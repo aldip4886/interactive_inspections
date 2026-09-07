@@ -1,7 +1,8 @@
 {
   "moduleId": "modul3",
   "moduleTitle": "Modul 3: Penyelundupan Melalui Barang Kiriman (Postal & Courier Cargo)",
-  "description": "Pemeriksaan paket barang kiriman impor melalui Pos & Perusahaan Jasa Titipan (PJT): Kaleng Makanan Palsu, Dinding Kardus Berongga, Alat Elektronik, & Mainan.",
+  "description": "Inspeksi paket barang kiriman impor Pos & PJT: Kardus Corrugated, Makanan Kaleng (Liquid Meth), Komponen Kendaraan, Elektronik, Mainan, Wadah Cairan, Kemasan Produk, & False Concealment.",
+  "supportsRotation": false,
   "centralImages": {
     "cutaway": {
       "url": "assets/images/central/m3_parcel_cutaway.png",
@@ -14,54 +15,170 @@
   },
   "filterCategories": [
     { "id": "all", "label": "Semua Titik" },
-    { "id": "food", "label": "Kaleng Makanan / Minuman" },
-    { "id": "cardboard", "label": "Dinding Lapisan Paket" }
+    { "id": "kardus_makanan", "label": "Kardus & Makanan" },
+    { "id": "komponen_elektronik", "label": "Komponen & Elektronik" },
+    { "id": "mainan_cairan", "label": "Mainan & Wadah Cairan" },
+    { "id": "kemasan_false", "label": "Kemasan & False Concealment" }
   ],
   "hotspots": [
     {
-      "id": "hs-m3-01",
-      "category": "food",
+      "id": "hs-m3-kardus",
+      "category": "kardus_makanan",
       "view": "cutaway",
-      "position": { "x": 62.0, "y": 52.0 },
-      "label": "False Sardine Can (Kaleng Makanan Cair Palsu)",
-      "badge": "MODUS CAIR & KRISTAL",
-      "badgeType": "danger",
+      "position": { "x": 35.0, "y": 45.0 },
+      "label": "Kardus: Dinding Kardus Corrugated (Double-Wall Sheet)",
+      "badge": "CORRUGATED",
+      "badgeType": "warning",
       "mainImage": "assets/images/hotspots/hs_sardine_can_false.png",
-      "galleryImages": [
-        "assets/images/hotspots/hs_sardine_can_false.png"
-      ],
-      "description": "Kaleng makanan kalengan (sarden/buahan) yang disegel ulang dari pabrik palsu. Di dalamnya diisi Narkotika cair (Liquid Meth) atau bungkus sabu yang direndam cairan beraroma kuat.",
+      "galleryImages": ["assets/images/hotspots/hs_sardine_can_false.png"],
+      "description": "Narkotika cair diresapkan ke dalam selipan corrugated kardus kemasan paket luar.",
       "riskIndicators": [
-        "X-Ray memperlihatkan batas densitas cairan tidak homogen atau ada bungkusan di dalam kaleng.",
-        "Berat kaleng tidak sesuai dengan netto yang tertera pada label kemasan luar.",
-        "Bekas patri/pemasangan ulang tutup kaleng tampak kasar saat diamati jarak dekat."
+        "Kardus kaku dan berbau kimia tajam.",
+        "Respon positif K-9 Pelacak Bea Cukai."
       ],
       "inspectionActions": [
-        "Lakukan pemeriksaan uji ketukan (sound density test) pada permukaan kaleng.",
-        "Buka tutup kaleng menggunakan pembuka kaleng steril dan ambil sampel cairan.",
-        "Teteskan reagen Marquis/Fast Blue B pada sampel untuk mengidentifikasi kandungan Narkotika."
+        "Iris tipis lapisan selipan kardus.",
+        "Uji ekstraksi laboratorium."
       ]
     },
     {
-      "id": "hs-m3-02",
-      "category": "cardboard",
+      "id": "hs-m3-makanan",
+      "category": "kardus_makanan",
       "view": "cutaway",
-      "position": { "x": 35.0, "y": 45.0 },
-      "label": "Dinding Kardus Corrugated (Double-Wall Sheet)",
-      "badge": "MODUS LEMBARAN PIPIH",
-      "badgeType": "warning",
+      "position": { "x": 62.0, "y": 52.0 },
+      "label": "Makanan: Kaleng Makanan Cair Palsu (Liquid Meth)",
+      "badge": "LIQUID METH",
+      "badgeType": "danger",
       "mainImage": "assets/images/hotspots/hs_sardine_can_false.png",
-      "galleryImages": [
-        "assets/images/hotspots/hs_sardine_can_false.png"
-      ],
-      "description": "Narkotika bentuk sintesis cair diresapkan ke dalam serat karton/kardus pembungkus, atau lembaran heroin dipres ke selipan corrugation kardus.",
+      "galleryImages": ["assets/images/hotspots/hs_sardine_can_false.png"],
+      "description": "Kaleng sarden/buah diisi Narkotika cair yang disegel ulang menyerupai olahan pabrik.",
       "riskIndicators": [
-        "Kardus terasa kaku, lemas tak wajar, atau berbau kimia tajam.",
-        "Pemeriksaan K-9 (Anjing Pelacak) menunjukkan respon positif pada lapisan kemasan luar."
+        "Densitas cairan X-Ray tidak homogen.",
+        "Berat kaleng tidak sesuai netto label."
       ],
       "inspectionActions": [
-        "Iris tipis lapisan kardus menggunakan cutter.",
-        "Lakukan ekstraksi sampel serat kardus dengan larutan pelarut organik untuk pengujian lab."
+        "Buka penutup kaleng dengan alat steril.",
+        "Uji cairan dengan Reagen Marquis."
+      ]
+    },
+    {
+      "id": "hs-m3-komponen",
+      "category": "komponen_elektronik",
+      "view": "cutaway",
+      "position": { "x": 48.0, "y": 70.0 },
+      "label": "Komponen Kendaraan: Shock Absorber & Sparepart",
+      "badge": "SPAREPART",
+      "badgeType": "danger",
+      "mainImage": "assets/images/hotspots/hs_sardine_can_false.png",
+      "galleryImages": ["assets/images/hotspots/hs_sardine_can_false.png"],
+      "description": "Rongga dalam tabung shock absorber / silinder mesin kendaraan diisi bungkus sabu padat.",
+      "riskIndicators": [
+        "X-Ray menembus rongga sparepart yang harusnya kosong.",
+        "Baut penutup sparepart menunjukkan bekas dibuka."
+      ],
+      "inspectionActions": [
+        "Gunakan gerinda potong untuk membuka silinder sparepart.",
+        "Sita paket sabu dari dalam rongga besi."
+      ]
+    },
+    {
+      "id": "hs-m3-elektronik",
+      "category": "komponen_elektronik",
+      "view": "cutaway",
+      "position": { "x": 75.0, "y": 42.0 },
+      "label": "Elektronik: Powerbank, Speaker, & Amplifier",
+      "badge": "ELEKTRONIK",
+      "badgeType": "warning",
+      "mainImage": "assets/images/hotspots/hs_sardine_can_false.png",
+      "galleryImages": ["assets/images/hotspots/hs_sardine_can_false.png"],
+      "description": "Komponen baterai powerbank / speaker dibongkar dan diganti dengan paket ekstasi.",
+      "riskIndicators": [
+        "Perangkat elektronik tidak dapat menyala.",
+        "Citra X-Ray menunjukkan susunan komponen tidak wajar."
+      ],
+      "inspectionActions": [
+        "Buka sekrup casing perangkat elektronik.",
+        "Keluarkan bungkusan barang bukti."
+      ]
+    },
+    {
+      "id": "hs-m3-mainan",
+      "category": "mainan_cairan",
+      "view": "normal",
+      "position": { "x": 28.0, "y": 62.0 },
+      "label": "Mainan: Boneka & Mainan Plastik Berongga",
+      "badge": "MAINAN ANAK",
+      "badgeType": "info",
+      "mainImage": "assets/images/hotspots/hs_sardine_can_false.png",
+      "galleryImages": ["assets/images/hotspots/hs_sardine_can_false.png"],
+      "description": "Busa isian boneka / rongga dalam mainan plastik diisi kantong sabu.",
+      "riskIndicators": [
+        "Jahitan boneka bekas dijahit ulang secara kasar.",
+        "Suara derak saat mainan digoyangkan."
+      ],
+      "inspectionActions": [
+        "Buka jahitan boneka dengan gunting.",
+        "Keluarkan kantong barang bukti."
+      ]
+    },
+    {
+      "id": "hs-m3-cairan",
+      "category": "mainan_cairan",
+      "view": "normal",
+      "position": { "x": 82.0, "y": 68.0 },
+      "label": "Wadah Cairan: Botol Sampo & Oli Pelumas",
+      "badge": "WADAH CAIRAN",
+      "badgeType": "warning",
+      "mainImage": "assets/images/hotspots/hs_sardine_can_false.png",
+      "galleryImages": ["assets/images/hotspots/hs_sardine_can_false.png"],
+      "description": "Liquid Meth diselipkan dalam kantong plastik tebal yang dimasukkan ke dalam botol oli pelumas.",
+      "riskIndicators": [
+        "Endapan cairan tampak memisah di dasar botol.",
+        "Segel leher botol bekas dipanaskan ulang."
+      ],
+      "inspectionActions": [
+        "Tuang sebagian sampel cairan.",
+        "Uji reaksi kimia dengan Fast Blue B."
+      ]
+    },
+    {
+      "id": "hs-m3-kemasan",
+      "category": "kemasan_false",
+      "view": "normal",
+      "position": { "x": 40.0, "y": 28.0 },
+      "label": "Kemasan Produk: Kemasan Teh Cina / Herbal",
+      "badge": "GUANYINWANG",
+      "badgeType": "danger",
+      "mainImage": "assets/images/hotspots/hs_sardine_can_false.png",
+      "galleryImages": ["assets/images/hotspots/hs_sardine_can_false.png"],
+      "description": "Modus klasik bungkus teh Cina (Guanyinwang) foil keemasan bermerk teh impor diisi sabu kristal.",
+      "riskIndicators": [
+        "Segel press aluminium foil tidak rapi.",
+        "Tekstur bungkusan keras berbentuk kristal padat."
+      ],
+      "inspectionActions": [
+        "Gunting ujung bungkus teh keemasan.",
+        "Timbang berat dan uji sampel sabu."
+      ]
+    },
+    {
+      "id": "hs-m3-false-other",
+      "category": "kemasan_false",
+      "view": "normal",
+      "position": { "x": 58.0, "y": 30.0 },
+      "label": "False Concealment Lainnya: Bingkai Foto & Patung Hiasan",
+      "badge": "PATUNG / BINGKAI",
+      "badgeType": "info",
+      "mainImage": "assets/images/hotspots/hs_sardine_can_false.png",
+      "galleryImages": ["assets/images/hotspots/hs_sardine_can_false.png"],
+      "description": "Patung semen / kayu hiasan dibuat berongga di bagian tengah untuk menyimpan ketamin/ekstasi.",
+      "riskIndicators": [
+        "Patung memiliki rongga saat dideteksi X-Ray.",
+        "Suara gema saat dinding patung diketuk."
+      ],
+      "inspectionActions": [
+        "Pecahkan bagian alas patung.",
+        "Sita paket dari rongga patung."
       ]
     }
   ]

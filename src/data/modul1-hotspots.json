@@ -1,7 +1,8 @@
 {
   "moduleId": "modul1",
   "moduleTitle": "Modul 1: Penyelundupan Melalui Tubuh Kurir (Body Concealment)",
-  "description": "Inspeksi titik-titik penyembunyian pada tubuh kurir melalui metode swallowing (body packing), strapping (penempelan luar), dan inserted objects.",
+  "description": "Inspeksi titik-titik penyembunyian pada tubuh kurir: Ingestion (metode telan), Insertion (anal/vaginal), Body Strapping (paha, betis, perut), Body-Adjacent (pembalut, kancing), dan Modus Terkini (serat kain).",
+  "supportsRotation": true,
   "centralImages": {
     "front": {
       "url": "assets/images/central/m1_body_front_xray.png",
@@ -9,85 +10,199 @@
     },
     "back": {
       "url": "assets/images/central/m1_body_back_xray.png",
-      "label": "Tampak Belakang (X-Ray View)"
+      "label": "Tampak Belakang (Anatomy & X-Ray View)"
     }
+  },
+  "angleImages": {
+    "front": "assets/images/central/m1_body_front_xray.png",
+    "side": "assets/images/central/m1_body_front_xray.png",
+    "back": "assets/images/central/m1_body_back_xray.png",
+    "side2": "assets/images/central/m1_body_front_xray.png"
   },
   "filterCategories": [
     { "id": "all", "label": "Semua Titik" },
-    { "id": "digestive", "label": "Saluran Pencernaan" },
-    { "id": "external", "label": "Penempelan Luar" },
-    { "id": "cavity", "label": "Rongga Tubuh" }
+    { "id": "ingestion", "label": "1. Ingestion (Telan)" },
+    { "id": "insertion", "label": "2. Insertion (Rongga)" },
+    { "id": "strapping", "label": "3. Body Strapping" },
+    { "id": "adjacent", "label": "4. Body-Adjacent" },
+    { "id": "latest", "label": "5. Modus Terkini" }
   ],
   "hotspots": [
     {
-      "id": "hs-m1-01",
-      "category": "digestive",
+      "id": "hs-m1-ingestion",
+      "category": "ingestion",
       "view": "front",
+      "angleMin": 0,
+      "angleMax": 120,
       "position": { "x": 49.5, "y": 48.0 },
-      "label": "Body Packing / Swallowing (Lambung & Usus)",
-      "badge": "TINGKAT RESIKO TINGGI",
-      "badgeType": "danger",
-      "mainImage": "assets/images/hotspots/hs_body_packing_main.png",
-      "galleryImages": [
-        "assets/images/hotspots/hs_body_packing_main.png"
-      ],
-      "description": "Kurir menelan puluhan kapsul/pellet berlapis kondom atau lateks kedap udara berisi Narkotika (Methamphetamine/Cocaine). Metode ini sangat membahayakan jiwa kurir apabila kapsul pecah di dalam saluran cerna.",
-      "riskIndicators": [
-        "Hasil citra X-Ray/CT-Scan memperlihatkan gambaran opak bulat berderet di lambung atau usus halus.",
-        "Kurir menunjukkan gestur gelisah, menolak makan/minum, atau meminum obat anti-diare.",
-        "Pemeriksaan fisik menunjukkan distensi abdomen tanpa gejala medis akut."
-      ],
-      "inspectionActions": [
-        "Arahkan kurir ke ruang pemeriksaan khusus X-Ray Badan / Body Scanner.",
-        "Koordinasi dengan tim medis/RS Bhayangkara untuk observasi pembuangan pellet (evakuasi medis).",
-        "Amankan bukti pellet dan uji laboratorium pengujian kandungan zat Narkotika."
-      ]
-    },
-    {
-      "id": "hs-m1-02",
-      "category": "external",
-      "view": "front",
-      "position": { "x": 38.0, "y": 38.0 },
-      "label": "Body Strapping (Paha & Pinggang)",
-      "badge": "MODUS POPULER",
-      "badgeType": "warning",
-      "mainImage": "assets/images/hotspots/hs_body_packing_main.png",
-      "galleryImages": [
-        "assets/images/hotspots/hs_body_packing_main.png"
-      ],
-      "description": "Paket sabu/heroin dikemas tipis pipih kemudian direkatkan dengan lakban medis di area paha dalam, pinggang, atau ketiak di balik pakaian berlapis.",
-      "riskIndicators": [
-        "Cara berjalan kurir tampak kaku atau tidak alami.",
-        "Pakaian tampak tebal secara tidak proporsional pada bagian paha atau selangkangan.",
-        "Penggeledahan badan (body search) meraba adanya bentukan keras bertekstur janggal."
-      ],
-      "inspectionActions": [
-        "Lakukan penggeledahan badan secara mendalam (strip search) di ruang tertutup sesuai SOP.",
-        "Dokumentasikan posisi perekatan paket pada tubuh tersangka sebelum dilepas.",
-        "Timbang dan catat berat bruto serta netto barang bukti."
-      ]
-    },
-    {
-      "id": "hs-m1-03",
-      "category": "cavity",
-      "view": "back",
-      "position": { "x": 50.0, "y": 58.0 },
-      "label": "Insertion (Rongga Anus / Vagina)",
+      "label": "Ingestion: Metode Telan (Lambung & Saluran Cerna)",
       "badge": "BAHAYA TINGGI",
       "badgeType": "danger",
       "mainImage": "assets/images/hotspots/hs_body_packing_main.png",
-      "galleryImages": [
-        "assets/images/hotspots/hs_body_packing_main.png"
-      ],
-      "description": "Penyembunyian tabung/kapsul besar berisi Narkotika ke dalam rongga tubuh bagian bawah.",
+      "galleryImages": ["assets/images/hotspots/hs_body_packing_main.png"],
+      "description": "Kurir menelan kapsul/pellet berbalut lateks kedap udara berisi Narkotika (Methamphetamine/Cocaine) yang terdeteksi berderet rapat di lambung.",
       "riskIndicators": [
-        "Duduk tersangka tampak canggung atau tidak nyaman.",
-        "Pemeriksaan Body Scanner menunjukkan bayangan benda asing silindris pada area pelvis.",
-        "Hasil penggeledahan fisik menunjukkan perlawanan berlebihan dari tersangka."
+        "Hasil X-Ray Body Scanner memperlihatkan bayangan opak bulat berderet di usus.",
+        "Gestur kurir tampak gelisah, menolak makan/minum, dan meminum anti-diare."
       ],
       "inspectionActions": [
-        "Lakukan pemeriksaan medis ahli oleh dokter pemeriksa independen.",
-        "Pastikan proses evakuasi dilakukan dengan peralatan medis steril."
+        "Arahkan tersangka ke X-Ray Body Scanner.",
+        "Koordinasikan evakuasi medis di Rumah Sakit Bhayangkara."
+      ]
+    },
+    {
+      "id": "hs-m1-insertion",
+      "category": "insertion",
+      "view": "back",
+      "angleMin": 120,
+      "angleMax": 240,
+      "position": { "x": 50.0, "y": 58.0 },
+      "label": "Insertion: Melalui Alat Kelamin / Anal / Vaginal",
+      "badge": "MODUS RONGGA",
+      "badgeType": "danger",
+      "mainImage": "assets/images/hotspots/hs_body_packing_main.png",
+      "galleryImages": ["assets/images/hotspots/hs_body_packing_main.png"],
+      "description": "Tabung silindris berisi Narkotika dimasukkan ke dalam rongga tubuh bawah (anal/vagina) untuk menghindari penggeledahan biasa.",
+      "riskIndicators": [
+        "Cara duduk tersangka canggung dan tidak alami.",
+        "Hasil scan memperlihatkan benda asing berbentuk silinder di pelvis."
+      ],
+      "inspectionActions": [
+        "Lakukan pemeriksaan medis oleh tenaga kesehatan resmi.",
+        "Amankan kapsul silinder dengan protokol bahan berbahaya."
+      ]
+    },
+    {
+      "id": "hs-m1-strap-paha",
+      "category": "strapping",
+      "view": "front",
+      "angleMin": 0,
+      "angleMax": 90,
+      "position": { "x": 42.0, "y": 62.0 },
+      "label": "Body Strapping: Dililit / Dibalut pada Paha",
+      "badge": "STRAPPING",
+      "badgeType": "warning",
+      "mainImage": "assets/images/hotspots/hs_body_packing_main.png",
+      "galleryImages": ["assets/images/hotspots/hs_body_packing_main.png"],
+      "description": "Paket sabu dipres tipis lalu dililit menggunakan lakban medis di paha dalam di balik celana longgar.",
+      "riskIndicators": [
+        "Langkah kaki kaku saat berjalan.",
+        "Rabaan fisik menemukan gumpalan padat di selangkangan."
+      ],
+      "inspectionActions": [
+        "Lakukan penggeledahan badan di ruang tertutup khusus.",
+        "Lepaskan peratan lakban dan timbang berat bruto/netto."
+      ]
+    },
+    {
+      "id": "hs-m1-strap-betis",
+      "category": "strapping",
+      "view": "front",
+      "angleMin": 0,
+      "angleMax": 180,
+      "position": { "x": 43.0, "y": 78.0 },
+      "label": "Body Strapping: Dililit / Dibalut pada Betis",
+      "badge": "STRAPPING",
+      "badgeType": "warning",
+      "mainImage": "assets/images/hotspots/hs_body_packing_main.png",
+      "galleryImages": ["assets/images/hotspots/hs_body_packing_main.png"],
+      "description": "Bungkusan pipih direkatkan di sekeliling betis di balik kaos kaki tebal atau celana jeans.",
+      "riskIndicators": [
+        "Lingkar betis tampak cembung secara tidak simetris.",
+        "Tersangka menolak melepas sepatu/kaos kaki saat diperiksa."
+      ],
+      "inspectionActions": [
+        "Instruksikan tersangka melepas alas kaki dan celana luar.",
+        "Dokumentasikan ikatan sabuk paha/betis."
+      ]
+    },
+    {
+      "id": "hs-m1-strap-perut",
+      "category": "strapping",
+      "view": "front",
+      "angleMin": 0,
+      "angleMax": 100,
+      "position": { "x": 50.0, "y": 42.0 },
+      "label": "Body Strapping: Dililit / Dibalut pada Perut",
+      "badge": "STRAPPING",
+      "badgeType": "warning",
+      "mainImage": "assets/images/hotspots/hs_body_packing_main.png",
+      "galleryImages": ["assets/images/hotspots/hs_body_packing_main.png"],
+      "description": "Sabuk korset khusus diisi kantong-kantong sabu yang dililitkan mengelilingi pinggang dan perut.",
+      "riskIndicators": [
+        "Postur tubuh kaku saat membungkuk.",
+        "Kontur perut terasa keras saat penggeledahan pat-down."
+      ],
+      "inspectionActions": [
+        "Buka pakaian bagian atas tersangka di ruang penggeledahan.",
+        "Sita korset penyimpan barang bukti."
+      ]
+    },
+    {
+      "id": "hs-m1-adjacent-pembalut",
+      "category": "adjacent",
+      "view": "front",
+      "angleMin": 0,
+      "angleMax": 180,
+      "position": { "x": 50.0, "y": 66.0 },
+      "label": "Body-Adjacent: Pembalut Wanita (Sanitary Pad)",
+      "badge": "BODY-ADJACENT",
+      "badgeType": "warning",
+      "mainImage": "assets/images/hotspots/hs_body_packing_main.png",
+      "galleryImages": ["assets/images/hotspots/hs_body_packing_main.png"],
+      "description": "Kristal sabu diselipkan di dalam lapisan pembalut wanita yang dikenakan kurir wanita.",
+      "riskIndicators": [
+        "Ketebalan pakaian dalam tidak wajar.",
+        "Pemeriksa wanita merasakan bentukan padat saat perabaan."
+      ],
+      "inspectionActions": [
+        "Pemeriksaan oleh petugas pemeriksa wanita di ruang steril.",
+        "Uji laboratorium sampel serbuk dalam pembalut."
+      ]
+    },
+    {
+      "id": "hs-m1-adjacent-kancing",
+      "category": "adjacent",
+      "view": "front",
+      "angleMin": 0,
+      "angleMax": 360,
+      "position": { "x": 52.0, "y": 28.0 },
+      "label": "Body-Adjacent: Kancing Pakaian (Clothing Buttons)",
+      "badge": "KAMUFLASE MIKRO",
+      "badgeType": "info",
+      "mainImage": "assets/images/hotspots/hs_body_packing_main.png",
+      "galleryImages": ["assets/images/hotspots/hs_body_packing_main.png"],
+      "description": "Narkotika bentuk padat dipres menyerupai kancing baju/jaket dan dilapisi bahan plastik bermotif.",
+      "riskIndicators": [
+        "Kancing pakaian terasa berat dan tidak mudah patah.",
+        "Warna kancing pudar saat terkena cairan penguji."
+      ],
+      "inspectionActions": [
+        "Lepas sampel kancing baju dan uji dengan Reagen Marquis.",
+        "Periksa seluruh kancing pada pakaian penumpang."
+      ]
+    },
+    {
+      "id": "hs-m1-modus-serat-kain",
+      "category": "latest",
+      "view": "front",
+      "angleMin": 0,
+      "angleMax": 360,
+      "position": { "x": 46.0, "y": 34.0 },
+      "label": "Modus Terkini: Diresapkan ke Dalam Serat Kain",
+      "badge": "MODUS TERKINI",
+      "badgeType": "danger",
+      "mainImage": "assets/images/hotspots/hs_body_packing_main.png",
+      "galleryImages": ["assets/images/hotspots/hs_body_packing_main.png"],
+      "description": "Cairan Narkotika disemprotkan dan diresapkan ke serat kain pakaian/handuk. Pakaian kemudian dikeringkan dan tampak seperti pakaian biasa.",
+      "riskIndicators": [
+        "Kain baju terasa kaku dan sedikit lengket saat dipegang.",
+        "Bau kimia tajam tercium dari serat kain pakaian.",
+        "Respon positif dari Anjing Pelacak K-9 Bea Cukai."
+      ],
+      "inspectionActions": [
+        "Potong sebagian sampel serat kain.",
+        "Lakukan ekstraksi pelarutan laboratorium untuk memisahkan kandungan zat Narkotika."
       ]
     }
   ]

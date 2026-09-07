@@ -1,65 +1,159 @@
 {
   "moduleId": "modul4a",
   "moduleTitle": "Modul 4A: Penyelundupan Melalui Sarana Pengangkut Darat (SUV / Passenger Vehicle)",
-  "description": "Inspeksi kompartemen rahasia pada kendaraan darat: Kompartemen Pintu Mobil, Tangki Bahan Bakar Dinding Ganda, Dashboard, & Ban Serep.",
+  "description": "Inspeksi titik-titik penyembunyian pada kendaraan darat: Interior (dashboard, bawah jok), Bagasi (lantai, subwoofer), Kolong (sasis, knalpot), Ban (ban serep), Kompartemen (pintu mobil, konsol), & Struktur (bumper, mesin).",
+  "supportsRotation": true,
   "centralImages": {
     "cutaway": {
       "url": "assets/images/central/m4a_suv_cutaway.png",
       "label": "Tampak Irisan Penampang Kendaraan (SUV Cutaway)"
     }
   },
+  "angleImages": {
+    "front": "assets/images/central/m4a_suv_cutaway.png",
+    "side": "assets/images/central/m4a_suv_cutaway.png",
+    "back": "assets/images/central/m4a_suv_cutaway.png",
+    "side2": "assets/images/central/m4a_suv_cutaway.png"
+  },
   "filterCategories": [
     { "id": "all", "label": "Semua Titik" },
-    { "id": "doors", "label": "Pintu & Kompartemen Ruang" },
-    { "id": "engine_fuel", "label": "Tangki & Mesin" }
+    { "id": "interior", "label": "1. Interior & Konsol" },
+    { "id": "bagasi", "label": "2. Bagasi & Ban" },
+    { "id": "kolong", "label": "3. Kolong & Tangki" },
+    { "id": "kompartemen", "label": "4. Kompartemen Pintu" },
+    { "id": "struktur", "label": "5. Bumper & Ruang Mesin" }
   ],
   "hotspots": [
     {
-      "id": "hs-m4a-01",
-      "category": "doors",
+      "id": "hs-m4a-interior",
+      "category": "interior",
       "view": "cutaway",
-      "position": { "x": 42.0, "y": 55.0 },
-      "label": "Kompartemen Pintu Mobil (Door Panel Cavity)",
-      "badge": "MODUS TEMUAN DJBC",
-      "badgeType": "danger",
+      "angleMin": 0,
+      "angleMax": 360,
+      "position": { "x": 38.0, "y": 48.0 },
+      "label": "Interior: Dashboard & Rongga Bawah Jok Mobil",
+      "badge": "INTERIOR",
+      "badgeType": "warning",
       "mainImage": "assets/images/hotspots/hs_door_panel_compartment.png",
-      "galleryImages": [
-        "assets/images/hotspots/hs_door_panel_compartment.png"
-      ],
-      "description": "Rongga kosong di balik panel interior pintu kendaraan dimanfaatkan untuk menyelipkan puluhan paket sabu/ekstasi berbungkus alumunium foil atau peredam suara rakitan.",
+      "galleryImages": ["assets/images/hotspots/hs_door_panel_compartment.png"],
+      "description": "Rongga airbag kosong di dashboard atau sela pembungkus busa di bawah jok depan/belakang diisi kantong sabu.",
       "riskIndicators": [
-        "Suara ketukan pada panel pintu terdengar pekat (soliter) tidak berongga seperti pintu normal.",
-        "Klip penahan (door clip) atau baut lis interior pintu bekas dibuka / tergores alat perkakas.",
-        "Bobot pintu saat diayunkan terasa jauh lebih berat dari spesifikasi standar pabrik."
+        "Lampu indikator airbag menyala terus di instrument cluster.",
+        "Busa jok terasa keras dan ada bekas jahitan manual."
       ],
       "inspectionActions": [
-        "Gunakan endoskop / boroskop kabel fleksibel melalui celah kaca pintu untuk melihat rongga dalam.",
-        "Lepaskan klip trim pintu secara hati-hati menggunakan alat perenggang plastik.",
-        "Keluarkan bungkusan paket narkotika dan lakukan penimbangan serta pengujian laboratorium."
+        "Buka konsol dashboard bawah dengan alat perenggang.",
+        "Periksa bawah karpet lantai dan jok."
       ]
     },
     {
-      "id": "hs-m4a-02",
-      "category": "engine_fuel",
+      "id": "hs-m4a-bagasi",
+      "category": "bagasi",
       "view": "cutaway",
-      "position": { "x": 78.0, "y": 62.0 },
-      "label": "Tangki Bahan Bakar Dinding Ganda (Modified Fuel Tank)",
-      "badge": "MODUS PARTISI RAHASIA",
-      "badgeType": "danger",
+      "angleMin": 120,
+      "angleMax": 240,
+      "position": { "x": 22.0, "y": 52.0 },
+      "label": "Bagasi: Floor Compartment & Ruang Subwoofer",
+      "badge": "BAGASI",
+      "badgeType": "info",
       "mainImage": "assets/images/hotspots/hs_door_panel_compartment.png",
-      "galleryImages": [
-        "assets/images/hotspots/hs_door_panel_compartment.png"
-      ],
-      "description": "Tangki bensin dipasang sekat/partisi kedap cair. Sebagian kecil diisi bensin agar mesin tetap bisa menyala, sedangkan ruang terbesar diisi ratusan bungkusan Narkotika.",
+      "galleryImages": ["assets/images/hotspots/hs_door_panel_compartment.png"],
+      "description": "Kompartemen bawah karpet bagasi atau box audio subwoofer dimodifikasi untuk menampung bungkusan ekstasi.",
       "riskIndicators": [
-        "Indikator bahan bakar di dashboard menunjukkan posisi penuh terus-menerus atau tidak akurat.",
-        "Ada bekas las baru atau lapisan cat ulang pada bagian bawah tangki bensin.",
-        "Pemeriksaan Mobile Vehicle X-Ray Scanner menunjukkan warna densitas ganda pada tangki."
+        "Lantai bagasi cembung tidak rata.",
+        "Box subwoofer berbunyi padat saat diketuk."
       ],
       "inspectionActions": [
-        "Pindahkan kendaraan ke atas pit pas / car-lift.",
-        "Gunakan alat pengukur bahan bakar manual (dipstick) untuk mengecek kedalaman tangki asli vs fisik.",
-        "Kuras bahan bakar dan lepas baut pengikat tangki dari sasis bawah kendaraan."
+        "Angkat papan alas karpet bagasi.",
+        "Buka sekrup cover box audio."
+      ]
+    },
+    {
+      "id": "hs-m4a-kolong",
+      "category": "kolong",
+      "view": "cutaway",
+      "angleMin": 0,
+      "angleMax": 360,
+      "position": { "x": 60.0, "y": 75.0 },
+      "label": "Kolong: Sasis Bawah & Knalpot Palsu (Ganda)",
+      "badge": "KOLONG MOBIL",
+      "badgeType": "danger",
+      "mainImage": "assets/images/hotspots/hs_door_panel_compartment.png",
+      "galleryImages": ["assets/images/hotspots/hs_door_panel_compartment.png"],
+      "description": "Pipa sasis berongga di bagian kolong atau tabung knalpot palsu dilas untuk menyembunyikan bungkusan sabu.",
+      "riskIndicators": [
+        "Bekas las baru pada pipa sasis kolong.",
+        "Asap knalpot hanya keluar dari satu pipa pada knalpot ganda."
+      ],
+      "inspectionActions": [
+        "Pindahkan mobil ke atas pit car-lift.",
+        "Gunakan boroskop kabel untuk melihat rongga sasis."
+      ]
+    },
+    {
+      "id": "hs-m4a-ban",
+      "category": "bagasi",
+      "view": "cutaway",
+      "angleMin": 120,
+      "angleMax": 240,
+      "position": { "x": 18.0, "y": 68.0 },
+      "label": "Ban: Ban Serep & Velg Roda Mobil",
+      "badge": "BAN SEREP",
+      "badgeType": "warning",
+      "mainImage": "assets/images/hotspots/hs_door_panel_compartment.png",
+      "galleryImages": ["assets/images/hotspots/hs_door_panel_compartment.png"],
+      "description": "Ban serep gantung di bawah bagasi dikempiskan dan diisi puluhan bungkus sabu sebelum dipompa kembali.",
+      "riskIndicators": [
+        "Tekanan ban serep keras namun berbunyi berat.",
+        "K-9 memberikan respon positif pada ban serep."
+      ],
+      "inspectionActions": [
+        "Turunkan ban serep dari dongkrak gantung.",
+        "Kempiskan angin dan lepas velg ban."
+      ]
+    },
+    {
+      "id": "hs-m4a-pintu",
+      "category": "kompartemen",
+      "view": "cutaway",
+      "angleMin": 0,
+      "angleMax": 360,
+      "position": { "x": 42.0, "y": 55.0 },
+      "label": "Kompartemen: Pintu Mobil (Door Panel) & Konsol Tengah",
+      "badge": "PINTU MOBIL",
+      "badgeType": "danger",
+      "mainImage": "assets/images/hotspots/hs_door_panel_compartment.png",
+      "galleryImages": ["assets/images/hotspots/hs_door_panel_compartment.png"],
+      "description": "Rongga di balik panel interior pintu mobil diisi bungkus sabu berperedam perak foil.",
+      "riskIndicators": [
+        "Suara ketukan pintu terdengar soliter/padat.",
+        "Klip trim pintu bergaris bekas dibuka perkakas."
+      ],
+      "inspectionActions": [
+        "Intip rongga pintu dengan endoskop.",
+        "Lepaskan klip trim pintu."
+      ]
+    },
+    {
+      "id": "hs-m4a-struktur",
+      "category": "struktur",
+      "view": "cutaway",
+      "angleMin": 0,
+      "angleMax": 90,
+      "position": { "x": 78.0, "y": 48.0 },
+      "label": "Struktur Kendaraan: Bumper Depan & Ruang Mesin",
+      "badge": "RUANG MESIN",
+      "badgeType": "danger",
+      "mainImage": "assets/images/hotspots/hs_door_panel_compartment.png",
+      "galleryImages": ["assets/images/hotspots/hs_door_panel_compartment.png"],
+      "description": "Rongga di balik bumper plastik depan atau box filter udara ruang mesin diisi paket sabu.",
+      "riskIndicators": [
+        "Bumper depan berjarak renggang dari gril.",
+        "Baut penyangga bumper menunjukkan bekas kunci shock."
+      ],
+      "inspectionActions": [
+        "Lepaskan kancing plastik bumper depan.",
+        "Keluarkan bungkusan dari rongga mesin."
       ]
     }
   ]

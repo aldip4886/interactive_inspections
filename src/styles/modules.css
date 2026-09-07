@@ -168,3 +168,81 @@
 .action-item {
   border-left-color: var(--accent-cyan);
 }
+
+/* 360 Rotation Control Bar */
+.rotation-control-bar {
+  position: absolute;
+  bottom: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--surface-glass);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--surface-glass-border);
+  border-radius: var(--radius-xl);
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  z-index: var(--z-controls);
+  box-shadow: var(--shadow-md);
+}
+
+.angle-display {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 170px;
+}
+
+.compass-icon {
+  font-size: 1.2rem;
+}
+
+.angle-text {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--accent-gold);
+}
+
+.angle-label {
+  font-size: 0.73rem;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.angle-slider-wrapper {
+  width: 180px;
+  display: flex;
+  align-items: center;
+}
+
+.angle-range-slider {
+  width: 100%;
+  accent-color: var(--accent-gold);
+  cursor: pointer;
+}
+
+.angle-quick-btns {
+  display: flex;
+  gap: 6px;
+}
+
+.angle-btn {
+  padding: 5px 10px;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--surface-glass-border);
+  color: var(--text-secondary);
+  font-size: 0.73rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.angle-btn:hover, .angle-btn.active {
+  background: var(--bg-dark-600);
+  border-color: var(--accent-gold);
+  color: #FFFFFF;
+}
+

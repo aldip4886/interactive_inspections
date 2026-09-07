@@ -11,17 +11,28 @@ export class HotspotLayer {
     this.hotspots = [];
   }
 
-  render(hotspots, activeView = 'front', activeFilter = 'all') {
+  render(hotspots, activeView = 'front', activeFilter = 'all', currentAngle = 0) {
     this.hotspots = hotspots;
     this.activeView = activeView;
     this.activeFilter = activeFilter;
 
-    // Filter hotspots matching current view and category
+    // Filter hotspots matching current view, category, and 360 degree angle
     const visibleHotspots = hotspots.filter(h => {
       const matchView = h.view ? (h.view === activeView) : true;
       const matchFilter = (activeFilter === 'all') || (h.category === activeFilter);
-      return matchView && matchFilter;
+      
+      let matchAngle = true;
+      if (h.angleMin !== undefined && h.angleMax !== undefined) {
+        if (h.angleMin <= h.angleMax) {
+          matchAngle = currentAngle >= h.angleMin && currentAngle <= h.angleMax;
+        } else {
+          // Crosses 360/0 wrap around
+          matchAngle = currentAngle >= h.angleMin || currentAngle <= h.angleMax;
+        }
+      }
+      return matchView && matchFilter && matchAngle;
     });
+
 
     this.container.innerHTML = visibleHotspots.map(h => {
       const isVisited = this.visitedSet.has(h.id);

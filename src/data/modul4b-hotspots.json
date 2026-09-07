@@ -1,63 +1,136 @@
 {
   "moduleId": "modul4b",
   "moduleTitle": "Modul 4B: Penyelundupan Melalui Sarana Pengangkut Laut (Cargo Ship & Container)",
-  "description": "Inspeksi kompartemen pada kapal kargo laut: Palka Kargo Utama, Pipa Air Balas, Dinding Ganda Kontainer, & Ruang Mesin.",
+  "description": "Inspeksi sarana laut: ABK (kabin & bawaan ABK), Kompartemen (mess room, kabin kapten), Tangki (air balas, bahan bakar), Struktur Kapal (palka kargo, dinding kontainer reefer), & Muatan (curah, kontainer).",
+  "supportsRotation": true,
   "centralImages": {
     "cutaway": {
       "url": "assets/images/central/m4b_cargo_ship_cutaway.png",
       "label": "Tampak Irisan Lambung Kapal Kargo (Cargo Vessel Cutaway)"
     }
   },
+  "angleImages": {
+    "front": "assets/images/central/m4b_cargo_ship_cutaway.png",
+    "side": "assets/images/central/m4b_cargo_ship_cutaway.png",
+    "back": "assets/images/central/m4b_cargo_ship_cutaway.png",
+    "side2": "assets/images/central/m4b_cargo_ship_cutaway.png"
+  },
   "filterCategories": [
     { "id": "all", "label": "Semua Titik" },
-    { "id": "hold", "label": "Palka & Kontainer" },
-    { "id": "machinery", "label": "Ruang Mesin & Balas" }
+    { "id": "abk_kabin", "label": "1. ABK & Kabin Kapten" },
+    { "id": "tangki", "label": "2. Tangki Balas & Bahan Bakar" },
+    { "id": "palka_kontainer", "label": "3. Palka & Kontainer Reefer" },
+    { "id": "muatan", "label": "4. Muatan Curah / Kargo" }
   ],
   "hotspots": [
     {
-      "id": "hs-m4b-01",
-      "category": "hold",
+      "id": "hs-m4b-abk",
+      "category": "abk_kabin",
       "view": "cutaway",
-      "position": { "x": 55.0, "y": 48.0 },
-      "label": "Dinding Ganda Kontainer Pendingin (Reefer Container False Wall)",
-      "badge": "MODUS IMPOR CONTAINER",
-      "badgeType": "danger",
+      "angleMin": 0,
+      "angleMax": 360,
+      "position": { "x": 18.0, "y": 42.0 },
+      "label": "ABK: Barang Bawaan & Ruang Istirahat ABK",
+      "badge": "ABK SHIP",
+      "badgeType": "warning",
       "mainImage": "assets/images/hotspots/hs_door_panel_compartment.png",
-      "galleryImages": [
-        "assets/images/hotspots/hs_door_panel_compartment.png"
-      ],
-      "description": "Bungkusan Narkotika ditaruh di dalam ruang mesin isolasi pendingin (reefer unit) atau selipan insulasi dinding stainless kontainer.",
+      "galleryImages": ["assets/images/hotspots/hs_door_panel_compartment.png"],
+      "description": "ABK menyimpan paket sabu di selipan kasur atau plafon ruang istirahat (crew cabin).",
       "riskIndicators": [
-        "Citra Container Scanner (Gamma-Ray Scanner) memperlihatkan anomali kerapatan materi di bagian depan reefer.",
-        "Segel pelabuhan (bolt seal) memiliki jejak goresan re-sealing.",
-        "Dokumen manifes barang (Bill of Lading) berasal dari pelabuhan high-risk origin."
+        "ABK menunjukkan gestur mencurigakan saat kapal berlabuh.",
+        "Langit-langit mess room terlihat bekas dibuka."
       ],
       "inspectionActions": [
-        "Arahkan kontainer ke Hi-Tech Container Scanner pelabuhan.",
-        "Buka panel paking reefer pendingin menggunakan kunci shock khusus.",
-        "Terjunkan Tim Anjing Pelacak K-9 Bea Cukai ke dalam kontainer."
+        "Gunakan K-9 Pelacak Bea Cukai di seluruh ruang kabin ABK.",
+        "Geledah tas & lemari pakaian ABK."
       ]
     },
     {
-      "id": "hs-m4b-02",
-      "category": "machinery",
+      "id": "hs-m4b-kompartemen",
+      "category": "abk_kabin",
       "view": "cutaway",
-      "position": { "x": 28.0, "y": 68.0 },
-      "label": "Pipa & Tangki Air Balas (Ballast Water Tanks)",
-      "badge": "MODUS KAPAL LAUT",
-      "badgeType": "warning",
+      "angleMin": 0,
+      "angleMax": 360,
+      "position": { "x": 22.0, "y": 32.0 },
+      "label": "Kompartemen: Kabin Kapten & Mess Room",
+      "badge": "KABIN KAPTEN",
+      "badgeType": "info",
       "mainImage": "assets/images/hotspots/hs_door_panel_compartment.png",
-      "galleryImages": [
-        "assets/images/hotspots/hs_door_panel_compartment.png"
-      ],
-      "description": "Kotak/tabung kedap air diikat menggunakan rantai dan ditenggelamkan ke dalam tangki air balas dasar kapal laut.",
+      "galleryImages": ["assets/images/hotspots/hs_door_panel_compartment.png"],
+      "description": "Penyembunyian di balik panel dinding kayu kapten kapal atau meja peta navigasi.",
       "riskIndicators": [
-        "Manhole penutup tangki air balas berminyak atau baut penutup tidak tertutup debu seperti bagian lainnya.",
-        "Tim Patroli Laut Bea Cukai (Customs Marine Patrol) mendapati pergerakan tidak wajar ABK di dekat palka bawah."
+        "Panel kayu berbunyi berongga.",
+        "Dokumen pelayaran tidak konsisten."
       ],
       "inspectionActions": [
-        "Turunkan tim selam khusus Bea Cukai / Marine Unit untuk inspeksi bawah air.",
-        "Kuras air balas kapal untuk memeriksa bagian dasar tangki."
+        "Buka panel meja navigasi.",
+        "Periksa brankas dan ruang simpan kapten."
+      ]
+    },
+    {
+      "id": "hs-m4b-tangki",
+      "category": "tangki",
+      "view": "cutaway",
+      "angleMin": 0,
+      "angleMax": 360,
+      "position": { "x": 28.0, "y": 68.0 },
+      "label": "Tangki: Tangki Air Balas & Tangki Bahan Bakar",
+      "badge": "TANGKI BALAS",
+      "badgeType": "danger",
+      "mainImage": "assets/images/hotspots/hs_door_panel_compartment.png",
+      "galleryImages": ["assets/images/hotspots/hs_door_panel_compartment.png"],
+      "description": "Kotak kedap air diikat rantai baja dan ditenggelamkan ke dalam tangki air balas dasar kapal laut.",
+      "riskIndicators": [
+        "Manhole penutup tangki berminyak atau berbekas dibuka.",
+        "Pergerakan ABK di dekat palka bawah saat malam hari."
+      ],
+      "inspectionActions": [
+        "Turunkan Tim Selam Khusus Bea Cukai.",
+        "Kuras air balas dan periksa dasar tangki."
+      ]
+    },
+    {
+      "id": "hs-m4b-struktur",
+      "category": "palka_kontainer",
+      "view": "cutaway",
+      "angleMin": 0,
+      "angleMax": 360,
+      "position": { "x": 55.0, "y": 48.0 },
+      "label": "Struktur Kapal: Palka Kargo & Reefer Container False Wall",
+      "badge": "REEFER CONTAINER",
+      "badgeType": "danger",
+      "mainImage": "assets/images/hotspots/hs_door_panel_compartment.png",
+      "galleryImages": ["assets/images/hotspots/hs_door_panel_compartment.png"],
+      "description": "Bungkusan Narkotika ditaruh di balik insulasi stainless pendingin (reefer unit) kontainer impor.",
+      "riskIndicators": [
+        "Gamma-Ray Container Scanner memperlihatkan anomali kerapatan insulasi reefer.",
+        "Bolt seal pelabuhan berbekas garitan."
+      ],
+      "inspectionActions": [
+        "Pindai kontainer dengan Hi-Tech Container Scanner.",
+        "Buka panel paking reefer pendingin."
+      ]
+    },
+    {
+      "id": "hs-m4b-muatan",
+      "category": "muatan",
+      "view": "cutaway",
+      "angleMin": 0,
+      "angleMax": 360,
+      "position": { "x": 72.0, "y": 58.0 },
+      "label": "Muatan: Muatan Curah & Kontainer Kargo",
+      "badge": "MUATAN CURAH",
+      "badgeType": "warning",
+      "mainImage": "assets/images/hotspots/hs_door_panel_compartment.png",
+      "galleryImages": ["assets/images/hotspots/hs_door_panel_compartment.png"],
+      "description": "Karung-karung sabu ditanam di tengah tumpukan muatan curah batu bara / semen impor.",
+      "riskIndicators": [
+        "K-9 Pelacak memberikan respon agresif pada palka muatan.",
+        "Manifes barang mencantumkan pengirim berkategori high-risk."
+      ],
+      "inspectionActions": [
+        "Bongkar sebagian sampel muatan curah.",
+        "Lakukan pemeriksaan fisik menyeluruh."
       ]
     }
   ]

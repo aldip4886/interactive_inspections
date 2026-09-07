@@ -2,6 +2,7 @@ import { HotspotLayer } from '../components/hotspot-layer.js';
 import { InfoPanel } from '../components/info-panel.js';
 import { ViewToggle } from '../components/view-toggle.js';
 import { Carousel } from '../components/carousel.js';
+import { RotationControl } from '../components/rotation.js';
 import { xapi } from './xapi.js';
 
 export class BaseModuleView {
@@ -11,6 +12,7 @@ export class BaseModuleView {
     this.moduleData = null;
     this.activeView = '';
     this.activeFilter = 'all';
+    this.currentAngle = 0;
   }
 
   async loadData() {
@@ -31,6 +33,7 @@ export class BaseModuleView {
     const data = this.moduleData;
     const viewKeys = Object.keys(data.centralImages || {});
     this.activeView = viewKeys[0] || 'front';
+    this.currentAngle = 0;
 
     const html = `
       <div class="inspection-workspace">
@@ -58,6 +61,9 @@ export class BaseModuleView {
           </div>
         </div>
 
+        <!-- 360 Rotation Controller Container -->
+        <div id="rotation-control-root"></div>
+
         <!-- Bottom Carousel Bar -->
         <div id="carousel-root"></div>
 
@@ -81,6 +87,7 @@ export class BaseModuleView {
     const drawerEl = document.getElementById('info-panel-drawer');
     const hotspotRoot = document.getElementById('hotspot-layer-root');
     const viewToggleRoot = document.getElementById('view-toggle-container');
+    const rotationRoot = document.getElementById('rotation-control-root');
     const carouselRoot = document.getElementById('carousel-root');
 
     this.infoPanel = new InfoPanel(drawerEl);
@@ -100,15 +107,43 @@ export class BaseModuleView {
           sceneImg.src = data.centralImages[viewKey].url;
           sceneImg.alt = data.centralImages[viewKey].label;
         }
-        this.hotspotLayer.render(data.hotspots, this.activeView, this.activeFilter);
+        this.hotspotLayer.render(data.hotspots, this.activeView, this.activeFilter, this.currentAngle);
       }
     });
 
+    // Rotation Control if supported by module
+    if (data.supportsRotation) {
+      this.rotationControl = new RotationControl(rotationRoot, {
+        onAngleChange: (angle) => {
+          this.currentAngle = angle;
+          
+          // Switch view angle image automatically if mapped
+          if (data.angleImages) {
+            if (angle >= 315 || angle < 45) {
+              if (data.angleImages.front) sceneImg.src = data.angleImages.front;
+            } else if (angle >= 45 && angle < 135) {
+              if (data.angleImages.side) sceneImg.src = data.angleImages.side;
+            } else if (angle >= 135 && angle < 225) {
+              if (data.angleImages.back) sceneImg.src = data.angleImages.back;
+            } else if (angle >= 225 && angle < 315) {
+              if (data.angleImages.side2) sceneImg.src = data.angleImages.side2;
+            }
+          }
+
+          this.hotspotLayer.render(data.hotspots, this.activeView, this.activeFilter, this.currentAngle);
+        }
+      });
+      this.rotationControl.render(0);
+    }
+
     this.carousel = new Carousel(carouselRoot, {
       onSelectHotspot: (hotspot) => {
-        // Auto-switch view if needed
+        // Auto-switch view or angle if needed
         if (hotspot.view && hotspot.view !== this.activeView) {
           this.viewToggle.onViewChange(hotspot.view);
+        }
+        if (this.rotationControl && hotspot.angleMin !== undefined) {
+          this.rotationControl.setAngle(hotspot.angleMin);
         }
         this.hotspotLayer.markVisited(hotspot.id);
         this.infoPanel.show(hotspot);
@@ -118,7 +153,7 @@ export class BaseModuleView {
 
     // Render initial sub-components state
     this.viewToggle.render(data.centralImages, this.activeView);
-    this.hotspotLayer.render(data.hotspots, this.activeView, this.activeFilter);
+    this.hotspotLayer.render(data.hotspots, this.activeView, this.activeFilter, this.currentAngle);
     this.carousel.render(data.hotspots);
 
     // Attach Category Filter Buttons Listeners
@@ -129,7 +164,7 @@ export class BaseModuleView {
         this.activeFilter = filterId;
         filterBtns.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-        this.hotspotLayer.render(data.hotspots, this.activeView, this.activeFilter);
+        this.hotspotLayer.render(data.hotspots, this.activeView, this.activeFilter, this.currentAngle);
       });
     });
   }
