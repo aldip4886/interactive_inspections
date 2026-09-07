@@ -1,0 +1,64 @@
+{
+  "moduleId": "modul4b",
+  "moduleTitle": "Modul 4B: Penyelundupan Melalui Sarana Pengangkut Laut (Cargo Ship & Container)",
+  "description": "Inspeksi kompartemen pada kapal kargo laut: Palka Kargo Utama, Pipa Air Balas, Dinding Ganda Kontainer, & Ruang Mesin.",
+  "centralImages": {
+    "cutaway": {
+      "url": "assets/images/central/m4b_cargo_ship_cutaway.png",
+      "label": "Tampak Irisan Lambung Kapal Kargo (Cargo Vessel Cutaway)"
+    }
+  },
+  "filterCategories": [
+    { "id": "all", "label": "Semua Titik" },
+    { "id": "hold", "label": "Palka & Kontainer" },
+    { "id": "machinery", "label": "Ruang Mesin & Balas" }
+  ],
+  "hotspots": [
+    {
+      "id": "hs-m4b-01",
+      "category": "hold",
+      "view": "cutaway",
+      "position": { "x": 55.0, "y": 48.0 },
+      "label": "Dinding Ganda Kontainer Pendingin (Reefer Container False Wall)",
+      "badge": "MODUS IMPOR CONTAINER",
+      "badgeType": "danger",
+      "mainImage": "assets/images/hotspots/hs_door_panel_compartment.png",
+      "galleryImages": [
+        "assets/images/hotspots/hs_door_panel_compartment.png"
+      ],
+      "description": "Bungkusan Narkotika ditaruh di dalam ruang mesin isolasi pendingin (reefer unit) atau selipan insulasi dinding stainless kontainer.",
+      "riskIndicators": [
+        "Citra Container Scanner (Gamma-Ray Scanner) memperlihatkan anomali kerapatan materi di bagian depan reefer.",
+        "Segel pelabuhan (bolt seal) memiliki jejak goresan re-sealing.",
+        "Dokumen manifes barang (Bill of Lading) berasal dari pelabuhan high-risk origin."
+      ],
+      "inspectionActions": [
+        "Arahkan kontainer ke Hi-Tech Container Scanner pelabuhan.",
+        "Buka panel paking reefer pendingin menggunakan kunci shock khusus.",
+        "Terjunkan Tim Anjing Pelacak K-9 Bea Cukai ke dalam kontainer."
+      ]
+    },
+    {
+      "id": "hs-m4b-02",
+      "category": "machinery",
+      "view": "cutaway",
+      "position": { "x": 28.0, "y": 68.0 },
+      "label": "Pipa & Tangki Air Balas (Ballast Water Tanks)",
+      "badge": "MODUS KAPAL LAUT",
+      "badgeType": "warning",
+      "mainImage": "assets/images/hotspots/hs_door_panel_compartment.png",
+      "galleryImages": [
+        "assets/images/hotspots/hs_door_panel_compartment.png"
+      ],
+      "description": "Kotak/tabung kedap air diikat menggunakan rantai dan ditenggelamkan ke dalam tangki air balas dasar kapal laut.",
+      "riskIndicators": [
+        "Manhole penutup tangki air balas berminyak atau baut penutup tidak tertutup debu seperti bagian lainnya.",
+        "Tim Patroli Laut Bea Cukai (Customs Marine Patrol) mendapati pergerakan tidak wajar ABK di dekat palka bawah."
+      ],
+      "inspectionActions": [
+        "Turunkan tim selam khusus Bea Cukai / Marine Unit untuk inspeksi bawah air.",
+        "Kuras air balas kapal untuk memeriksa bagian dasar tangki."
+      ]
+    }
+  ]
+}

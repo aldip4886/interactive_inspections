@@ -1,0 +1,94 @@
+{
+  "moduleId": "modul1",
+  "moduleTitle": "Modul 1: Penyelundupan Melalui Tubuh Kurir (Body Concealment)",
+  "description": "Inspeksi titik-titik penyembunyian pada tubuh kurir melalui metode swallowing (body packing), strapping (penempelan luar), dan inserted objects.",
+  "centralImages": {
+    "front": {
+      "url": "assets/images/central/m1_body_front_xray.png",
+      "label": "Tampak Depan (Anatomy & X-Ray View)"
+    },
+    "back": {
+      "url": "assets/images/central/m1_body_back_xray.png",
+      "label": "Tampak Belakang (X-Ray View)"
+    }
+  },
+  "filterCategories": [
+    { "id": "all", "label": "Semua Titik" },
+    { "id": "digestive", "label": "Saluran Pencernaan" },
+    { "id": "external", "label": "Penempelan Luar" },
+    { "id": "cavity", "label": "Rongga Tubuh" }
+  ],
+  "hotspots": [
+    {
+      "id": "hs-m1-01",
+      "category": "digestive",
+      "view": "front",
+      "position": { "x": 49.5, "y": 48.0 },
+      "label": "Body Packing / Swallowing (Lambung & Usus)",
+      "badge": "TINGKAT RESIKO TINGGI",
+      "badgeType": "danger",
+      "mainImage": "assets/images/hotspots/hs_body_packing_main.png",
+      "galleryImages": [
+        "assets/images/hotspots/hs_body_packing_main.png"
+      ],
+      "description": "Kurir menelan puluhan kapsul/pellet berlapis kondom atau lateks kedap udara berisi Narkotika (Methamphetamine/Cocaine). Metode ini sangat membahayakan jiwa kurir apabila kapsul pecah di dalam saluran cerna.",
+      "riskIndicators": [
+        "Hasil citra X-Ray/CT-Scan memperlihatkan gambaran opak bulat berderet di lambung atau usus halus.",
+        "Kurir menunjukkan gestur gelisah, menolak makan/minum, atau meminum obat anti-diare.",
+        "Pemeriksaan fisik menunjukkan distensi abdomen tanpa gejala medis akut."
+      ],
+      "inspectionActions": [
+        "Arahkan kurir ke ruang pemeriksaan khusus X-Ray Badan / Body Scanner.",
+        "Koordinasi dengan tim medis/RS Bhayangkara untuk observasi pembuangan pellet (evakuasi medis).",
+        "Amankan bukti pellet dan uji laboratorium pengujian kandungan zat Narkotika."
+      ]
+    },
+    {
+      "id": "hs-m1-02",
+      "category": "external",
+      "view": "front",
+      "position": { "x": 38.0, "y": 38.0 },
+      "label": "Body Strapping (Paha & Pinggang)",
+      "badge": "MODUS POPULER",
+      "badgeType": "warning",
+      "mainImage": "assets/images/hotspots/hs_body_packing_main.png",
+      "galleryImages": [
+        "assets/images/hotspots/hs_body_packing_main.png"
+      ],
+      "description": "Paket sabu/heroin dikemas tipis pipih kemudian direkatkan dengan lakban medis di area paha dalam, pinggang, atau ketiak di balik pakaian berlapis.",
+      "riskIndicators": [
+        "Cara berjalan kurir tampak kaku atau tidak alami.",
+        "Pakaian tampak tebal secara tidak proporsional pada bagian paha atau selangkangan.",
+        "Penggeledahan badan (body search) meraba adanya bentukan keras bertekstur janggal."
+      ],
+      "inspectionActions": [
+        "Lakukan penggeledahan badan secara mendalam (strip search) di ruang tertutup sesuai SOP.",
+        "Dokumentasikan posisi perekatan paket pada tubuh tersangka sebelum dilepas.",
+        "Timbang dan catat berat bruto serta netto barang bukti."
+      ]
+    },
+    {
+      "id": "hs-m1-03",
+      "category": "cavity",
+      "view": "back",
+      "position": { "x": 50.0, "y": 58.0 },
+      "label": "Insertion (Rongga Anus / Vagina)",
+      "badge": "BAHAYA TINGGI",
+      "badgeType": "danger",
+      "mainImage": "assets/images/hotspots/hs_body_packing_main.png",
+      "galleryImages": [
+        "assets/images/hotspots/hs_body_packing_main.png"
+      ],
+      "description": "Penyembunyian tabung/kapsul besar berisi Narkotika ke dalam rongga tubuh bagian bawah.",
+      "riskIndicators": [
+        "Duduk tersangka tampak canggung atau tidak nyaman.",
+        "Pemeriksaan Body Scanner menunjukkan bayangan benda asing silindris pada area pelvis.",
+        "Hasil penggeledahan fisik menunjukkan perlawanan berlebihan dari tersangka."
+      ],
+      "inspectionActions": [
+        "Lakukan pemeriksaan medis ahli oleh dokter pemeriksa independen.",
+        "Pastikan proses evakuasi dilakukan dengan peralatan medis steril."
+      ]
+    }
+  ]
+}

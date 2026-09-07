@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modul Interaktif Inspeksi Modus Penyelundupan Narkotika — DJBC</title>
+  <meta name="description" content="Modul Pembelajaran Interaktif Modus Penyelundupan Narkotika untuk Pegawai Direktorat Jenderal Bea dan Cukai (DJBC) - Kemenkeu RI">
+  <link rel="stylesheet" href="./src/styles/index.css">
+</head>
+<body>
+  <div id="app-container">
+    <!-- Sidebar Navigation -->
+    <aside id="sidebar">
+      <div class="sidebar-header" style="padding: 16px; border-bottom: 1px solid var(--surface-glass-border); display: flex; align-items: center; gap: 12px;">
+        <div style="width: 36px; height: 36px; background: var(--accent-gold); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 800; color: #060B13; font-size: 1.1rem;">
+          BC
+        </div>
+        <div class="sidebar-brand-text">
+          <div style="font-weight: 700; font-size: 0.95rem; color: #FFF; line-height: 1.1;">BEA CUKAI</div>
+          <div style="font-size: 0.7rem; color: var(--accent-gold); letter-spacing: 0.05em;">NARCOTICS INSPECTION</div>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav" style="flex: 1; padding: 16px 8px; display: flex; flex-direction: column; gap: 4px; overflow-y: auto;">
+        <a href="#/beranda" class="nav-item active" data-route="beranda" style="display: flex; align-items: center; gap: 12px; padding: 10px 14px; border-radius: 8px; color: var(--text-primary); text-decoration: none; font-size: 0.88rem; font-weight: 500; transition: all 0.2s;">
+          <span class="nav-icon">🏠</span>
+          <span class="nav-label">Beranda & Panduan</span>
+        </a>
+        
+        <div style="margin-top: 12px; padding: 0 14px; font-size: 0.68rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em;">
+          KATEGORI MODUL
+        </div>
+
+        <a href="#/modul1" class="nav-item" data-route="modul1" style="display: flex; align-items: center; gap: 12px; padding: 10px 14px; border-radius: 8px; color: var(--text-secondary); text-decoration: none; font-size: 0.88rem; font-weight: 500; transition: all 0.2s;">
+          <span class="nav-icon">👤</span>
+          <span class="nav-label">1. Tubuh Kurir</span>
+        </a>
+
+        <a href="#/modul2" class="nav-item" data-route="modul2" style="display: flex; align-items: center; gap: 12px; padding: 10px 14px; border-radius: 8px; color: var(--text-secondary); text-decoration: none; font-size: 0.88rem; font-weight: 500; transition: all 0.2s;">
+          <span class="nav-icon">🧳</span>
+          <span class="nav-label">2. Barang Bawaan</span>
+        </a>
+
+        <a href="#/modul3" class="nav-item" data-route="modul3" style="display: flex; align-items: center; gap: 12px; padding: 10px 14px; border-radius: 8px; color: var(--text-secondary); text-decoration: none; font-size: 0.88rem; font-weight: 500; transition: all 0.2s;">
+          <span class="nav-icon">📦</span>
+          <span class="nav-label">3. Barang Kiriman</span>
+        </a>
+
+        <a href="#/modul4a" class="nav-item" data-route="modul4a" style="display: flex; align-items: center; gap: 12px; padding: 10px 14px; border-radius: 8px; color: var(--text-secondary); text-decoration: none; font-size: 0.88rem; font-weight: 500; transition: all 0.2s;">
+          <span class="nav-icon">🚗</span>
+          <span class="nav-label">4A. Kendaraan (SUV)</span>
+        </a>
+
+        <a href="#/modul4b" class="nav-item" data-route="modul4b" style="display: flex; align-items: center; gap: 12px; padding: 10px 14px; border-radius: 8px; color: var(--text-secondary); text-decoration: none; font-size: 0.88rem; font-weight: 500; transition: all 0.2s;">
+          <span class="nav-icon">🚢</span>
+          <span class="nav-label">4B. Kapal Laut Cargo</span>
+        </a>
+
+        <div style="margin-top: 12px; padding: 0 14px; font-size: 0.68rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em;">
+          EVALUASI
+        </div>
+
+        <a href="#/evaluasi" class="nav-item" data-route="evaluasi" style="display: flex; align-items: center; gap: 12px; padding: 10px 14px; border-radius: 8px; color: var(--text-secondary); text-decoration: none; font-size: 0.88rem; font-weight: 500; transition: all 0.2s;">
+          <span class="nav-icon">📝</span>
+          <span class="nav-label">Ujian Evaluasi</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer" style="padding: 14px; border-top: 1px solid var(--surface-glass-border); font-size: 0.72rem; color: var(--text-muted); text-align: center;">
+        DJBC E-Learning &copy; 2026<br>v1.0 SCORM 2004 / xAPI
+      </div>
+    </aside>
+
+    <!-- Main Workspace -->
+    <main id="main-wrapper">
+      <!-- Header Bar -->
+      <header id="main-header">
+        <div style="display: flex; align-items: center; gap: 16px;">
+          <button id="sidebar-toggle-btn" class="btn-icon" title="Toggle Sidebar">
+            ☰
+          </button>
+          <h2 id="page-title" style="font-size: 1.1rem; font-weight: 600; color: #FFF; margin: 0;">
+            Beranda & Panduan Inspeksi
+          </h2>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 16px;">
+          <!-- LRS Connection Config Button -->
+          <button id="lrs-config-btn" class="btn-icon" title="Pengaturan LRS / xAPI Analytics" style="position: relative;">
+            ⚙️
+            <span id="lrs-status-dot" style="position: absolute; top: 6px; right: 6px; width: 8px; height: 8px; border-radius: 50%; background: #64748B;"></span>
+          </button>
+
+          <!-- KLC User Profile Widget -->
+          <div id="user-profile-widget">
+            <div class="user-avatar-container">
+              <img id="user-avatar-img" src="" alt="Avatar" style="display: none;">
+              <span id="user-avatar-placeholder" style="display: none;">👤</span>
+              <span id="user-avatar-initials">BC</span>
+            </div>
+            <div class="user-info-text">
+              <span id="user-display-name">Memuat profil...</span>
+              <span id="user-display-role">Pegawai DJBC</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Viewport Content Render Area -->
+      <div id="content-area">
+        <!-- Dynamic module pages render here -->
+      </div>
+    </main>
+
+    <!-- Modal Container Root -->
+    <div id="modal-root"></div>
+  </div>
+
+  <script type="module" src="./src/main.js"></script>
+</body>
+</html>

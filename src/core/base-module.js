@@ -1,0 +1,136 @@
+import { HotspotLayer } from '../components/hotspot-layer.js';
+import { InfoPanel } from '../components/info-panel.js';
+import { ViewToggle } from '../components/view-toggle.js';
+import { Carousel } from '../components/carousel.js';
+import { xapi } from './xapi.js';
+
+export class BaseModuleView {
+  constructor(container, jsonPath) {
+    this.container = container;
+    this.jsonPath = jsonPath;
+    this.moduleData = null;
+    this.activeView = '';
+    this.activeFilter = 'all';
+  }
+
+  async loadData() {
+    try {
+      const resp = await fetch(this.jsonPath);
+      this.moduleData = await resp.json();
+    } catch (e) {
+      console.error(`[BaseModule] Failed to load JSON ${this.jsonPath}`, e);
+    }
+  }
+
+  async render() {
+    if (!this.moduleData) {
+      await this.loadData();
+    }
+    if (!this.moduleData) return;
+
+    const data = this.moduleData;
+    const viewKeys = Object.keys(data.centralImages || {});
+    this.activeView = viewKeys[0] || 'front';
+
+    const html = `
+      <div class="inspection-workspace">
+        <!-- Floating Filter Category Bar -->
+        <div class="filter-category-bar">
+          ${(data.filterCategories || []).map(cat => `
+            <button class="filter-btn ${cat.id === 'all' ? 'active' : ''}" data-filter="${cat.id}">
+              ${cat.label}
+            </button>
+          `).join('')}
+        </div>
+
+        <!-- Floating Viewport Controls (X-Ray / Normal) -->
+        <div id="view-toggle-container"></div>
+
+        <!-- Central Inspection Viewport Scene -->
+        <div class="scene-viewport">
+          <div class="scene-container">
+            <img id="central-scene-image" class="scene-image" 
+                 src="${data.centralImages[this.activeView].url}" 
+                 alt="${data.centralImages[this.activeView].label}">
+            
+            <!-- Hotspots Interactive Layer -->
+            <div id="hotspot-layer-root"></div>
+          </div>
+        </div>
+
+        <!-- Bottom Carousel Bar -->
+        <div id="carousel-root"></div>
+
+        <!-- Right Side Info Drawer -->
+        <aside id="info-panel-drawer"></aside>
+      </div>
+    `;
+
+    this.container.innerHTML = html;
+
+    // Initialize sub-components
+    this.initComponents();
+
+    // Track xAPI module view
+    xapi.trackModuleView(data.moduleId, data.moduleTitle);
+  }
+
+  initComponents() {
+    const data = this.moduleData;
+    const sceneImg = document.getElementById('central-scene-image');
+    const drawerEl = document.getElementById('info-panel-drawer');
+    const hotspotRoot = document.getElementById('hotspot-layer-root');
+    const viewToggleRoot = document.getElementById('view-toggle-container');
+    const carouselRoot = document.getElementById('carousel-root');
+
+    this.infoPanel = new InfoPanel(drawerEl);
+
+    this.hotspotLayer = new HotspotLayer(hotspotRoot, {
+      onHotspotClick: (hotspot) => {
+        this.infoPanel.show(hotspot);
+        this.carousel.render(data.hotspots, hotspot.id);
+        xapi.trackHotspotClick(data.moduleId, hotspot.id, hotspot.label, hotspot.category);
+      }
+    });
+
+    this.viewToggle = new ViewToggle(viewToggleRoot, {
+      onViewChange: (viewKey) => {
+        this.activeView = viewKey;
+        if (data.centralImages[viewKey]) {
+          sceneImg.src = data.centralImages[viewKey].url;
+          sceneImg.alt = data.centralImages[viewKey].label;
+        }
+        this.hotspotLayer.render(data.hotspots, this.activeView, this.activeFilter);
+      }
+    });
+
+    this.carousel = new Carousel(carouselRoot, {
+      onSelectHotspot: (hotspot) => {
+        // Auto-switch view if needed
+        if (hotspot.view && hotspot.view !== this.activeView) {
+          this.viewToggle.onViewChange(hotspot.view);
+        }
+        this.hotspotLayer.markVisited(hotspot.id);
+        this.infoPanel.show(hotspot);
+        xapi.trackHotspotClick(data.moduleId, hotspot.id, hotspot.label, hotspot.category);
+      }
+    });
+
+    // Render initial sub-components state
+    this.viewToggle.render(data.centralImages, this.activeView);
+    this.hotspotLayer.render(data.hotspots, this.activeView, this.activeFilter);
+    this.carousel.render(data.hotspots);
+
+    // Attach Category Filter Buttons Listeners
+    const filterBtns = this.container.querySelectorAll('.filter-btn');
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const filterId = btn.getAttribute('data-filter');
+        this.activeFilter = filterId;
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        this.hotspotLayer.render(data.hotspots, this.activeView, this.activeFilter);
+      });
+    });
+  }
+}

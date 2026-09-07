@@ -1,0 +1,68 @@
+{
+  "moduleId": "modul3",
+  "moduleTitle": "Modul 3: Penyelundupan Melalui Barang Kiriman (Postal & Courier Cargo)",
+  "description": "Pemeriksaan paket barang kiriman impor melalui Pos & Perusahaan Jasa Titipan (PJT): Kaleng Makanan Palsu, Dinding Kardus Berongga, Alat Elektronik, & Mainan.",
+  "centralImages": {
+    "cutaway": {
+      "url": "assets/images/central/m3_parcel_cutaway.png",
+      "label": "Tampak Irisan Dalam (Cutaway View)"
+    },
+    "normal": {
+      "url": "assets/images/central/m3_parcel_normal.png",
+      "label": "Tampak Luar Kemasan Pos/PJT"
+    }
+  },
+  "filterCategories": [
+    { "id": "all", "label": "Semua Titik" },
+    { "id": "food", "label": "Kaleng Makanan / Minuman" },
+    { "id": "cardboard", "label": "Dinding Lapisan Paket" }
+  ],
+  "hotspots": [
+    {
+      "id": "hs-m3-01",
+      "category": "food",
+      "view": "cutaway",
+      "position": { "x": 62.0, "y": 52.0 },
+      "label": "False Sardine Can (Kaleng Makanan Cair Palsu)",
+      "badge": "MODUS CAIR & KRISTAL",
+      "badgeType": "danger",
+      "mainImage": "assets/images/hotspots/hs_sardine_can_false.png",
+      "galleryImages": [
+        "assets/images/hotspots/hs_sardine_can_false.png"
+      ],
+      "description": "Kaleng makanan kalengan (sarden/buahan) yang disegel ulang dari pabrik palsu. Di dalamnya diisi Narkotika cair (Liquid Meth) atau bungkus sabu yang direndam cairan beraroma kuat.",
+      "riskIndicators": [
+        "X-Ray memperlihatkan batas densitas cairan tidak homogen atau ada bungkusan di dalam kaleng.",
+        "Berat kaleng tidak sesuai dengan netto yang tertera pada label kemasan luar.",
+        "Bekas patri/pemasangan ulang tutup kaleng tampak kasar saat diamati jarak dekat."
+      ],
+      "inspectionActions": [
+        "Lakukan pemeriksaan uji ketukan (sound density test) pada permukaan kaleng.",
+        "Buka tutup kaleng menggunakan pembuka kaleng steril dan ambil sampel cairan.",
+        "Teteskan reagen Marquis/Fast Blue B pada sampel untuk mengidentifikasi kandungan Narkotika."
+      ]
+    },
+    {
+      "id": "hs-m3-02",
+      "category": "cardboard",
+      "view": "cutaway",
+      "position": { "x": 35.0, "y": 45.0 },
+      "label": "Dinding Kardus Corrugated (Double-Wall Sheet)",
+      "badge": "MODUS LEMBARAN PIPIH",
+      "badgeType": "warning",
+      "mainImage": "assets/images/hotspots/hs_sardine_can_false.png",
+      "galleryImages": [
+        "assets/images/hotspots/hs_sardine_can_false.png"
+      ],
+      "description": "Narkotika bentuk sintesis cair diresapkan ke dalam serat karton/kardus pembungkus, atau lembaran heroin dipres ke selipan corrugation kardus.",
+      "riskIndicators": [
+        "Kardus terasa kaku, lemas tak wajar, atau berbau kimia tajam.",
+        "Pemeriksaan K-9 (Anjing Pelacak) menunjukkan respon positif pada lapisan kemasan luar."
+      ],
+      "inspectionActions": [
+        "Iris tipis lapisan kardus menggunakan cutter.",
+        "Lakukan ekstraksi sampel serat kardus dengan larutan pelarut organik untuk pengujian lab."
+      ]
+    }
+  ]
+}

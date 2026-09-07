@@ -1,0 +1,68 @@
+{
+  "moduleId": "modul2",
+  "moduleTitle": "Modul 2: Penyelundupan Melalui Barang Bawaan (Luggage Concealment)",
+  "description": "Inspeksi titik penyembunyian pada koper penumpang penerbangan internasional: False Bottom, Dinding Ganda, Rangka Gagang Trolley, dan Lipatan Jahitan.",
+  "centralImages": {
+    "xray": {
+      "url": "assets/images/central/m2_luggage_xray.png",
+      "label": "Tampak X-Ray Scanner (Color Density View)"
+    },
+    "normal": {
+      "url": "assets/images/central/m2_luggage_normal.png",
+      "label": "Tampak Luar & Fisik Normal"
+    }
+  },
+  "filterCategories": [
+    { "id": "all", "label": "Semua Titik" },
+    { "id": "structure", "label": "Struktur Dinding Koper" },
+    { "id": "trolley", "label": "Gagang & Rangka" }
+  ],
+  "hotspots": [
+    {
+      "id": "hs-m2-01",
+      "category": "structure",
+      "view": "xray",
+      "position": { "x": 51.0, "y": 72.0 },
+      "label": "False Bottom (Kompartemen Dasar Palsu)",
+      "badge": "FREKUENSI SANGAT TINGGI",
+      "badgeType": "danger",
+      "mainImage": "assets/images/hotspots/hs_sardine_can_false.png",
+      "galleryImages": [
+        "assets/images/hotspots/hs_sardine_can_false.png"
+      ],
+      "description": "Kompartemen rahasia yang dibuat di balik alas koper. Lembaran sabu/heroin dipres tebal lalu ditutup dengan lapisan plastik sintetis menyerupai dasar asli koper.",
+      "riskIndicators": [
+        "Citra X-Ray menampilkan warna oranye pekat (organik) tebal merata pada alas koper.",
+        "Kedalaman bagian dalam koper tidak sebanding dengan ketinggian fisik luar koper.",
+        "Berat koper dalam keadaan kosong terasa sangat berat (berkelbihan)."
+      ],
+      "inspectionActions": [
+        "Ukur perbedaan dimensi luar dan dalam koper menggunakan pita ukur.",
+        "Buka paksa alas koper menggunakan pisau pemotong medis/alat pembongkar khusus.",
+        "Lakukan swab tes narkotika (Ion Scan / Narcotest Kit) pada serbuk tersembunyi."
+      ]
+    },
+    {
+      "id": "hs-m2-02",
+      "category": "trolley",
+      "view": "xray",
+      "position": { "x": 18.0, "y": 35.0 },
+      "label": "Pipa Gagang Trolley (Trolley Handle Tubes)",
+      "badge": "MODUS KAMUFLASE",
+      "badgeType": "warning",
+      "mainImage": "assets/images/hotspots/hs_sardine_can_false.png",
+      "galleryImages": [
+        "assets/images/hotspots/hs_sardine_can_false.png"
+      ],
+      "description": "Pengisian kristal Sabu (Methamphetamine) dimasukkan ke dalam pipa alumunium/besi penyangga gagang tarikan koper.",
+      "riskIndicators": [
+        "Citra X-Ray menunjukkan rongga pipa tidak transparan melainkan padat berisi materi seragam.",
+        "Gagang tarikan koper tersendat atau sulit ditarik sepenuhnya."
+      ],
+      "inspectionActions": [
+        "Lepaskan baut pengunci gagang trolley.",
+        "Keluarkan materi padat dari dalam rongga pipa baja koper."
+      ]
+    }
+  ]
+}

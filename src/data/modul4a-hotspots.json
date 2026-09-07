@@ -1,0 +1,66 @@
+{
+  "moduleId": "modul4a",
+  "moduleTitle": "Modul 4A: Penyelundupan Melalui Sarana Pengangkut Darat (SUV / Passenger Vehicle)",
+  "description": "Inspeksi kompartemen rahasia pada kendaraan darat: Kompartemen Pintu Mobil, Tangki Bahan Bakar Dinding Ganda, Dashboard, & Ban Serep.",
+  "centralImages": {
+    "cutaway": {
+      "url": "assets/images/central/m4a_suv_cutaway.png",
+      "label": "Tampak Irisan Penampang Kendaraan (SUV Cutaway)"
+    }
+  },
+  "filterCategories": [
+    { "id": "all", "label": "Semua Titik" },
+    { "id": "doors", "label": "Pintu & Kompartemen Ruang" },
+    { "id": "engine_fuel", "label": "Tangki & Mesin" }
+  ],
+  "hotspots": [
+    {
+      "id": "hs-m4a-01",
+      "category": "doors",
+      "view": "cutaway",
+      "position": { "x": 42.0, "y": 55.0 },
+      "label": "Kompartemen Pintu Mobil (Door Panel Cavity)",
+      "badge": "MODUS TEMUAN DJBC",
+      "badgeType": "danger",
+      "mainImage": "assets/images/hotspots/hs_door_panel_compartment.png",
+      "galleryImages": [
+        "assets/images/hotspots/hs_door_panel_compartment.png"
+      ],
+      "description": "Rongga kosong di balik panel interior pintu kendaraan dimanfaatkan untuk menyelipkan puluhan paket sabu/ekstasi berbungkus alumunium foil atau peredam suara rakitan.",
+      "riskIndicators": [
+        "Suara ketukan pada panel pintu terdengar pekat (soliter) tidak berongga seperti pintu normal.",
+        "Klip penahan (door clip) atau baut lis interior pintu bekas dibuka / tergores alat perkakas.",
+        "Bobot pintu saat diayunkan terasa jauh lebih berat dari spesifikasi standar pabrik."
+      ],
+      "inspectionActions": [
+        "Gunakan endoskop / boroskop kabel fleksibel melalui celah kaca pintu untuk melihat rongga dalam.",
+        "Lepaskan klip trim pintu secara hati-hati menggunakan alat perenggang plastik.",
+        "Keluarkan bungkusan paket narkotika dan lakukan penimbangan serta pengujian laboratorium."
+      ]
+    },
+    {
+      "id": "hs-m4a-02",
+      "category": "engine_fuel",
+      "view": "cutaway",
+      "position": { "x": 78.0, "y": 62.0 },
+      "label": "Tangki Bahan Bakar Dinding Ganda (Modified Fuel Tank)",
+      "badge": "MODUS PARTISI RAHASIA",
+      "badgeType": "danger",
+      "mainImage": "assets/images/hotspots/hs_door_panel_compartment.png",
+      "galleryImages": [
+        "assets/images/hotspots/hs_door_panel_compartment.png"
+      ],
+      "description": "Tangki bensin dipasang sekat/partisi kedap cair. Sebagian kecil diisi bensin agar mesin tetap bisa menyala, sedangkan ruang terbesar diisi ratusan bungkusan Narkotika.",
+      "riskIndicators": [
+        "Indikator bahan bakar di dashboard menunjukkan posisi penuh terus-menerus atau tidak akurat.",
+        "Ada bekas las baru atau lapisan cat ulang pada bagian bawah tangki bensin.",
+        "Pemeriksaan Mobile Vehicle X-Ray Scanner menunjukkan warna densitas ganda pada tangki."
+      ],
+      "inspectionActions": [
+        "Pindahkan kendaraan ke atas pit pas / car-lift.",
+        "Gunakan alat pengukur bahan bakar manual (dipstick) untuk mengecek kedalaman tangki asli vs fisik.",
+        "Kuras bahan bakar dan lepas baut pengikat tangki dari sasis bawah kendaraan."
+      ]
+    }
+  ]
+}

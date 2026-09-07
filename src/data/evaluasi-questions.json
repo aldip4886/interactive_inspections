@@ -1,0 +1,72 @@
+{
+  "quizTitle": "Ujian Evaluasi Modus Penyelundupan Narkotika — DJBC",
+  "passingScorePercent": 70,
+  "timeLimitMinutes": 10,
+  "questions": [
+    {
+      "id": "q1",
+      "category": "Tubuh Kurir",
+      "question": "Petugas mendapati seorang penumpang pria penerbangan internasional dari Bangkok berjalan dengan kaku dan menolak tawaran makanan/minuman selama 6 jam penerbangan. Hasil pemeriksaan Body Scanner memperlihatkan gambaran opak bulat berderet pada saluran cerna. Apakah jenis modus penyembunyian ini?",
+      "options": [
+        "Body Strapping",
+        "Body Packing / Swallowing",
+        "Insertion Rongga Bawah",
+        "False Luggage Bottom"
+      ],
+      "correctIndex": 1,
+      "explanation": "Pola bayangan opak bulat berderet di saluran cerna dan penolakan konsumsi makanan merupakan ciri khas metode Body Packing (swallowing pellets)."
+    },
+    {
+      "id": "q2",
+      "category": "Barang Bawaan",
+      "question": "Saat koper penumpang melewati X-Ray Baggage Scanner, layar menampilkan warna oranye tebal merata pada bagian alas koper, namun saat dibuka fisik kedalaman alas koper tampak 5 cm lebih dangkal. Langkah pemeriksaan fisik awal yang paling tepat adalah...",
+      "options": [
+        "Langsung mengembalikan koper ke belt bagasi",
+        "Memotong gagang trolley koper",
+        "Mengukur selisih dimensi luar dan dalam serta melakukan pemeriksaan kompartemen dasar palsu (False Bottom)",
+        "Menyemprotkan disinfektan pada koper"
+      ],
+      "correctIndex": 2,
+      "explanation": "Perbedaan kedalaman alas dan warna oranye pekat pada X-Ray menandakan adanya kompartemen False Bottom yang harus diverifikasi dimensinya."
+    },
+    {
+      "id": "q3",
+      "category": "Barang Kiriman",
+      "question": "Modus penyembunyian pada paket barang kiriman berupa kaleng makanan pabrikan yang diisi Narkotika cair atau sabu yang direndam dinamakan...",
+      "options": [
+        "Corrugated Box Impregnation",
+        "False Food/Sardine Can",
+        "Reefer Insulation Packing",
+        "Trolley Tube Concealment"
+      ],
+      "correctIndex": 1,
+      "explanation": "False Food/Sardine Can adalah modus menyegel kembali kaleng makanan yang diisi Narkotika cair (Liquid Meth) atau kristal."
+    },
+    {
+      "id": "q4",
+      "category": "Kendaraan Darat",
+      "question": "Seorang petugas Bea Cukai di pos lintas batas darat mengetuk panel pintu mobil SUV dan mendapati suara ketukan terdengar soliter/padat serta klip trim pintu berjejak bekas garitan obeng. Modus penyembunyian yang teridentifikasi adalah...",
+      "options": [
+        "Penyembunyian di Kompartemen Pintu Mobil (Door Panel Cavity)",
+        "Modus Tangki Air Balas",
+        "Penempelan di Ketiak",
+        "Penyembunyian di Busa Helm"
+      ],
+      "correctIndex": 0,
+      "explanation": "Suara ketukan padat dan bekas garitan perkakas pada trim pintu merupakan indikasi kuat penyembunyian di balik Kompartemen Pintu Mobil."
+    },
+    {
+      "id": "q5",
+      "category": "Sarana Laut",
+      "question": "Peralatan Hi-Tech apakah yang digunakan untuk memindai kerapatan dinding kontainer pendingin (reefer container) di pelabuhan tanpa harus merusak fisik kontainer?",
+      "options": [
+        "Body Scanner",
+        "Ion Mobility Spectrometer (IMS)",
+        "Gamma-Ray / Container Scanner Pelabuhan",
+        "Boroskop Serat Optik"
+      ],
+      "correctIndex": 2,
+      "explanation": "Container Scanner (Gamma-Ray / X-Ray Pelabuhan) mampu menembus dinding baja kontainer dan mendeteksi anomali insulasi pendingin reefer."
+    }
+  ]
+}

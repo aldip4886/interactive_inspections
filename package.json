@@ -1,0 +1,15 @@
+{
+  "name": "interactive-narcotics-inspection",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "package:scorm": "node scripts/package-scorm.js"
+  },
+  "devDependencies": {
+    "vite": "^5.4.2"
+  }
+}
