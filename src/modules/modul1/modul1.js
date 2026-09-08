@@ -288,7 +288,7 @@ export class Modul1View extends BaseModuleView {
           </div>
 
           <div class="modal-footer">
-            <button id="btn-modal-close-footer" class="btn-outline-action">Tutup Kartu</button>
+            <button id="btn-modal-close-footer" class="btn-outline-action">Tutup Side Bar</button>
           </div>
         </div>
       </div>
