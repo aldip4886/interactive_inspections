@@ -1,15 +1,6 @@
-/* Bottom Thumbnail Carousel Bar */
+/* Bottom Thumbnail Carousel Bar (Disabled) */
 .bottom-carousel-bar {
-  height: 94px;
-  background: rgba(0, 25, 60, 0.92);
-  backdrop-filter: blur(12px);
-  border-top: 1px solid var(--color-on-primary-container);
-  display: flex;
-  align-items: center;
-  padding: 0 var(--space-3);
-  gap: var(--space-2);
-  overflow-x: auto;
-  z-index: var(--z-controls);
+  display: none !important;
 }
 
 .carousel-thumb {

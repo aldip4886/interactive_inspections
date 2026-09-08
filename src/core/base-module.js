@@ -64,9 +64,6 @@ export class BaseModuleView {
         <!-- 360 Rotation Controller Container -->
         <div id="rotation-control-root"></div>
 
-        <!-- Bottom Carousel Bar -->
-        <div id="carousel-root"></div>
-
         <!-- Right Side Info Drawer -->
         <aside id="info-panel-drawer"></aside>
       </div>
@@ -88,14 +85,12 @@ export class BaseModuleView {
     const hotspotRoot = document.getElementById('hotspot-layer-root');
     const viewToggleRoot = document.getElementById('view-toggle-container');
     const rotationRoot = document.getElementById('rotation-control-root');
-    const carouselRoot = document.getElementById('carousel-root');
 
     this.infoPanel = new InfoPanel(drawerEl);
 
     this.hotspotLayer = new HotspotLayer(hotspotRoot, {
       onHotspotClick: (hotspot) => {
         this.infoPanel.show(hotspot);
-        this.carousel.render(data.hotspots, hotspot.id);
         xapi.trackHotspotClick(data.moduleId, hotspot.id, hotspot.label, hotspot.category);
       }
     });
@@ -136,25 +131,9 @@ export class BaseModuleView {
       this.rotationControl.render(0);
     }
 
-    this.carousel = new Carousel(carouselRoot, {
-      onSelectHotspot: (hotspot) => {
-        // Auto-switch view or angle if needed
-        if (hotspot.view && hotspot.view !== this.activeView) {
-          this.viewToggle.onViewChange(hotspot.view);
-        }
-        if (this.rotationControl && hotspot.angleMin !== undefined) {
-          this.rotationControl.setAngle(hotspot.angleMin);
-        }
-        this.hotspotLayer.markVisited(hotspot.id);
-        this.infoPanel.show(hotspot);
-        xapi.trackHotspotClick(data.moduleId, hotspot.id, hotspot.label, hotspot.category);
-      }
-    });
-
     // Render initial sub-components state
     this.viewToggle.render(data.centralImages, this.activeView);
     this.hotspotLayer.render(data.hotspots, this.activeView, this.activeFilter, this.currentAngle);
-    this.carousel.render(data.hotspots);
 
     // Attach Category Filter Buttons Listeners
     const filterBtns = this.container.querySelectorAll('.filter-btn');
