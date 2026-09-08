@@ -4,3 +4,5 @@
 @import './components.css';
 @import './animations.css';
 @import './modules.css';
+@import './hotspot-card.css';
+@import 'glightbox/dist/css/glightbox.min.css';
