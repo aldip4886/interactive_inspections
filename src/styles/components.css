@@ -390,3 +390,423 @@
   border-color: var(--color-primary-container);
   box-shadow: 0 0 0 3px rgba(0, 45, 98, 0.1);
 }
+
+/* ==========================================
+   BERANDA PAGE STYLES — HIGH CONTRAST & PROPORTIONAL
+   ========================================== */
+.beranda-container {
+  width: 100%;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 28px 24px 48px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  font-family: var(--font-family-base, 'Poppins', sans-serif);
+}
+
+/* ─── Hero Banner ─── */
+.beranda-hero {
+  background: linear-gradient(135deg, #030F26 0%, #0B2C6E 60%, #051833 100%);
+  border-radius: 20px;
+  padding: 40px 44px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 12px 36px rgba(3, 15, 38, 0.25), 0 0 0 1px rgba(245, 166, 35, 0.2);
+}
+
+.beranda-hero-bg-overlay {
+  position: absolute;
+  top: -50px;
+  right: -50px;
+  width: 350px;
+  height: 350px;
+  background: radial-gradient(circle, rgba(245, 166, 35, 0.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.beranda-hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 820px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.hero-badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 14px;
+  border-radius: 20px;
+  background: rgba(245, 166, 35, 0.15);
+  border: 1px solid rgba(245, 166, 35, 0.4);
+  color: #F5A623;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  width: fit-content;
+}
+
+.hero-badge-pill .badge-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #F5A623;
+  box-shadow: 0 0 8px #F5A623;
+}
+
+.beranda-hero-title {
+  font-size: 32px;
+  font-weight: 800;
+  color: #FFFFFF !important;
+  line-height: 1.25;
+  letter-spacing: -0.3px;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+  margin: 0;
+}
+
+.beranda-hero-subtitle {
+  font-size: 14.5px;
+  line-height: 1.65;
+  color: #E2E8F0 !important;
+  font-weight: 400;
+  margin: 0;
+}
+
+.beranda-hero-subtitle strong {
+  color: #F5A623 !important;
+  font-weight: 700;
+}
+
+.beranda-hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.btn-hero-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 26px;
+  background: #F5A623;
+  color: #030F26 !important;
+  font-size: 13.5px;
+  font-weight: 700;
+  border-radius: 10px;
+  text-decoration: none;
+  box-shadow: 0 4px 16px rgba(245, 166, 35, 0.35);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-hero-primary:hover {
+  background: #FFAE1A;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(245, 166, 35, 0.45);
+}
+
+.btn-hero-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 24px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #FFFFFF !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.3);
+  font-size: 13.5px;
+  font-weight: 600;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.btn-hero-secondary:hover {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: #FFFFFF;
+  transform: translateY(-2px);
+}
+
+/* ─── Disclaimer Banner ─── */
+.beranda-disclaimer-box {
+  background: #FEF3C7;
+  border: 1px solid #FCD34D;
+  border-left: 4px solid #F59E0B;
+  border-radius: 12px;
+  padding: 16px 20px;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+}
+
+.disclaimer-icon {
+  font-size: 20px;
+  flex-shrink: 0;
+  line-height: 1;
+  margin-top: 2px;
+}
+
+.disclaimer-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.disclaimer-title {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #78350F !important;
+}
+
+.disclaimer-desc {
+  font-size: 12px;
+  line-height: 1.55;
+  color: #92400E !important;
+  margin: 0;
+}
+
+/* ─── Sections Header & Grid ─── */
+.beranda-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.section-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.section-title-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.section-tag-label {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  color: #F5A623;
+  text-transform: uppercase;
+}
+
+.section-heading-title {
+  font-size: 20px;
+  font-weight: 800;
+  color: #030F26 !important;
+  letter-spacing: -0.2px;
+  margin: 0;
+}
+
+/* Objectives 3-Col Grid */
+.beranda-grid-3col {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.objective-card {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 14px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-shadow: 0 4px 14px rgba(3, 15, 38, 0.04);
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.objective-card:hover {
+  transform: translateY(-3px);
+  border-color: #CBD5E1;
+  box-shadow: 0 8px 20px rgba(3, 15, 38, 0.08);
+}
+
+.obj-num-badge {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+.obj-num-badge.badge-blue {
+  background: #E0F2FE;
+  color: #0284C7;
+}
+
+.obj-num-badge.badge-gold {
+  background: #FEF3C7;
+  color: #D97706;
+}
+
+.obj-num-badge.badge-green {
+  background: #DCFCE7;
+  color: #15803D;
+}
+
+.obj-card-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #030F26 !important;
+  line-height: 1.35;
+  margin: 0;
+}
+
+.obj-card-desc {
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: #334155 !important;
+  font-weight: 400;
+  margin: 0;
+}
+
+/* Modules 2-Col Grid */
+.beranda-grid-2col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.module-select-card {
+  background: #FFFFFF;
+  border: 1.5px solid #E2E8F0;
+  border-radius: 16px;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  text-decoration: none;
+  box-shadow: 0 4px 16px rgba(3, 15, 38, 0.04);
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.module-select-card:hover {
+  transform: translateY(-4px);
+  border-color: #F5A623;
+  box-shadow: 0 14px 32px rgba(3, 15, 38, 0.12);
+}
+
+.module-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.module-icon-box {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: #030F26;
+  border: 1px solid #F5A623;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  box-shadow: 0 3px 10px rgba(3, 15, 38, 0.15);
+}
+
+.module-tag-badge {
+  font-size: 9.5px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  padding: 3.5px 10px;
+  border-radius: 12px;
+}
+
+.module-tag-badge.tag-gold {
+  background: #FEF3C7;
+  color: #B45309;
+}
+
+.module-tag-badge.tag-blue {
+  background: #E0F2FE;
+  color: #0369A1;
+}
+
+.module-tag-badge.tag-green {
+  background: #DCFCE7;
+  color: #15803D;
+}
+
+.module-tag-badge.tag-purple {
+  background: #F3E8FF;
+  color: #7E22CE;
+}
+
+.module-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.module-card-title {
+  font-size: 16.5px;
+  font-weight: 700;
+  color: #030F26 !important;
+  line-height: 1.35;
+  margin: 0;
+  transition: color 0.2s ease;
+}
+
+.module-select-card:hover .module-card-title {
+  color: #0B2C6E !important;
+}
+
+.module-card-desc {
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: #475569 !important;
+  margin: 0;
+}
+
+.module-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 10px;
+  border-top: 1px solid #F1F5F9;
+  margin-top: 4px;
+}
+
+.footer-link-text {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #0B2C6E !important;
+}
+
+.footer-arrow {
+  font-size: 16px;
+  font-weight: 700;
+  color: #F5A623;
+  transition: transform 0.2s ease;
+}
+
+.module-select-card:hover .footer-arrow {
+  transform: translateX(4px);
+}
+
+/* Responsive Media Queries for Beranda */
+@media (max-width: 768px) {
+  .beranda-grid-3col,
+  .beranda-grid-2col {
+    grid-template-columns: 1fr;
+  }
+  .beranda-hero {
+    padding: 28px 24px;
+  }
+  .beranda-hero-title {
+    font-size: 24px;
+  }
+}

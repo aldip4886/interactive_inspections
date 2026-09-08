@@ -10,118 +10,148 @@ export class BerandaView {
     const profile = userProfile.getProfile();
 
     const html = `
-      <div style="width: 100%; height: 100%; overflow-y: auto; padding: var(--container-padding); display: flex; flex-direction: column; gap: var(--space-4); max-width: var(--content-max); margin: 0 auto;">
-        
-        <!-- Hero Section (Dharma Bhakti Atlas Style) -->
-        <section style="background: linear-gradient(135deg, var(--color-primary-container) 0%, #001530 100%); color: white; border-radius: var(--radius-xl); padding: 48px; position: relative; overflow: hidden; box-shadow: var(--shadow-card);">
-          <div style="max-width: 780px; position: relative; z-index: 2;">
-            <span class="badge badge-gold" style="margin-bottom: 16px;">
-              MP3 — Modus Operandi & Inspeksi Narkotika DJBC
-            </span>
-            <h1 style="font-size: var(--font-size-display); font-weight: 700; color: #FFFFFF; line-height: 1.15; margin-bottom: 16px;">
+      <div class="beranda-container">
+        <!-- ─── 1. HERO BANNER SECTION ─── -->
+        <section class="beranda-hero">
+          <div class="beranda-hero-bg-overlay"></div>
+          <div class="beranda-hero-content">
+            <div class="hero-badge-pill">
+              <span class="badge-dot"></span>
+              <span>MP3 — MODUS OPERANDI & INSPEKSI NARKOTIKA DJBC</span>
+            </div>
+            <h1 class="beranda-hero-title">
               Interactive Narcotics Inspection Simulator
             </h1>
-            <p style="font-size: var(--font-size-body-lg); color: rgba(255, 255, 255, 0.9); margin-bottom: 28px; line-height: 1.6;">
-              Selamat datang, <strong style="color: var(--color-secondary-container);">${profile.name}</strong> (${profile.nip || profile.username}). Media pembelajaran interaktif berbasis simulasi pengawasan X-Ray, 360° rotation, dan hotspot inspeksi untuk mendeteksi titik-titik penyembunyian Narkotika pada 4 kategori utama.
+            <p class="beranda-hero-subtitle">
+              Selamat datang, <strong>${profile.name}</strong> (${profile.nip || profile.username || 'Petugas DJBC'}). Media pembelajaran interaktif berbasis simulasi X-Ray forensik, 360° rotation, dan hotspot interaktif untuk mendeteksi titik-titik penyembunyian Narkotika pada 4 kategori pengawasan utama.
             </p>
-            <div style="display: flex; gap: 16px; flex-wrap: wrap;">
-              <a href="#/modul1" class="btn btn-secondary btn-lg">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
-                Mulai Inspeksi Modul 1
+            <div class="beranda-hero-actions">
+              <a href="#/modul1" class="btn-hero-primary">
+                <span>Mulai Inspeksi Modul 1</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
               </a>
-              <a href="#/evaluasi" class="btn btn-ghost btn-lg" style="color: white; border-color: rgba(255,255,255,0.4);">
-                Uji Pemahaman (Evaluasi)
+              <a href="#/evaluasi" class="btn-hero-secondary">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                <span>Kuis & Evaluasi Kompetensi</span>
               </a>
             </div>
           </div>
         </section>
 
-        <!-- Mandatory Disclaimer Banner -->
-        <div class="disclaimer-banner">
-          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
-          <div>
-            <strong>Disclaimer Resmi Kemenkeu & DJBC:</strong> Simulasi inspeksi ini dikembangkan khusus untuk tujuan pembelajaran mandiri dan peningkatan ketajaman teknis pegawai Direktorat Jenderal Bea dan Cukai. Tindakan interdiksi resmi di lapangan wajib mematuhi SOP dan petunjuk teknis DJBC yang berlaku.
+        <!-- ─── 2. DISCLAIMER BANNER ─── -->
+        <div class="beranda-disclaimer-box">
+          <div class="disclaimer-icon">⚠️</div>
+          <div class="disclaimer-content">
+            <span class="disclaimer-title">Disclaimer Resmi Kemenkeu & DJBC:</span>
+            <p class="disclaimer-desc">
+              Simulasi inspeksi ini dikembangkan khusus untuk tujuan pembelajaran mandiri dan peningkatan ketajaman teknis pegawai Direktorat Jenderal Bea dan Cukai. Tindakan interdiksi resmi di lapangan wajib mematuhi SOP dan petunjuk teknis DJBC yang berlaku.
+            </p>
           </div>
         </div>
 
-        <!-- Learning Objectives Grid -->
-        <section style="margin-bottom: 24px;">
-          <h2 style="font-size: var(--font-size-headline-md); font-weight: 700; margin-bottom: 16px; color: var(--color-primary-container);">
-            Tujuan Pembelajaran Mandiri
-          </h2>
-          <div class="grid-3col">
-            <div class="card">
-              <div style="width: 48px; height: 48px; background: #e0f2fe; color: #0284c7; border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; margin-bottom: 16px; font-weight: bold; font-size: 20px;">01</div>
-              <h3 style="font-size: var(--font-size-title-lg); font-weight: 600; margin-bottom: 8px;">Identifikasi Modus</h3>
-              <p style="font-size: var(--font-size-body-md); color: var(--color-on-surface-variant);">Memahami pemetaan metode concealment pada tubuh kurir, barang bawaan, barang kiriman pos/PJT, serta sarana pengangkut darat dan laut.</p>
+        <!-- ─── 3. OBJECTIVES SECTION ─── -->
+        <section class="beranda-section">
+          <div class="section-header-row">
+            <div class="section-title-wrap">
+              <span class="section-tag-label">KOMPETENSI UTAMA</span>
+              <h2 class="section-heading-title">Tujuan Pembelajaran Mandiri</h2>
             </div>
-            <div class="card">
-              <div style="width: 48px; height: 48px; background: #fef3c7; color: #d97706; border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; margin-bottom: 16px; font-weight: bold; font-size: 20px;">02</div>
-              <h3 style="font-size: var(--font-size-title-lg); font-weight: 600; margin-bottom: 8px;">Analisis Citra X-Ray</h3>
-              <p style="font-size: var(--font-size-body-md); color: var(--color-on-surface-variant);">Mengamati citra X-Ray, Cutaway View, dan 360° Rotation dengan hotspot interaktif untuk mengenali indikator risiko (red flags).</p>
+          </div>
+          <div class="beranda-grid-3col">
+            <div class="objective-card">
+              <div class="obj-num-badge badge-blue">01</div>
+              <h3 class="obj-card-title">Identifikasi Modus Operandi</h3>
+              <p class="obj-card-desc">Memahami pemetaan metode concealment pada tubuh kurir, barang bawaan bagasi, barang kiriman pos/PJT, serta sarana pengangkut darat dan laut.</p>
             </div>
-            <div class="card">
-              <div style="width: 48px; height: 48px; background: #dcfce7; color: #15803d; border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; margin-bottom: 16px; font-weight: bold; font-size: 20px;">03</div>
-              <h3 style="font-size: var(--font-size-title-lg); font-weight: 600; margin-bottom: 8px;">Penerapan SOP Bea Cukai</h3>
-              <p style="font-size: var(--font-size-body-md); color: var(--color-on-surface-variant);">Mempelajari langkah penindakan, penggeledahan fisik, uji reagen laboratorium, dan evakuasi medis sesuai standar DJBC.</p>
+            <div class="objective-card">
+              <div class="obj-num-badge badge-gold">02</div>
+              <h3 class="obj-card-title">Analisis Citra Forensik & X-Ray</h3>
+              <p class="obj-card-desc">Mengamati citra X-Ray, Cutaway View, dan 360° Rotation dengan hotspot interaktif untuk mengenali indikator risiko (*red flags*) penyembunyian.</p>
+            </div>
+            <div class="objective-card">
+              <div class="obj-num-badge badge-green">03</div>
+              <h3 class="obj-card-title">Penerapan SOP Interdiksi DJBC</h3>
+              <p class="obj-card-desc">Mempelajari langkah penindakan, penggeledahan fisik, uji reagen laboratorium, dan protokol pengamanan sesuai standar resmi DJBC.</p>
             </div>
           </div>
         </section>
 
-        <!-- 4 Key Modules Interactive Grid -->
-        <section style="margin-bottom: 32px;">
-          <h2 style="font-size: var(--font-size-headline-md); font-weight: 700; margin-bottom: 16px; color: var(--color-primary-container);">
-            Modul Inspeksi Interaktif
-          </h2>
-          <div class="grid-2col">
+        <!-- ─── 4. MODULES SELECTION GRID ─── -->
+        <section class="beranda-section">
+          <div class="section-header-row">
+            <div class="section-title-wrap">
+              <span class="section-tag-label">SIMULASI INTERAKTIF</span>
+              <h2 class="section-heading-title">Modul Inspeksi Interaktif</h2>
+            </div>
+          </div>
+          <div class="beranda-grid-2col">
             
-            <!-- Modul 1 Card -->
-            <a href="#/modul1" class="card card-interactive" style="display: flex; gap: 20px; align-items: center; text-decoration: none; color: inherit;">
-              <div style="width: 64px; height: 64px; background-color: var(--color-primary-container); color: white; border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 28px;">
-                👤
+            <!-- Modul 1 -->
+            <a href="#/modul1" class="module-select-card">
+              <div class="module-card-header">
+                <div class="module-icon-box">👤</div>
+                <span class="module-tag-badge tag-gold">MODUL 01 • ANATOMI 360°</span>
               </div>
-              <div>
-                <h3 style="font-size: var(--font-size-title-lg); font-weight: 700; margin-bottom: 4px;">1. Tubuh Kurir (Body Concealment)</h3>
-                <p style="color: var(--color-on-surface-variant); font-size: var(--font-size-body-md);">Inspeksi 360° anatomi & X-Ray tubuh: Ingestion (telan), Insertion (anal/vaginal), Body Strapping, & Modus Terkini.</p>
+              <div class="module-card-body">
+                <h3 class="module-card-title">1. Tubuh Kurir (Body Concealment)</h3>
+                <p class="module-card-desc">Inspeksi 360° anatomi & citra forensik X-Ray tubuh: Ingestion (telan), Insertion (anal/vaginal), Body Strapping, & Modus Terkini.</p>
               </div>
-            </a>
-
-            <!-- Modul 2 Card -->
-            <a href="#/modul2" class="card card-interactive" style="display: flex; gap: 20px; align-items: center; text-decoration: none; color: inherit;">
-              <div style="width: 64px; height: 64px; background-color: var(--color-secondary-container); color: #261a00; border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 28px;">
-                🧳
-              </div>
-              <div>
-                <h3 style="font-size: var(--font-size-title-lg); font-weight: 700; margin-bottom: 4px;">2. Barang Bawaan (Luggage)</h3>
-                <p style="color: var(--color-on-surface-variant); font-size: var(--font-size-body-md);">Pemeriksaan koper bagasi penumpang: False Bottom, Dinding Ganda, Rangka Trolley, Sepatu (False Sole), & Buku.</p>
+              <div class="module-card-footer">
+                <span class="footer-link-text">Mulai Inspeksi Modul 1</span>
+                <span class="footer-arrow">→</span>
               </div>
             </a>
 
-            <!-- Modul 3 Card -->
-            <a href="#/modul3" class="card card-interactive" style="display: flex; gap: 20px; align-items: center; text-decoration: none; color: inherit;">
-              <div style="width: 64px; height: 64px; background-color: var(--color-primary-container); color: white; border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 28px;">
-                📦
+            <!-- Modul 2 -->
+            <a href="#/modul2" class="module-select-card">
+              <div class="module-card-header">
+                <div class="module-icon-box">🧳</div>
+                <span class="module-tag-badge tag-blue">MODUL 02 • X-RAY LUGGAGE</span>
               </div>
-              <div>
-                <h3 style="font-size: var(--font-size-title-lg); font-weight: 700; margin-bottom: 4px;">3. Barang Kiriman (Postal Cargo)</h3>
-                <p style="color: var(--color-on-surface-variant); font-size: var(--font-size-body-md);">Inspeksi kargo Pos & PJT: Kaleng Makanan (Liquid Meth), Kardus Corrugated, Elektronik, & Kemasan Teh Guanyinwang.</p>
+              <div class="module-card-body">
+                <h3 class="module-card-title">2. Barang Bawaan (Luggage)</h3>
+                <p class="module-card-desc">Pemeriksaan koper & bagasi penumpang: False Bottom, Dinding Ganda, Rangka Trolley, Sepatu (False Sole), & Kitab/Buku.</p>
+              </div>
+              <div class="module-card-footer">
+                <span class="footer-link-text">Mulai Inspeksi Modul 2</span>
+                <span class="footer-arrow">→</span>
               </div>
             </a>
 
-            <!-- Modul 4A & 4B Card -->
-            <a href="#/modul4a" class="card card-interactive" style="display: flex; gap: 20px; align-items: center; text-decoration: none; color: inherit;">
-              <div style="width: 64px; height: 64px; background-color: var(--color-secondary-container); color: #261a00; border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 28px;">
-                🚗
+            <!-- Modul 3 -->
+            <a href="#/modul3" class="module-select-card">
+              <div class="module-card-header">
+                <div class="module-icon-box">📦</div>
+                <span class="module-tag-badge tag-green">MODUL 03 • KARGO POS & PJT</span>
               </div>
-              <div>
-                <h3 style="font-size: var(--font-size-title-lg); font-weight: 700; margin-bottom: 4px;">4. Sarana Pengangkut (Darat & Laut)</h3>
-                <p style="color: var(--color-on-surface-variant); font-size: var(--font-size-body-md);">Inspeksi 360° Kompartemen Pintu Mobil, Tangki Bahan Bakar Dinding Ganda, Kontainer Reefer, & Kapal Kargo.</p>
+              <div class="module-card-body">
+                <h3 class="module-card-title">3. Barang Kiriman (Postal Cargo)</h3>
+                <p class="module-card-desc">Inspeksi kargo Pos & PJT: Kaleng Makanan (Liquid Meth), Kardus Corrugated, Elektronik, & Kemasan Teh Guanyinwang.</p>
+              </div>
+              <div class="module-card-footer">
+                <span class="footer-link-text">Mulai Inspeksi Modul 3</span>
+                <span class="footer-arrow">→</span>
+              </div>
+            </a>
+
+            <!-- Modul 4 -->
+            <a href="#/modul4a" class="module-select-card">
+              <div class="module-card-header">
+                <div class="module-icon-box">🚗</div>
+                <span class="module-tag-badge tag-purple">MODUL 04 • SARANA PENGANGKUT</span>
+              </div>
+              <div class="module-card-body">
+                <h3 class="module-card-title">4. Sarana Pengangkut (Darat & Laut)</h3>
+                <p class="module-card-desc">Inspeksi 360° Kompartemen Pintu Mobil, Tangki Bahan Bakar Dinding Ganda, Kontainer Reefer, & Kapal Kargo Laut.</p>
+              </div>
+              <div class="module-card-footer">
+                <span class="footer-link-text">Mulai Inspeksi Modul 4</span>
+                <span class="footer-arrow">→</span>
               </div>
             </a>
 
           </div>
         </section>
-
       </div>
     `;
 
