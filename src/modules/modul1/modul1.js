@@ -160,6 +160,7 @@ export class Modul1View extends BaseModuleView {
           </div>
 
           <div class="card-tabs-nav" id="card-tabs-nav">
+            <button id="btn-tab-prev" class="tab-nav-arrow-btn" title="Tab Sebelumnya">‹</button>
             <button class="tab-btn active" data-tab="tab-modus">
               <span class="tab-icon">📋</span>
               <span class="tab-label">Modus Operandi</span>
@@ -176,6 +177,7 @@ export class Modul1View extends BaseModuleView {
               <span class="tab-icon">🚨</span>
               <span class="tab-label">Indikator Risiko</span>
             </button>
+            <button id="btn-tab-next" class="tab-nav-arrow-btn" title="Tab Berikutnya">›</button>
           </div>
 
           <div class="tab-content-container" id="tab-content-container">
@@ -608,7 +610,24 @@ export class Modul1View extends BaseModuleView {
       this.openHotspotModal(this.moduleData.hotspots[nextIdx].id, true);
     });
 
-    const tabBtns = this.container.querySelectorAll('.card-tabs-nav .tab-btn');
+    const tabBtns = Array.from(this.container.querySelectorAll('.card-tabs-nav .tab-btn'));
+    const btnTabPrev = this.container.querySelector('#btn-tab-prev');
+    const btnTabNext = this.container.querySelector('#btn-tab-next');
+
+    btnTabPrev?.addEventListener('click', () => {
+      const activeIdx = tabBtns.findIndex(b => b.classList.contains('active'));
+      const prevIdx = (activeIdx - 1 + tabBtns.length) % tabBtns.length;
+      const tabId = tabBtns[prevIdx].getAttribute('data-tab');
+      this.switchCardTab(tabId);
+    });
+
+    btnTabNext?.addEventListener('click', () => {
+      const activeIdx = tabBtns.findIndex(b => b.classList.contains('active'));
+      const nextIdx = (activeIdx + 1) % tabBtns.length;
+      const tabId = tabBtns[nextIdx].getAttribute('data-tab');
+      this.switchCardTab(tabId);
+    });
+
     tabBtns.forEach(btn => {
       btn.addEventListener('click', () => {
         const tabId = btn.getAttribute('data-tab');
@@ -701,7 +720,10 @@ export class Modul1View extends BaseModuleView {
     const note = this.container.querySelector('#detail-inspection-note');
 
     if (mainImg) {
-      mainImg.src = hs.mainIllustration || hs.thumb;
+      mainImg.onerror = () => {
+        mainImg.src = 'assets/mockup/image_placeholder.svg';
+      };
+      mainImg.src = hs.mainIllustration || hs.thumb || 'assets/mockup/image_placeholder.svg';
       mainImg.alt = hs.label;
     }
     if (desc) desc.textContent = hs.description;
@@ -714,16 +736,25 @@ export class Modul1View extends BaseModuleView {
 
     // TAB 2: Foto Real
     const findingsGrid = this.container.querySelector('#findings-thumbnails-grid');
-    if (findingsGrid && hs.findings) {
+    if (findingsGrid) {
       findingsGrid.innerHTML = '';
-      hs.findings.forEach(f => {
+      const findingsList = (hs.findings && hs.findings.length > 0) ? hs.findings : [
+        {
+          full: 'assets/mockup/image_placeholder.svg',
+          thumb: 'assets/mockup/image_placeholder.svg',
+          caption: 'Dokumentasi Barang Bukti (Placeholder)',
+          tag: 'PLACEHOLDER'
+        }
+      ];
+
+      findingsList.forEach(f => {
         const a = document.createElement('a');
         a.href = f.full;
         a.className = 'finding-thumb-item glightbox';
         a.setAttribute('data-gallery', `findings-gallery-${hs.id}`);
         a.setAttribute('data-title', `${f.caption} — [${f.tag}]`);
         a.innerHTML = `
-          <img src="${f.thumb}" alt="${f.caption}" />
+          <img src="${f.thumb}" alt="${f.caption}" onerror="this.src='assets/mockup/image_placeholder.svg'" />
           <span class="finding-thumb-label">${f.tag}</span>
         `;
         findingsGrid.appendChild(a);

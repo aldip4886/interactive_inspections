@@ -497,9 +497,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: linear-gradient(135deg, #08244D 0%, #0B2C6E 100%);
-  color: #FFFFFF;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  background: #030F26 !important;
+  color: #FFFFFF !important;
+  border-bottom: 3px solid #F5A623 !important;
 }
 
 .modal-header-left {
@@ -525,11 +525,11 @@
   font-size: 10px;
   font-weight: 800;
   letter-spacing: 0.6px;
-  padding: 3px 10px;
+  padding: 3.5px 12px;
   border-radius: 20px;
-  background: #F5A623;
-  color: #051833;
-  box-shadow: 0 2px 6px rgba(245, 166, 35, 0.3);
+  background: #F5A623 !important;
+  color: #030F26 !important;
+  box-shadow: 0 2px 8px rgba(245, 166, 35, 0.4);
   transition: all 0.2s ease;
 }
 
@@ -537,55 +537,55 @@
   font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.5px;
-  padding: 3px 10px;
+  padding: 3.5px 12px;
   border-radius: 20px;
-  background: rgba(255, 255, 255, 0.15);
-  color: #FFFFFF;
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: #1E293B !important;
+  color: #F8FAFC !important;
+  border: 1px solid #475569 !important;
   transition: all 0.2s ease;
 }
 
 /* Category Badges Styling */
 .detail-cat-badge.cat-ingestion {
-  background: rgba(245, 166, 35, 0.2) !important;
+  background: rgba(245, 166, 35, 0.25) !important;
   color: #FCD34D !important;
-  border-color: rgba(245, 166, 35, 0.5) !important;
+  border-color: rgba(245, 166, 35, 0.6) !important;
 }
 
 .detail-cat-badge.cat-insertion {
-  background: rgba(229, 62, 62, 0.2) !important;
+  background: rgba(229, 62, 62, 0.25) !important;
   color: #FCA5A5 !important;
-  border-color: rgba(229, 62, 62, 0.5) !important;
+  border-color: rgba(229, 62, 62, 0.6) !important;
 }
 
 .detail-cat-badge.cat-body-strapping {
-  background: rgba(56, 161, 105, 0.2) !important;
+  background: rgba(56, 161, 105, 0.25) !important;
   color: #86EFAC !important;
-  border-color: rgba(56, 161, 105, 0.5) !important;
+  border-color: rgba(56, 161, 105, 0.6) !important;
 }
 
 .detail-cat-badge.cat-body-adjacent {
-  background: rgba(24, 144, 255, 0.2) !important;
+  background: rgba(24, 144, 255, 0.25) !important;
   color: #93C5FD !important;
-  border-color: rgba(24, 144, 255, 0.5) !important;
+  border-color: rgba(24, 144, 255, 0.6) !important;
 }
 
 .card-quick-nav {
   display: flex;
   align-items: center;
   gap: 8px;
-  background: rgba(255, 255, 255, 0.1);
-  padding: 3px 8px;
+  background: #1E293B;
+  padding: 4px 10px;
   border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  border: 1px solid #334155;
 }
 
 .card-nav-arrow-btn {
   width: 26px;
   height: 26px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.15);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: #334155;
+  border: 1px solid #475569;
   color: #FFFFFF;
   font-size: 13px;
   font-weight: 700;
@@ -597,37 +597,39 @@
 
 .card-nav-arrow-btn:hover {
   background: #F5A623;
-  color: #08244D;
+  color: #030F26;
   border-color: #F5A623;
 }
 
 .card-nav-counter {
   font-size: 11px;
   font-weight: 700;
-  color: rgba(255, 255, 255, 0.9);
+  color: #F8FAFC;
   padding: 0 4px;
 }
 
 .detail-title {
-  font-size: 17px;
+  font-size: 18px;
   font-weight: 700;
-  color: #FFFFFF;
+  color: #FFFFFF !important;
   line-height: 1.25;
   margin-top: 2px;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
 }
 
 .detail-subtitle {
   font-size: 12px;
-  color: rgba(255, 255, 255, 0.82);
+  color: #E2E8F0 !important;
   line-height: 1.35;
+  font-weight: 400;
 }
 
 .modal-close-btn {
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.12);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: #1E293B;
+  border: 1px solid #334155;
   color: #FFFFFF;
   font-size: 14px;
   font-weight: 700;
@@ -644,20 +646,25 @@
   transform: rotate(90deg);
 }
 
-/* Tab Navigation Bar */
+/* Proportional Tab Navigation Bar */
 .card-tabs-nav {
   display: flex;
+  align-items: center;
   background: #F1F5F9;
   border-bottom: 1px solid #E2E8F0;
-  padding: 6px 18px;
-  gap: 8px;
+  padding: 6px 14px;
+  gap: 6px;
+  width: 100%;
 }
 
 .tab-btn {
+  flex: 1 1 0;
+  min-width: 0;
   display: inline-flex;
   align-items: center;
-  gap: 7px;
-  padding: 9px 14px;
+  justify-content: center;
+  gap: 6px;
+  padding: 9px 10px;
   font-size: 12px;
   font-weight: 600;
   color: #475569;
@@ -666,6 +673,8 @@
   border: 2px solid transparent;
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .tab-btn:hover {
@@ -677,8 +686,31 @@
   color: #0B2C6E;
   background: #FFFFFF;
   font-weight: 700;
-  box-shadow: 0 2px 8px rgba(11, 44, 110, 0.1);
+  box-shadow: 0 2px 8px rgba(11, 44, 110, 0.12);
   border-bottom: 3px solid #F5A623;
+}
+
+.tab-nav-arrow-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  background: #FFFFFF;
+  border: 1px solid #CBD5E1;
+  color: #08244D;
+  font-size: 15px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all 0.18s ease;
+}
+
+.tab-nav-arrow-btn:hover {
+  background: #0B2C6E;
+  color: #FFFFFF;
+  border-color: #0B2C6E;
 }
 
 .tab-icon {
