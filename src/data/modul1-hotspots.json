@@ -4,15 +4,20 @@
   "description": "Inspeksi titik-titik penyembunyian pada tubuh kurir: Ingestion (metode telan), Insertion (anal/vaginal), Body Strapping (paha, betis, perut), Body-Adjacent (pembalut, kancing), dan Modus Terkini (serat kain).",
   "supportsRotation": true,
   "centralImages": {
+    "anatomy3d": {
+      "url": "assets/images/central/m1_body_front_xray.png",
+      "label": "3D Human Anatomy Viewer (Model 3D Interaktif)"
+    },
     "front": {
       "url": "assets/images/central/m1_body_front_xray.png",
-      "label": "Tampak Depan (Anatomy & X-Ray View)"
+      "label": "Tampak Depan (X-Ray View)"
     },
     "back": {
       "url": "assets/images/central/m1_body_back_xray.png",
-      "label": "Tampak Belakang (Anatomy & X-Ray View)"
+      "label": "Tampak Belakang (X-Ray View)"
     }
   },
+
   "angleImages": {
     "front": "assets/images/central/m1_body_front_xray.png",
     "side": "assets/images/central/m1_body_front_xray.png",

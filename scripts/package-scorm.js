@@ -43,7 +43,13 @@ function copyDirRecursive(src, dest) {
 
 copyDirRecursive(publicImagesSrc, distImagesDest);
 
+console.log('[SCORM Package] Copying public 3D GLB models to dist/geometries...');
+const publicGeomSrc = path.join(process.cwd(), 'public', 'geometries');
+const distGeomDest = path.join(process.cwd(), 'dist', 'geometries');
+copyDirRecursive(publicGeomSrc, distGeomDest);
+
 console.log('[SCORM Package] Creating scorm_package.zip...');
+
 try {
   execSync('powershell -Command "Compress-Archive -Path dist\\* -DestinationPath scorm_package.zip -Force"', { stdio: 'inherit' });
   console.log('[SCORM Package] scorm_package.zip generated successfully!');
