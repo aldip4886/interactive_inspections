@@ -40,22 +40,22 @@ export class EvaluasiView {
     const selectedAnswer = this.userAnswers[this.currentIndex];
 
     const html = `
-      <div style="width: 100%; height: 100%; overflow-y: auto; padding: 32px; display: flex; flex-direction: column; align-items: center; justify-content: center;">
-        <div style="width: 100%; max-width: 780px; background: var(--bg-dark-800); border: 1px solid var(--surface-glass-border); border-radius: var(--radius-xl); padding: 32px; box-shadow: var(--shadow-lg);">
+      <div style="width: 100%; height: 100%; overflow-y: auto; padding: var(--container-padding); display: flex; flex-direction: column; align-items: center; justify-content: center;">
+        <div class="card" style="width: 100%; max-width: 820px; padding: 40px;">
           
           <!-- Header Progress -->
-          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; border-bottom: 1px solid var(--surface-glass-border); padding-bottom: 16px;">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; border-bottom: 1px solid var(--color-outline-variant); padding-bottom: 16px;">
             <div>
               <span class="badge badge-gold">${q.category}</span>
-              <span style="font-size: 0.85rem; color: var(--text-secondary); margin-left: 8px;">Soal ${this.currentIndex + 1} dari ${total}</span>
+              <span style="font-size: var(--font-size-label-md); color: var(--color-on-surface-variant); margin-left: 8px;">Soal ${this.currentIndex + 1} dari ${total}</span>
             </div>
-            <div style="font-size: 0.85rem; font-weight: 600; color: var(--accent-gold);">
+            <div style="font-size: var(--font-size-label-md); font-weight: 700; color: var(--color-primary-container);">
               Batas Kelulusan: ${this.quizData.passingScorePercent}%
             </div>
           </div>
 
           <!-- Question Prompt -->
-          <h3 style="font-size: 1.15rem; color: #FFF; line-height: 1.5; margin-bottom: 24px;">
+          <h3 style="font-size: var(--font-size-title-lg); color: var(--color-primary-container); line-height: 1.5; margin-bottom: 28px;">
             ${q.question}
           </h3>
 
@@ -64,30 +64,26 @@ export class EvaluasiView {
             ${q.options.map((opt, idx) => {
               const isSelected = selectedAnswer === idx;
               return `
-                <button class="btn btn-outline quiz-option-btn ${isSelected ? 'active-gold' : ''}" 
-                        data-index="${idx}"
-                        style="justify-content: flex-start; text-align: left; padding: 14px 18px; ${isSelected ? 'border-color: var(--accent-gold); background: rgba(245,166,35,0.15);' : ''}">
-                  <span style="width: 26px; height: 26px; border-radius: 50%; background: ${isSelected ? 'var(--accent-gold)' : 'rgba(255,255,255,0.1)'}; color: ${isSelected ? '#000' : '#FFF'}; font-weight: 700; font-size: 0.8rem; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; margin-right: 10px;">
-                    ${String.fromCharCode(65 + idx)}
-                  </span>
-                  <span style="font-size: 0.92rem;">${opt}</span>
-                </button>
+                <div class="option-card ${isSelected ? 'selected' : ''}" data-index="${idx}">
+                  <div class="option-indicator">${String.fromCharCode(65 + idx)}</div>
+                  <div style="font-size: var(--font-size-body-md); color: var(--color-on-surface); font-weight: 500;">${opt}</div>
+                </div>
               `;
             }).join('')}
           </div>
 
           <!-- Navigation Footer -->
-          <div style="display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--surface-glass-border); padding-top: 20px;">
-            <button id="prev-question-btn" class="btn btn-outline" ${this.currentIndex === 0 ? 'disabled style="opacity:0.4; cursor:not-allowed;"' : ''}>
+          <div style="display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--color-outline-variant); padding-top: 24px;">
+            <button id="prev-question-btn" class="btn btn-ghost" ${this.currentIndex === 0 ? 'disabled style="opacity:0.4; cursor:not-allowed;"' : ''}>
               &larr; Sebelumnya
             </button>
 
             ${this.currentIndex < total - 1 ? `
-              <button id="next-question-btn" class="btn btn-gold">
+              <button id="next-question-btn" class="btn btn-secondary btn-lg">
                 Berikutnya &rarr;
               </button>
             ` : `
-              <button id="submit-quiz-btn" class="btn btn-gold">
+              <button id="submit-quiz-btn" class="btn btn-secondary btn-lg">
                 Selesaikan Ujian ✅
               </button>
             `}
@@ -102,10 +98,10 @@ export class EvaluasiView {
   }
 
   attachQuestionEvents() {
-    const optionBtns = this.container.querySelectorAll('.quiz-option-btn');
-    optionBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        const idx = parseInt(btn.getAttribute('data-index'), 10);
+    const optionCards = this.container.querySelectorAll('.option-card');
+    optionCards.forEach(card => {
+      card.addEventListener('click', () => {
+        const idx = parseInt(card.getAttribute('data-index'), 10);
         this.userAnswers[this.currentIndex] = idx;
         this.renderQuestionScreen();
       });
@@ -166,31 +162,31 @@ export class EvaluasiView {
 
   renderResultScreen(scorePercent, passed, correctCount, total) {
     const html = `
-      <div style="width: 100%; height: 100%; overflow-y: auto; padding: 32px; display: flex; flex-direction: column; align-items: center; justify-content: center;">
-        <div style="width: 100%; max-width: 650px; background: var(--bg-dark-800); border: 1px solid var(--surface-glass-border); border-radius: var(--radius-xl); padding: 40px; text-align: center; box-shadow: var(--shadow-lg);">
+      <div style="width: 100%; height: 100%; overflow-y: auto; padding: var(--container-padding); display: flex; flex-direction: column; align-items: center; justify-content: center;">
+        <div class="card" style="width: 100%; max-width: 680px; padding: 48px; text-align: center;">
           
-          <div style="font-size: 4rem; margin-bottom: 12px;">
+          <div style="font-size: 4.5rem; margin-bottom: 12px;">
             ${passed ? '🏆' : '⚠️'}
           </div>
 
-          <h2 style="font-size: 1.8rem; color: #FFF; margin-bottom: 8px;">
-            ${passed ? 'Selamat! Anda Lulus Evaluasi' : 'Belum Mencapai Batas Kelulusan'}
+          <h2 style="font-size: var(--font-size-headline-lg); color: var(--color-primary-container); margin-bottom: 8px;">
+            ${passed ? 'Selamat! Anda Lulus Ujian Evaluasi' : 'Belum Mencapai Batas Kelulusan'}
           </h2>
 
-          <div style="font-size: 3rem; font-weight: 800; color: ${passed ? '#34C759' : '#FF3B30'}; margin: 16px 0;">
+          <div style="font-size: 3.5rem; font-weight: 800; color: ${passed ? 'var(--color-success)' : 'var(--color-error)'}; margin: 16px 0;">
             ${scorePercent}%
           </div>
 
-          <p style="font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 24px;">
-            Anda menjawab benar <strong>${correctCount}</strong> dari <strong>${total}</strong> soal scenario.<br>
-            Batas kelulusan minimum: ${this.quizData.passingScorePercent}%. Status kelulusan SCORM telah dicatat ke KLC.
+          <p style="font-size: var(--font-size-body-lg); color: var(--color-on-surface-variant); margin-bottom: 32px; line-height: 1.6;">
+            Anda menjawab benar <strong>${correctCount}</strong> dari <strong>${total}</strong> soal skenario.<br>
+            Batas kelulusan minimum: ${this.quizData.passingScorePercent}%. Hasil kelulusan SCORM telah otomatis disimpan ke KLC.
           </p>
 
-          <div style="display: flex; gap: 16px; justify-content: center;">
-            <button id="retake-quiz-btn" class="btn btn-outline">
+          <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+            <button id="retake-quiz-btn" class="btn btn-ghost btn-lg">
               🔄 Ulangi Ujian
             </button>
-            <a href="#/beranda" class="btn btn-gold">
+            <a href="#/beranda" class="btn btn-secondary btn-lg">
               🏠 Kembali ke Beranda
             </a>
           </div>

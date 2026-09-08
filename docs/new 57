@@ -47,3 +47,82 @@
         ├── Tangki
         ├── Struktur kapal
         └── Muatan
+		
+		
+		. Pembaruan Gambar Utama (Ilustrasi Paket Strapped)
+Main Body Stage: Menampilkan figur model anatomi manusia pada panggung bundar 3D (pedestal) dengan ilustrasi paket yang dililit lakban secara nyata pada:
+Paha (thighs): balok-balok paket terlilit lakban cokelat/transparan.
+Betis (calves): paket melingkari betis.
+Perut (abdomen): balutan lakban melingkari perut.
+Serta visualisasi organ dalam transparan (saluran cerna) yang menyala.
+Menggunakan aset beresolusi tinggi langsung dari mockup (stage_with_pedestal_hires.png, body_front_strapped_trans.png, dsb.) dengan hotspot interaktif beranimasi denyut cincin (pulsing rings) sesuai warna kategori.
+		
+		Gambar Model Tubuh: Seluruh 4 sudut pandang anatomi tubuh (Depan 0°, Kanan 90°, Belakang 180°, Kiri 270°) telah dikembalikan ke kondisi gambar anatomis asli yang bersih (tanpa ilustrasi paket lakban/strapping).
+Fitur yang Tetap Dipertahankan:
+8 Hotspot Interaktif untuk 4 metode penyembunyian (Metode Ingestion: Rongga Mulut, Lambung; Metode Insertion: Anal / Anus; Metode Body Strapping: Paha, Betis, Perut; Body-Adjacent: Vagina, Bagian Prostetik/Gips Palsu).
+Tombol Navigasi Rotasi: Tombol Ke Kiri, Reset (Depan), dan Ke Kanan.
+Modal Dialog Detail Modus & Kasus Riil.
+
+
+1. Spesifikasi Hotspot Concealment (8 Titik)
+Sesuai permintaan pengguna, hotspot dikelompokkan ke dalam 4 metode utama:
+
+A. Metode Ingestion (Kuning Emas #F5A623)
+Rongga Mulut (rongga-mulut):
+Lokasi: Rongga mulut (sublingual, kantung bukal pipi, orofaring / penelanan kilat saat razia).
+Modus: Paket kecil sabu/kokain dibungkus balon tipis atau plastik permen.
+Lambung (lambung):
+Lokasi: Saluran gastrointestinal / lambung.
+Modus: Body packing puluhan hingga ratusan kapsul lateks berbobot 1-2 kg.
+B. Metode Insertion (Merah / Koral #E53E3E)
+Pada Anal / Anus (anal-anus):
+Lokasi: Saluran anal / rektum kurir (body pushing).
+Modus: Paket silinder besar berpelumas silikon, sering diikat benang penarik.
+C. Metode Body Strapping / Dililit Lakban (Hijau #38A169)
+Pada Paha (strapping-paha):
+Lokasi: Paha kiri dan kanan.
+Modus: Lempengan sabu/heroin dipres pipih dililitkan mengelilingi paha dengan lakban cokelat / isolasi elastis.
+Betis (strapping-betis):
+Lokasi: Otot betis dan tulang kering tungkai bawah.
+Modus: Paket strip memanjang dilakban rapat tertutup kaus kaki tebal dan sepatu bot.
+Perut (strapping-perut):
+Lokasi: Dinding abdomen dan pinggang (torso wrap).
+Modus: Rompi korset atau lempengan berat 1-2 kg dililit rapat dengan lakban bertingkat.
+D. Body-Adjacent Concealment (Biru / Cyan #1890FF)
+Pada Vagina Menggunakan Pembalut (vagina-pembalut):
+Lokasi: Lipatan genitalia / celana dalam wanita.
+Modus: Modifikasi pembalut wanita (sanitary pad) berlapis berisi sabu/ekstasi.
+Pada Bagian Prostetik / Gips Palsu (prostetik-gips):
+Lokasi: Gips medis palsu pada lengan/kaki atau rongga kaki/tangan palsu.
+Modus: Kompartemen tersembunyi resin gips/fiberglass menyembunyikan paket narkotika.
+2. Pembaruan Gambar Utama (Ilustrasi Paket Strapped)
+Main Body Stage: Menampilkan figur model anatomi manusia pada panggung bundar 3D (pedestal) dengan ilustrasi paket yang dililit lakban secara nyata pada:
+Paha (thighs): balok-balok paket terlilit lakban cokelat/transparan.
+Betis (calves): paket melingkari betis.
+Perut (abdomen): balutan lakban melingkari perut.
+Serta visualisasi organ dalam transparan (saluran cerna) yang menyala.
+Menggunakan aset beresolusi tinggi langsung dari mockup (stage_with_pedestal_hires.png, body_front_strapped_trans.png, dsb.) dengan hotspot interaktif beranimasi denyut cincin (pulsing rings) sesuai warna kategori.
+3. Pembaruan Pengaturan Zoom & Sudut Pandang (Camera Controls)
+Sesuai mockup:
+
+Tombol Sudut Pandang di Kanan Bawah:
+Tampak Depan (Aktif / Biru Navy #0B2C6E dengan teks putih)
+Tampak Samping (Pill abu/biru muda #E8F0FE)
+Tampak Belakang (Pill abu/biru muda #E8F0FE)
+Kontrol Rotasi Pedestal:
+Teks petunjuk melengkung: ⟲ 360° Seret untuk memutar model. ⟳
+Tiga tombol kontrol carousel di bawah pedestal:
+‹ : Putar ke sudut sebelumnya
+▶ / ⏸ : Auto-play putar model 360° secara kontinu
+› : Putar ke sudut berikutnya
+Interaksi Drag / Swipe:
+Pengguna dapat menggeser/men-drag kursor mouse atau layar sentuh pada model untuk memutar sudut pandang secara bebas 360°.
+4. Format Tabbed Card Penjelasan Hotspot
+Ketika pengguna mengklik salah satu hotspot (atau kartu kategori):
+
+Tampil kartu modal interaktif dengan 4 tab navigasi:
+📋 Modus Operandi: Narasi detail teknis, karakteristik jenis narkotika, teknik pengemasan, dan catatan khusus penindakan DJBC.
+📷 Foto Gambar Real: Dokumentasi nyata hasil sitaan barang bukti, citra radiologi Sinar-X / CT-Scan, dan kemasan terbuka forensik dengan pratinjau zoom GLightbox.
+🔍 Metode Pengungkapan: Dua kolom terpisah untuk Indikator Tingkah Laku & Fisik vs Standar Prosedur Pemeriksaan (SOP) Bea Cukai.
+🚨 Risiko Bahaya: Bar pengukur tingkat bahaya (Kritis 100/100), bahaya medis akut bagi tersangka, dan protokol keselamatan & hukum petugas.
+

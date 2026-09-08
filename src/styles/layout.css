@@ -8,7 +8,7 @@ html, body {
   width: 100%;
   height: 100%;
   overflow: hidden;
-  background-color: var(--bg-dark-900);
+  background-color: var(--color-surface);
 }
 
 #app-container {
@@ -19,25 +19,121 @@ html, body {
   overflow: hidden;
 }
 
-/* Sidebar Navigation */
+/* Persistent Navy Sidebar (280px) */
 #sidebar {
-  width: 260px;
-  min-width: 260px;
+  width: var(--sidebar-width);
+  min-width: var(--sidebar-width);
   height: 100%;
-  background: var(--bg-dark-800);
-  border-right: 1px solid var(--surface-glass-border);
+  background-color: var(--color-primary-container);
+  color: var(--color-on-primary);
   display: flex;
   flex-direction: column;
   z-index: var(--z-header);
-  transition: transform var(--transition-normal), width var(--transition-normal);
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+  transition: transform var(--transition-norm), width var(--transition-norm);
 }
 
 #sidebar.collapsed {
-  width: 70px;
-  min-width: 70px;
+  width: 76px;
+  min-width: 76px;
 }
 
-/* Main Area */
+.sidebar-header {
+  padding: var(--space-4) var(--space-3);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.sidebar-logo {
+  width: 42px;
+  height: 42px;
+  background-color: var(--color-secondary-container);
+  color: #261a00;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: var(--font-weight-bold);
+  font-size: 20px;
+  flex-shrink: 0;
+  box-shadow: var(--shadow-sm);
+}
+
+.sidebar-title-group {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.sidebar-title {
+  font-size: var(--font-size-title-lg);
+  font-weight: var(--font-weight-bold);
+  color: #FFFFFF;
+  line-height: 1.2;
+}
+
+.sidebar-subtitle {
+  font-size: var(--font-size-caption);
+  color: var(--color-on-primary-container);
+  margin-top: 2px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+#sidebar.collapsed .sidebar-title-group,
+#sidebar.collapsed .nav-label,
+#sidebar.collapsed .sidebar-footer-text,
+#sidebar.collapsed .sidebar-category-header {
+  display: none;
+}
+
+/* Sidebar Nav Items */
+.sidebar-nav {
+  padding: var(--space-3) var(--space-2);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex-grow: 1;
+  overflow-y: auto;
+}
+
+.sidebar-nav .nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-body-md);
+  font-weight: var(--font-weight-medium);
+  transition: all var(--transition-fast);
+  border-left: 4px solid transparent;
+}
+
+.sidebar-nav .nav-item:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+  color: #FFFFFF;
+}
+
+.sidebar-nav .nav-item.active {
+  background-color: #e3f2fd;
+  color: var(--color-primary-container) !important;
+  font-weight: var(--font-weight-semibold);
+  border-left-color: var(--color-secondary-container);
+}
+
+.sidebar-footer {
+  padding: var(--space-3);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: var(--font-size-caption);
+  color: var(--color-on-primary-container);
+  text-align: center;
+}
+
+/* Main Area Wrapper */
 #main-wrapper {
   flex: 1;
   display: flex;
@@ -45,33 +141,51 @@ html, body {
   height: 100%;
   position: relative;
   overflow: hidden;
+  background-color: var(--color-surface);
 }
 
-/* App Header */
+/* Clean Header (64px Sticky) */
 #main-header {
-  height: 60px;
-  min-height: 60px;
-  background: var(--surface-glass);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--surface-glass-border);
+  height: 64px;
+  min-height: 64px;
+  background-color: var(--color-surface-card);
+  border-bottom: 1px solid var(--color-outline-variant);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 var(--space-lg);
+  padding: 0 var(--space-4);
   z-index: var(--z-header);
 }
 
-/* Viewport / Workspace Content */
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: var(--font-size-label-md);
+  color: var(--color-on-surface-variant);
+}
+
+.breadcrumb span.active-page {
+  color: var(--color-primary-container);
+  font-weight: var(--font-weight-bold);
+}
+
+/* Content Render Container */
 #content-area {
   flex: 1;
   position: relative;
   display: flex;
-  overflow: hidden;
-  background: radial-gradient(circle at center, #0F2038 0%, #060B13 100%);
+  overflow-y: auto;
+  background-color: var(--color-surface);
 }
 
-/* Central Interactive Inspection Scene */
+/* Central Inspection Scene Workspace */
 .inspection-workspace {
   flex: 1;
   position: relative;
@@ -79,6 +193,7 @@ html, body {
   flex-direction: column;
   height: 100%;
   overflow: hidden;
+  background-color: var(--scene-dark-bg);
 }
 
 .scene-viewport {
@@ -89,6 +204,7 @@ html, body {
   justify-content: center;
   overflow: hidden;
   user-select: none;
+  background: var(--scene-viewport-bg);
 }
 
 .scene-container {
@@ -106,35 +222,33 @@ html, body {
   max-width: 95%;
   max-height: 92%;
   object-fit: contain;
-  filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.7));
-  transition: opacity var(--transition-normal), transform var(--transition-normal);
+  filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.8));
+  transition: opacity var(--transition-norm), transform var(--transition-norm);
 }
 
 /* Info Panel Drawer (Right side) */
 #info-panel-drawer {
-  width: 420px;
-  min-width: 420px;
+  width: 440px;
+  min-width: 440px;
   height: 100%;
-  background: var(--surface-card);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-left: 1px solid var(--surface-glass-border);
+  background: var(--color-surface-card);
+  border-left: 1px solid var(--color-outline-variant);
   display: flex;
   flex-direction: column;
   z-index: var(--z-drawer);
   transform: translateX(100%);
-  transition: transform var(--transition-normal);
+  transition: transform var(--transition-norm);
   position: absolute;
   right: 0;
   top: 0;
-  box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+  box-shadow: var(--shadow-modal);
 }
 
 #info-panel-drawer.open {
   transform: translateX(0);
 }
 
-/* Responsive adjustments */
+/* Responsive */
 @media (max-width: 1024px) {
   #sidebar {
     position: absolute;

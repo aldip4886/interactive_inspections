@@ -30,9 +30,9 @@ export class InfoPanel {
       <div class="drawer-header">
         <div>
           <span class="badge ${badgeClass}" style="margin-bottom: 8px;">${hotspotData.badge || 'MODUS PENYELUNDUPAN'}</span>
-          <h3 style="margin: 0; font-size: 1.15rem; color: #FFF; line-height: 1.3;">${hotspotData.label}</h3>
+          <h3 style="margin: 0; font-size: var(--font-size-title-lg); color: var(--color-primary-container); line-height: 1.3;">${hotspotData.label}</h3>
         </div>
-        <button id="close-info-drawer-btn" class="btn-icon" style="width:32px; height:32px; flex-shrink: 0;">✕</button>
+        <button id="close-info-drawer-btn" class="btn-icon" style="width:34px; height:34px; flex-shrink: 0;">✕</button>
       </div>
 
       <div class="drawer-body">
@@ -40,20 +40,20 @@ export class InfoPanel {
         <div class="drawer-image-container">
           <img src="${hotspotData.mainImage}" alt="${hotspotData.label}" 
                onerror="this.onerror=null; this.src='assets/images/central/m1_body_front_xray.png';">
-          <div style="position: absolute; bottom: 8px; right: 8px; background: rgba(0,0,0,0.7); padding: 2px 8px; border-radius: 4px; font-size: 0.68rem; color: #FFF;">
+          <div style="position: absolute; bottom: 8px; right: 8px; background: rgba(0,25,60,0.85); color: #FFF; padding: 2px 10px; border-radius: 4px; font-size: 11px; font-weight: 600;">
             Visual Modus Realistis
           </div>
         </div>
 
         <!-- Deskripsi Modus -->
         <div>
-          <h4 style="font-size: 0.9rem; color: var(--accent-gold); margin-bottom: 6px;">Deskripsi Modus Penyelundupan</h4>
-          <p style="font-size: 0.85rem; color: var(--text-primary); line-height: 1.6;">${hotspotData.description}</p>
+          <h4 style="font-size: var(--font-size-label-md); font-weight: 700; color: var(--color-primary-container); margin-bottom: 6px;">DESKRIPSI MODUS PENYELUNDUPAN</h4>
+          <p style="font-size: var(--font-size-body-md); color: var(--color-on-surface); line-height: 1.6;">${hotspotData.description}</p>
         </div>
 
         <!-- Indikator Resiko / Anomali -->
         <div>
-          <h4 style="font-size: 0.9rem; color: #FF9500; margin-bottom: 6px;">Indikator Risiko & Anomali (Red Flags)</h4>
+          <h4 style="font-size: var(--font-size-label-md); font-weight: 700; color: var(--color-warning); margin-bottom: 6px;">INDIKATOR RISIKO & ANOMALI (RED FLAGS)</h4>
           <div class="risk-list">
             ${riskItemsHtml}
           </div>
@@ -61,7 +61,7 @@ export class InfoPanel {
 
         <!-- Tindakan Inspeksi DJBC -->
         <div>
-          <h4 style="font-size: 0.9rem; color: var(--accent-cyan); margin-bottom: 6px;">SOP Tindakan Inspeksi Bea Cukai</h4>
+          <h4 style="font-size: var(--font-size-label-md); font-weight: 700; color: var(--color-info-risk); margin-bottom: 6px;">SOP TINDAKAN INSPEKSI BEA CUKAI</h4>
           <div class="action-list">
             ${actionItemsHtml}
           </div>
