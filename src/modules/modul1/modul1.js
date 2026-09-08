@@ -48,22 +48,29 @@ export class Modul1View extends BaseModuleView {
         <!-- ─── MAIN VIEWPORT ─── -->
         <div id="modul1-viewport">
 
-          <!-- Sub Header Bar -->
-          <div id="modul1-top-bar">
+          <!-- Sub Header Bar (Stitch Forensic Module Strip) -->
+          <div id="modul1-top-bar" class="modul1-top-bar">
             <div class="nav-left">
               <div class="header-breadcrumb">
-                <span class="course-main-title">Penanganan Penyelundupan Narkotika</span>
-                <span class="breadcrumb-separator">|</span>
-                <span class="course-sub-title">Modul 1: Modus di Tubuh Kurir</span>
+                <span class="modul-code-badge font-code-tech">MODUL 01</span>
+                <span class="course-main-title">Pemeriksaan Tubuh Kurir (Body Concealment)</span>
+                <span class="breadcrumb-separator">•</span>
+                <span class="modul-ref-tag font-code-tech">PMK-188/2021 & S-39/BC/2023</span>
               </div>
             </div>
 
             <div class="nav-right">
+              <!-- Live Sensor State Indicator -->
+              <div class="sensor-state-chip font-code-tech">
+                <span class="sensor-dot live"></span>
+                <span>BODY SCANNER: AKTIF</span>
+              </div>
+
               <!-- Module Progress Widget -->
               <div class="module-progress-widget">
                 <div class="progress-info-row">
-                  <span class="progress-title">Progres Modul:</span>
-                  <span id="progress-percentage-text" class="progress-value">12%</span>
+                  <span class="progress-title">Hotspot Terverifikasi:</span>
+                  <span id="progress-percentage-text" class="progress-value font-code-tech">12%</span>
                 </div>
                 <div class="progress-track">
                   <div id="progress-fill-bar" class="progress-fill" style="width: 12%;"></div>
@@ -89,31 +96,33 @@ export class Modul1View extends BaseModuleView {
             <!-- Angle Header Bar -->
             <div class="angle-header-bar">
               <div class="current-angle-badge" id="current-angle-badge">
-                <span class="angle-deg" id="angle-deg-text">0°</span>
+                <span class="angle-deg font-code-tech" id="angle-deg-text">0°</span>
                 <span class="angle-sep">•</span>
                 <span class="angle-name" id="angle-name-text">Tampak Depan</span>
                 <span class="angle-sub" id="angle-sub-text">(Organ Pencernaan & Dada)</span>
               </div>
               <div class="angle-instruction-tag">
-                <span>Klik hotspot bernomor untuk melihat rincian modus operandi</span>
+                <span class="instruction-dot">●</span>
+                <span>Klik hotspot bernomor untuk menganalisis modus operandi & bukti forensik</span>
               </div>
             </div>
 
-            <!-- Body Canvas Wrapper -->
+            <!-- Body Canvas Wrapper with Technical Forensic Grid & HUD Overlay -->
             <div class="body-canvas-wrapper" id="body-canvas-wrapper">
 
-              <!-- Zoom Dock (Bottom Left) -->
-              <div class="camera-zoom-dock" id="camera-zoom-dock">
-                <button id="btn-zoom-in" class="zoom-ctrl-btn" title="Perbesar (Zoom In)" aria-label="Zoom In">
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-                </button>
-                <span id="zoom-level-text" class="zoom-level-badge">150%</span>
-                <button id="btn-zoom-out" class="zoom-ctrl-btn" title="Perkecil (Zoom Out)" aria-label="Zoom Out">
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-                </button>
-                <button id="btn-zoom-reset" class="zoom-ctrl-btn reset-btn" title="Reset Zoom (150%)" aria-label="Reset Zoom">
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><polyline points="3 3 3 8 8 8"></polyline></svg>
-                </button>
+              <!-- Technical Forensic Grid Background Overlay -->
+              <div class="forensic-grid-background" aria-hidden="true"></div>
+
+              <!-- HUD Telemetry Watermark Overlay -->
+              <div class="forensic-hud-telemetry" aria-hidden="true">
+                <div class="forensic-hud-top-left font-code-tech">
+                  <div class="hud-line-title">STASIUN PEMINDAIAN ANATOMI DUAL-AXIS</div>
+                  <div class="hud-line-sub">SUBJEK ID: SUSPECT-JKT-9921 / PRIA / 34 TH</div>
+                </div>
+                <div class="forensic-hud-top-right font-code-tech">
+                  <div class="hud-line-azimuth" id="hud-azimuth-text">ROTASI AKTIF: AZIMUTH 000° | TILT +00.0°</div>
+                  <div class="hud-line-status">SENSOR: FULL-BODY TRANSMISSION X-RAY</div>
+                </div>
               </div>
 
               <!-- Central Active Body Image with Hotspots Layer -->
@@ -123,17 +132,41 @@ export class Modul1View extends BaseModuleView {
                 <div id="hotspots-layer" class="hotspots-layer"></div>
               </div>
 
-              <!-- Pedestal Rotation Control Dock (Center Bottom) -->
+              <!-- Stitch Floating HUD Segmented Pill Controls Dock (Center Bottom) -->
               <div class="pedestal-rotation-dock" id="pedestal-rotation-dock">
-                <div class="pedestal-rotate-hint">
-                  <span>⟲ 360° Seret untuk memutar model. ⟳</span>
-                </div>
                 <div class="pedestal-carousel-controls">
-                  <button id="btn-carousel-prev" class="pedestal-ctrl-btn" title="Putar ke sudut sebelumnya" aria-label="Sudut Sebelumnya">‹</button>
-                  <button id="btn-carousel-play" class="pedestal-ctrl-btn btn-play" title="Auto-play putar model 360° secara kontinu" aria-label="Auto-Play 360°">
+                  <!-- Putar Sudut Button with 360 icon -->
+                  <button id="btn-rotate-angle" class="hud-pill-action-btn" title="Putar Sudut Anatomi (0°, 90°, 180°, 270°)">
+                    <span class="hud-btn-icon">↻</span>
+                    <span class="hud-btn-text">PUTAR SUDUT</span>
+                    <span id="hud-current-angle-label" class="hud-angle-indicator font-code-tech">0°</span>
+                  </button>
+
+                  <div class="hud-pill-divider"></div>
+
+                  <!-- Step Carousel Prev / Play / Next -->
+                  <button id="btn-carousel-prev" class="pedestal-ctrl-btn" title="Sudut Sebelumnya" aria-label="Sudut Sebelumnya">‹</button>
+                  <button id="btn-carousel-play" class="pedestal-ctrl-btn btn-play" title="Auto-play rotasi kontinu 360°" aria-label="Auto-Play 360°">
                     <span id="play-pause-icon">▶</span>
                   </button>
-                  <button id="btn-carousel-next" class="pedestal-ctrl-btn" title="Putar ke sudut berikutnya" aria-label="Sudut Berikutnya">›</button>
+                  <button id="btn-carousel-next" class="pedestal-ctrl-btn" title="Sudut Berikutnya" aria-label="Sudut Berikutnya">›</button>
+
+                  <div class="hud-pill-divider"></div>
+
+                  <!-- Zoom Controls integrated into segmented dock -->
+                  <button id="btn-zoom-out" class="pedestal-ctrl-btn hud-zoom-btn" title="Perkecil (Zoom Out)" aria-label="Zoom Out">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                  </button>
+                  <span id="zoom-level-text" class="zoom-level-badge font-code-tech">150%</span>
+                  <button id="btn-zoom-in" class="pedestal-ctrl-btn hud-zoom-btn" title="Perbesar (Zoom In)" aria-label="Zoom In">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                  </button>
+                  <button id="btn-zoom-reset" class="pedestal-ctrl-btn hud-zoom-btn reset-btn" title="Reset Zoom (150%)" aria-label="Reset Zoom">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><polyline points="3 3 3 8 8 8"></polyline></svg>
+                  </button>
+                </div>
+                <div class="pedestal-rotate-hint">
+                  <span>⟲ Drag atau usap pada tubuh untuk rotasi bebas 360° ⟳</span>
                 </div>
               </div>
 
@@ -406,10 +439,18 @@ export class Modul1View extends BaseModuleView {
   }
 
   setupRotationControls() {
+    const btnRotate = this.container.querySelector('#btn-rotate-angle');
     const btnPrev = this.container.querySelector('#btn-carousel-prev');
     const btnPlay = this.container.querySelector('#btn-carousel-play');
     const btnNext = this.container.querySelector('#btn-carousel-next');
     const canvasWrap = this.container.querySelector('#body-canvas-wrapper');
+
+    btnRotate?.addEventListener('click', () => {
+      this.stopAutoPlay();
+      const idx = this.ANGLES.indexOf(this.currentAngle);
+      const nextIdx = (idx + 1) % this.ANGLES.length;
+      this.setBodyAngle(this.ANGLES[nextIdx]);
+    });
 
     btnPrev?.addEventListener('click', () => {
       this.stopAutoPlay();
@@ -545,9 +586,17 @@ export class Modul1View extends BaseModuleView {
     const degText = this.container.querySelector('#angle-deg-text');
     const nameText = this.container.querySelector('#angle-name-text');
     const subText = this.container.querySelector('#angle-sub-text');
+    const hudAngleLabel = this.container.querySelector('#hud-current-angle-label');
+    const hudAzimuthText = this.container.querySelector('#hud-azimuth-text');
+
     if (degText) degText.textContent = `${angle}°`;
+    if (hudAngleLabel) hudAngleLabel.textContent = `${angle}°`;
     if (nameText && angleInfo) nameText.textContent = angleInfo.label;
     if (subText && angleInfo) subText.textContent = `(${angleInfo.sub})`;
+    if (hudAzimuthText) {
+      const paddedAngle = String(angle).padStart(3, '0');
+      hudAzimuthText.textContent = `ROTASI AKTIF: AZIMUTH ${paddedAngle}° | TILT +00.0°`;
+    }
 
     const img = this.container.querySelector('#main-body-img');
     if (img && angleInfo && !img.src.includes(angleInfo.image)) {

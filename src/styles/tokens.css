@@ -1,76 +1,94 @@
 /* ==========================================
-   DESIGN TOKENS — Institutional Intelligence Explorer
-   Applied from Stitch Project: 1809635501361859886
-   Interactive Narcotics Inspection Simulator (DJBC)
+   DESIGN TOKENS — Customs Narcotics Inspection Simulator
+   Applied from Stitch Project: 6164640703697521581
+   Direktorat Jenderal Bea dan Cukai — Kementerian Keuangan RI
    ========================================== */
 
 :root {
-  /* === COLOR PALETTE (Institutional Intelligence Explorer) === */
-  --color-primary:              #001529;   /* Deep Navy */
-  --color-primary-container:    #071d31;   /* Deep Navy Container (Sidebar & Headers) */
+  /* === CORE BRAND PALETTE (DJBC Maritime & Republic Gold) === */
+  --color-primary:              #00253b;   /* Primary Sovereign Navy */
+  --color-primary-container:    #003b5c;   /* Structural Deep Navy (Headers & Navbars) */
+  --color-primary-hover:        #001d31;   /* Darkened Navy Pressed/Hover */
   --color-on-primary:           #ffffff;
-  --color-on-primary-container: #72869e;
+  --color-on-primary-container: #7aa5cc;   /* High-contrast Technical Accent */
 
-  --color-secondary:            #785900;
-  --color-secondary-container:  #fdc003;   /* Golden Yellow - Primary CTA / Accent */
-  --color-gold:                 #ffc107;
-  --color-gold-hover:           #e5ad00;
+  /* Kemenkeu Republic Gold / Kontrabanda Discovery CTA */
+  --color-secondary:            #7b5800;   /* Secondary Deep Gold Ink */
+  --color-secondary-container:  #fdbb24;   /* Kemenkeu Gold Accent (#F4B41A / #FDBB24) */
+  --color-secondary-fixed:      #ffdea5;
+  --color-secondary-fixed-dim:  #fdbb24;
   --color-on-secondary:         #ffffff;
-  --color-on-secondary-container:#6c5000;
+  --color-on-secondary-container:#6c4d00;
+  --color-gold:                 #f4b41a;
+  --color-gold-hover:           #d99a00;
 
-  --color-tertiary:             #1890ff;   /* Tertiary / Interactive Blue */
-  --color-tertiary-container:   #001c3a;
-  --color-on-tertiary-container:#0085ef;
+  /* Tertiary Analytical Blue & Surveillance Highlights */
+  --color-tertiary:             #00243b;
+  --color-tertiary-container:   #153a55;
+  --color-on-tertiary:          #ffffff;
+  --color-on-tertiary-container:#83a4c4;
+  --color-tertiary-fixed:       #cce5ff;
+  --color-tertiary-fixed-dim:   #a8caeb;
 
-  --color-surface:              #f7f9fc;   /* Light Canvas Background */
-  --color-surface-card:         #ffffff;   /* Pure White for Containers/Cards */
+  /* Clinical Institutional Surfaces */
+  --color-surface:              #f7f9fb;   /* Base Light Viewport */
+  --color-surface-bright:       #f7f9fb;
+  --color-surface-card:         #ffffff;   /* Pure White Clinical Containers */
   --color-surface-container-lowest: #ffffff;
-  --color-surface-container-low:#f2f4f7;
-  --color-surface-container:    #eceef1;
-  --color-surface-container-high:#e6e8eb;
-  --color-surface-container-highest:#e0e3e6;
-  --color-surface-dim:          #d8dadd;
-  --color-surface-bright:       #f7f9fc;
+  --color-surface-container-low:#f2f4f6;
+  --color-surface-container:    #eceef0;
+  --color-surface-container-high:#e6e8ea;
+  --color-surface-container-highest:#e0e3e5;
+  --color-surface-dim:          #d8dadc;
+  --color-surface-tint:         #366285;
 
-  --color-on-surface:           #191c1e;   /* Main Body Text */
-  --color-on-surface-variant:   #43474d;   /* Secondary Text */
-  --color-outline:              #74777d;
-  --color-outline-variant:      #c4c6cd;
-  --color-border-subtle:        #e0e3e6;
+  /* Typography Inks */
+  --color-on-surface:           #191c1e;   /* Deep Typographic Ink */
+  --color-on-surface-variant:   #42474e;   /* Meta / Descriptive Ink */
+  --color-on-background:        #191c1e;
+  --color-outline:              #72787e;   /* Administrative Borders */
+  --color-outline-variant:      #c2c7ce;
+  --color-border-subtle:        #e2e8f0;
 
-  /* === RISK / CATEGORY COLOR CODING === */
-  --color-high-risk:            #dc2626;   /* Red - Risk Tinggi */
-  --color-med-risk:             #d97706;   /* Amber - Risk Sedang */
-  --color-low-risk:             #16a34a;   /* Green - Risk Rendah */
-  --color-info-risk:            #1890ff;   /* Blue - Info */
+  /* === FORENSIC STATUS / ALERT INDICATORS === */
+  --color-high-risk:            #dc2626;   /* Seizure / Lethal Contraband */
+  --color-critical:             #ba1a1a;
+  --color-med-risk:             #d97706;   /* Warning / Discrepancy Flag */
+  --color-low-risk:             #0e8345;   /* Clean / SOP Verified */
+  --color-info-risk:            #0284c7;   /* SCORM & Sensory Tracking */
 
   --color-error:                #ba1a1a;
   --color-error-container:      #ffdad6;
   --color-on-error:             #ffffff;
   --color-on-error-container:   #93000a;
-  --color-success:              #15803d;
-  --color-success-container:    #dcfce7;
+  --color-success:              #0e8345;
+  --color-success-container:    #e7f6ec;
   --color-warning:              #d97706;
-  --color-warning-container:    #fffbeb;
+  --color-warning-container:    #fef3c7;
 
   /* Dark Theme Scene Container Overlays */
-  --scene-dark-bg:              #071d31;
-  --scene-viewport-bg:          radial-gradient(circle at center, #0e2a47 0%, #051322 100%);
+  --scene-dark-bg:              #00253b;
+  --scene-viewport-bg:          radial-gradient(circle at center, #003b5c 0%, #001d31 100%);
 
-  /* === TYPOGRAPHY (Inter) === */
-  --font-family-base:     'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-family-heading:  'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  /* === TYPOGRAPHY (Public Sans & JetBrains Mono) === */
+  --font-family-base:     'Public Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-family-heading:  'Public Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-family-mono:     'JetBrains Mono', monospace;
 
-  --font-size-display:    48px;
-  --font-size-headline-xl:36px;
-  --font-size-headline-lg:32px;
-  --font-size-headline-md:24px;
+  --font-size-display:    36px;
+  --font-size-headline-xl:32px;
+  --font-size-headline-lg:28px;
+  --font-size-headline-md:22px;
+  --font-size-headline-sm:18px;
   --font-size-title-lg:   20px;
   --font-size-body-lg:    16px;
   --font-size-body-md:    14px;
+  --font-size-body-sm:    12px;
+  --font-size-label-lg:   14px;
   --font-size-label-md:   12px;
   --font-size-label-sm:   11px;
-  --font-size-caption:    12px;
+  --font-size-code:       12px;
+  --font-size-caption:    11px;
 
   --font-weight-bold:     700;
   --font-weight-semibold: 600;
@@ -78,15 +96,26 @@
   --font-weight-regular:  400;
 
   /* Line Heights */
-  --line-height-display:    60px;
-  --line-height-headline-lg:40px;
-  --line-height-headline-md:32px;
+  --line-height-display:    44px;
+  --line-height-headline-lg:36px;
+  --line-height-headline-md:28px;
+  --line-height-headline-sm:24px;
   --line-height-title:      28px;
   --line-height-body-lg:    24px;
-  --line-height-body-md:    22px;
+  --line-height-body-md:    20px;
+  --line-height-body-sm:    18px;
   --line-height-label:      16px;
 
-  /* === SPACING (8px Baseline Grid) === */
+  /* === SPACING (Stitch 8pt geometric grid) === */
+  --space-2xs: 4px;       /* 0.25rem */
+  --space-xs:  8px;       /* 0.5rem */
+  --space-sm:  12px;      /* 0.75rem */
+  --space-md:  16px;      /* 1.0rem */
+  --space-lg:  24px;      /* 1.5rem */
+  --space-xl:  32px;      /* 2.0rem */
+  --space-2xl: 48px;      /* 3.0rem */
+  --space-3xl: 64px;      /* 4.0rem */
+
   --space-0-5: 4px;
   --space-1:   8px;
   --space-2:   16px;
@@ -100,25 +129,28 @@
   --stack-lg:  24px;
 
   --sidebar-width:     260px;
-  --content-max:       1440px;
-  --container-padding: 32px;
+  --content-max:       1600px;
+  --container-padding: 24px;
   --gutter:            24px;
-  --margin-desktop:    32px;
+  --gutter-desktop:    24px;
+  --gutter-mobile:     16px;
+  --margin-desktop:    24px;
   --margin-mobile:     16px;
 
-  /* === BORDER RADIUS === */
-  --radius-sm:   4px;    /* 0.25rem */
-  --radius-md:   8px;    /* 0.5rem - DEFAULT */
-  --radius-lg:   12px;   /* 0.75rem */
-  --radius-xl:   16px;   /* 1.0rem */
-  --radius-2xl:  24px;   /* 1.5rem */
-  --radius-full: 9999px;
+  /* === BORDER RADIUS (Stitch roundness scale) === */
+  --radius-sm:   4px;     /* 0.25rem */
+  --radius-md:   8px;     /* 0.5rem - DEFAULT */
+  --radius-lg:   12px;    /* 0.75rem */
+  --radius-xl:   16px;    /* 1.0rem - Cards & Forensic Panels */
+  --radius-2xl:  24px;    /* 1.5rem - Viewport Containers */
+  --radius-full: 9999px;  /* Pills, Badges & Hotspot Nodes */
 
-  /* === ELEVATION & SHADOWS (Tonal Layers + Ambient Shadows) === */
-  --shadow-sm:     0px 2px 6px rgba(7, 29, 49, 0.04);
-  --shadow-card:   0px 4px 16px rgba(7, 29, 49, 0.05);
-  --shadow-hover:  0px 8px 24px rgba(7, 29, 49, 0.08);
-  --shadow-modal:  0px 12px 32px rgba(7, 29, 49, 0.14);
+  /* === ELEVATION & DEPTH (Crisp clinical surfaces) === */
+  --shadow-sm:     0px 1px 4px rgba(0, 37, 59, 0.04);
+  --shadow-card:   0px 2px 10px rgba(0, 37, 59, 0.05);
+  --shadow-hover:  0px 6px 20px rgba(0, 37, 59, 0.08);
+  --shadow-modal:  0px 12px 36px rgba(0, 37, 59, 0.16);
+  --shadow-floating: 0px 8px 28px -4px rgba(0, 37, 59, 0.18);
 
   /* === TRANSITIONS === */
   --transition-fast: 150ms ease;
