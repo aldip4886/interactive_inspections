@@ -38,132 +38,12 @@ export class Modul1View extends BaseModuleView {
   getTemplateHTML() {
     return `
       <div id="modul1-app-root">
-        <!-- ─── 1. INNER HOTSPOT NAVIGATION SIDEBAR ─── -->
-        <aside id="modul1-sidebar">
-          <div class="sidebar-header">
-            <div class="sidebar-brand-badge">
-              <svg class="djbc-crest-icon" viewBox="0 0 48 48" width="28" height="28" fill="none">
-                <circle cx="24" cy="24" r="22" fill="#0B2C6E" stroke="#F5A623" stroke-width="2"/>
-                <path d="M24 8L33 20H15L24 8Z" fill="#F5A623"/>
-                <path d="M24 40L15 28H33L24 40Z" fill="#F5A623"/>
-                <circle cx="24" cy="24" r="7" fill="#FFFFFF"/>
-                <path d="M24 19L25.5 22.5H29L26 24.8L27.2 28.5L24 26.2L20.8 28.5L22 24.8L19 22.5H22.5L24 19Z" fill="#0B2C6E"/>
-              </svg>
-              <div class="brand-titles">
-                <span class="brand-inst">KEMENTERIAN KEUANGAN RI</span>
-                <h2 class="brand-org">DIREKTORAT JENDERAL BEA DAN CUKAI</h2>
-              </div>
-            </div>
-            <div class="sidebar-course-tag">8 TITIK MODUS DI TUBUH KURIR</div>
-          </div>
-
-          <nav class="sidebar-nav">
-            <div class="nav-section-title">8 TITIK CONCEALMENT</div>
-            <div class="sidebar-hotspots-accordion">
-
-              <!-- Kategori 1: Metode Ingestion -->
-              <div class="sidebar-cat-group">
-                <div class="sidebar-cat-title">
-                  <span class="cat-badge-dot ingestion"></span>
-                  <span>METODE INGESTION</span>
-                </div>
-                <ul class="sidebar-hotspot-list">
-                  <li class="sidebar-hotspot-item active" data-hotspot-id="rongga-mulut">
-                    <span class="hs-badge-num">1</span>
-                    <span class="hs-label">Rongga Mulut</span>
-                    <span class="hs-angle-tag">0°</span>
-                  </li>
-                  <li class="sidebar-hotspot-item" data-hotspot-id="lambung">
-                    <span class="hs-badge-num">2</span>
-                    <span class="hs-label">Lambung</span>
-                    <span class="hs-angle-tag">0°</span>
-                  </li>
-                </ul>
-              </div>
-
-              <!-- Kategori 2: Metode Insertion -->
-              <div class="sidebar-cat-group">
-                <div class="sidebar-cat-title">
-                  <span class="cat-badge-dot insertion"></span>
-                  <span>METODE INSERTION</span>
-                </div>
-                <ul class="sidebar-hotspot-list">
-                  <li class="sidebar-hotspot-item" data-hotspot-id="anal-anus">
-                    <span class="hs-badge-num">3</span>
-                    <span class="hs-label">Pada Anal / Anus</span>
-                    <span class="hs-angle-tag">180°</span>
-                  </li>
-                </ul>
-              </div>
-
-              <!-- Kategori 3: Metode Body Strapping -->
-              <div class="sidebar-cat-group">
-                <div class="sidebar-cat-title">
-                  <span class="cat-badge-dot strapping"></span>
-                  <span>BODY STRAPPING (LAKBAN)</span>
-                </div>
-                <ul class="sidebar-hotspot-list">
-                  <li class="sidebar-hotspot-item" data-hotspot-id="strapping-paha">
-                    <span class="hs-badge-num">4</span>
-                    <span class="hs-label">Pada Paha</span>
-                    <span class="hs-angle-tag">270°</span>
-                  </li>
-                  <li class="sidebar-hotspot-item" data-hotspot-id="strapping-betis">
-                    <span class="hs-badge-num">5</span>
-                    <span class="hs-label">Betis</span>
-                    <span class="hs-angle-tag">90°</span>
-                  </li>
-                  <li class="sidebar-hotspot-item" data-hotspot-id="strapping-perut">
-                    <span class="hs-badge-num">6</span>
-                    <span class="hs-label">Perut</span>
-                    <span class="hs-angle-tag">180°</span>
-                  </li>
-                </ul>
-              </div>
-
-              <!-- Kategori 4: Body-Adjacent Concealment -->
-              <div class="sidebar-cat-group">
-                <div class="sidebar-cat-title">
-                  <span class="cat-badge-dot adjacent"></span>
-                  <span>BODY-ADJACENT</span>
-                </div>
-                <ul class="sidebar-hotspot-list">
-                  <li class="sidebar-hotspot-item" data-hotspot-id="vagina-pembalut">
-                    <span class="hs-badge-num">7</span>
-                    <span class="hs-label">Pada Vagina (Pembalut)</span>
-                    <span class="hs-angle-tag">0°</span>
-                  </li>
-                  <li class="sidebar-hotspot-item" data-hotspot-id="prostetik-gips">
-                    <span class="hs-badge-num">8</span>
-                    <span class="hs-label">Bagian Prostetik / Gips Palsu</span>
-                    <span class="hs-angle-tag">0°</span>
-                  </li>
-                </ul>
-              </div>
-
-            </div>
-          </nav>
-
-          <div class="sidebar-footer">
-            <div class="customs-badge-card">
-              <img src="assets/mockup/sidebar_customs_bg.png" alt="Customs Border Protection" class="customs-footer-img" />
-              <div class="customs-caption">
-                <span class="cbp-title">CUSTOMS BORDER PROTECTION</span>
-                <span class="cbp-sub">Mengawasi • Melindungi • Melayani</span>
-              </div>
-            </div>
-          </div>
-        </aside>
-
-        <!-- ─── 2. MAIN VIEWPORT ─── -->
+        <!-- ─── MAIN VIEWPORT ─── -->
         <div id="modul1-viewport">
 
           <!-- Sub Header Bar -->
           <div id="modul1-top-bar">
             <div class="nav-left">
-              <button id="btn-toggle-mod1-sidebar" class="icon-btn" title="Buka/Tutup Menu Hotspot" aria-label="Toggle Sidebar">
-                <span>☰</span>
-              </button>
               <div class="header-breadcrumb">
                 <span class="course-main-title">Penanganan Penyelundupan Narkotika</span>
                 <span class="breadcrumb-separator">|</span>
@@ -487,7 +367,6 @@ export class Modul1View extends BaseModuleView {
   }
 
   initInteractiveViewer() {
-    this.setupSidebarNav();
     this.setupRotationControls();
     this.setupZoomControls();
     this.setupDetailModal();
@@ -495,25 +374,6 @@ export class Modul1View extends BaseModuleView {
     // Initial angle & zoom 150%
     this.setBodyAngle(0);
     this.applyZoom(1.5);
-  }
-
-  setupSidebarNav() {
-    const toggleBtn = this.container.querySelector('#btn-toggle-mod1-sidebar');
-    const sidebar = this.container.querySelector('#modul1-sidebar');
-
-    toggleBtn?.addEventListener('click', () => {
-      sidebar.classList.toggle('collapsed');
-    });
-
-    const hotspotItems = this.container.querySelectorAll('.sidebar-hotspot-item');
-    hotspotItems.forEach(item => {
-      item.addEventListener('click', () => {
-        const id = item.getAttribute('data-hotspot-id');
-        if (id) {
-          this.openHotspotModal(id, true);
-        }
-      });
-    });
   }
 
   setupRotationControls() {
@@ -802,13 +662,6 @@ export class Modul1View extends BaseModuleView {
     } else {
       this.renderHotspotsForCurrentAngle();
     }
-
-    // Update inner sidebar
-    this.container.querySelectorAll('.sidebar-hotspot-item').forEach(item => {
-      const itemHsId = item.getAttribute('data-hotspot-id');
-      item.classList.toggle('active', itemHsId === id);
-      if (this.visitedHotspots.has(itemHsId)) item.classList.add('visited');
-    });
 
     // Track xAPI click
     xapi.trackHotspotClick('modul1', hs.id, hs.label, hs.categoryLabel);

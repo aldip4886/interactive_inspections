@@ -126,11 +126,51 @@ html, body {
 }
 
 .sidebar-footer {
-  padding: var(--space-3);
+  padding: 10px;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
-  font-size: var(--font-size-caption);
-  color: var(--color-on-primary-container);
-  text-align: center;
+}
+
+.customs-badge-card {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.customs-footer-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+.customs-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(5, 24, 51, 0.95) 0%, rgba(5, 24, 51, 0.5) 85%, transparent 100%);
+  padding: 6px 8px;
+  display: flex;
+  flex-direction: column;
+}
+
+.cbp-title {
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  color: var(--color-secondary-container, #F5A623);
+}
+
+.cbp-sub {
+  font-size: 8px;
+  color: #E2E8F0;
+  letter-spacing: 0.3px;
+}
+
+#sidebar.collapsed .customs-badge-card {
+  display: none;
 }
 
 /* Main Area Wrapper */
