@@ -10,7 +10,7 @@
     "package:scorm": "node scripts/package-scorm.js"
   },
   "devDependencies": {
-    "vite": "^5.4.2"
+    "vite": "^5.4.21"
   },
   "dependencies": {
     "glightbox": "^3.3.1",

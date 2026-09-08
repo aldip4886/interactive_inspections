@@ -17,6 +17,13 @@ export class Modul1View extends BaseModuleView {
     this.quiz = null;
     this.glightboxInstance = null;
     this.ANGLES = [0, 90, 180, 270];
+    this.cardPages = [
+      { id: 'tab-modus', num: 1, title: 'Modus Operandi' },
+      { id: 'tab-photos', num: 2, title: 'Foto Gambar Real' },
+      { id: 'tab-detection', num: 3, title: 'Ciri Pelaku & SOP' },
+      { id: 'tab-risk', num: 4, title: 'Indikator Risiko' }
+    ];
+    this.currentCardPageIndex = 0;
   }
 
   async render() {
@@ -140,14 +147,15 @@ export class Modul1View extends BaseModuleView {
       <!-- ─── 3. TABBED HOTSPOT CARD MODAL ─── -->
       <div id="hotspot-card-modal-overlay" class="modal-overlay hidden" role="dialog" aria-modal="true">
         <div id="hotspot-modal-card" class="modal-card tabbed-hotspot-modal">
-          <div class="modal-header tabbed-modal-header">
+          <div class="modal-header tabbed-modal-header" title="Tahan dan geser untuk memindahkan kartu">
             <div class="modal-header-left">
               <div class="detail-badge-row">
+                <span class="floating-card-drag-indicator" title="Geser posisi kartu">⋮⋮</span>
                 <span id="detail-tag-badge" class="detail-tag-badge">MODUS #01</span>
                 <span id="detail-cat-badge" class="detail-cat-badge">METODE INGESTION</span>
               </div>
               <h3 id="detail-title" class="detail-title">1. Rongga Mulut</h3>
-              <p id="detail-subtitle" class="detail-subtitle">Metode Ingestion: Penyelundupan paket narkotika di rongga mulut.</p>
+              <p id="detail-subtitle" class="detail-subtitle">Penyelundupan paket narkotika di rongga mulut.</p>
             </div>
             <div class="modal-header-right">
               <div class="card-quick-nav">
@@ -155,29 +163,28 @@ export class Modul1View extends BaseModuleView {
                 <span id="card-nav-counter" class="card-nav-counter">1 / 8</span>
                 <button id="btn-next-hotspot" class="card-nav-arrow-btn" title="Modus Berikutnya">→</button>
               </div>
-              <button id="btn-close-detail-modal" class="modal-close-btn" aria-label="Tutup Kartu">✕</button>
+              <button id="btn-close-detail-modal" class="modal-close-btn" aria-label="Tutup Kartu" title="Tutup Kartu">✕</button>
             </div>
           </div>
 
+          <!-- Compact Segmented Tab Navigation -->
           <div class="card-tabs-nav" id="card-tabs-nav">
-            <button id="btn-tab-prev" class="tab-nav-arrow-btn" title="Tab Sebelumnya">‹</button>
-            <button class="tab-btn active" data-tab="tab-modus">
+            <button class="tab-btn active" data-tab="tab-modus" title="Halaman 1: Modus Operandi">
               <span class="tab-icon">📋</span>
-              <span class="tab-label">Modus Operandi</span>
+              <span class="tab-label">Modus</span>
             </button>
-            <button class="tab-btn" data-tab="tab-photos">
+            <button class="tab-btn" data-tab="tab-photos" title="Halaman 2: Foto Gambar Real">
               <span class="tab-icon">📷</span>
-              <span class="tab-label">Foto Gambar Real</span>
+              <span class="tab-label">Foto Bukti</span>
             </button>
-            <button class="tab-btn" data-tab="tab-detection">
+            <button class="tab-btn" data-tab="tab-detection" title="Halaman 3: Ciri Pelaku & SOP">
               <span class="tab-icon">🔍</span>
-              <span class="tab-label">Ciri Pelaku & SOP</span>
+              <span class="tab-label">SOP & Ciri</span>
             </button>
-            <button class="tab-btn" data-tab="tab-risk">
+            <button class="tab-btn" data-tab="tab-risk" title="Halaman 4: Indikator Risiko">
               <span class="tab-icon">🚨</span>
-              <span class="tab-label">Indikator Risiko</span>
+              <span class="tab-label">Risiko</span>
             </button>
-            <button id="btn-tab-next" class="tab-nav-arrow-btn" title="Tab Berikutnya">›</button>
           </div>
 
           <div class="tab-content-container" id="tab-content-container">
@@ -193,19 +200,19 @@ export class Modul1View extends BaseModuleView {
               </div>
               <div class="modus-params-grid">
                 <div class="param-box">
-                  <span class="param-label">Metode Concealment:</span>
+                  <span class="param-label">Metode:</span>
                   <p id="detail-concealment-method" class="param-val"></p>
                 </div>
                 <div class="param-box">
-                  <span class="param-label">Lokasi Detail Tubuh:</span>
+                  <span class="param-label">Lokasi:</span>
                   <p id="detail-body-location" class="param-val"></p>
                 </div>
                 <div class="param-box">
-                  <span class="param-label">Jenis Narkotika Lazim:</span>
+                  <span class="param-label">Narkotika:</span>
                   <p id="detail-drug-types" class="param-val"></p>
                 </div>
                 <div class="param-box">
-                  <span class="param-label">Teknik Pengemasan:</span>
+                  <span class="param-label">Kemasan:</span>
                   <p id="detail-packaging" class="param-val"></p>
                 </div>
               </div>
@@ -222,12 +229,12 @@ export class Modul1View extends BaseModuleView {
             <!-- TAB 2: FOTO REAL -->
             <div class="tab-pane" id="tab-photos">
               <div class="photos-tab-header">
-                <span class="photos-tab-title">Dokumentasi Realita Barang Bukti & Citra Forensik:</span>
+                <span class="photos-tab-title">Barang Bukti Sitaan & Citra Forensik:</span>
                 <span class="photos-tab-hint">Klik gambar untuk melihat resolusi penuh & zoom</span>
               </div>
               <div class="findings-thumbnails-grid" id="findings-thumbnails-grid"></div>
               <div class="gallery-case-note">
-                <strong>Penting:</strong> Seluruh gambar merupakan dokumentasi kasus penindakan riil dan citra radiologis forensik resmi DJBC dan mitra penegak hukum internasional.
+                <strong>Penting:</strong> Dokumentasi penindakan riil dan citra radiologis forensik resmi DJBC.
               </div>
             </div>
 
@@ -271,24 +278,44 @@ export class Modul1View extends BaseModuleView {
               <div class="hazard-alert-box hazard-medical">
                 <div class="hazard-icon">🚨</div>
                 <div class="hazard-content">
-                  <span class="hazard-title">Bahaya Medis Darurat bagi Tersangka:</span>
+                  <span class="hazard-title">Bahaya Medis Darurat Tersangka:</span>
                   <p id="detail-medical-risk" class="hazard-desc"></p>
                 </div>
               </div>
               <div class="hazard-alert-box hazard-officer">
                 <div class="hazard-icon">🛡️</div>
                 <div class="hazard-content">
-                  <span class="hazard-title">Protokol Keselamatan & Hukum Petugas:</span>
+                  <span class="hazard-title">Protokol Keselamatan Petugas:</span>
                   <p class="hazard-desc">
-                    Gunakan sarung tangan nitril standar. Dilarang keras melakukan pemeriksaan fisik internal invasif rongga tubuh tanpa tenaga medis resmi. Hubungi dokter rujukan dan koordinasikan pengamanan barang bukti.
+                    Gunakan sarung tangan nitril. Dilarang pemeriksaan internal tanpa medis resmi. Koordinasikan pengamanan BB.
                   </p>
                 </div>
               </div>
             </div>
           </div>
 
-          <div class="modal-footer">
-            <button id="btn-modal-close-footer" class="btn-outline-action">Tutup Side Bar</button>
+          <!-- Bottom Pagination Bar -->
+          <div class="card-pagination-bar" id="card-pagination-bar">
+            <button id="btn-page-prev" class="card-page-nav-btn" title="Halaman Sebelumnya" disabled>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
+              <span>Prev</span>
+            </button>
+
+            <div class="card-page-pills" id="card-page-pills">
+              <button class="page-pill active" data-page="0" title="1. Modus Operandi">1</button>
+              <button class="page-pill" data-page="1" title="2. Foto Gambar Real">2</button>
+              <button class="page-pill" data-page="2" title="3. Ciri Pelaku & SOP">3</button>
+              <button class="page-pill" data-page="3" title="4. Indikator Risiko">4</button>
+            </div>
+
+            <span class="card-page-info" id="card-page-info">Hal 1 / 4</span>
+
+            <button id="btn-page-next" class="card-page-nav-btn" title="Halaman Selanjutnya">
+              <span>Lanjut</span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
+
+            <button id="btn-modal-close-footer" class="card-close-pill-btn" title="Tutup Floating Card">✕ Tutup</button>
           </div>
         </div>
       </div>
@@ -610,30 +637,148 @@ export class Modul1View extends BaseModuleView {
       this.openHotspotModal(this.moduleData.hotspots[nextIdx].id, true);
     });
 
+    // Tab buttons
     const tabBtns = Array.from(this.container.querySelectorAll('.card-tabs-nav .tab-btn'));
-    const btnTabPrev = this.container.querySelector('#btn-tab-prev');
-    const btnTabNext = this.container.querySelector('#btn-tab-next');
-
-    btnTabPrev?.addEventListener('click', () => {
-      const activeIdx = tabBtns.findIndex(b => b.classList.contains('active'));
-      const prevIdx = (activeIdx - 1 + tabBtns.length) % tabBtns.length;
-      const tabId = tabBtns[prevIdx].getAttribute('data-tab');
-      this.switchCardTab(tabId);
-    });
-
-    btnTabNext?.addEventListener('click', () => {
-      const activeIdx = tabBtns.findIndex(b => b.classList.contains('active'));
-      const nextIdx = (activeIdx + 1) % tabBtns.length;
-      const tabId = tabBtns[nextIdx].getAttribute('data-tab');
-      this.switchCardTab(tabId);
-    });
-
-    tabBtns.forEach(btn => {
+    tabBtns.forEach((btn, idx) => {
       btn.addEventListener('click', () => {
-        const tabId = btn.getAttribute('data-tab');
-        this.switchCardTab(tabId);
+        this.switchCardPage(idx);
       });
     });
+
+    // Pagination buttons & pills
+    const btnPagePrev = this.container.querySelector('#btn-page-prev');
+    const btnPageNext = this.container.querySelector('#btn-page-next');
+    const pagePills = Array.from(this.container.querySelectorAll('.card-page-pills .page-pill'));
+
+    btnPagePrev?.addEventListener('click', () => {
+      if (this.currentCardPageIndex > 0) {
+        this.switchCardPage(this.currentCardPageIndex - 1);
+      }
+    });
+
+    btnPageNext?.addEventListener('click', () => {
+      if (this.currentCardPageIndex < this.cardPages.length - 1) {
+        this.switchCardPage(this.currentCardPageIndex + 1);
+      } else {
+        // When reaching end of card pages, advance to next hotspot
+        const idx = this.moduleData.hotspots.findIndex(h => h.id === this.currentHotspotId);
+        const nextIdx = (idx + 1) % this.moduleData.hotspots.length;
+        this.openHotspotModal(this.moduleData.hotspots[nextIdx].id, true);
+      }
+    });
+
+    pagePills.forEach((pill, idx) => {
+      pill.addEventListener('click', () => {
+        this.switchCardPage(idx);
+      });
+    });
+
+    this.initDraggableFloatingCard();
+  }
+
+  switchCardPage(pageIndex) {
+    if (pageIndex < 0) pageIndex = 0;
+    if (pageIndex >= this.cardPages.length) pageIndex = this.cardPages.length - 1;
+    this.currentCardPageIndex = pageIndex;
+    const page = this.cardPages[pageIndex];
+    this.currentActiveTab = page.id;
+
+    // Sync tab buttons
+    this.container.querySelectorAll('.card-tabs-nav .tab-btn').forEach((b, idx) => {
+      if (idx === pageIndex) b.classList.add('active');
+      else b.classList.remove('active');
+    });
+
+    // Sync tab panes
+    this.container.querySelectorAll('.tab-content-container .tab-pane').forEach(p => {
+      if (p.id === page.id) p.classList.add('active');
+      else p.classList.remove('active');
+    });
+
+    // Sync pagination pills
+    this.container.querySelectorAll('.card-page-pills .page-pill').forEach((pill, idx) => {
+      if (idx === pageIndex) pill.classList.add('active');
+      else pill.classList.remove('active');
+    });
+
+    // Sync pagination status text
+    const pageInfo = this.container.querySelector('#card-page-info');
+    if (pageInfo) {
+      pageInfo.textContent = `Hal ${pageIndex + 1} / ${this.cardPages.length}`;
+    }
+
+    // Update prev/next button states
+    const btnPagePrev = this.container.querySelector('#btn-page-prev');
+    const btnPageNext = this.container.querySelector('#btn-page-next');
+    if (btnPagePrev) {
+      btnPagePrev.disabled = (pageIndex === 0);
+    }
+    if (btnPageNext) {
+      if (pageIndex === this.cardPages.length - 1) {
+        btnPageNext.innerHTML = `<span>Modus Berikutnya</span> <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>`;
+      } else {
+        btnPageNext.innerHTML = `<span>Lanjut</span> <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>`;
+      }
+    }
+
+    const content = this.container.querySelector('#tab-content-container');
+    if (content) content.scrollTop = 0;
+  }
+
+  switchCardTab(tabId) {
+    const idx = this.cardPages.findIndex(p => p.id === tabId);
+    if (idx !== -1) {
+      this.switchCardPage(idx);
+    }
+  }
+
+  initDraggableFloatingCard() {
+    const card = this.container.querySelector('#hotspot-modal-card');
+    const header = this.container.querySelector('.tabbed-modal-header');
+    if (!card || !header) return;
+
+    let isDragging = false;
+    let startMouseX = 0, startMouseY = 0;
+    let initialTransformX = 0, initialTransformY = 0;
+
+    const onMouseDown = (e) => {
+      if (e.target.closest('button') || e.target.closest('.card-quick-nav')) return;
+      isDragging = true;
+      startMouseX = e.clientX;
+      startMouseY = e.clientY;
+
+      const transform = window.getComputedStyle(card).transform;
+      if (transform && transform !== 'none') {
+        const matrix = new DOMMatrixReadOnly(transform);
+        initialTransformX = matrix.m41;
+        initialTransformY = matrix.m42;
+      } else {
+        initialTransformX = 0;
+        initialTransformY = 0;
+      }
+
+      header.style.cursor = 'grabbing';
+      document.addEventListener('mousemove', onMouseMove);
+      document.addEventListener('mouseup', onMouseUp);
+      e.preventDefault();
+    };
+
+    const onMouseMove = (e) => {
+      if (!isDragging) return;
+      const dx = e.clientX - startMouseX;
+      const dy = e.clientY - startMouseY;
+      card.style.transform = `translate(${initialTransformX + dx}px, ${initialTransformY + dy}px)`;
+    };
+
+    const onMouseUp = () => {
+      if (!isDragging) return;
+      isDragging = false;
+      header.style.cursor = 'grab';
+      document.removeEventListener('mousemove', onMouseMove);
+      document.removeEventListener('mouseup', onMouseUp);
+    };
+
+    header.addEventListener('mousedown', onMouseDown);
   }
 
   closeHotspotModal() {
@@ -642,21 +787,11 @@ export class Modul1View extends BaseModuleView {
     if (overlay) {
       overlay.classList.add('hidden');
     }
+    const card = this.container.querySelector('#hotspot-modal-card');
+    if (card) {
+      card.style.transform = '';
+    }
     this.renderHotspotsForCurrentAngle();
-  }
-
-  switchCardTab(tabId) {
-    this.currentActiveTab = tabId;
-
-    this.container.querySelectorAll('.card-tabs-nav .tab-btn').forEach(b => {
-      if (b.getAttribute('data-tab') === tabId) b.classList.add('active');
-      else b.classList.remove('active');
-    });
-
-    this.container.querySelectorAll('.tab-content-container .tab-pane').forEach(p => {
-      if (p.id === tabId) p.classList.add('active');
-      else p.classList.remove('active');
-    });
   }
 
   openHotspotModal(id, syncAngle = false) {
@@ -673,7 +808,7 @@ export class Modul1View extends BaseModuleView {
     }
 
     this.renderModalContent(hs);
-    this.switchCardTab('tab-modus');
+    this.switchCardPage(0);
     this.updateProgressUI();
 
     if (syncAngle && !hs.visibleAngles.includes(this.currentAngle)) {
@@ -728,7 +863,7 @@ export class Modul1View extends BaseModuleView {
     }
     if (desc) desc.textContent = hs.description;
     if (concealmentMethod) concealmentMethod.textContent = hs.categoryLabel || 'Modus Penyembunyian Tubuh';
-    if (bodyLocation) bodyLocation.textContent = `${hs.label} (Sudut Pandang Utama: ${hs.primaryAngle}°)`;
+    if (bodyLocation) bodyLocation.textContent = hs.bodyLocation || `${hs.label} (Sudut Pandang Utama: ${hs.primaryAngle}°)`;
     if (drugTypes) drugTypes.textContent = hs.drugTypes || 'Narkotika Golongan I (Kokain, Sabu, Heroin)';
     if (packaging) packaging.textContent = hs.packagingTechnique || 'Kondom lateks berlapis, selotip kedap udara';
     if (narrative) narrative.textContent = hs.modusDetail || hs.description;

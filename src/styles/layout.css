@@ -123,24 +123,24 @@ html, body {
 }
 
 .sidebar-nav .nav-item:hover {
-  background-color: rgba(255, 255, 255, 0.12);
+  background-color: rgba(255, 255, 255, 0.08);
   color: #FFFFFF !important;
-  transform: translateX(5px);
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+  transform: translateX(4px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
 .sidebar-nav .nav-item:hover svg {
   color: var(--color-secondary-container);
-  transform: scale(1.15);
+  transform: scale(1.1);
   opacity: 1;
 }
 
 .sidebar-nav .nav-item.active {
-  background: linear-gradient(135deg, rgba(253, 192, 3, 0.22) 0%, rgba(0, 45, 98, 0.6) 100%) !important;
+  background: rgba(255, 255, 255, 0.1) !important;
   color: #FFFFFF !important;
-  font-weight: 700;
+  font-weight: 600;
   border-left-color: var(--color-secondary-container) !important;
-  box-shadow: inset 0 0 10px rgba(253, 192, 3, 0.2), 0 4px 14px rgba(0, 0, 0, 0.25);
+  box-shadow: inset 0 0 10px rgba(253, 192, 3, 0.15), 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 .sidebar-nav .nav-item.active svg {

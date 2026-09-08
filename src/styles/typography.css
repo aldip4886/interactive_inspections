@@ -1,29 +1,44 @@
-@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Be+Vietnam+Pro:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap');
 
 body {
   font-family: var(--font-family-base);
   font-size: var(--font-size-body-md);
   color: var(--color-on-surface);
-  line-height: 1.6;
+  line-height: var(--line-height-body-md);
+  letter-spacing: -0.01em;
   -webkit-font-smoothing: antialiased;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-family-base);
+  font-family: var(--font-family-heading);
   font-weight: var(--font-weight-bold);
   color: var(--color-primary-container);
   margin: 0;
   line-height: 1.25;
 }
 
-h1 { font-size: var(--font-size-headline-xl); }
-h2 { font-size: var(--font-size-headline-lg); }
-h3 { font-size: var(--font-size-headline-md); }
-h4 { font-size: var(--font-size-title-lg); }
+h1 { 
+  font-size: var(--font-size-display); 
+  line-height: var(--line-height-display); 
+  letter-spacing: -0.02em; 
+}
+h2 { 
+  font-size: var(--font-size-headline-lg); 
+  line-height: var(--line-height-headline-lg); 
+}
+h3 { 
+  font-size: var(--font-size-headline-md); 
+  line-height: var(--line-height-headline-md); 
+}
+h4 { 
+  font-size: var(--font-size-title-lg); 
+  line-height: var(--line-height-title); 
+}
 
 p {
   margin: 0 0 1rem 0;
   color: var(--color-on-surface-variant);
+  line-height: var(--line-height-body-md);
 }
 
 p:last-child {
@@ -32,7 +47,9 @@ p:last-child {
 
 .text-gold { color: var(--color-secondary-container); }
 .text-navy { color: var(--color-primary-container); }
+.text-blue { color: var(--color-tertiary); }
 .text-muted { color: var(--color-outline); }
 .text-sm { font-size: var(--font-size-label-md); }
-.text-xs { font-size: var(--font-size-caption); }
+.text-xs { font-size: var(--font-size-label-sm); }
 .text-bold { font-weight: var(--font-weight-bold); }
+

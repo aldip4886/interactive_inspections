@@ -78,7 +78,7 @@
       ],
       "coordsByAngle": {
         "0": {
-          "x": 50.0,
+          "x": 50,
           "y": 10.8
         },
         "90": null,
@@ -91,7 +91,7 @@
       "packagingTechnique": "Balon lateks tipis, plastik klip ganda kedap air, atau kondom mini terikat benang gigi (dental floss)",
       "mainIllustration": "assets/mockup/thumb_mulut.jpg",
       "thumb": "assets/mockup/thumb_mulut.jpg",
-      "description": "Pelaku menyembunyikan paket narkotika di dalam rongga mulut (sublingual/bawah lidah, kantung bukal pipi, atau orofaring) maupun penelanan darurat (body stuffing) saat disergap petugas di area pos pemeriksaan bandara/pelabuhan.",
+      "description": "Paket kecil sabu/kokain dibungkus balon tipis atau plastik permen.",
       "modusDetail": "Metode ini lazim dilakukan oleh kurir jarak pendek atau kurir transit yang membawa muatan 10-50 gram. Bungkusan kerap diikatkan ke gigi geraham menggunakan benang nilon atau benang gigi agar mudah ditarik kembali setelah melewati gerbang pemeriksaan.",
       "findings": [
         {
@@ -126,7 +126,8 @@
         "Gunakan sarung tangan nitril medis jika perlu melakukan pemeriksaan palpasi pipi luar"
       ],
       "medicalRisk": "SANGAT TINGGI: Bahaya ruptur (pecah pembungkus) menyebabkan penyerapan transmukosa yang sangat cepat ke aliran darah otak, memicu kejang tonik-klonik akut, aritmia jantung fatal, dan koma dalam hitungan menit.",
-      "inspectionNote": "Petugas dilarang memaksa memasukkan jari ke mulut tersangka untuk mencegah gigitan refleks dan bahaya tertusuk benda tajam. Bawa segera ke fasilitas medis rujukan bila dicurigai terjadi ruptur."
+      "inspectionNote": "Petugas dilarang memaksa memasukkan jari ke mulut tersangka untuk mencegah gigitan refleks dan bahaya tertusuk benda tajam. Bawa segera ke fasilitas medis rujukan bila dicurigai terjadi ruptur.",
+      "bodyLocation": "Rongga mulut (sublingual, kantung bukal pipi, orofaring / penelanan kilat saat razia)."
     },
     {
       "id": "lambung",
@@ -144,8 +145,8 @@
       ],
       "coordsByAngle": {
         "0": {
-          "x": 52.0,
-          "y": 32.0
+          "x": 52,
+          "y": 32
         },
         "90": null,
         "180": null,
@@ -157,7 +158,7 @@
       "packagingTechnique": "Kondom lateks multilayer (3-7 lapis) dipres mesin hidrolik bertekanan tinggi, dilapis lilin parafin dan selotip medis tahan asam lambung",
       "mainIllustration": "assets/mockup/card_digestive_main.png",
       "thumb": "assets/mockup/thumb_saluran_cerna.jpg",
-      "description": "Kurir menelan puluhan hingga ratusan kapsul/pellet padat berisi narkotika murni untuk disembunyikan di lambung dan usus halus selama penerbangan rute internasional.",
+      "description": "Body packing puluhan hingga ratusan kapsul lateks berbobot 1-2 kg.",
       "modusDetail": "Subjek dipersiapkan 24-48 jam sebelum keberangkatan dengan meminum obat anti-motilitas usus (Loperamide/Imodium). Setiap kapsul berbobot 8-12 gram dengan muatan total mencapai 1 hingga 2 kilogram narkotika bernilai miliaran rupiah.",
       "findings": [
         {
@@ -192,7 +193,8 @@
         "Pengawasan ketat dokter spesialis radiologi dan forensik kepabeanan"
       ],
       "medicalRisk": "KRITIS (100/100): Pecahnya 1 kapsul saja melepaskan dosis mematikan (lethal dose) ke dalam sirkulasi darah, menyebabkan henti jantung dalam waktu kurang dari 15 menit. DILARANG MEMBERI OBAT PENCAHAR STIMULAN PAKSA!",
-      "inspectionNote": "Wajib dirujuk ke Rumah Sakit Rujukan DJBC. Petugas tidak diperkenankan melakukan intervensi medis invasif mandiri."
+      "inspectionNote": "Wajib dirujuk ke Rumah Sakit Rujukan DJBC. Petugas tidak diperkenankan melakukan intervensi medis invasif mandiri.",
+      "bodyLocation": "Saluran gastrointestinal / lambung."
     },
     {
       "id": "anal-anus",
@@ -212,7 +214,7 @@
         "0": null,
         "90": null,
         "180": {
-          "x": 50.0,
+          "x": 50,
           "y": 55.5
         },
         "270": null
@@ -223,7 +225,7 @@
       "packagingTechnique": "Bentuk silinder atau torpedo padat dibungkus kondom tebal berlapis 4-6 lapis, dilumuri gel silikon/vaselin, dan diikat tali benang bedah pengaman",
       "mainIllustration": "assets/mockup/thumb_panggul.jpg",
       "thumb": "assets/mockup/thumb_panggul.jpg",
-      "description": "Narkotika dimasukkan langsung ke dalam rektum/saluran anal melalui sfingter ani (body pushing) menggunakan pelumas agar tidak terdeteksi saat penggeledahan baju luar.",
+      "description": "Paket silinder besar berpelumas silikon, sering diikat benang penarik.",
       "modusDetail": "Paket silinder umumnya berdiameter 2-4 cm dan panjang 10-15 cm dengan bobot 100-500 gram. Kurir menahan paket ini di rongga ampula rektum selama perjalanan penerbangan atau penyeberangan feri.",
       "findings": [
         {
@@ -258,7 +260,8 @@
         "Proses evakuasi medis di bawah supervisi tenaga kesehatan rumah sakit rujukan"
       ],
       "medicalRisk": "KRITIS: Risiko perforasi usus besar / rektum yang berujung peritonitis dan syok sepsis berat. Keracunan sistemik masif bila dinding pembungkus bocor di area vaskular rektum yang kaya pembuluh darah.",
-      "inspectionNote": "Pemeriksaan rektal (colok dubur) HANYA BOLEH DILAKUKAN OLEH TENAGA MEDIS RESMI (DOKTER) di fasilitas kesehatan rujukan, bukan oleh petugas bea cukai di lapangan."
+      "inspectionNote": "Pemeriksaan rektal (colok dubur) HANYA BOLEH DILAKUKAN OLEH TENAGA MEDIS RESMI (DOKTER) di fasilitas kesehatan rujukan, bukan oleh petugas bea cukai di lapangan.",
+      "bodyLocation": "Saluran anal / rektum kurir (body pushing)."
     },
     {
       "id": "strapping-paha",
@@ -279,8 +282,8 @@
         "90": null,
         "180": null,
         "270": {
-          "x": 52.0,
-          "y": 62.0
+          "x": 52,
+          "y": 62
         }
       },
       "riskLevel": "high",
@@ -289,7 +292,7 @@
       "packagingTechnique": "Lempengan pipih dibungkus aluminium foil vakum kedap bau, dilapis busa tipis, dan dililit berlapis menggunakan lakban perekat tebal melingkari paha",
       "mainIllustration": "assets/mockup/thumb_anggota_gerak.jpg",
       "thumb": "assets/mockup/thumb_anggota_gerak.jpg",
-      "description": "Paket narkotika dikemas dalam lempengan pipih atau balok fleksibel, lalu dililitkan melingkari paha kiri dan kanan menggunakan tape/lakban perekat kuat di balik celana panjang.",
+      "description": "Lempengan sabu/heroin dipres pipih dililitkan mengelilingi paha dengan lakban cokelat / isolasi elastis.",
       "modusDetail": "Kurir dapat membawa 500 gram hingga 2 kilogram sabu di kedua paha. Pelaku biasanya mengenakan celana dalam ganda (boxer ganda) atau korset penahan untuk menyamarkan kontur tonjolan paket dari luar.",
       "findings": [
         {
@@ -323,7 +326,8 @@
         "Penggeledahan badan menyeluruh (strip search) sesuai Peraturan Direktur Jenderal Bea dan Cukai"
       ],
       "medicalRisk": "SEDANG - TINGGI: Iskemia lokal akibat lilitan lakban yang terlalu kuat memotong aliran darah vena/arteri femoralis, dermatitis kontak iritan hebat, dan lecet epidermis luas saat lakban dicabut paksa.",
-      "inspectionNote": "Petugas wajib melakukan pemeriksaan oleh personel berjenis kelamin sama di ruang tertutup dengan pencahayaan cukup dan disaksikan minimal 2 petugas."
+      "inspectionNote": "Petugas wajib melakukan pemeriksaan oleh personel berjenis kelamin sama di ruang tertutup dengan pencahayaan cukup dan disaksikan minimal 2 petugas.",
+      "bodyLocation": "Paha kiri dan kanan."
     },
     {
       "id": "strapping-betis",
@@ -342,8 +346,8 @@
       "coordsByAngle": {
         "0": null,
         "90": {
-          "x": 48.0,
-          "y": 76.0
+          "x": 40,
+          "y": 31
         },
         "180": null,
         "270": null
@@ -354,7 +358,7 @@
       "packagingTechnique": "Bungkusan pipih memanjang menyerupai pelat pelindung tulang kering, direkatkan dengan isolasi plastik elastis atau lakban hitam melingkari otot betis",
       "mainIllustration": "assets/mockup/thumb_anggota_gerak.jpg",
       "thumb": "assets/mockup/thumb_anggota_gerak.jpg",
-      "description": "Paket narkotika memanjang dililitkan di sekeliling betis atau tulang kering kaki menggunakan tape / lakban perekat, disamarkan di balik celana panjang gombrong atau sepatu bot tinggi.",
+      "description": "Paket strip memanjang dilakban rapat tertutup kaus kaki tebal dan sepatu bot / pakaian luar.",
       "modusDetail": "Metode ini memanfaatkan ruang antara tulang kering dan kain celana yang longgar. Kurir biasanya memasang paket mulai dari bawah lutut hingga tepat di atas mata kaki, berbobot 250 - 500 gram per kaki.",
       "findings": [
         {
@@ -388,7 +392,8 @@
         "Pemeriksaan sepatu bot dan kaus kaki secara terpisah melalui X-Ray mesin bagasi kabin"
       ],
       "medicalRisk": "SEDANG: Edema perifer tungkai bawah dan risiko parestesia sementara akibat kompresi nervus peroneus bila lakban dililit terlalu kencang.",
-      "inspectionNote": "Waspadai kurir menyembunyikan silet atau benda tajam di balik perban lakban sebagai upaya melukai diri atau menyerang petugas saat lakban dibuka."
+      "inspectionNote": "Waspadai kurir menyembunyikan silet atau benda tajam di balik perban lakban sebagai upaya melukai diri atau menyerang petugas saat lakban dibuka.",
+      "bodyLocation": "Otot betis dan tulang kering tungkai bawah / lengan atas sebelah kanan."
     },
     {
       "id": "strapping-perut",
@@ -408,8 +413,8 @@
         "0": null,
         "90": null,
         "180": {
-          "x": 50.0,
-          "y": 41.0
+          "x": 50,
+          "y": 41
         },
         "270": null
       },
@@ -419,7 +424,7 @@
       "packagingTechnique": "Rompi modifikasi atau puluhan paket pipih disusun bertingkat melingkari torso/abdomen, kemudian dibalut putaran penuh lakban duct-tape tebal",
       "mainIllustration": "assets/mockup/thumb_pakaian.jpg",
       "thumb": "assets/mockup/thumb_pakaian.jpg",
-      "description": "Paket narkotika dalam jumlah besar disusun melingkari perut dan pinggang kurir, lalu dililit berulang kali dengan lakban perekat tebal menyerupai korset tubuh tebal (body wrap).",
+      "description": "Rompi korset atau lempengan berat 1-2 kg dililit rapat dengan lakban bertingkat.",
       "modusDetail": "Metode ini mampu membawa muatan paling banyak pada tubuh kurir (hingga 3-4 kg). Pelaku memakai jaket tebal atau baju hangat berukuran besar (oversized) untuk menyembunyikan siluet perut yang kaku.",
       "findings": [
         {
@@ -453,7 +458,8 @@
         "Penggunaan Body Scanner bandara yang mendeteksi ketebalan material non-organik di permukaan kulit"
       ],
       "medicalRisk": "TINGGI: Restriksi pernapasan diafragma yang dapat memicu hiperventilasi, dehidrasi parah akibat penumpukan keringat di balik lakban, dan kerusakan kulit saat pelepasan.",
-      "inspectionNote": "Buka balutan lakban menggunakan gunting medis berujung tumpul (bandage scissors) agar tidak melukai kulit tersangka dan tidak merobek kemasan barang bukti."
+      "inspectionNote": "Buka balutan lakban menggunakan gunting medis berujung tumpul (bandage scissors) agar tidak melukai kulit tersangka dan tidak merobek kemasan barang bukti.",
+      "bodyLocation": "Dinding abdomen dan pinggang (torso wrap)."
     },
     {
       "id": "vagina-pembalut",
@@ -471,7 +477,7 @@
       ],
       "coordsByAngle": {
         "0": {
-          "x": 50.0,
+          "x": 50,
           "y": 52.5
         },
         "90": null,
@@ -484,7 +490,7 @@
       "packagingTechnique": "Kantong plastik pipih diselipkan di antara lapisan kapas pembalut wanita (sanitary pad) yang direkatkan kembali rapi, atau ditaruh di dalam celana dalam khusus berlapis",
       "mainIllustration": "assets/mockup/thumb_panggul.jpg",
       "thumb": "assets/mockup/thumb_panggul.jpg",
-      "description": "Narkotika disisipkan ke dalam celana dalam dengan modifikasi pembalut wanita (sanitary napkin) atau diletakkan menempel erat di lipatan genital eksternal wanita.",
+      "description": "Modifikasi pembalut wanita (sanitary pad) berlapis berisi sabu/ekstasi.",
       "modusDetail": "Kurir wanita sering beralasan sedang menstruasi untuk menghindari penggeledahan mendalam oleh petugas. Narkotika yang dibawa berkisar 100-300 gram berbentuk paket pipih presisi.",
       "findings": [
         {
@@ -518,7 +524,8 @@
         "Gunakan sarung tangan nitril medis dan alat uji tes narkotika cepat (narcotic test kit)"
       ],
       "medicalRisk": "SEDANG - TINGGI: Iritasi mukosa vulva hebat, vaginitis kimiawi bila ada kebocoran zat narkotika korosif, dan risiko infeksi bakteri saluran kemih.",
-      "inspectionNote": "Lakukan pemeriksaan secara humanis, profesional, menjunjung tinggi hak asasi manusia, serta wajib didokumentasikan dalam Berita Acara Penggeledahan Badan resmi DJBC."
+      "inspectionNote": "Lakukan pemeriksaan secara humanis, profesional, menjunjung tinggi hak asasi manusia, serta wajib didokumentasikan dalam Berita Acara Penggeledahan Badan resmi DJBC.",
+      "bodyLocation": "Lipatan genitalia / celana dalam wanita."
     },
     {
       "id": "prostetik-gips",
@@ -536,8 +543,8 @@
       ],
       "coordsByAngle": {
         "0": {
-          "x": 80.0,
-          "y": 42.0
+          "x": 80,
+          "y": 42
         },
         "90": null,
         "180": null,
@@ -549,7 +556,7 @@
       "packagingTechnique": "Dinding gips medis (plaster cast) berbahan resin fiberglass yang dilubangi membentuk rongga kedap suara dan bau, atau kompartemen rahasia kaki/tangan palsu (prosthesis)",
       "mainIllustration": "assets/mockup/thumb_lainnya.jpg",
       "thumb": "assets/mockup/thumb_lainnya.jpg",
-      "description": "Kurir berpura-pura sakit atau menyandang disabilitas fisik dengan memasang gips medis tiruan pada lengan/tungkai, atau menggunakan kaki/tangan palsu yang dimodifikasi menyimpan narkotika.",
+      "description": "Kompartemen tersembunyi resin gips/fiberglass menyembunyikan paket narkotika.",
       "modusDetail": "Sindikat memanfaatkan rasa iba petugas terhadap penumpang difabel atau cedera fisik. Gips dibuat menyerupai perban orthopedi asli di rumah sakit, tetapi berisi 500 gram hingga 1,5 kg narkotika berharga tinggi.",
       "findings": [
         {
@@ -583,7 +590,8 @@
         "Koordinasi dengan dokter bandara untuk pembongkaran gips menggunakan gergaji gips medis khusus"
       ],
       "medicalRisk": "SEDANG: Risiko cedera jaringan lunak bila gips dibongkar tanpa prosedur orthopedi yang benar, serta potensi komplikasi infeksi kulit sekunder.",
-      "inspectionNote": "Pembongkaran gips medis wajib dilakukan di hadapan dan atas rekomendasi dokter kesehatan pelabuhan/bandara untuk memastikan keselamatan fisik tersangka dan keabsahan alat bukti di persidangan."
+      "inspectionNote": "Pembongkaran gips medis wajib dilakukan di hadapan dan atas rekomendasi dokter kesehatan pelabuhan/bandara untuk memastikan keselamatan fisik tersangka dan keabsahan alat bukti di persidangan.",
+      "bodyLocation": "Gips medis palsu pada lengan/kaki atau rongga kaki/tangan palsu."
     }
   ]
 }
