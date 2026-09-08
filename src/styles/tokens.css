@@ -43,7 +43,7 @@
   --scene-viewport-bg:          radial-gradient(circle at center, #0e1e36 0%, #050911 100%);
 
   /* === TYPOGRAPHY === */
-  --font-family-base:     'Be Vietnam Pro', 'Poppins', system-ui, -apple-system, sans-serif;
+  --font-family-base:     'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   
   --font-size-display:    42px;
   --font-size-headline-xl:36px;
