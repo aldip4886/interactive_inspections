@@ -473,27 +473,37 @@ export class Modul4aView extends BaseModuleView {
         const hotspots = this.moduleData?.hotspots || [];
         if (hotspots.length === 0) return;
 
-        for (let hit of intersects) {
-          let obj = hit.object;
-          while (obj && obj !== this.vehicleGroup) {
-            if (obj.userData?.isHotspotAnchor) {
-              this.openHotspotDetail(obj.userData.hotspotId);
-              return;
+        if (intersects.length > 0) {
+          for (let hit of intersects) {
+            let obj = hit.object;
+            while (obj && obj !== this.vehicleGroup) {
+              if (obj.userData?.isHotspotAnchor) {
+                this.openHotspotDetail(obj.userData.hotspotId);
+                return;
+              }
+              obj = obj.parent;
             }
-            obj = obj.parent;
           }
 
-          // Check proximity of 3D hit point to any hotspot anchor
+          // If clicking vehicle mesh surface, open closest hotspot (or first hotspot)
+          let closestHs = hotspots[0];
+          let minDistance = Infinity;
+
           for (let hs of hotspots) {
             const anchor = this.vehicleGroup.getObjectByName(`hotspot-anchor-${hs.id}`);
             if (anchor) {
               const anchorWorldPos = new THREE.Vector3();
               anchor.getWorldPosition(anchorWorldPos);
-              if (hit.point.distanceTo(anchorWorldPos) < 2.5) {
-                this.openHotspotDetail(hs.id);
-                return;
+              const dist = intersects[0].point.distanceTo(anchorWorldPos);
+              if (dist < minDistance) {
+                minDistance = dist;
+                closestHs = hs;
               }
             }
+          }
+
+          if (closestHs) {
+            this.openHotspotDetail(closestHs.id);
           }
         }
       });
@@ -639,13 +649,16 @@ export class Modul4aView extends BaseModuleView {
         const x = (worldVec.x * 0.5 + 0.5) * width;
         const y = (-worldVec.y * 0.5 + 0.5) * height;
 
-        // Check if inside canvas frustum
-        const isVisible = worldVec.z < 1 && x >= -40 && x <= width + 40 && y >= -40 && y <= height + 40;
+        // Check if inside camera view frustum
+        const isVisible = worldVec.z < 1;
 
         if (isVisible) {
+          const clampedX = Math.max(30, Math.min(width - 30, x));
+          const clampedY = Math.max(30, Math.min(height - 30, y));
+
           pin.style.display = 'flex';
-          pin.style.left = `${x}px`;
-          pin.style.top = `${y}px`;
+          pin.style.left = `${clampedX}px`;
+          pin.style.top = `${clampedY}px`;
         } else {
           pin.style.display = 'none';
         }
@@ -791,15 +804,15 @@ export class Modul4aView extends BaseModuleView {
   }
 
   openHotspotDetail(hotspotId) {
-    const hotspots = this.moduleData.hotspots || [];
-    const hs = hotspots.find(h => h.id === hotspotId);
+    const hotspots = this.moduleData?.hotspots || [];
+    const hs = hotspots.find(h => h.id === hotspotId) || hotspots[0];
     if (!hs) return;
 
-    this.currentHotspotId = hotspotId;
-    this.visitedHotspots.add(hotspotId);
+    this.currentHotspotId = hs.id;
+    this.visitedHotspots.add(hs.id);
     this.isModalOpen = true;
 
-    courseProgress.markHotspotVisited('modul4a', hotspotId, hotspots.length);
+    courseProgress.markHotspotVisited('modul4a', hs.id, hotspots.length);
     this.updateProgressUI();
 
     this.renderModalContent(hs, hotspots);
@@ -808,6 +821,7 @@ export class Modul4aView extends BaseModuleView {
     if (overlay) {
       overlay.classList.remove('hidden');
       overlay.style.display = 'flex';
+      overlay.style.zIndex = '9999';
     }
 
     this.renderHotspots();
