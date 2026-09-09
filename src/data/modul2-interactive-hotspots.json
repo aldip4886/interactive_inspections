@@ -53,6 +53,7 @@
       "categoryId": "koper_tas",
       "categoryLabel": "Koper & Tas Bawaan",
       "color": "#E53E3E",
+      "position": { "x": 36.0, "y": 26.0 },
       "riskLevel": "critical",
       "riskScore": 90,
       "drugTypes": "Sabu (Methamphetamine), Heroin lempengan, Kokain murni, Ketamine",
@@ -76,7 +77,7 @@
         }
       ],
       "indicators": [
-        "Citra X-Ray memperlihatkan bayangan oranye pekat (materi organik) tebal berlebih pada dinding/alas tas",
+        "Citra X-Ray memperlihatkan bayangan oranye pekat (materi organik) tebal berlebih pada dinding tas",
         "Dinding atau alas tas terasa kaku, tebal tidak wajar, dan tidak lentur saat ditekuk",
         "Bobot tas tangan terasa berat tidak seimbang meskipun dalam keadaan kosong",
         "Jahitan furing dalam tas terlihat ada bekas jahitan ulang manual yang tidak simetris"
@@ -101,6 +102,7 @@
       "categoryId": "personal_items",
       "categoryLabel": "Pouch Personal Items",
       "color": "#1890FF",
+      "position": { "x": 65.0, "y": 26.0 },
       "riskLevel": "high",
       "riskScore": 85,
       "drugTypes": "Liquid Meth (Sabu Cair), Ketamine cair, GHB, Ekstasi cair",
@@ -148,6 +150,7 @@
       "categoryId": "buku_dokumen",
       "categoryLabel": "Buku & Kitab",
       "color": "#38A169",
+      "position": { "x": 36.0, "y": 52.0 },
       "riskLevel": "high",
       "riskScore": 80,
       "drugTypes": "Sabu kristal, Heroin, Kertas Dewa (Paper Drug / LSD blotter), Cocaine",
@@ -195,6 +198,7 @@
       "categoryId": "makanan_snack",
       "categoryLabel": "Makanan & Snack",
       "color": "#F5A623",
+      "position": { "x": 57.5, "y": 52.0 },
       "riskLevel": "warning",
       "riskScore": 75,
       "drugTypes": "Pil Ekstasi (MDMA), Sabu butiran kristal, Fentanyl tablet, Happy Five (H5)",
@@ -242,6 +246,7 @@
       "categoryId": "makanan_snack",
       "categoryLabel": "Makanan & Snack",
       "color": "#F5A623",
+      "position": { "x": 70.0, "y": 54.0 },
       "riskLevel": "medium",
       "riskScore": 70,
       "drugTypes": "Sabu serbuk, Heroin bubuk, Ekstasi bubuk, Liquid Meth dalam kaleng sarden",
@@ -289,6 +294,7 @@
       "categoryId": "sepatu_footwear",
       "categoryLabel": "Sepatu & Footwear",
       "color": "#E53E3E",
+      "position": { "x": 43.0, "y": 74.0 },
       "riskLevel": "critical",
       "riskScore": 88,
       "drugTypes": "Sabu kristal, Heroin lempengan, Pil Ekstasi, Ketamine",
@@ -302,7 +308,7 @@
           "thumb": "assets/images/hotspots/hs_sardine_can_false.png",
           "full": "assets/images/hotspots/hs_sardine_can_false.png",
           "caption": "Pembongkaran Sol Karet Sepatu Menampakkan Balok Sabu Pres",
-          "tag": "Barang Bukti Sitaan"
+          "tag": "Dokumentasi Penindakan"
         },
         {
           "thumb": "assets/images/central/m2_luggage_xray.png",

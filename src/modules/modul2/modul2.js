@@ -67,23 +67,23 @@ export class Modul2View extends BaseModuleView {
           </div>
 
           <!-- Central Inspection Viewport Scene -->
-          <div class="scene-viewport" style="position:relative; width:100%; min-height:calc(100vh - 120px); display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; background:#030F26; padding:20px 0; overflow:hidden;">
+          <div class="scene-viewport" style="position:relative; width:100%; min-height:calc(100vh - 120px); display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; background:#FFFFFF; padding:20px 0; overflow:hidden;">
             
             <!-- View Mode Switcher Pill (Centered Above Main Image) -->
-            <div class="view-mode-switcher-pill" style="display:inline-flex; align-items:center; justify-content:center; gap:6px; background:rgba(3,15,38,0.92); padding:5px 10px; border-radius:24px; border:1px solid rgba(245,166,35,0.4); margin:0 auto 16px auto; z-index:10; box-shadow:0 4px 20px rgba(0,0,0,0.6);">
-              <button id="btn-view-xray" class="mode-pill-btn active" style="padding:6px 18px; border-radius:20px; border:none; background:#F5A623; color:#030F26; font-size:12px; font-weight:700; cursor:pointer; transition:all 0.2s ease;">
+            <div class="view-mode-switcher-pill" style="display:inline-flex; align-items:center; justify-content:center; gap:6px; background:#F8FAFC; padding:6px 12px; border-radius:24px; border:1px solid #E2E8F0; margin:0 auto 16px auto; z-index:10; box-shadow:0 2px 10px rgba(0,0,0,0.06);">
+              <button id="btn-view-xray" class="mode-pill-btn active" style="padding:6px 18px; border-radius:20px; border:none; background:#F5A623; color:#FFFFFF; font-size:12px; font-weight:700; cursor:pointer; transition:all 0.2s ease;">
                 🔍 X-Ray Scanner
               </button>
-              <button id="btn-view-normal" class="mode-pill-btn" style="padding:6px 18px; border-radius:20px; border:none; background:transparent; color:#CBD5E1; font-size:12px; font-weight:600; cursor:pointer; transition:all 0.2s ease;">
+              <button id="btn-view-normal" class="mode-pill-btn" style="padding:6px 18px; border-radius:20px; border:none; background:transparent; color:#64748B; font-size:12px; font-weight:600; cursor:pointer; transition:all 0.2s ease;">
                 👜 Tampak Normal
               </button>
             </div>
 
             <!-- Central Main Image Container with Hotspots -->
-            <div class="scene-container" style="position:relative; max-width:850px; width:100%; margin:0 auto; display:flex; justify-content:center; align-items:center;">
+            <div class="scene-container" style="position:relative; max-width:850px; width:100%; margin:0 auto; display:flex; justify-content:center; align-items:center; background:#FFFFFF;">
               <img id="m2-central-image" src="assets/images/central/m2_luggage_xray.png" 
                    alt="X-Ray Scanner Koper Bagasi Bawaan" 
-                   style="max-height:76vh; max-width:100%; object-fit:contain; filter:drop-shadow(0 10px 30px rgba(0,0,0,0.7)); display:block; margin:0 auto;" />
+                   style="max-height:76vh; max-width:100%; object-fit:contain; filter:drop-shadow(0 4px 20px rgba(0,0,0,0.12)); display:block; margin:0 auto;" />
               
               <!-- Hotspots Interactive Layer -->
               <div id="m2-hotspots-layer" class="hotspots-layer" style="position:absolute; inset:0;"></div>
@@ -251,10 +251,10 @@ export class Modul2View extends BaseModuleView {
       btnXray.addEventListener('click', () => {
         btnXray.classList.add('active');
         btnXray.style.background = '#F5A623';
-        btnXray.style.color = '#030F26';
+        btnXray.style.color = '#FFFFFF';
         btnNormal.classList.remove('active');
         btnNormal.style.background = 'transparent';
-        btnNormal.style.color = '#CBD5E1';
+        btnNormal.style.color = '#64748B';
         this.currentViewMode = 'xray';
         centralImg.src = 'assets/images/central/m2_luggage_xray.png';
         this.renderHotspots();
@@ -263,10 +263,10 @@ export class Modul2View extends BaseModuleView {
       btnNormal.addEventListener('click', () => {
         btnNormal.classList.add('active');
         btnNormal.style.background = '#F5A623';
-        btnNormal.style.color = '#030F26';
+        btnNormal.style.color = '#FFFFFF';
         btnXray.classList.remove('active');
         btnXray.style.background = 'transparent';
-        btnXray.style.color = '#CBD5E1';
+        btnXray.style.color = '#64748B';
         this.currentViewMode = 'normal';
         centralImg.src = 'assets/images/central/m2_luggage_normal.png';
         this.renderHotspots();
@@ -287,29 +287,44 @@ export class Modul2View extends BaseModuleView {
         return;
       }
 
-      const btn = document.createElement('button');
-      btn.className = `hotspot-pin ${hs.id === this.currentHotspotId ? 'active' : ''}`;
-      btn.dataset.id = hs.id;
-      btn.style.left = `${hs.position.x}%`;
-      btn.style.top = `${hs.position.y}%`;
-      btn.style.position = 'absolute';
-      btn.style.transform = 'translate(-50%, -50%)';
+      const isVisited = this.visitedHotspots.has(hs.id);
+      const isActive = this.isModalOpen && hs.id === this.currentHotspotId;
 
-      const color = hs.color || '#F5A623';
+      const pin = document.createElement('div');
+      pin.className = `body-hotspot-pin ${isActive ? 'active' : ''} ${isVisited ? 'visited' : ''}`;
+      pin.dataset.id = hs.id;
+      pin.style.left = `${hs.position.x}%`;
+      pin.style.top = `${hs.position.y}%`;
+      pin.style.position = 'absolute';
+      pin.style.transform = 'translate(-50%, -50%)';
 
-      btn.innerHTML = `
-        <div class="hotspot-pulse" style="border-color: ${color};"></div>
-        <div class="hotspot-core" style="background: ${color};">
-          <span class="hotspot-num">${hs.num || (idx + 1)}</span>
+      const num = hs.badgeNum || hs.num || (idx + 1);
+      const label = hs.shortName || hs.label || `Modus #${num}`;
+
+      pin.innerHTML = `
+        <div class="pin-point">
+          <div class="pin-pulse-ring"></div>
         </div>
-        <div class="hotspot-tooltip">${hs.shortName || hs.label}</div>
+        <div class="pin-tooltip" role="tooltip">
+          <span class="pin-tooltip-num">${num}</span>
+          <span class="pin-tooltip-name">${label}</span>
+        </div>
       `;
 
-      btn.addEventListener('click', () => {
+      pin.setAttribute('tabindex', '0');
+      pin.setAttribute('role', 'button');
+      pin.setAttribute('aria-label', `Hotspot ${num}: ${label}`);
+
+      pin.addEventListener('pointerenter', () => pin.classList.add('is-hovered'));
+      pin.addEventListener('pointerleave', () => pin.classList.remove('is-hovered'));
+
+      pin.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
         this.openHotspotDetail(hs.id);
       });
 
-      layerEl.appendChild(btn);
+      layerEl.appendChild(pin);
     });
   }
 
@@ -428,6 +443,7 @@ export class Modul2View extends BaseModuleView {
       closeBtn.addEventListener('click', () => {
         overlay.classList.add('hidden');
         this.isModalOpen = false;
+        this.renderHotspots();
       });
     }
 
@@ -437,6 +453,7 @@ export class Modul2View extends BaseModuleView {
         if (e.target === overlay) {
           overlay.classList.add('hidden');
           this.isModalOpen = false;
+          this.renderHotspots();
         }
       });
     }
