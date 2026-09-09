@@ -6,7 +6,6 @@ import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
-import '@google/model-viewer';
 
 export class Modul4aView extends BaseModuleView {
   constructor(container) {
@@ -118,28 +117,14 @@ export class Modul4aView extends BaseModuleView {
                 </div>
               </div>
 
-              <!-- Central Active 3D Vehicle Container with Google Model-Viewer & Hotspots Layer -->
+              <!-- Central Active 3D Vehicle Container with Hotspots Layer -->
               <div class="body-image-container" id="vehicle-image-container" style="max-width:920px; width:100%; aspect-ratio: auto; margin:0 auto; position:relative;">
                 <div id="m4a-3d-canvas-wrapper" style="width:100%; height:62vh; min-height:420px; position:relative; display:flex; align-items:center; justify-content:center;">
-                  <model-viewer id="m4a-model-viewer"
-                    src="assets/models/ford_ranger_next-gen_2023_sport.glb"
-                    alt="Ford Ranger Next-Gen 2023 Sport"
-                    camera-controls
-                    auto-rotate
-                    rotation-per-second="18deg"
-                    shadow-intensity="1.5"
-                    shadow-softness="0.8"
-                    exposure="1.1"
-                    camera-orbit="45deg 75deg 2.84m"
-                    field-of-view="30deg"
-                    disable-zoom
-                    style="width:100%; height:100%; --poster-color: transparent; background-color: transparent; position:absolute; inset:0; z-index:5;">
-                  </model-viewer>
                   <img id="m4a-central-image" src="assets/images/central/m4a_suv_cutaway.png" alt="Ford Ranger Next-Gen 2023 Sport" class="main-body-img" style="display:none; max-height:60vh; object-fit:contain; filter:drop-shadow(0 12px 32px rgba(0,37,59,0.16)); pointer-events:none;" />
-                  <div id="three-canvas-container" style="width:100%; height:100%; position:absolute; inset:0; z-index:1; display:none;"></div>
+                  <div id="three-canvas-container" style="width:100%; height:100%; position:absolute; inset:0; z-index:2;"></div>
                 </div>
                 <div class="body-pedestal-platform"></div>
-                <div id="m4a-hotspots-layer" class="hotspots-layer" style="z-index:10; display:none;"></div>
+                <div id="m4a-hotspots-layer" class="hotspots-layer" style="z-index:10;"></div>
               </div>
 
               <!-- Floating HUD Segmented Pill Controls Dock (Center Bottom) -->
@@ -555,124 +540,66 @@ export class Modul4aView extends BaseModuleView {
       });
     });
 
-    // Auto-Rotate Button Toggle for <model-viewer>
+    // Auto-Rotate Button Toggle
     const btnRotate = this.container.querySelector('#btn-rotate-3d');
     btnRotate?.addEventListener('click', () => {
-      const modelViewer = this.container.querySelector('#m4a-model-viewer');
       this.isAutoRotating = !this.isAutoRotating;
-      if (modelViewer) {
-        if (this.isAutoRotating) {
-          modelViewer.setAttribute('auto-rotate', '');
-        } else {
-          modelViewer.removeAttribute('auto-rotate');
-        }
-      }
       btnRotate.classList.toggle('active', this.isAutoRotating);
     });
   }
 
   renderHotspots() {
-    if (!this.moduleData) return;
-    const hotspots = this.moduleData.hotspots || [];
-
-    // 1. Google Model-Viewer Hotspots
-    const modelViewer = this.container.querySelector('#m4a-model-viewer');
-    if (modelViewer) {
-      // Clear previous model-viewer hotspot slots
-      modelViewer.querySelectorAll('.model-viewer-hotspot').forEach(el => el.remove());
-
-      hotspots.forEach((hs, idx) => {
-        if (this.activeFilter !== 'all' && hs.category !== this.activeFilter && hs.categoryId !== this.activeFilter) {
-          return;
-        }
-
-        const isVisited = this.visitedHotspots.has(hs.id);
-        const isActive = this.isModalOpen && hs.id === this.currentHotspotId;
-        const num = idx + 1;
-        const label = hs.label || `Hotspot #${num}`;
-
-        const pin = document.createElement('button');
-        pin.className = `body-hotspot-pin model-viewer-hotspot ${isActive ? 'active' : ''} ${isVisited ? 'visited' : ''}`;
-        pin.slot = `hotspot-${hs.id}`;
-        pin.dataset.position = hs.modelViewerPos || `${hs.worldPos?.x || 0}m ${hs.worldPos?.y || 0}m ${hs.worldPos?.z || 0}m`;
-        pin.dataset.normal = hs.modelViewerNormal || '0m 1m 0m';
-        pin.dataset.visibilityAttribute = 'visible';
-        pin.dataset.id = hs.id;
-
-        pin.innerHTML = `
-          <div class="pin-point">
-            <div class="pin-pulse-ring"></div>
-          </div>
-          <div class="pin-tooltip" role="tooltip">
-            <span class="pin-tooltip-num">${num}</span>
-            <span class="pin-tooltip-name">${label}</span>
-          </div>
-        `;
-
-        pin.setAttribute('aria-label', `Hotspot ${num}: ${label}`);
-
-        pin.addEventListener('pointerenter', () => pin.classList.add('is-hovered'));
-        pin.addEventListener('pointerleave', () => pin.classList.remove('is-hovered'));
-
-        pin.addEventListener('click', (e) => {
-          e.stopPropagation();
-          this.openHotspotDetail(hs.id);
-        });
-
-        modelViewer.appendChild(pin);
-      });
-    }
-
-    // 2. Fallback Three.js Hotspots Layer
     const layerEl = this.container.querySelector('#m4a-hotspots-layer');
-    if (layerEl) {
-      layerEl.innerHTML = '';
-      hotspots.forEach((hs, idx) => {
-        if (this.activeFilter !== 'all' && hs.category !== this.activeFilter && hs.categoryId !== this.activeFilter) {
-          return;
-        }
+    if (!layerEl || !this.moduleData) return;
 
-        const isVisited = this.visitedHotspots.has(hs.id);
-        const isActive = this.isModalOpen && hs.id === this.currentHotspotId;
+    const hotspots = this.moduleData.hotspots || [];
+    layerEl.innerHTML = '';
 
-        const pin = document.createElement('div');
-        pin.className = `body-hotspot-pin ${isActive ? 'active' : ''} ${isVisited ? 'visited' : ''}`;
-        pin.dataset.id = hs.id;
+    hotspots.forEach((hs, idx) => {
+      if (this.activeFilter !== 'all' && hs.category !== this.activeFilter && hs.categoryId !== this.activeFilter) {
+        return;
+      }
 
-        const coords = hs.position || { x: 50, y: 50 };
-        pin.style.left = `${coords.x}%`;
-        pin.style.top = `${coords.y}%`;
-        pin.style.position = 'absolute';
-        pin.style.transform = 'translate(-50%, -50%)';
+      const isVisited = this.visitedHotspots.has(hs.id);
+      const isActive = this.isModalOpen && hs.id === this.currentHotspotId;
 
-        const num = hs.num || (idx + 1);
-        const label = hs.label || `Hotspot #${num}`;
+      const pin = document.createElement('div');
+      pin.className = `body-hotspot-pin ${isActive ? 'active' : ''} ${isVisited ? 'visited' : ''}`;
+      pin.dataset.id = hs.id;
 
-        pin.innerHTML = `
-          <div class="pin-point">
-            <div class="pin-pulse-ring"></div>
-          </div>
-          <div class="pin-tooltip" role="tooltip">
-            <span class="pin-tooltip-num">${num}</span>
-            <span class="pin-tooltip-name">${label}</span>
-          </div>
-        `;
+      const coords = hs.position || { x: 50, y: 50 };
+      pin.style.left = `${coords.x}%`;
+      pin.style.top = `${coords.y}%`;
+      pin.style.position = 'absolute';
+      pin.style.transform = 'translate(-50%, -50%)';
 
-        pin.setAttribute('tabindex', '0');
-        pin.setAttribute('role', 'button');
-        pin.setAttribute('aria-label', `Hotspot ${num}: ${label}`);
+      const num = hs.num || (idx + 1);
+      const label = hs.label || `Hotspot #${num}`;
 
-        pin.addEventListener('pointerenter', () => pin.classList.add('is-hovered'));
-        pin.addEventListener('pointerleave', () => pin.classList.remove('is-hovered'));
+      pin.innerHTML = `
+        <div class="pin-point">
+          <div class="pin-pulse-ring"></div>
+        </div>
+        <div class="pin-tooltip" role="tooltip">
+          <span class="pin-tooltip-num">${num}</span>
+          <span class="pin-tooltip-name">${label}</span>
+        </div>
+      `;
 
-        pin.addEventListener('click', (e) => {
-          e.stopPropagation();
-          this.openHotspotDetail(hs.id);
-        });
+      pin.setAttribute('tabindex', '0');
+      pin.setAttribute('role', 'button');
+      pin.setAttribute('aria-label', `Hotspot ${num}: ${label}`);
 
-        layerEl.appendChild(pin);
+      pin.addEventListener('pointerenter', () => pin.classList.add('is-hovered'));
+      pin.addEventListener('pointerleave', () => pin.classList.remove('is-hovered'));
+
+      pin.addEventListener('click', (e) => {
+        e.stopPropagation();
+        this.openHotspotDetail(hs.id);
       });
-    }
+
+      layerEl.appendChild(pin);
+    });
   }
 
   openHotspotDetail(hotspotId) {
