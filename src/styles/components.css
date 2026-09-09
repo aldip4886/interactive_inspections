@@ -462,11 +462,11 @@
 
 .beranda-hero-title {
   font-size: var(--font-size-headline-lg);
-  font-weight: 700;
-  color: #FFFFFF !important;
+  font-weight: 800;
+  color: #FDC003 !important;
   line-height: var(--line-height-headline-lg);
   letter-spacing: -0.02em;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.85), 0 0 20px rgba(253, 192, 3, 0.3);
   margin: 0;
 }
 
