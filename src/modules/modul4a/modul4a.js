@@ -525,6 +525,8 @@ export class Modul4aView extends BaseModuleView {
   init3DHotspotAnchors() {
     if (!this.vehicleGroup || !this.moduleData?.hotspots) return;
 
+    this.vehicleGroup.updateMatrixWorld(true);
+
     // Clear previous 3D hotspot anchors from vehicleGroup
     const existingAnchors = [];
     this.vehicleGroup.traverse(child => {
@@ -537,20 +539,48 @@ export class Modul4aView extends BaseModuleView {
     const hotspots = this.moduleData.hotspots || [];
 
     hotspots.forEach(hs => {
-      const wp = hs.worldPos || { x: 0, y: 0, z: 0 };
+      const wp = hs.worldPos || { x: 1.15, y: 0.35, z: 0.0 };
 
-      // Create 3D Hotspot Object attached directly to vehicleGroup GLB model tree
       const anchorGroup = new THREE.Group();
       anchorGroup.name = `hotspot-anchor-${hs.id}`;
 
-      // Surface raycast to snap anchor directly onto exact GLB hood mesh surface
+      // Candidates to locate hood surface regardless of model axis orientation
+      const candidates = [
+        new THREE.Vector3(wp.x, wp.y, wp.z),
+        new THREE.Vector3(1.15, 0.35, 0.0),
+        new THREE.Vector3(-1.15, 0.35, 0.0),
+        new THREE.Vector3(0.0, 0.35, 1.15),
+        new THREE.Vector3(0.0, 0.35, -1.15)
+      ];
+
+      let bestLocalHit = null;
+      let highestY = -Infinity;
       const surfaceRaycaster = new THREE.Raycaster();
-      const downDir = new THREE.Vector3(0, -1, 0);
-      const rayStart = new THREE.Vector3(wp.x, wp.y + 2.0, wp.z);
-      surfaceRaycaster.set(rayStart, downDir);
-      const hits = surfaceRaycaster.intersectObjects(this.vehicleGroup.children, true);
-      if (hits.length > 0) {
-        anchorGroup.position.copy(hits[0].point);
+
+      for (let cand of candidates) {
+        // Local ray start 2.0 units above candidate, shooting straight down (-Y)
+        const localRayStart = new THREE.Vector3(cand.x, cand.y + 2.0, cand.z);
+        const localRayDir = new THREE.Vector3(0, -1, 0);
+
+        // Convert local ray to world space
+        const worldRayStart = localRayStart.clone().applyMatrix4(this.vehicleGroup.matrixWorld);
+        const worldRayDir = localRayDir.clone().transformDirection(this.vehicleGroup.matrixWorld).normalize();
+
+        surfaceRaycaster.set(worldRayStart, worldRayDir);
+        const hits = surfaceRaycaster.intersectObjects(this.vehicleGroup.children, true);
+
+        for (let hit of hits) {
+          const localP = this.vehicleGroup.worldToLocal(hit.point.clone());
+          // Must hit top exterior metal surface of hood/body (Y > 0.1)
+          if (localP.y > 0.1 && localP.y > highestY) {
+            highestY = localP.y;
+            bestLocalHit = localP;
+          }
+        }
+      }
+
+      if (bestLocalHit) {
+        anchorGroup.position.copy(bestLocalHit);
       } else {
         anchorGroup.position.set(wp.x, wp.y, wp.z);
       }
@@ -566,7 +596,7 @@ export class Modul4aView extends BaseModuleView {
       const material = new THREE.MeshBasicMaterial({
         color: 0xfdbb24,
         transparent: true,
-        opacity: 0.8
+        opacity: 0.85
       });
       const markerMesh = new THREE.Mesh(geometry, material);
       markerMesh.name = `marker-mesh-${hs.id}`;
