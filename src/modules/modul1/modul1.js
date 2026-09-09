@@ -201,7 +201,7 @@ export class Modul1View extends BaseModuleView {
               <span class="tab-label">Foto Real</span>
             </button>
             <button class="tab-btn" data-tab="tab-detection" title="Halaman 3: Ciri Pelaku & SOP">
-              <span class="tab-label">SOP & Deteksi</span>
+              <span class="tab-label">Ciri Pelaku & SOP</span>
             </button>
             <button class="tab-btn" data-tab="tab-risk" title="Halaman 4: Indikator Risiko">
               <span class="tab-label">Indikator Risiko</span>
