@@ -427,6 +427,7 @@ export class Modul4aView extends BaseModuleView {
             model.scale.set(scale, scale, scale);
 
             this.vehicleGroup.add(model);
+            this.init3DHotspotAnchors();
             if (fallbackImg) fallbackImg.style.display = 'none';
           },
           undefined,
@@ -438,6 +439,30 @@ export class Modul4aView extends BaseModuleView {
       };
 
       loadModel(0);
+
+      // Raycasting for direct clicks on 3D hotspot objects in scene
+      const raycaster = new THREE.Raycaster();
+      const mouse = new THREE.Vector2();
+      container.addEventListener('click', (e) => {
+        if (!this.threeCamera || !this.vehicleGroup) return;
+        const rect = container.getBoundingClientRect();
+        mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+        mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+
+        raycaster.setFromCamera(mouse, this.threeCamera);
+        const intersects = raycaster.intersectObjects(this.vehicleGroup.children, true);
+
+        for (let hit of intersects) {
+          let obj = hit.object;
+          while (obj && obj !== this.vehicleGroup) {
+            if (obj.userData?.isHotspotAnchor) {
+              this.openHotspotDetail(obj.userData.hotspotId);
+              return;
+            }
+            obj = obj.parent;
+          }
+        }
+      });
 
       // Animation loop
       const animate = () => {
@@ -479,6 +504,49 @@ export class Modul4aView extends BaseModuleView {
     }
   }
 
+  init3DHotspotAnchors() {
+    if (!this.vehicleGroup || !this.moduleData?.hotspots) return;
+
+    // Clear previous 3D hotspot anchors from vehicleGroup
+    const existingAnchors = [];
+    this.vehicleGroup.traverse(child => {
+      if (child.userData?.isHotspotAnchor) {
+        existingAnchors.push(child);
+      }
+    });
+    existingAnchors.forEach(child => child.parent?.remove(child));
+
+    const hotspots = this.moduleData.hotspots || [];
+
+    hotspots.forEach(hs => {
+      const wp = hs.worldPos || { x: 0, y: 0, z: 0 };
+
+      // Create 3D Hotspot Object attached directly to vehicleGroup GLB model tree
+      const anchorGroup = new THREE.Group();
+      anchorGroup.name = `hotspot-anchor-${hs.id}`;
+      anchorGroup.position.set(wp.x, wp.y, wp.z);
+      anchorGroup.userData = {
+        isHotspotAnchor: true,
+        hotspotId: hs.id,
+        label: hs.label
+      };
+
+      // Visual 3D marker inside scene
+      const geometry = new THREE.SphereGeometry(0.04, 16, 16);
+      const material = new THREE.MeshBasicMaterial({
+        color: 0xfdbb24,
+        transparent: true,
+        opacity: 0.8
+      });
+      const markerMesh = new THREE.Mesh(geometry, material);
+      markerMesh.name = `marker-mesh-${hs.id}`;
+      anchorGroup.add(markerMesh);
+
+      // Add 3D hotspot object directly to vehicleGroup mesh hierarchy
+      this.vehicleGroup.add(anchorGroup);
+    });
+  }
+
   updateHotspotPositions3D() {
     if (!this.threeCamera || !this.container || !this.vehicleGroup) return;
     const container = this.container.querySelector('#m4a-3d-canvas-wrapper');
@@ -492,28 +560,25 @@ export class Modul4aView extends BaseModuleView {
     if (!layerEl) return;
 
     const pins = layerEl.querySelectorAll('.body-hotspot-pin');
-    const hotspots = this.moduleData?.hotspots || [];
+    const worldVec = new THREE.Vector3();
 
     pins.forEach(pin => {
       const hsId = pin.dataset.id;
-      const hs = hotspots.find(h => h.id === hsId);
-      if (!hs) return;
+      const anchor = this.vehicleGroup.getObjectByName(`hotspot-anchor-${hsId}`);
 
-      if (hs.worldPos) {
-        const wp = hs.worldPos;
-        const v = new THREE.Vector3(wp.x, wp.y, wp.z);
-        // Apply vehicle group transformation (rotation, position, scale)
-        v.applyMatrix4(this.vehicleGroup.matrixWorld);
+      if (anchor) {
+        // Query exact world space position of embedded 3D hotspot object
+        anchor.getWorldPosition(worldVec);
 
-        // Project vector to Normalized Device Coordinates (-1 to +1)
-        v.project(this.threeCamera);
+        // Project world vector to Normalized Device Coordinates (-1 to +1)
+        worldVec.project(this.threeCamera);
 
         // Convert NDC to screen pixel coordinates relative to container
-        const x = (v.x * 0.5 + 0.5) * width;
-        const y = (-v.y * 0.5 + 0.5) * height;
+        const x = (worldVec.x * 0.5 + 0.5) * width;
+        const y = (-worldVec.y * 0.5 + 0.5) * height;
 
         // Check if inside canvas frustum
-        const isVisible = v.z < 1 && x >= -40 && x <= width + 40 && y >= -40 && y <= height + 40;
+        const isVisible = worldVec.z < 1 && x >= -40 && x <= width + 40 && y >= -40 && y <= height + 40;
 
         if (isVisible) {
           pin.style.display = 'flex';
