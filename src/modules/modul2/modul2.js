@@ -69,24 +69,24 @@ export class Modul2View extends BaseModuleView {
           <!-- Central Inspection Viewport Scene -->
           <div class="scene-viewport" style="position:relative; width:100%; min-height:calc(100vh - 120px); display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; background:#FFFFFF; padding:20px 0; overflow:hidden;">
             
-            <!-- View Mode Switcher Pill (Centered Above Main Image) -->
-            <div class="view-mode-switcher-pill" style="display:inline-flex; align-items:center; justify-content:center; gap:6px; background:#F8FAFC; padding:6px 12px; border-radius:24px; border:1px solid #E2E8F0; margin:0 auto 16px auto; z-index:10; box-shadow:0 2px 10px rgba(0,0,0,0.06);">
+            <!-- Central Main Image Container with Hotspots -->
+            <div class="scene-container" style="position:relative; max-width:850px; width:100%; margin:0 auto; display:flex; justify-content:center; align-items:center; background:#FFFFFF;">
+              <img id="m2-central-image" src="assets/images/central/m2_luggage_xray.png" 
+                   alt="X-Ray Scanner Koper Bagasi Bawaan" 
+                   style="max-height:72vh; max-width:100%; object-fit:contain; filter:drop-shadow(0 4px 20px rgba(0,0,0,0.12)); display:block; margin:0 auto;" />
+              
+              <!-- Hotspots Interactive Layer -->
+              <div id="m2-hotspots-layer" class="hotspots-layer" style="position:absolute; inset:0;"></div>
+            </div>
+
+            <!-- View Mode Switcher Pill (Centered Below Main Image) -->
+            <div class="view-mode-switcher-pill" style="display:inline-flex; align-items:center; justify-content:center; gap:6px; background:#F8FAFC; padding:6px 12px; border-radius:24px; border:1px solid #E2E8F0; margin:16px auto 0 auto; z-index:10; box-shadow:0 2px 10px rgba(0,0,0,0.06);">
               <button id="btn-view-xray" class="mode-pill-btn active" style="padding:6px 18px; border-radius:20px; border:none; background:#F5A623; color:#FFFFFF; font-size:12px; font-weight:700; cursor:pointer; transition:all 0.2s ease;">
                 🔍 X-Ray Scanner
               </button>
               <button id="btn-view-normal" class="mode-pill-btn" style="padding:6px 18px; border-radius:20px; border:none; background:transparent; color:#64748B; font-size:12px; font-weight:600; cursor:pointer; transition:all 0.2s ease;">
                 👜 Tampak Normal
               </button>
-            </div>
-
-            <!-- Central Main Image Container with Hotspots -->
-            <div class="scene-container" style="position:relative; max-width:850px; width:100%; margin:0 auto; display:flex; justify-content:center; align-items:center; background:#FFFFFF;">
-              <img id="m2-central-image" src="assets/images/central/m2_luggage_xray.png" 
-                   alt="X-Ray Scanner Koper Bagasi Bawaan" 
-                   style="max-height:76vh; max-width:100%; object-fit:contain; filter:drop-shadow(0 4px 20px rgba(0,0,0,0.12)); display:block; margin:0 auto;" />
-              
-              <!-- Hotspots Interactive Layer -->
-              <div id="m2-hotspots-layer" class="hotspots-layer" style="position:absolute; inset:0;"></div>
             </div>
           </div>
         </div>
@@ -293,8 +293,10 @@ export class Modul2View extends BaseModuleView {
       const pin = document.createElement('div');
       pin.className = `body-hotspot-pin ${isActive ? 'active' : ''} ${isVisited ? 'visited' : ''}`;
       pin.dataset.id = hs.id;
-      pin.style.left = `${hs.position.x}%`;
-      pin.style.top = `${hs.position.y}%`;
+      
+      const coords = (hs.coordsByView && hs.coordsByView[this.currentViewMode]) || hs.position;
+      pin.style.left = `${coords.x}%`;
+      pin.style.top = `${coords.y}%`;
       pin.style.position = 'absolute';
       pin.style.transform = 'translate(-50%, -50%)';
 

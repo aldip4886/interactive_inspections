@@ -54,6 +54,10 @@
       "categoryLabel": "Koper & Tas Bawaan",
       "color": "#E53E3E",
       "position": { "x": 36.0, "y": 26.0 },
+      "coordsByView": {
+        "xray": { "x": 36.0, "y": 26.0 },
+        "normal": { "x": 35.0, "y": 30.0 }
+      },
       "riskLevel": "critical",
       "riskScore": 90,
       "drugTypes": "Sabu (Methamphetamine), Heroin lempengan, Kokain murni, Ketamine",
@@ -103,6 +107,10 @@
       "categoryLabel": "Pouch Personal Items",
       "color": "#1890FF",
       "position": { "x": 65.0, "y": 26.0 },
+      "coordsByView": {
+        "xray": { "x": 65.0, "y": 26.0 },
+        "normal": { "x": 65.0, "y": 30.0 }
+      },
       "riskLevel": "high",
       "riskScore": 85,
       "drugTypes": "Liquid Meth (Sabu Cair), Ketamine cair, GHB, Ekstasi cair",
@@ -151,6 +159,10 @@
       "categoryLabel": "Buku & Kitab",
       "color": "#38A169",
       "position": { "x": 36.0, "y": 52.0 },
+      "coordsByView": {
+        "xray": { "x": 36.0, "y": 52.0 },
+        "normal": { "x": 38.0, "y": 48.0 }
+      },
       "riskLevel": "high",
       "riskScore": 80,
       "drugTypes": "Sabu kristal, Heroin, Kertas Dewa (Paper Drug / LSD blotter), Cocaine",
@@ -199,6 +211,10 @@
       "categoryLabel": "Makanan & Snack",
       "color": "#F5A623",
       "position": { "x": 57.5, "y": 52.0 },
+      "coordsByView": {
+        "xray": { "x": 57.5, "y": 52.0 },
+        "normal": { "x": 62.0, "y": 48.0 }
+      },
       "riskLevel": "warning",
       "riskScore": 75,
       "drugTypes": "Pil Ekstasi (MDMA), Sabu butiran kristal, Fentanyl tablet, Happy Five (H5)",
@@ -247,6 +263,10 @@
       "categoryLabel": "Makanan & Snack",
       "color": "#F5A623",
       "position": { "x": 70.0, "y": 54.0 },
+      "coordsByView": {
+        "xray": { "x": 70.0, "y": 54.0 },
+        "normal": { "x": 63.0, "y": 66.0 }
+      },
       "riskLevel": "medium",
       "riskScore": 70,
       "drugTypes": "Sabu serbuk, Heroin bubuk, Ekstasi bubuk, Liquid Meth dalam kaleng sarden",
@@ -295,6 +315,10 @@
       "categoryLabel": "Sepatu & Footwear",
       "color": "#E53E3E",
       "position": { "x": 43.0, "y": 74.0 },
+      "coordsByView": {
+        "xray": { "x": 43.0, "y": 74.0 },
+        "normal": { "x": 37.0, "y": 66.0 }
+      },
       "riskLevel": "critical",
       "riskScore": 88,
       "drugTypes": "Sabu kristal, Heroin lempengan, Pil Ekstasi, Ketamine",
