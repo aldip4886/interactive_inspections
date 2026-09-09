@@ -15,7 +15,7 @@ export class Modul4aView extends BaseModuleView {
     this.currentActiveTab = 'tab-modus';
     this.activeFilter = 'all';
     this.isModalOpen = false;
-    this.isAutoRotating = true;
+    this.isAutoRotating = false;
     this.currentZoomFactor = 2.5;
     this.cardPages = [
       { id: 'tab-modus', num: 1, title: 'Modus Operandi' },
@@ -123,9 +123,9 @@ export class Modul4aView extends BaseModuleView {
                 <div id="m4a-3d-canvas-wrapper" style="width:100%; height:62vh; min-height:420px; position:relative; display:flex; align-items:center; justify-content:center;">
                   <img id="m4a-central-image" src="assets/images/central/m4a_suv_cutaway.png" alt="KIA Carnival 2023" class="main-body-img" style="display:none; max-height:60vh; object-fit:contain; filter:drop-shadow(0 12px 32px rgba(0,37,59,0.16)); pointer-events:none;" />
                   <div id="three-canvas-container" style="width:100%; height:100%; position:absolute; inset:0; z-index:2;"></div>
+                  <div id="m4a-hotspots-layer" class="hotspots-layer" style="position:absolute; inset:0; z-index:30; pointer-events:none;"></div>
                 </div>
                 <div class="body-pedestal-platform"></div>
-                <div id="m4a-hotspots-layer" class="hotspots-layer" style="z-index:10;"></div>
               </div>
 
               <!-- Floating HUD Segmented Pill Controls Dock (Center Bottom) -->
@@ -133,8 +133,8 @@ export class Modul4aView extends BaseModuleView {
                 <div class="pedestal-carousel-controls">
                   <!-- Step Carousel Prev / Play / Next Controls -->
                   <button id="btn-carousel-prev" class="pedestal-ctrl-btn" title="Putar Kiri (360°)" aria-label="Putar Kiri">‹</button>
-                  <button id="btn-carousel-play" class="pedestal-ctrl-btn btn-play playing" title="Toggle Rotasi Otomatis 360°" aria-label="Auto-Play 360°">
-                    <span id="play-pause-icon">⏸</span>
+                  <button id="btn-carousel-play" class="pedestal-ctrl-btn btn-play" title="Toggle Rotasi Otomatis 360°" aria-label="Auto-Play 360°">
+                    <span id="play-pause-icon">▶</span>
                   </button>
                   <button id="btn-carousel-next" class="pedestal-ctrl-btn" title="Putar Kanan (360°)" aria-label="Putar Kanan">›</button>
 
@@ -458,7 +458,7 @@ export class Modul4aView extends BaseModuleView {
 
       loadModel(0);
 
-      // Raycasting for direct clicks on 3D hotspot objects in scene
+      // Raycasting for direct clicks on 3D hotspot objects or vehicle mesh surface
       const raycaster = new THREE.Raycaster();
       const mouse = new THREE.Vector2();
       container.addEventListener('click', (e) => {
@@ -470,6 +470,9 @@ export class Modul4aView extends BaseModuleView {
         raycaster.setFromCamera(mouse, this.threeCamera);
         const intersects = raycaster.intersectObjects(this.vehicleGroup.children, true);
 
+        const hotspots = this.moduleData?.hotspots || [];
+        if (hotspots.length === 0) return;
+
         for (let hit of intersects) {
           let obj = hit.object;
           while (obj && obj !== this.vehicleGroup) {
@@ -478,6 +481,19 @@ export class Modul4aView extends BaseModuleView {
               return;
             }
             obj = obj.parent;
+          }
+
+          // Check proximity of 3D hit point to any hotspot anchor
+          for (let hs of hotspots) {
+            const anchor = this.vehicleGroup.getObjectByName(`hotspot-anchor-${hs.id}`);
+            if (anchor) {
+              const anchorWorldPos = new THREE.Vector3();
+              anchor.getWorldPosition(anchorWorldPos);
+              if (hit.point.distanceTo(anchorWorldPos) < 1.2) {
+                this.openHotspotDetail(hs.id);
+                return;
+              }
+            }
           }
         }
       });
