@@ -177,12 +177,10 @@ export class Modul1View extends BaseModuleView {
             <div class="modal-header-left">
               <div class="detail-badge-row">
                 <span class="floating-card-drag-indicator" title="Geser posisi kartu">⋮⋮</span>
-                <span class="callout-pin-tag">📌 CALLOUT</span>
                 <span id="detail-tag-badge" class="detail-tag-badge">MODUS #01</span>
                 <span id="detail-cat-badge" class="detail-cat-badge">METODE INGESTION</span>
               </div>
               <h3 id="detail-title" class="detail-title">1. Rongga Mulut</h3>
-              <p id="detail-subtitle" class="detail-subtitle">Penyelundupan paket narkotika di rongga mulut.</p>
             </div>
             <div class="modal-header-right">
               <div class="card-quick-nav">

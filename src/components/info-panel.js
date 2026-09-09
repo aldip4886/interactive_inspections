@@ -29,8 +29,7 @@ export class InfoPanel {
     const html = `
       <div class="drawer-header">
         <div>
-          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
-            <span class="callout-pin-tag">📌 CALLOUT</span>
+          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
             <span class="badge ${badgeClass}">${hotspotData.badge || 'MODUS PENYELUNDUPAN'}</span>
           </div>
           <h3 style="margin: 0; font-size: var(--font-size-title-lg); color: #FFFFFF; line-height: 1.3;">${hotspotData.label}</h3>
