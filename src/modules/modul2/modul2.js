@@ -171,56 +171,83 @@ export class Modul2View extends BaseModuleView {
               <!-- TAB 2: FOTO REAL -->
               <div class="tab-pane" id="tab-photos">
                 <div class="photos-tab-header">
-                  <span class="photos-title">📸 Dokumentasi Temuan Realistis Kasus DJBC</span>
-                  <span class="photos-subtitle">Klik gambar untuk pembesaran resolusi penuh</span>
+                  <span class="photos-tab-title">Barang Bukti Sitaan & Citra Forensik:</span>
+                  <span class="photos-tab-hint">Klik gambar untuk melihat resolusi penuh & zoom</span>
                 </div>
-                <div id="findings-gallery-grid" class="findings-gallery-grid"></div>
+                <div class="findings-thumbnails-grid" id="findings-thumbnails-grid"></div>
+                <div class="gallery-case-note">
+                  <strong>Penting:</strong> Dokumentasi penindakan riil dan citra radiologis forensik resmi DJBC.
+                </div>
               </div>
 
-              <!-- TAB 3: SOP & CIRI -->
+              <!-- TAB 3: DETEKSI & SOP -->
               <div class="tab-pane" id="tab-detection">
-                <div class="detection-section-block">
-                  <span class="section-block-title text-info-blue">🔍 SOP & Langkah Penggeledahan Barang Bawaan:</span>
-                  <ul id="detail-detection-steps" class="block-list detection-list"></ul>
-                </div>
-                <div class="detection-section-block hazard-alert-box">
-                  <span class="hazard-title">⚠️ Bahaya Bahan Kimia & Prosedur Keamanan:</span>
-                  <p id="detail-medical-risk" class="hazard-desc"></p>
+                <div class="detection-two-columns">
+                  <div class="info-block-col block-warning" id="block-indicators">
+                    <div class="block-header">
+                      <span class="block-icon warning-icon">⚠️</span>
+                      <span class="block-title">Indikator Anomali & Red Flags X-Ray</span>
+                    </div>
+                    <ul id="detail-indicators-list" class="block-list"></ul>
+                  </div>
+                  <div class="info-block-col block-procedure" id="block-detection">
+                    <div class="block-header">
+                      <span class="block-icon procedure-icon">✔</span>
+                      <span class="block-title">Standar Prosedur Pemeriksaan (SOP)</span>
+                    </div>
+                    <ul id="detail-detection-list" class="block-list"></ul>
+                  </div>
                 </div>
               </div>
 
               <!-- TAB 4: INDIKATOR RISIKO -->
               <div class="tab-pane" id="tab-risk">
-                <div class="risk-score-banner">
+                <div class="risk-meter-widget">
                   <div class="risk-meter-header">
-                    <span class="risk-meter-title">TINGKAT ANOMALI X-RAY & ANCAMAN:</span>
-                    <span id="detail-risk-badge" class="risk-level-badge">KRITIS</span>
+                    <span class="risk-meter-title">Tingkat Bahaya Penyelundupan:</span>
+                    <span id="risk-score-val" class="risk-meter-score">KRITIS (100/100)</span>
                   </div>
-                  <div class="risk-bar-track">
-                    <div id="detail-risk-bar-fill" class="risk-bar-fill" style="width: 85%;"></div>
+                  <div class="risk-meter-bar-track">
+                    <div id="risk-meter-bar-fill" class="risk-meter-bar-fill" style="width: 100%;"></div>
                   </div>
-                  <div class="risk-score-caption">
-                    Skor Ancaman Modus: <strong id="detail-risk-score" class="font-code-tech">85/100</strong>
+                  <div class="risk-meter-scale">
+                    <span>Rendah (0)</span>
+                    <span>Sedang (50)</span>
+                    <span>Tinggi (75)</span>
+                    <span>Kritis (100)</span>
                   </div>
                 </div>
-                <div class="detection-section-block">
-                  <span class="section-block-title text-warning-gold">🚩 Indikator Red Flags & Anomali X-Ray Scanner:</span>
-                  <ul id="detail-risk-indicators" class="block-list risk-list"></ul>
+                <div class="hazard-alert-box hazard-medical">
+                  <div class="hazard-icon">🚨</div>
+                  <div class="hazard-content">
+                    <span class="hazard-title">Bahaya Medis Darurat / Bahan Kimia:</span>
+                    <p id="detail-medical-risk" class="hazard-desc"></p>
+                  </div>
+                </div>
+                <div class="hazard-alert-box hazard-officer">
+                  <div class="hazard-icon">🛡️</div>
+                  <div class="hazard-content">
+                    <span class="hazard-title">Protokol Keselamatan Petugas:</span>
+                    <p class="hazard-desc">
+                      Gunakan sarung tangan nitril & masker medis. Dilarang penguraian barang bukti tanpa APD resmi. Koordinasikan pengamanan BB.
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
 
-            <!-- Card Bottom Pagination Bar -->
-            <div class="card-pagination-bar">
-              <button id="btn-card-prev-page" class="card-carousel-nav-btn" title="Halaman Tab Sebelumnya">‹</button>
+            <!-- Bottom Carousel Pagination Bar -->
+            <div class="card-pagination-bar" id="card-pagination-bar">
+              <button id="btn-page-prev" class="card-page-nav-btn" title="Halaman Tab Sebelumnya" disabled>&lt;</button>
 
-              <div class="card-page-dots" id="card-page-dots">
-                ${this.cardPages.map((p, idx) => `
-                  <span class="page-dot ${idx === 0 ? 'active' : ''}" data-index="${idx}" title="${p.title}"></span>
-                `).join('')}
+              <div class="card-page-pills" id="card-page-pills">
+                <button class="page-pill active" data-page="0" title="1. Modus Operandi"></button>
+                <button class="page-pill" data-page="1" title="2. Foto Gambar Real"></button>
+                <button class="page-pill" data-page="2" title="3. Ciri Pelaku & SOP"></button>
+                <button class="page-pill" data-page="3" title="4. Indikator Risiko"></button>
               </div>
 
-              <button id="btn-card-next-page" class="card-carousel-nav-btn" title="Halaman Tab Berikutnya">›</button>
+              <button id="btn-page-next" class="card-page-nav-btn" title="Halaman Tab Selanjutnya">&gt;</button>
             </div>
           </div>
         </div>
@@ -332,105 +359,148 @@ export class Modul2View extends BaseModuleView {
 
   openHotspotDetail(hotspotId) {
     const hotspots = this.moduleData.hotspots || [];
-    const hotspot = hotspots.find(h => h.id === hotspotId);
-    if (!hotspot) return;
+    const hs = hotspots.find(h => h.id === hotspotId);
+    if (!hs) return;
 
     this.currentHotspotId = hotspotId;
+    this.isModalOpen = true;
     this.visitedHotspots.add(hotspotId);
     this.renderHotspots();
 
-    // Populate Modal Data
     const overlay = this.container.querySelector('#hotspot-card-modal-overlay');
-    const titleEl = this.container.querySelector('#detail-title');
-    const tagBadge = this.container.querySelector('#detail-tag-badge');
-    const catBadge = this.container.querySelector('#detail-cat-badge');
-    const descEl = this.container.querySelector('#detail-desc');
-    const methodEl = this.container.querySelector('#detail-concealment-method');
-    const locEl = this.container.querySelector('#detail-body-location');
-    const drugEl = this.container.querySelector('#detail-drug-types');
-    const packEl = this.container.querySelector('#detail-packaging');
-    const narrativeEl = this.container.querySelector('#detail-modus-narrative');
-    const guideEl = this.container.querySelector('#detail-inspection-note');
-    const counterEl = this.container.querySelector('#card-nav-counter');
-    const mainImgEl = this.container.querySelector('#detail-main-img');
-
-    if (titleEl) titleEl.textContent = hotspot.label;
-    if (tagBadge) tagBadge.textContent = `MODUS #${hotspot.num || '01'}`;
-    if (catBadge) catBadge.textContent = (hotspot.tag || hotspot.categoryLabel || 'BARANG BAWAAN').toUpperCase();
-    if (descEl) descEl.textContent = hotspot.description;
-    if (methodEl) methodEl.textContent = hotspot.tag || hotspot.categoryLabel || 'False Concealment';
-    if (locEl) locEl.textContent = hotspot.bodyLocation || 'Bagasi Koper';
-    if (drugEl) drugEl.textContent = hotspot.drugTypes || 'Sabu / Heroin';
-    if (packEl) packEl.textContent = hotspot.packagingTechnique || 'Plastik Vakum';
-    if (narrativeEl) narrativeEl.textContent = hotspot.modusDetail || hotspot.description;
-    if (guideEl) guideEl.textContent = hotspot.inspectionNote || 'SOP DJBC';
-
-    if (mainImgEl) {
-      mainImgEl.src = hotspot.mainIllustration || hotspot.mainImage || 'assets/images/hotspots/hs_sardine_can_false.png';
-    }
-
-    const currentIdx = hotspots.findIndex(h => h.id === hotspotId);
-    if (counterEl) counterEl.textContent = `${currentIdx + 1} / ${hotspots.length}`;
-
-    // Populate Findings Gallery
-    const galleryGrid = this.container.querySelector('#findings-gallery-grid');
-    if (galleryGrid) {
-      const findings = hotspot.findings || [];
-      galleryGrid.innerHTML = findings.map(f => `
-        <div class="finding-card">
-          <div class="finding-img-wrapper">
-            <img src="${f.full || f.thumb}" alt="${f.caption}" class="finding-img" />
-            <span class="finding-tag">${f.tag || 'Barang Bukti'}</span>
-          </div>
-          <p class="finding-caption">${f.caption}</p>
-        </div>
-      `).join('');
-    }
-
-    // Populate Detection SOPs
-    const detectionList = this.container.querySelector('#detail-detection-steps');
-    if (detectionList) {
-      const steps = hotspot.detection || hotspot.inspectionActions || [];
-      detectionList.innerHTML = steps.map(step => `
-        <li><span class="bullet-icon">▸</span> <div>${step}</div></li>
-      `).join('');
-    }
-
-    // Populate Medical/Chemical Risk
-    const medicalRiskEl = this.container.querySelector('#detail-medical-risk');
-    if (medicalRiskEl) {
-      medicalRiskEl.textContent = hotspot.medicalRisk || 'BAHAYA ZAT KIMIA BERBAHAYA: Selalu gunakan sarung tangan nitril dan masker medis saat membuka bungkusan barang bukti.';
-    }
-
-    // Populate Risk Meter & Indicators
-    const riskBadge = this.container.querySelector('#detail-risk-badge');
-    const riskBarFill = this.container.querySelector('#detail-risk-bar-fill');
-    const riskScoreEl = this.container.querySelector('#detail-risk-score');
-    const riskList = this.container.querySelector('#detail-risk-indicators');
-
-    const score = hotspot.riskScore || 80;
-    if (riskScoreEl) riskScoreEl.textContent = `${score}/100`;
-    if (riskBarFill) riskBarFill.style.width = `${score}%`;
-    if (riskBadge) {
-      riskBadge.textContent = (hotspot.riskLevel || 'HIGH').toUpperCase();
-    }
-
-    if (riskList) {
-      const indicators = hotspot.indicators || hotspot.riskIndicators || [];
-      riskList.innerHTML = indicators.map(ind => `
-        <li><span class="bullet-icon">🚩</span> <div>${ind}</div></li>
-      `).join('');
-    }
-
     if (overlay) {
       overlay.classList.remove('hidden');
-      this.isModalOpen = true;
     }
+
+    this.renderModalContent(hs);
+    this.switchCardPage(0);
 
     // Record hotspot visit in progress manager & send xAPI event
     courseProgress.recordHotspotVisit('modul2', hotspotId);
-    xapi.trackHotspotClick('modul2', hotspotId, hotspot.label, hotspot.categoryId || hotspot.category);
+    xapi.trackHotspotClick('modul2', hotspotId, hs.label, hs.categoryId || hs.category);
     this.updateProgressUI();
+  }
+
+  renderModalContent(hs) {
+    const hotspots = this.moduleData.hotspots || [];
+    const idx = hotspots.findIndex(h => h.id === hs.id);
+    const counter = this.container.querySelector('#card-nav-counter');
+    if (counter) counter.textContent = `${idx + 1} / ${hotspots.length}`;
+
+    const badgeRow = this.container.querySelector('.detail-badge-row');
+    const tagBadge = this.container.querySelector('#detail-tag-badge');
+    const catBadge = this.container.querySelector('#detail-cat-badge');
+    const title = this.container.querySelector('#detail-title');
+
+    if (badgeRow) badgeRow.className = `detail-badge-row cat-${hs.categoryId || hs.category}`;
+    if (tagBadge) {
+      tagBadge.textContent = `MODUS #${hs.num || String(idx + 1).padStart(2, '0')}`;
+      tagBadge.className = `detail-tag-badge cat-${hs.categoryId || hs.category}`;
+    }
+    if (catBadge) {
+      catBadge.textContent = (hs.categoryLabel || hs.tag || 'BARANG BAWAAN').toUpperCase();
+      catBadge.className = `detail-cat-badge cat-${hs.categoryId || hs.category}`;
+    }
+    if (title) title.textContent = hs.label;
+
+    // TAB 1: Modus
+    const mainImg = this.container.querySelector('#detail-main-img');
+    const desc = this.container.querySelector('#detail-desc');
+    const concealmentMethod = this.container.querySelector('#detail-concealment-method');
+    const bodyLocation = this.container.querySelector('#detail-body-location');
+    const drugTypes = this.container.querySelector('#detail-drug-types');
+    const packaging = this.container.querySelector('#detail-packaging');
+    const narrative = this.container.querySelector('#detail-modus-narrative');
+    const note = this.container.querySelector('#detail-inspection-note');
+
+    if (mainImg) {
+      mainImg.onerror = () => {
+        mainImg.src = 'assets/mockup/image_placeholder.svg';
+      };
+      mainImg.src = hs.mainIllustration || hs.mainImage || hs.thumb || 'assets/mockup/image_placeholder.svg';
+      mainImg.alt = hs.label;
+    }
+    if (desc) desc.textContent = hs.description;
+    if (concealmentMethod) concealmentMethod.textContent = hs.tag || hs.categoryLabel || 'False Concealment';
+    if (bodyLocation) bodyLocation.textContent = hs.bodyLocation || 'Bagasi Koper';
+    if (drugTypes) drugTypes.textContent = hs.drugTypes || 'Sabu / Heroin';
+    if (packaging) packaging.textContent = hs.packagingTechnique || 'Plastik Vakum';
+    if (narrative) narrative.textContent = hs.modusDetail || hs.description;
+    if (note) note.textContent = hs.inspectionNote || 'SOP DJBC';
+
+    // TAB 2: Foto Real
+    const findingsGrid = this.container.querySelector('#findings-thumbnails-grid');
+    if (findingsGrid) {
+      findingsGrid.innerHTML = '';
+      const findingsList = (hs.findings && hs.findings.length > 0) ? hs.findings : [
+        {
+          full: 'assets/mockup/image_placeholder.svg',
+          thumb: 'assets/mockup/image_placeholder.svg',
+          caption: 'Dokumentasi Barang Bukti (Placeholder)',
+          tag: 'PLACEHOLDER'
+        }
+      ];
+
+      findingsList.forEach(f => {
+        const a = document.createElement('a');
+        a.href = f.full || f.thumb;
+        a.className = 'finding-thumb-item glightbox';
+        a.setAttribute('data-gallery', `findings-gallery-${hs.id}`);
+        a.setAttribute('data-title', `${f.caption} — [${f.tag || 'Barang Bukti'}]`);
+        a.innerHTML = `
+          <img src="${f.thumb || f.full}" alt="${f.caption}" onerror="this.src='assets/mockup/image_placeholder.svg'" />
+          <span class="finding-thumb-label">${f.tag || 'Barang Bukti'}</span>
+        `;
+        findingsGrid.appendChild(a);
+      });
+
+      try {
+        if (typeof window.GLightbox !== 'undefined') {
+          if (this.glightboxInstance) this.glightboxInstance.destroy();
+          this.glightboxInstance = window.GLightbox({
+            selector: '.glightbox',
+            touchNavigation: true,
+            loop: true
+          });
+        }
+      } catch (gErr) {
+        console.warn('GLightbox warning:', gErr);
+      }
+    }
+
+    // TAB 3: Detection & SOP
+    const indList = this.container.querySelector('#detail-indicators-list');
+    if (indList) {
+      indList.innerHTML = '';
+      const indicators = hs.indicators || hs.riskIndicators || [];
+      indicators.forEach(item => {
+        const li = document.createElement('li');
+        li.textContent = item;
+        indList.appendChild(li);
+      });
+    }
+
+    const detList = this.container.querySelector('#detail-detection-list');
+    if (detList) {
+      detList.innerHTML = '';
+      const steps = hs.detection || hs.inspectionActions || [];
+      steps.forEach(item => {
+        const li = document.createElement('li');
+        li.textContent = item;
+        detList.appendChild(li);
+      });
+    }
+
+    // TAB 4: Risk
+    const riskScoreVal = this.container.querySelector('#risk-score-val');
+    const riskBarFill = this.container.querySelector('#risk-meter-bar-fill');
+    const medRisk = this.container.querySelector('#detail-medical-risk');
+
+    const score = hs.riskScore || 80;
+    const level = (hs.riskLevel || 'HIGH').toUpperCase();
+    if (riskScoreVal) riskScoreVal.textContent = `${level} (${score}/100)`;
+    if (riskBarFill) riskBarFill.style.width = `${score}%`;
+    if (medRisk) medRisk.textContent = hs.medicalRisk || 'BAHAYA ZAT KIMIA BERBAHAYA: Selalu gunakan sarung tangan nitril dan masker medis saat membuka bungkusan barang bukti.';
   }
 
   initModals() {
@@ -438,8 +508,8 @@ export class Modul2View extends BaseModuleView {
     const closeBtn = this.container.querySelector('#btn-close-detail-modal');
     const prevBtn = this.container.querySelector('#btn-prev-hotspot');
     const nextBtn = this.container.querySelector('#btn-next-hotspot');
-    const prevPageBtn = this.container.querySelector('#btn-card-prev-page');
-    const nextPageBtn = this.container.querySelector('#btn-card-next-page');
+    const btnPagePrev = this.container.querySelector('#btn-page-prev');
+    const btnPageNext = this.container.querySelector('#btn-page-next');
 
     if (closeBtn && overlay) {
       closeBtn.addEventListener('click', () => {
@@ -478,48 +548,77 @@ export class Modul2View extends BaseModuleView {
       });
     }
 
-    // Tab Navigation inside Card
-    const tabBtns = this.container.querySelectorAll('#card-tabs-nav .tab-btn');
-    const tabPanes = this.container.querySelectorAll('#tab-content-container .tab-pane');
-    const dots = this.container.querySelectorAll('#card-page-dots .page-dot');
-
-    const switchTab = (tabId, index) => {
-      tabBtns.forEach(b => b.classList.toggle('active', b.dataset.tab === tabId));
-      tabPanes.forEach(p => p.classList.toggle('active', p.id === tabId));
-      dots.forEach((d, idx) => d.classList.toggle('active', idx === index));
-      this.currentActiveTab = tabId;
-      this.currentCardPageIndex = index;
-    };
-
+    // Tab buttons
+    const tabBtns = Array.from(this.container.querySelectorAll('.card-tabs-nav .tab-btn'));
     tabBtns.forEach((btn, idx) => {
       btn.addEventListener('click', () => {
-        switchTab(btn.dataset.tab, idx);
+        this.switchCardPage(idx);
       });
     });
 
-    dots.forEach((dot, idx) => {
-      dot.addEventListener('click', () => {
-        const targetTab = this.cardPages[idx].id;
-        switchTab(targetTab, idx);
-      });
+    // Pagination buttons & pills
+    const pagePills = Array.from(this.container.querySelectorAll('.card-page-pills .page-pill'));
+
+    btnPagePrev?.addEventListener('click', () => {
+      if (this.currentCardPageIndex > 0) {
+        this.switchCardPage(this.currentCardPageIndex - 1);
+      }
     });
 
-    if (prevPageBtn) {
-      prevPageBtn.addEventListener('click', () => {
-        const prevIdx = (this.currentCardPageIndex - 1 + this.cardPages.length) % this.cardPages.length;
-        switchTab(this.cardPages[prevIdx].id, prevIdx);
-      });
-    }
+    btnPageNext?.addEventListener('click', () => {
+      if (this.currentCardPageIndex < this.cardPages.length - 1) {
+        this.switchCardPage(this.currentCardPageIndex + 1);
+      } else {
+        // When reaching end of card pages, advance to next hotspot
+        const idx = hotspots.findIndex(h => h.id === this.currentHotspotId);
+        const nextIdx = (idx + 1) % hotspots.length;
+        this.openHotspotDetail(hotspots[nextIdx].id);
+      }
+    });
 
-    if (nextPageBtn) {
-      nextPageBtn.addEventListener('click', () => {
-        const nextIdx = (this.currentCardPageIndex + 1) % this.cardPages.length;
-        switchTab(this.cardPages[nextIdx].id, nextIdx);
+    pagePills.forEach((pill, idx) => {
+      pill.addEventListener('click', () => {
+        this.switchCardPage(idx);
       });
-    }
+    });
 
     // Make modal card draggable
     this.initCardDraggable();
+  }
+
+  switchCardPage(pageIndex) {
+    if (pageIndex < 0) pageIndex = 0;
+    if (pageIndex >= this.cardPages.length) pageIndex = this.cardPages.length - 1;
+    this.currentCardPageIndex = pageIndex;
+    const page = this.cardPages[pageIndex];
+    this.currentActiveTab = page.id;
+
+    // Sync tab buttons
+    this.container.querySelectorAll('.card-tabs-nav .tab-btn').forEach((b, idx) => {
+      if (idx === pageIndex) b.classList.add('active');
+      else b.classList.remove('active');
+    });
+
+    // Sync tab panes
+    this.container.querySelectorAll('.tab-content-container .tab-pane').forEach(p => {
+      if (p.id === page.id) p.classList.add('active');
+      else p.classList.remove('active');
+    });
+
+    // Sync pagination pills
+    this.container.querySelectorAll('.card-page-pills .page-pill').forEach((pill, idx) => {
+      if (idx === pageIndex) pill.classList.add('active');
+      else pill.classList.remove('active');
+    });
+
+    // Update prev/next button states
+    const btnPagePrev = this.container.querySelector('#btn-page-prev');
+    if (btnPagePrev) {
+      btnPagePrev.disabled = (pageIndex === 0);
+    }
+
+    const content = this.container.querySelector('#tab-content-container');
+    if (content) content.scrollTop = 0;
   }
 
   initCardDraggable() {
@@ -528,57 +627,47 @@ export class Modul2View extends BaseModuleView {
     if (!card || !header) return;
 
     let isDragging = false;
-    let currentX;
-    let currentY;
-    let initialX;
-    let initialY;
-    let xOffset = 0;
-    let yOffset = 0;
+    let startMouseX = 0, startMouseY = 0;
+    let initialTransformX = 0, initialTransformY = 0;
 
-    header.style.cursor = 'grab';
-
-    const dragStart = (e) => {
-      if (e.target.closest('button')) return;
-      if (e.type === 'touchstart') {
-        initialX = e.touches[0].clientX - xOffset;
-        initialY = e.touches[0].clientY - yOffset;
-      } else {
-        initialX = e.clientX - xOffset;
-        initialY = e.clientY - yOffset;
-      }
+    const onMouseDown = (e) => {
+      if (e.target.closest('button') || e.target.closest('.card-quick-nav')) return;
       isDragging = true;
+      startMouseX = e.clientX;
+      startMouseY = e.clientY;
+
+      const transform = window.getComputedStyle(card).transform;
+      if (transform && transform !== 'none') {
+        const matrix = new DOMMatrixReadOnly(transform);
+        initialTransformX = matrix.m41;
+        initialTransformY = matrix.m42;
+      } else {
+        initialTransformX = 0;
+        initialTransformY = 0;
+      }
+
       header.style.cursor = 'grabbing';
+      document.addEventListener('mousemove', onMouseMove);
+      document.addEventListener('mouseup', onMouseUp);
+      e.preventDefault();
     };
 
-    const dragEnd = () => {
-      initialX = currentX;
-      initialY = currentY;
+    const onMouseMove = (e) => {
+      if (!isDragging) return;
+      const dx = e.clientX - startMouseX;
+      const dy = e.clientY - startMouseY;
+      card.style.transform = `translate(${initialTransformX + dx}px, ${initialTransformY + dy}px)`;
+    };
+
+    const onMouseUp = () => {
+      if (!isDragging) return;
       isDragging = false;
       header.style.cursor = 'grab';
+      document.removeEventListener('mousemove', onMouseMove);
+      document.removeEventListener('mouseup', onMouseUp);
     };
 
-    const drag = (e) => {
-      if (!isDragging) return;
-      e.preventDefault();
-      if (e.type === 'touchmove') {
-        currentX = e.touches[0].clientX - initialX;
-        currentY = e.touches[0].clientY - initialY;
-      } else {
-        currentX = e.clientX - initialX;
-        currentY = e.clientY - initialY;
-      }
-      xOffset = currentX;
-      yOffset = currentY;
-      card.style.transform = `translate(${currentX}px, ${currentY}px)`;
-    };
-
-    header.addEventListener('mousedown', dragStart);
-    document.addEventListener('mouseup', dragEnd);
-    document.addEventListener('mousemove', drag);
-
-    header.addEventListener('touchstart', dragStart);
-    document.addEventListener('touchend', dragEnd);
-    document.addEventListener('touchmove', drag);
+    header.addEventListener('mousedown', onMouseDown);
   }
 
   updateProgressUI() {
