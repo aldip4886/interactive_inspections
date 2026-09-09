@@ -10,10 +10,10 @@ export function Modul1View() {
   const [currentAngle, setCurrentAngle] = useState(0);
   const [currentZoom, setCurrentZoom] = useState(1.5);
   const [isAutoPlaying, setIsAutoPlaying] = useState(false);
-  const [selectedHotspot, setSelectedHotspot] = useState(() => modul1Data?.hotspots?.[0] || null);
+  const [selectedHotspot, setSelectedHotspot] = useState(null);
   const [activeTab, setActiveTab] = useState('tab-modus');
   const [currentPage, setCurrentPage] = useState(0);
-  const [visitedHotspots, setVisitedHotspots] = useState(() => new Set(['rongga-mulut']));
+  const [visitedHotspots, setVisitedHotspots] = useState(() => new Set(courseProgress.state?.visitedHotspots?.modul1 || []));
   const [modalPos, setModalPos] = useState({ x: 0, y: 0 });
   const [showQuiz, setShowQuiz] = useState(false);
   const [quizIndex, setQuizIndex] = useState(0);
@@ -31,7 +31,6 @@ export function Modul1View() {
   useEffect(() => {
     xapi.trackModuleView('modul1', 'Modul 1: Penyelundupan Melalui Tubuh Kurir (React)');
     courseProgress.recordModuleVisit('modul1');
-    courseProgress.recordHotspotVisit('modul1', 'rongga-mulut');
     refreshProgress();
   }, []);
 
@@ -75,10 +74,11 @@ export function Modul1View() {
   };
 
   // Hotspot Click
-  const handleHotspotClick = (hs) => {
+  const handleHotspotClick = (hs, syncAngle = false) => {
     setSelectedHotspot(hs);
     setActiveTab('tab-modus');
     setCurrentPage(0);
+    setModalPos({ x: 0, y: 0 });
     setVisitedHotspots(prev => {
       const next = new Set(prev);
       next.add(hs.id);
@@ -87,6 +87,10 @@ export function Modul1View() {
     courseProgress.recordHotspotVisit('modul1', hs.id);
     xapi.trackHotspotClick('modul1', hs.id, hs.label, hs.categoryLabel);
     refreshProgress();
+
+    if (syncAngle && hs.visibleAngles && !hs.visibleAngles.includes(currentAngle)) {
+      setCurrentAngle(hs.primaryAngle ?? hs.visibleAngles[0] ?? 0);
+    }
   };
 
   // Modal Dragging
@@ -278,7 +282,9 @@ export function Modul1View() {
                       key={hs.id}
                       className={`body-hotspot-pin ${isActive ? 'active' : ''} ${isVisited ? 'visited' : ''}`}
                       style={{ left: `${coords.x}%`, top: `${coords.y}%` }}
+                      onPointerDown={(e) => e.stopPropagation()}
                       onClick={(e) => {
+                        e.preventDefault();
                         e.stopPropagation();
                         handleHotspotClick(hs);
                       }}
@@ -372,45 +378,80 @@ export function Modul1View() {
                 <span>⟲ Drag atau usap pada tubuh untuk rotasi bebas 360° ⟳</span>
               </div>
             </div>
+          </div>
+        </div>
+      </div>
 
-            {/* ─── FLOATING HOTSPOT CARD MODAL ─── */}
-            {selectedHotspot && (
-              <div id="hotspot-card-modal-overlay">
-                <div
-                  id="hotspot-modal-card"
-                  className="modal-card tabbed-hotspot-modal"
-                  style={{
-                    transform: `translate(${modalPos.x}px, ${modalPos.y}px)`
-                  }}
-                >
-                  {/* Modal Header */}
-                  <div
-                    className="modal-header tabbed-modal-header"
-                    onPointerDown={handleModalPointerDown}
-                    title="Tahan dan geser untuk memindahkan kartu"
+      {/* ─── FLOATING HOTSPOT CALLOUT CARD ─── */}
+      {selectedHotspot && (
+        <div id="hotspot-card-modal-overlay" className="modal-overlay" role="dialog" aria-modal="true">
+          <div
+            id="hotspot-modal-card"
+            className="modal-card tabbed-hotspot-modal hotspot-callout-card"
+            style={{
+              transform: `translate(${modalPos.x}px, ${modalPos.y}px)`
+            }}
+          >
+            {/* Modal Header */}
+            <div
+              className="modal-header tabbed-modal-header"
+              onPointerDown={handleModalPointerDown}
+              title="Tahan dan geser untuk memindahkan kartu"
+            >
+              <div className="modal-header-left">
+                <div className="detail-badge-row">
+                  <span className="floating-card-drag-indicator" title="Geser posisi kartu">⋮⋮</span>
+                  <span className="detail-tag-badge font-code-tech">MODUS #{String(selectedHotspot.badgeNum).padStart(2, '0')}</span>
+                  <span className={`detail-cat-badge font-code-tech cat-${selectedHotspot.categoryId}`}>
+                    {(selectedHotspot.categoryLabel || selectedHotspot.tag || 'MODUS').toUpperCase()}
+                  </span>
+                </div>
+                <h3 className="detail-title">{selectedHotspot.label}</h3>
+                <p className="detail-subtitle">{selectedHotspot.tag || selectedHotspot.shortName || selectedHotspot.label}</p>
+              </div>
+
+              <div className="modal-header-right">
+                <div className="card-quick-nav">
+                  <button
+                    id="btn-prev-hotspot"
+                    className="card-nav-arrow-btn"
+                    title="Modus Sebelumnya"
+                    onClick={() => {
+                      const allHotspots = moduleData?.hotspots || [];
+                      const idx = allHotspots.findIndex(h => h.id === selectedHotspot.id);
+                      const prevIdx = (idx - 1 + allHotspots.length) % allHotspots.length;
+                      handleHotspotClick(allHotspots[prevIdx], true);
+                    }}
                   >
-                    <div className="modal-header-left">
-                      <div className="detail-badge-row">
-                        <span className="floating-card-drag-indicator" title="Geser posisi kartu">⋮⋮</span>
-                        <span className="detail-tag-badge font-code-tech">MODUS #{String(selectedHotspot.badgeNum).padStart(2, '0')}</span>
-                        <span className={`detail-cat-badge font-code-tech cat-${selectedHotspot.categoryId}`}>
-                          {(selectedHotspot.categoryLabel || selectedHotspot.tag || 'MODUS').toUpperCase()}
-                        </span>
-                      </div>
-                      <h3 className="detail-title">{selectedHotspot.label}</h3>
-                      <p className="detail-subtitle">{selectedHotspot.tag || selectedHotspot.shortName || selectedHotspot.label}</p>
-                    </div>
-
-                    <div className="modal-header-right">
-                      <button
-                        className="modal-close-btn"
-                        onClick={() => setSelectedHotspot(null)}
-                        aria-label="Tutup Kartu"
-                      >
-                        ✕
-                      </button>
-                    </div>
-                  </div>
+                    ←
+                  </button>
+                  <span id="card-nav-counter" className="card-nav-counter font-code-tech">
+                    {selectedHotspot.badgeNum || ((moduleData?.hotspots || []).findIndex(h => h.id === selectedHotspot.id) + 1)} / {moduleData?.hotspots?.length || 8}
+                  </span>
+                  <button
+                    id="btn-next-hotspot"
+                    className="card-nav-arrow-btn"
+                    title="Modus Berikutnya"
+                    onClick={() => {
+                      const allHotspots = moduleData?.hotspots || [];
+                      const idx = allHotspots.findIndex(h => h.id === selectedHotspot.id);
+                      const nextIdx = (idx + 1) % allHotspots.length;
+                      handleHotspotClick(allHotspots[nextIdx], true);
+                    }}
+                  >
+                    →
+                  </button>
+                </div>
+                <button
+                  className="modal-close-btn"
+                  onClick={() => setSelectedHotspot(null)}
+                  aria-label="Tutup Kartu"
+                  title="Tutup Kartu"
+                >
+                  ✕
+                </button>
+              </div>
+            </div>
 
                   {/* Tab Navigation */}
                   <div className="card-tabs-nav">
@@ -637,9 +678,6 @@ export function Modul1View() {
                 </div>
               </div>
             )}
-          </div>
-        </div>
-      </div>
 
       {/* ─── QUIZ MODAL ─── */}
       {showQuiz && (
