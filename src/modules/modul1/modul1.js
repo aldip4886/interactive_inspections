@@ -71,11 +71,6 @@ export class Modul1View extends BaseModuleView {
                 </div>
               </div>
 
-              <!-- Kuis Button -->
-              <button class="quiz-nav-pill-btn" id="btn-open-quiz" title="Latihan Soal Penilaian Kompetensi">
-                <span>Kuis Penilaian</span>
-              </button>
-
               <!-- Help Button -->
               <button id="btn-help-modal" class="icon-btn circle-btn" title="Panduan Penggunaan">
                 <span>?</span>
