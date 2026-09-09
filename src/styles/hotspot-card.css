@@ -1448,83 +1448,36 @@
   color: #334155;
 }
 
-/* Floating Card Pagination Bar with Carousel & Modus Navigation */
+/* Floating Card Pagination Bar with Carousel Navigation */
 .card-pagination-bar {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 6px 12px;
+  justify-content: center;
+  padding: 6px 14px;
   background: var(--color-surface, #F8FAFC);
   border-top: 1px solid var(--color-border-subtle, #E2E8F0);
   user-select: none;
-  gap: 8px;
+  gap: 12px;
   font-family: 'Poppins', sans-serif !important;
-  flex-wrap: wrap;
-}
-
-/* Modus Navigation Group (Beralih ke Modus Concealment Sblm/Lanjut) */
-.modus-nav-group {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.btn-modus-nav {
-  display: inline-flex;
-  align-items: center;
-  gap: 3px;
-  padding: 4px 10px;
-  border-radius: 6px;
-  font-size: 11px;
-  font-weight: 700;
-  font-family: 'Poppins', sans-serif !important;
-  color: #00253B;
-  background: #FFFBEB;
-  border: 1px solid #FDE68A;
-  cursor: pointer;
-  transition: all 0.18s ease;
-  white-space: nowrap;
-}
-
-.btn-modus-nav:hover {
-  background: #FDBB24;
-  color: #00253B;
-  border-color: #FDBB24;
-  box-shadow: 0 2px 6px rgba(253, 187, 36, 0.35);
-}
-
-.modus-nav-counter {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 11px;
-  font-weight: 700;
-  color: #0B2C6E;
-  background: #EFF6FF;
-  padding: 3px 8px;
-  border-radius: 4px;
-  border: 1px solid #DBEAFE;
-}
-
-/* Tab Carousel Navigation Group */
-.tab-carousel-nav-group {
-  display: flex;
-  align-items: center;
-  gap: 6px;
 }
 
 .card-page-nav-btn {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
-  padding: 4px 10px;
-  border-radius: 6px;
-  font-size: 11px;
-  font-weight: 600;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  font-size: 13px;
+  font-weight: 700;
   font-family: 'Poppins', sans-serif !important;
   color: var(--color-primary, #00253B);
   background: #FFFFFF;
   border: 1px solid var(--color-border-subtle, #CBD5E1);
   cursor: pointer;
   transition: all 0.18s ease;
+  padding: 0;
+  line-height: 1;
 }
 
 .card-page-nav-btn:hover:not(:disabled) {
@@ -1541,7 +1494,7 @@
 .card-page-pills {
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 6px;
 }
 
 /* Carousel Pills / Dots */
@@ -1575,7 +1528,7 @@
 
 .card-page-info {
   font-family: 'Poppins', sans-serif !important;
-  font-size: 10.5px;
+  font-size: 11px;
   font-weight: 600;
   color: var(--color-on-surface-variant, #64748B);
 }
