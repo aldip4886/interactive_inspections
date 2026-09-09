@@ -412,8 +412,8 @@
 .beranda-hero {
   background: linear-gradient(135deg, #001529 0%, #071d31 60%, #030d17 100%);
   border-radius: var(--radius-xl);
-  padding: 48px 48px 56px 48px;
-  min-height: 280px;
+  padding: 24px 32px 28px 32px;
+  min-height: 160px;
   display: flex;
   align-items: center;
   position: relative;
