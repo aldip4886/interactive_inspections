@@ -16,6 +16,7 @@ export class Modul4aView extends BaseModuleView {
     this.activeFilter = 'all';
     this.isModalOpen = false;
     this.isAutoRotating = true;
+    this.currentZoomFactor = 2.5;
     this.cardPages = [
       { id: 'tab-modus', num: 1, title: 'Modus Operandi' },
       { id: 'tab-photos', num: 2, title: 'Foto Gambar Real' },
@@ -130,10 +131,22 @@ export class Modul4aView extends BaseModuleView {
               <!-- Floating HUD Segmented Pill Controls Dock (Center Bottom) -->
               <div class="pedestal-rotation-dock" id="pedestal-rotation-dock">
                 <div class="pedestal-carousel-controls">
-                  <!-- Mode / Auto-Rotate Toggle Button -->
-                  <button id="btn-rotate-3d" class="hud-pill-action-btn active" title="Toggle Rotasi Otomatis 360°">
-                    <span class="hud-btn-icon">↻</span>
-                    <span class="hud-btn-text">ROTASI 360°</span>
+                  <!-- Step Carousel Prev / Play / Next Controls -->
+                  <button id="btn-carousel-prev" class="pedestal-ctrl-btn" title="Putar Kiri (360°)" aria-label="Putar Kiri">‹</button>
+                  <button id="btn-carousel-play" class="pedestal-ctrl-btn btn-play playing" title="Toggle Rotasi Otomatis 360°" aria-label="Auto-Play 360°">
+                    <span id="play-pause-icon">⏸</span>
+                  </button>
+                  <button id="btn-carousel-next" class="pedestal-ctrl-btn" title="Putar Kanan (360°)" aria-label="Putar Kanan">›</button>
+
+                  <div class="hud-pill-divider"></div>
+
+                  <!-- Zoom Controls integrated into segmented dock -->
+                  <button id="btn-zoom-out" class="pedestal-ctrl-btn hud-zoom-btn" title="Perkecil (Zoom Out)" aria-label="Zoom Out">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                  </button>
+                  <button id="btn-zoom-reset" class="pedestal-ctrl-btn hud-zoom-btn font-code-tech" title="Reset Zoom (250%)">250%</button>
+                  <button id="btn-zoom-in" class="pedestal-ctrl-btn hud-zoom-btn" title="Perbesar (Zoom In)" aria-label="Zoom In">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
                   </button>
 
                   <div class="hud-pill-divider"></div>
@@ -605,12 +618,71 @@ export class Modul4aView extends BaseModuleView {
       });
     });
 
-    // Auto-Rotate Button Toggle
-    const btnRotate = this.container.querySelector('#btn-rotate-3d');
-    btnRotate?.addEventListener('click', () => {
-      this.isAutoRotating = !this.isAutoRotating;
-      btnRotate.classList.toggle('active', this.isAutoRotating);
+    // Step Carousel Prev (<), Play (▶/⏸), Next (>) Rotate Controls
+    const btnPrev = this.container.querySelector('#btn-carousel-prev');
+    const btnPlay = this.container.querySelector('#btn-carousel-play');
+    const btnNext = this.container.querySelector('#btn-carousel-next');
+    const playIcon = this.container.querySelector('#play-pause-icon');
+
+    btnPrev?.addEventListener('click', () => {
+      if (this.vehicleGroup) {
+        this.vehicleGroup.rotation.y -= 0.25;
+      }
     });
+
+    btnNext?.addEventListener('click', () => {
+      if (this.vehicleGroup) {
+        this.vehicleGroup.rotation.y += 0.25;
+      }
+    });
+
+    btnPlay?.addEventListener('click', () => {
+      this.isAutoRotating = !this.isAutoRotating;
+      btnPlay.classList.toggle('playing', this.isAutoRotating);
+      if (playIcon) {
+        playIcon.textContent = this.isAutoRotating ? '⏸' : '▶';
+      }
+    });
+
+    // Zoom Controls: Zoom Out (-), Reset Zoom, Zoom In (+)
+    const btnZoomOut = this.container.querySelector('#btn-zoom-out');
+    const btnZoomReset = this.container.querySelector('#btn-zoom-reset');
+    const btnZoomIn = this.container.querySelector('#btn-zoom-in');
+
+    btnZoomOut?.addEventListener('click', () => {
+      this.currentZoomFactor = Math.max(1.0, (this.currentZoomFactor || 2.5) - 0.5);
+      this.updateZoomLevel();
+    });
+
+    btnZoomIn?.addEventListener('click', () => {
+      this.currentZoomFactor = Math.min(4.0, (this.currentZoomFactor || 2.5) + 0.5);
+      this.updateZoomLevel();
+    });
+
+    btnZoomReset?.addEventListener('click', () => {
+      this.currentZoomFactor = 2.5;
+      this.updateZoomLevel();
+    });
+  }
+
+  updateZoomLevel() {
+    if (!this.threeControls || !this.threeCamera) return;
+    const factor = this.currentZoomFactor || 2.5;
+    // Base 100% zoom distance is 7.1
+    const distance = 7.1 / factor;
+
+    const dir = this.threeCamera.position.clone().sub(this.threeControls.target).normalize();
+    if (dir.length() === 0) dir.set(0, 0, 1);
+
+    this.threeCamera.position.copy(this.threeControls.target).add(dir.multiplyScalar(distance));
+    this.threeControls.minDistance = distance;
+    this.threeControls.maxDistance = distance;
+    this.threeControls.update();
+
+    const zoomResetBtn = this.container.querySelector('#btn-zoom-reset');
+    if (zoomResetBtn) {
+      zoomResetBtn.textContent = `${Math.round(factor * 100)}%`;
+    }
   }
 
   renderHotspots() {
