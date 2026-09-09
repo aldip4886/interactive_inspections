@@ -702,10 +702,10 @@
 
 /* ══════════════════════ TABBED HOTSPOT FLOATING CARD (STITCH FORENSIC STYLE) ══════════════════════ */
 .tabbed-hotspot-modal {
-  width: 520px !important;
-  max-width: calc(100vw - 260px) !important;
+  width: 620px !important;
+  max-width: min(92vw, 680px) !important;
   height: auto !important;
-  max-height: min(640px, calc(100vh - 65px)) !important;
+  max-height: min(680px, calc(100vh - 60px)) !important;
   background: var(--color-surface-container-lowest, #FFFFFF) !important;
   border-radius: var(--radius-xl, 16px) !important;
   box-shadow: 0 24px 56px rgba(0, 37, 59, 0.28), 0 0 0 1px rgba(0, 37, 59, 0.1), 0 4px 20px rgba(0, 0, 0, 0.08) !important;
@@ -751,7 +751,7 @@
 }
 
 .tabbed-modal-header {
-  padding: 14px 18px;
+  padding: 14px 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -880,7 +880,7 @@
 }
 
 .detail-title {
-  font-size: 17px;
+  font-size: 18px;
   font-weight: 800;
   color: #FFFFFF !important;
   line-height: 1.25;
@@ -889,14 +889,14 @@
 }
 
 .detail-subtitle {
-  font-size: 12px;
+  font-size: 12.5px;
   color: #CBD5E1 !important;
   line-height: 1.35;
   font-weight: 400;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 280px;
+  max-width: 380px;
 }
 
 .modal-close-btn {
@@ -928,7 +928,7 @@
   align-items: center;
   background: #F1F5F9;
   border-bottom: 1px solid var(--color-border-subtle, #E2E8F0);
-  padding: 6px 10px;
+  padding: 6px 12px;
   gap: 6px;
   width: 100%;
 }
@@ -939,8 +939,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 8.5px 8px;
-  font-size: 12px;
+  padding: 9px 8px;
+  font-size: 12.5px;
   font-weight: 600;
   color: #475569;
   border-radius: 8px;
@@ -975,8 +975,8 @@
 .tab-content-container {
   flex: 1;
   overflow-y: auto;
-  padding: 12px 14px;
-  max-height: 380px;
+  padding: 16px 20px;
+  max-height: 460px;
 }
 
 .tab-content-container::-webkit-scrollbar {
