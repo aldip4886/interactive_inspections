@@ -555,7 +555,7 @@ export class Modul4aView extends BaseModuleView {
     const hotspots = this.moduleData.hotspots || [];
 
     hotspots.forEach(hs => {
-      const wp = hs.worldPos || { x: -2.00, y: -0.65, z: 0.0 };
+      const wp = hs.worldPos || { x: -2.00, y: 0.00, z: 0.0 };
 
       const anchorGroup = new THREE.Group();
       anchorGroup.name = `hotspot-anchor-${hs.id}`;
