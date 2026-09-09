@@ -53,9 +53,9 @@
       "categoryId": "koper_tas",
       "categoryLabel": "Koper & Tas Bawaan",
       "color": "#E53E3E",
-      "position": { "x": 36.0, "y": 26.0 },
+      "position": { "x": 36.0, "y": 25.0 },
       "coordsByView": {
-        "xray": { "x": 36.0, "y": 26.0 },
+        "xray": { "x": 36.0, "y": 25.0 },
         "normal": { "x": 35.0, "y": 30.0 }
       },
       "riskLevel": "critical",
@@ -106,9 +106,9 @@
       "categoryId": "personal_items",
       "categoryLabel": "Pouch Personal Items",
       "color": "#1890FF",
-      "position": { "x": 65.0, "y": 26.0 },
+      "position": { "x": 65.0, "y": 25.0 },
       "coordsByView": {
-        "xray": { "x": 65.0, "y": 26.0 },
+        "xray": { "x": 65.0, "y": 25.0 },
         "normal": { "x": 65.0, "y": 30.0 }
       },
       "riskLevel": "high",
@@ -158,9 +158,9 @@
       "categoryId": "buku_dokumen",
       "categoryLabel": "Buku & Kitab",
       "color": "#38A169",
-      "position": { "x": 36.0, "y": 52.0 },
+      "position": { "x": 36.0, "y": 50.0 },
       "coordsByView": {
-        "xray": { "x": 36.0, "y": 52.0 },
+        "xray": { "x": 36.0, "y": 50.0 },
         "normal": { "x": 38.0, "y": 48.0 }
       },
       "riskLevel": "high",
@@ -210,9 +210,9 @@
       "categoryId": "makanan_snack",
       "categoryLabel": "Makanan & Snack",
       "color": "#F5A623",
-      "position": { "x": 57.5, "y": 52.0 },
+      "position": { "x": 57.5, "y": 50.0 },
       "coordsByView": {
-        "xray": { "x": 57.5, "y": 52.0 },
+        "xray": { "x": 57.5, "y": 50.0 },
         "normal": { "x": 62.0, "y": 48.0 }
       },
       "riskLevel": "warning",
