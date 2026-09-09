@@ -90,7 +90,7 @@ export class Modul4aView extends BaseModuleView {
               <div class="current-angle-badge" id="current-angle-badge">
                 <span class="angle-deg font-code-tech" id="view-mode-badge">3D MODEL</span>
                 <span class="angle-sep">•</span>
-                <span class="angle-name" id="view-mode-title">Ford Everest Sport SUV 2023</span>
+                <span class="angle-name" id="view-mode-title">Ford Ranger Next-Gen 2023 Sport</span>
                 <span class="angle-sub" id="view-mode-sub">(Inspeksi 3D Interaktif 360°)</span>
               </div>
               <div class="angle-instruction-tag">
@@ -109,7 +109,7 @@ export class Modul4aView extends BaseModuleView {
               <div class="forensic-hud-telemetry" aria-hidden="true">
                 <div class="forensic-hud-top-left font-code-tech">
                   <div class="hud-line-title">STASIUN PEMINDAIAN KENDARAAN DARAT 3D</div>
-                  <div class="hud-line-sub">SUBJEK ID: VEHICLE-SUV-EV44 / FORD EVEREST 2023</div>
+                  <div class="hud-line-sub">SUBJEK ID: VEHICLE-PICKUP-FR23 / FORD RANGER 2023</div>
                 </div>
                 <div class="forensic-hud-top-right font-code-tech">
                   <div class="hud-line-azimuth" id="hud-azimuth-text">MODE AKTIF: 3D INTERACTIVE INSPECTION</div>
@@ -120,7 +120,7 @@ export class Modul4aView extends BaseModuleView {
               <!-- Central Active 3D Vehicle Container with Hotspots Layer -->
               <div class="body-image-container" id="vehicle-image-container" style="max-width:920px; width:100%; aspect-ratio: auto; margin:0 auto; position:relative;">
                 <div id="m4a-3d-canvas-wrapper" style="width:100%; height:62vh; min-height:420px; position:relative; display:flex; align-items:center; justify-content:center;">
-                  <img id="m4a-central-image" src="assets/images/central/m4a_suv_cutaway.png" alt="Ford Everest Sport SUV" class="main-body-img" style="display:none; max-height:60vh; object-fit:contain; filter:drop-shadow(0 12px 32px rgba(0,37,59,0.16)); pointer-events:none;" />
+                  <img id="m4a-central-image" src="assets/images/central/m4a_suv_cutaway.png" alt="Ford Ranger Next-Gen 2023 Sport" class="main-body-img" style="display:none; max-height:60vh; object-fit:contain; filter:drop-shadow(0 12px 32px rgba(0,37,59,0.16)); pointer-events:none;" />
                   <div id="three-canvas-container" style="width:100%; height:100%; position:absolute; inset:0; z-index:2;"></div>
                 </div>
                 <div class="body-pedestal-platform"></div>
@@ -400,8 +400,8 @@ export class Modul4aView extends BaseModuleView {
       loader.setMeshoptDecoder(MeshoptDecoder);
 
       const modelPaths = [
-        'assets/models/ford_everest_sport_2023.glb',
-        'assets/images/central/ford_everest_sport_2023.glb'
+        'assets/models/ford_ranger_next-gen_2023_sport.glb',
+        'assets/images/central/ford_ranger_next-gen_2023_sport.glb'
       ];
 
       const loadModel = (index) => {
@@ -450,6 +450,9 @@ export class Modul4aView extends BaseModuleView {
           this.threeControls.update();
         }
 
+        // Project 3D hotspot positions to 2D screen coordinates on every frame
+        this.updateHotspotPositions3D();
+
         if (this.threeRenderer && this.threeScene && this.threeCamera) {
           this.threeRenderer.render(this.threeScene, this.threeCamera);
         }
@@ -473,6 +476,53 @@ export class Modul4aView extends BaseModuleView {
       console.warn('Three.js initialization warning:', err.message);
       if (fallbackImg) fallbackImg.style.display = 'block';
     }
+  }
+
+  updateHotspotPositions3D() {
+    if (!this.threeCamera || !this.container || !this.vehicleGroup) return;
+    const container = this.container.querySelector('#m4a-3d-canvas-wrapper');
+    if (!container) return;
+
+    const width = container.clientWidth;
+    const height = container.clientHeight;
+    if (!width || !height) return;
+
+    const layerEl = this.container.querySelector('#m4a-hotspots-layer');
+    if (!layerEl) return;
+
+    const pins = layerEl.querySelectorAll('.body-hotspot-pin');
+    const hotspots = this.moduleData?.hotspots || [];
+
+    pins.forEach(pin => {
+      const hsId = pin.dataset.id;
+      const hs = hotspots.find(h => h.id === hsId);
+      if (!hs) return;
+
+      if (hs.worldPos) {
+        const wp = hs.worldPos;
+        const v = new THREE.Vector3(wp.x, wp.y, wp.z);
+        // Apply vehicle group transformation (rotation, position, scale)
+        v.applyMatrix4(this.vehicleGroup.matrixWorld);
+
+        // Project vector to Normalized Device Coordinates (-1 to +1)
+        v.project(this.threeCamera);
+
+        // Convert NDC to screen pixel coordinates relative to container
+        const x = (v.x * 0.5 + 0.5) * width;
+        const y = (-v.y * 0.5 + 0.5) * height;
+
+        // Check if inside canvas frustum
+        const isVisible = v.z < 1 && x >= -40 && x <= width + 40 && y >= -40 && y <= height + 40;
+
+        if (isVisible) {
+          pin.style.display = 'flex';
+          pin.style.left = `${x}px`;
+          pin.style.top = `${y}px`;
+        } else {
+          pin.style.display = 'none';
+        }
+      }
+    });
   }
 
   initInteractiveViewer() {
