@@ -4,38 +4,38 @@
    ═══════════════════════════════════════════════════════════════ */
 
 :root {
-  --djbc-navy-dark: #071d31;
-  --djbc-navy-deep: #001529;
-  --djbc-navy-main: #071d31;
-  --djbc-navy-light: #132f4c;
-  --djbc-gold: #fdc003;
-  --djbc-gold-hover: #e5ad00;
-  --djbc-gold-light: #fffbe6;
-  --djbc-gold-border: #ffe58f;
+  --djbc-navy-dark: var(--color-dark-sidebar, #041E3A);
+  --djbc-navy-deep: var(--color-deep-navy, #062B52);
+  --djbc-navy-main: var(--color-primary-navy, #0B3A6F);
+  --djbc-navy-light: #134B8A;
+  --djbc-gold: var(--color-gold, #D9B45B);
+  --djbc-gold-hover: var(--color-gold-hover, #C9A34E);
+  --djbc-gold-light: var(--color-gold-light, #FDF9EE);
+  --djbc-gold-border: #E8D39A;
 
-  --bg-stage: #f7f9fc;
-  --bg-surface: #ffffff;
-  --bg-card: #ffffff;
-  --border-light: #e0e3e6;
-  --border-medium: #c4c6cd;
+  --bg-stage: var(--color-bg-main, #EEF2F7);
+  --bg-surface: var(--color-surface, #FFFFFF);
+  --bg-card: var(--color-surface, #FFFFFF);
+  --border-light: var(--color-border-light, #E5E9F0);
+  --border-medium: var(--color-border, #D9E0E8);
 
-  --text-primary: #191c1e;
-  --text-secondary: #43474d;
-  --text-muted: #74777d;
-  --text-white: #ffffff;
+  --text-primary: var(--color-text-primary, #1F2937);
+  --text-secondary: var(--color-text-muted, #64748B);
+  --text-muted: var(--color-text-muted, #64748B);
+  --text-white: var(--color-text-on-dark, #FFFFFF);
 
-  --warning-bg: #fffbe6;
-  --warning-border: #ffe58f;
-  --warning-text: #873800;
-  --warning-badge: #faad14;
+  --warning-bg: var(--color-warning-bg, #FFFBEB);
+  --warning-border: #FDE68A;
+  --warning-text: #92400E;
+  --warning-badge: var(--color-warning, #D97706);
 
-  --proc-bg: #e6f7ff;
-  --proc-border: #91d5ff;
-  --proc-text: #003a8c;
-  --proc-badge: #1890ff;
+  --proc-bg: var(--color-accent-blue-light, #EBF3FE);
+  --proc-border: #BFDBFE;
+  --proc-text: var(--color-deep-navy, #062B52);
+  --proc-badge: var(--color-secondary, #0284C7);
 
-  --danger-red: #ba1a1a;
-  --success-green: #15803d;
+  --danger-red: var(--color-danger, #EF4444);
+  --success-green: var(--color-success, #10B981);
   --sidebar-width-mod1: 230px;
   --navbar-height-mod1: 52px;
   --body-zoom: 1.5;
@@ -67,7 +67,7 @@
   border: 2px solid var(--djbc-gold);
   pointer-events: none;
   animation: pulseRadar 1.8s infinite ease-out;
-  box-shadow: 0 0 8px rgba(245, 166, 35, 0.7);
+  box-shadow: 0 0 8px rgba(217, 180, 91, 0.7);
 }
 
 /* ══════════════════════ MODUL 1 ROOT WRAPPER ══════════════════════ */
