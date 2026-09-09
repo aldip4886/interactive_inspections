@@ -137,6 +137,12 @@
   letter-spacing: 0.3px;
 }
 
+.modul1-top-bar .nav-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
 .sensor-state-chip {
   display: inline-flex;
   align-items: center;
@@ -166,6 +172,58 @@
 @keyframes sensorPulse {
   0%, 100% { opacity: 1; transform: scale(1); }
   50% { opacity: 0.4; transform: scale(0.85); }
+}
+
+/* ─── Gold Module Progress Widget (Nav Right) ─── */
+.module-progress-widget {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 150px;
+  background: #F8FAFC;
+  padding: 5px 12px;
+  border-radius: 8px;
+  border: 1px solid #E2E8F0;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.03);
+}
+
+.progress-info-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  line-height: 1.2;
+}
+
+.progress-title {
+  color: #475569;
+  font-size: 10.5px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.progress-value {
+  color: #0B2C6E;
+  font-weight: 800;
+  font-size: 11.5px;
+  letter-spacing: 0.5px;
+}
+
+.progress-track {
+  width: 100%;
+  height: 7px;
+  background: #E2E8F0;
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #F5A623 0%, #FDC003 100%);
+  border-radius: 4px;
+  box-shadow: 0 0 8px rgba(253, 192, 3, 0.6);
+  transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .rotatable-body-view {
