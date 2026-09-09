@@ -560,22 +560,22 @@ export class Modul4aView extends BaseModuleView {
       const anchorGroup = new THREE.Group();
       anchorGroup.name = `hotspot-anchor-${hs.id}`;
 
-      // Candidates to locate hood surface regardless of model axis orientation
+      // Candidates targeting front hood area across major model axes
       const candidates = [
-        new THREE.Vector3(wp.x, wp.y, wp.z),
-        new THREE.Vector3(1.15, 0.35, 0.0),
-        new THREE.Vector3(-1.15, 0.35, 0.0),
-        new THREE.Vector3(0.0, 0.35, 1.15),
-        new THREE.Vector3(0.0, 0.35, -1.15)
+        new THREE.Vector3(1.40, 0.25, 0.0),   // +X front
+        new THREE.Vector3(-1.40, 0.25, 0.0),  // -X front
+        new THREE.Vector3(0.0, 0.25, 1.40),   // +Z front
+        new THREE.Vector3(0.0, 0.25, -1.40),  // -Z front
+        new THREE.Vector3(wp.x, wp.y, wp.z)
       ];
 
-      let bestLocalHit = null;
-      let highestY = -Infinity;
+      let bestHoodHit = null;
+      let maxDistFromCenter = -Infinity;
       const surfaceRaycaster = new THREE.Raycaster();
 
       for (let cand of candidates) {
-        // Local ray start 2.0 units above candidate, shooting straight down (-Y)
-        const localRayStart = new THREE.Vector3(cand.x, cand.y + 2.0, cand.z);
+        // Local ray start 1.8 units above candidate, shooting straight down (-Y)
+        const localRayStart = new THREE.Vector3(cand.x, cand.y + 1.8, cand.z);
         const localRayDir = new THREE.Vector3(0, -1, 0);
 
         // Convert local ray to world space
@@ -587,16 +587,19 @@ export class Modul4aView extends BaseModuleView {
 
         for (let hit of hits) {
           const localP = this.vehicleGroup.worldToLocal(hit.point.clone());
-          // Must hit top exterior metal surface of hood/body (Y > 0.1)
-          if (localP.y > 0.1 && localP.y > highestY) {
-            highestY = localP.y;
-            bestLocalHit = localP;
+          // Target hood metal surface height (0.15 <= Y <= 0.48, excluding roof Y > 0.5)
+          if (localP.y >= 0.15 && localP.y <= 0.48) {
+            const horizontalDist = Math.hypot(localP.x, localP.z);
+            if (horizontalDist > maxDistFromCenter) {
+              maxDistFromCenter = horizontalDist;
+              bestHoodHit = localP;
+            }
           }
         }
       }
 
-      if (bestLocalHit) {
-        anchorGroup.position.copy(bestLocalHit);
+      if (bestHoodHit) {
+        anchorGroup.position.copy(bestHoodHit);
       } else {
         anchorGroup.position.set(wp.x, wp.y, wp.z);
       }
