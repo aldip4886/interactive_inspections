@@ -592,17 +592,6 @@ export class Modul4aView extends BaseModuleView {
         label: hs.label
       };
 
-      // Visual 3D marker inside scene
-      const geometry = new THREE.SphereGeometry(0.04, 16, 16);
-      const material = new THREE.MeshBasicMaterial({
-        color: 0xfdbb24,
-        transparent: true,
-        opacity: 0.85
-      });
-      const markerMesh = new THREE.Mesh(geometry, material);
-      markerMesh.name = `marker-mesh-${hs.id}`;
-      anchorGroup.add(markerMesh);
-
       // Add 3D hotspot object directly to vehicleGroup mesh hierarchy
       this.vehicleGroup.add(anchorGroup);
     });
@@ -766,9 +755,7 @@ export class Modul4aView extends BaseModuleView {
       const label = hs.label || `Hotspot #${num}`;
 
       pin.innerHTML = `
-        <div class="pin-point">
-          <div class="pin-pulse-ring"></div>
-        </div>
+        <div class="pin-point"></div>
         <div class="pin-tooltip" role="tooltip">
           <span class="pin-tooltip-num">${num}</span>
           <span class="pin-tooltip-name">${label}</span>
