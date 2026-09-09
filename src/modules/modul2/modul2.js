@@ -41,12 +41,12 @@ export class Modul2View extends BaseModuleView {
     const categories = this.moduleData.categories || [];
 
     return `
-      <div id="modul2-app-root" style="width:100%; display:flex; flex-direction:column; align-items:center;">
+      <div id="modul2-app-root">
         <!-- ─── MAIN VIEWPORT ─── -->
-        <div id="modul2-viewport" style="width:100%; display:flex; flex-direction:column; align-items:center;">
+        <div id="modul2-viewport">
 
           <!-- Sub Header Bar (Stitch Forensic Module Strip) -->
-          <div id="modul2-top-bar" class="modul1-top-bar" style="width:100%;">
+          <div id="modul2-top-bar" class="modul1-top-bar">
             <div class="nav-left">
               <div class="header-breadcrumb">
                 <span class="modul-code-badge font-code-tech">MODUL 02</span>
@@ -55,40 +55,92 @@ export class Modul2View extends BaseModuleView {
                 <span class="modul-ref-tag font-code-tech">PMK-188/2021 & S-39/BC/2023</span>
               </div>
             </div>
-          </div>
 
-          <!-- Floating Filter Category Bar -->
-          <div class="filter-category-bar">
-            ${categories.map(cat => `
-              <button class="filter-btn ${cat.id === 'all' ? 'active' : ''}" data-filter="${cat.id}">
-                ${cat.icon || ''} ${cat.label}
-              </button>
-            `).join('')}
-          </div>
-
-          <!-- Central Inspection Viewport Scene -->
-          <div class="scene-viewport" style="position:relative; width:100%; min-height:calc(100vh - 120px); display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; background:#FFFFFF; padding:20px 0; overflow:hidden;">
-            
-            <!-- Central Main Image Container with Hotspots -->
-            <div class="scene-container" style="position:relative; max-width:850px; width:100%; margin:0 auto; display:flex; justify-content:center; align-items:center; background:#FFFFFF;">
-              <img id="m2-central-image" src="assets/images/central/m2_luggage_xray.png" 
-                   alt="X-Ray Scanner Koper Bagasi Bawaan" 
-                   style="max-height:72vh; max-width:100%; object-fit:contain; filter:drop-shadow(0 4px 20px rgba(0,0,0,0.12)); display:block; margin:0 auto;" />
-              
-              <!-- Hotspots Interactive Layer -->
-              <div id="m2-hotspots-layer" class="hotspots-layer" style="position:absolute; inset:0;"></div>
-            </div>
-
-            <!-- View Mode Switcher Pill (Centered Below Main Image) -->
-            <div class="view-mode-switcher-pill" style="display:inline-flex; align-items:center; justify-content:center; gap:6px; background:#F8FAFC; padding:6px 12px; border-radius:24px; border:1px solid #E2E8F0; margin:16px auto 0 auto; z-index:10; box-shadow:0 2px 10px rgba(0,0,0,0.06);">
-              <button id="btn-view-xray" class="mode-pill-btn active" style="padding:6px 18px; border-radius:20px; border:none; background:#F5A623; color:#FFFFFF; font-size:12px; font-weight:700; cursor:pointer; transition:all 0.2s ease;">
-                🔍 X-Ray Scanner
-              </button>
-              <button id="btn-view-normal" class="mode-pill-btn" style="padding:6px 18px; border-radius:20px; border:none; background:transparent; color:#64748B; font-size:12px; font-weight:600; cursor:pointer; transition:all 0.2s ease;">
-                👜 Tampak Normal
+            <div class="nav-right">
+              <!-- Help Button -->
+              <button id="btn-help-modal" class="icon-btn circle-btn" title="Panduan Penggunaan">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                  <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                </svg>
               </button>
             </div>
           </div>
+
+          <!-- Inspection View Stage -->
+          <div class="rotatable-body-view">
+
+            <!-- Angle / View Header Bar -->
+            <div class="angle-header-bar">
+              <div class="current-angle-badge" id="current-angle-badge">
+                <span class="angle-deg font-code-tech" id="view-mode-badge">X-RAY SCANNER</span>
+                <span class="angle-sep">•</span>
+                <span class="angle-name" id="view-mode-title">Pemeriksaan Koper Bagasi (X-Ray)</span>
+                <span class="angle-sub" id="view-mode-sub">(Koper Trolley & Barang Bawaan)</span>
+              </div>
+              <div class="angle-instruction-tag">
+                <span class="instruction-dot">●</span>
+                <span>Klik hotspot bernomor untuk menganalisis modus operandi & bukti forensik</span>
+              </div>
+            </div>
+
+            <!-- Luggage Canvas Wrapper with Technical Forensic Grid & HUD Overlay -->
+            <div class="body-canvas-wrapper" id="luggage-canvas-wrapper">
+
+              <!-- Technical Forensic Grid Background Overlay -->
+              <div class="forensic-grid-background" aria-hidden="true"></div>
+
+              <!-- HUD Telemetry Watermark Overlay -->
+              <div class="forensic-hud-telemetry" aria-hidden="true">
+                <div class="forensic-hud-top-left font-code-tech">
+                  <div class="hud-line-title">STASIUN PEMINDAIAN BARANG BAWAAN DUAL-ENERGY</div>
+                  <div class="hud-line-sub">SUBJEK ID: SUSPECT-LUGGAGE-8812 / KOPER BAGASI</div>
+                </div>
+                <div class="forensic-hud-top-right font-code-tech">
+                  <div class="hud-line-azimuth" id="hud-azimuth-text">MODE AKTIF: SCANNER X-RAY HI-PENETRATION</div>
+                  <div class="hud-line-status">SENSOR: DUAL-ENERGY TRANSMISSION X-RAY</div>
+                </div>
+              </div>
+
+              <!-- Central Active Luggage Image Container with Hotspots Layer -->
+              <div class="body-image-container" id="luggage-image-container" style="max-width:850px; aspect-ratio: auto; margin:0 auto;">
+                <img id="m2-central-image" src="assets/images/central/m2_luggage_xray.png" 
+                     alt="X-Ray Scanner Koper Bagasi Bawaan" 
+                     class="main-body-img"
+                     style="max-height: 68vh; filter: drop-shadow(0 12px 32px rgba(0, 37, 59, 0.16)); pointer-events:none;" />
+                <div class="body-pedestal-platform"></div>
+                <div id="m2-hotspots-layer" class="hotspots-layer"></div>
+              </div>
+
+              <!-- Floating HUD Segmented Pill Controls Dock (Center Bottom) -->
+              <div class="pedestal-rotation-dock" id="pedestal-rotation-dock">
+                <div class="pedestal-carousel-controls">
+                  <!-- Mode Switcher Pill Buttons -->
+                  <button id="btn-view-xray" class="hud-pill-action-btn active" title="Tampilan X-Ray Scanner">
+                    <span class="hud-btn-icon">🔍</span>
+                    <span class="hud-btn-text">X-RAY SCANNER</span>
+                  </button>
+                  <button id="btn-view-normal" class="hud-pill-action-btn mode-btn-secondary" title="Tampilan Tampak Normal">
+                    <span class="hud-btn-icon">👜</span>
+                    <span class="hud-btn-text">TAMPAK NORMAL</span>
+                  </button>
+
+                  <div class="hud-pill-divider"></div>
+
+                  <!-- Category Filter Buttons -->
+                  ${categories.map(cat => `
+                    <button class="filter-btn m2-dock-filter-btn ${cat.id === 'all' ? 'active' : ''}" data-filter="${cat.id}" title="${cat.label}">
+                      ${cat.icon || ''} <span>${cat.label}</span>
+                    </button>
+                  `).join('')}
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
         </div>
 
         <!-- ─── TABBED HOTSPOT CALLOUT CARD ─── -->
@@ -251,6 +303,33 @@ export class Modul2View extends BaseModuleView {
             </div>
           </div>
         </div>
+
+        <!-- ─── HELP MODAL ─── -->
+        <div id="help-overlay" class="modal-overlay hidden" role="dialog" aria-modal="true">
+          <div class="modal-card help-box">
+            <div class="modal-header">
+              <h2 class="modal-heading">Panduan Penggunaan Modul Barang Bawaan</h2>
+              <button id="btn-close-help" class="modal-close-btn">✕</button>
+            </div>
+            <div class="modal-body help-content">
+              <div class="help-item">
+                <strong>1. Switcher Mode Tampilan:</strong> Gunakan tombol <strong>🔍 X-Ray Scanner</strong> dan <strong>hb Tampak Normal</strong> pada dock bawah untuk berpindah citra radiologi atau visual fisik barang bawaan.
+              </div>
+              <div class="help-item">
+                <strong>2. Filter Kategori Modus:</strong> Filter titik-titik hotspot berdasarkan jenis koper, personal items, buku, makanan, atau sepatu melalui tombol kategori pada dock bawah.
+              </div>
+              <div class="help-item">
+                <strong>3. Titik Hotspot Interaktif:</strong> Klik nomor callout bernomor pada koper untuk menginspeksi modus penyembunyian & barang bukti.
+              </div>
+              <div class="help-item">
+                <strong>4. Format Tabbed Card:</strong> Pelajari rincian lengkap melalui 4 tab: <em>Modus Operandi</em>, <em>Foto Gambar Real</em>, <em>Ciri Pelaku & SOP</em>, dan <em>Indikator Risiko</em>.
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button id="btn-help-ok" class="btn-primary-action">Mengerti</button>
+            </div>
+          </div>
+        </div>
       </div>
     `;
   }
@@ -258,8 +337,8 @@ export class Modul2View extends BaseModuleView {
   initInteractiveViewer() {
     this.renderHotspots();
 
-    // Setup Category Filter Buttons
-    const filterBtns = this.container.querySelectorAll('.filter-category-bar .filter-btn');
+    // Setup Category Filter Buttons (HUD Dock Pills)
+    const filterBtns = this.container.querySelectorAll('.m2-dock-filter-btn, .filter-btn');
     filterBtns.forEach(btn => {
       btn.addEventListener('click', (e) => {
         filterBtns.forEach(b => b.classList.remove('active'));
@@ -273,29 +352,30 @@ export class Modul2View extends BaseModuleView {
     const btnXray = this.container.querySelector('#btn-view-xray');
     const btnNormal = this.container.querySelector('#btn-view-normal');
     const centralImg = this.container.querySelector('#m2-central-image');
+    const viewBadge = this.container.querySelector('#view-mode-badge');
+    const viewTitle = this.container.querySelector('#view-mode-title');
+    const azimuthText = this.container.querySelector('#hud-azimuth-text');
 
     if (btnXray && btnNormal && centralImg) {
       btnXray.addEventListener('click', () => {
         btnXray.classList.add('active');
-        btnXray.style.background = '#F5A623';
-        btnXray.style.color = '#FFFFFF';
         btnNormal.classList.remove('active');
-        btnNormal.style.background = 'transparent';
-        btnNormal.style.color = '#64748B';
         this.currentViewMode = 'xray';
         centralImg.src = 'assets/images/central/m2_luggage_xray.png';
+        if (viewBadge) viewBadge.textContent = 'X-RAY SCANNER';
+        if (viewTitle) viewTitle.textContent = 'Pemeriksaan Koper Bagasi (X-Ray)';
+        if (azimuthText) azimuthText.textContent = 'MODE AKTIF: SCANNER X-RAY HI-PENETRATION';
         this.renderHotspots();
       });
 
       btnNormal.addEventListener('click', () => {
         btnNormal.classList.add('active');
-        btnNormal.style.background = '#F5A623';
-        btnNormal.style.color = '#FFFFFF';
         btnXray.classList.remove('active');
-        btnXray.style.background = 'transparent';
-        btnXray.style.color = '#64748B';
         this.currentViewMode = 'normal';
         centralImg.src = 'assets/images/central/m2_luggage_normal.png';
+        if (viewBadge) viewBadge.textContent = 'TAMPAK NORMAL';
+        if (viewTitle) viewTitle.textContent = 'Pemeriksaan Koper Bagasi (Fisik)';
+        if (azimuthText) azimuthText.textContent = 'MODE AKTIF: INSPEKSI FISIK TAMPAK NORMAL';
         this.renderHotspots();
       });
     }
@@ -504,6 +584,16 @@ export class Modul2View extends BaseModuleView {
   }
 
   initModals() {
+    // Help modal listeners
+    const btnHelp = this.container.querySelector('#btn-help-modal');
+    const helpOverlay = this.container.querySelector('#help-overlay');
+    const btnCloseHelp = this.container.querySelector('#btn-close-help');
+    const btnOkHelp = this.container.querySelector('#btn-help-ok');
+
+    btnHelp?.addEventListener('click', () => helpOverlay?.classList.remove('hidden'));
+    btnCloseHelp?.addEventListener('click', () => helpOverlay?.classList.add('hidden'));
+    btnOkHelp?.addEventListener('click', () => helpOverlay?.classList.add('hidden'));
+
     const overlay = this.container.querySelector('#hotspot-card-modal-overlay');
     const closeBtn = this.container.querySelector('#btn-close-detail-modal');
     const prevBtn = this.container.querySelector('#btn-prev-hotspot');
