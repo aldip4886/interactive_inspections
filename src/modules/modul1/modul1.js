@@ -195,20 +195,16 @@ export class Modul1View extends BaseModuleView {
           <!-- Compact Segmented Tab Navigation -->
           <div class="card-tabs-nav" id="card-tabs-nav">
             <button class="tab-btn active" data-tab="tab-modus" title="Halaman 1: Modus Operandi">
-              <span class="tab-icon">📋</span>
-              <span class="tab-label">Modus</span>
+              <span class="tab-label">Modus Operandi</span>
             </button>
             <button class="tab-btn" data-tab="tab-photos" title="Halaman 2: Foto Gambar Real">
-              <span class="tab-icon">📷</span>
-              <span class="tab-label">Foto Bukti</span>
+              <span class="tab-label">Foto Real</span>
             </button>
             <button class="tab-btn" data-tab="tab-detection" title="Halaman 3: Ciri Pelaku & SOP">
-              <span class="tab-icon">🔍</span>
-              <span class="tab-label">SOP & Ciri</span>
+              <span class="tab-label">SOP & Deteksi</span>
             </button>
             <button class="tab-btn" data-tab="tab-risk" title="Halaman 4: Indikator Risiko">
-              <span class="tab-icon">🚨</span>
-              <span class="tab-label">Risiko</span>
+              <span class="tab-label">Indikator Risiko</span>
             </button>
           </div>
 
