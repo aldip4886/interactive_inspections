@@ -101,30 +101,47 @@
 }
 
 /* Sub-header Bar inside Modul 1 (Stitch Forensic Strip) */
-#modul1-top-bar.modul1-top-bar {
-  min-height: 52px;
-  height: auto;
+#modul1-top-bar.modul1-top-bar,
+#modul2-top-bar.modul1-top-bar {
+  min-height: 50px;
+  height: 50px;
   background: #FFFFFF;
   border-bottom: 1px solid var(--color-border-subtle, #E2E8F0);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 8px 20px;
+  padding: 0 20px;
   z-index: 20;
   gap: 16px;
   box-shadow: 0 1px 3px rgba(0, 37, 59, 0.04);
+  flex-wrap: nowrap;
+  white-space: nowrap;
 }
 
 .modul1-top-bar .nav-left {
   display: flex;
   align-items: center;
+  flex: 1;
+  min-width: 0;
+  flex-wrap: nowrap;
 }
 
 .modul1-top-bar .header-breadcrumb {
   display: flex;
   align-items: center;
   gap: 10px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.modul1-top-bar .course-main-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 700;
+  font-size: 14px;
 }
 
 .modul-code-badge {
