@@ -461,8 +461,17 @@ export class Modul4aView extends BaseModuleView {
       // Raycasting for direct clicks on 3D hotspot objects or vehicle mesh surface
       const raycaster = new THREE.Raycaster();
       const mouse = new THREE.Vector2();
-      container.addEventListener('click', (e) => {
+      let pointerDownPos = { x: 0, y: 0 };
+      container.addEventListener('pointerdown', (e) => {
+        pointerDownPos = { x: e.clientX, y: e.clientY };
+      });
+
+      container.addEventListener('pointerup', (e) => {
         if (!this.threeCamera || !this.vehicleGroup) return;
+
+        const distMoved = Math.hypot(e.clientX - pointerDownPos.x, e.clientY - pointerDownPos.y);
+        if (distMoved > 8) return; // Ignore drag rotation movements
+
         const rect = container.getBoundingClientRect();
         mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
         mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
@@ -821,7 +830,18 @@ export class Modul4aView extends BaseModuleView {
     if (overlay) {
       overlay.classList.remove('hidden');
       overlay.style.display = 'flex';
+      overlay.style.opacity = '1';
+      overlay.style.visibility = 'visible';
       overlay.style.zIndex = '9999';
+    }
+
+    const card = this.container.querySelector('#hotspot-modal-card');
+    if (card) {
+      card.style.display = 'flex';
+      card.style.opacity = '1';
+      card.style.visibility = 'visible';
+      card.style.transform = 'none';
+      card.style.pointerEvents = 'auto';
     }
 
     this.renderHotspots();
