@@ -27,7 +27,7 @@
       "angleMin": 0,
       "angleMax": 360,
       "position": { "x": 78.0, "y": 45.0 },
-      "worldPos": { "x": -2.00, "y": 0.00, "z": -0.7 },
+      "worldPos": { "x": -2.00, "y": 0.00, "z": -1.0 },
       "label": "1. Kap / Ruang Mesin & Bumper Depan",
       "badge": "KAP / RUANG MESIN",
       "badgeType": "danger",
