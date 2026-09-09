@@ -170,13 +170,14 @@ export class Modul1View extends BaseModuleView {
         </div>
       </div>
 
-      <!-- ─── 3. TABBED HOTSPOT CARD MODAL ─── -->
+      <!-- ─── 3. TABBED HOTSPOT CALLOUT CARD ─── -->
       <div id="hotspot-card-modal-overlay" class="modal-overlay hidden" role="dialog" aria-modal="true">
-        <div id="hotspot-modal-card" class="modal-card tabbed-hotspot-modal">
-          <div class="modal-header tabbed-modal-header" title="Tahan dan geser untuk memindahkan kartu">
+        <div id="hotspot-modal-card" class="modal-card tabbed-hotspot-modal hotspot-callout-card">
+          <div class="modal-header tabbed-modal-header" title="Tahan dan geser untuk memindahkan kartu callout">
             <div class="modal-header-left">
               <div class="detail-badge-row">
                 <span class="floating-card-drag-indicator" title="Geser posisi kartu">⋮⋮</span>
+                <span class="callout-pin-tag">📌 CALLOUT</span>
                 <span id="detail-tag-badge" class="detail-tag-badge">MODUS #01</span>
                 <span id="detail-cat-badge" class="detail-cat-badge">METODE INGESTION</span>
               </div>

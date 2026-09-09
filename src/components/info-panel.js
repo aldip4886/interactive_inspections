@@ -29,10 +29,13 @@ export class InfoPanel {
     const html = `
       <div class="drawer-header">
         <div>
-          <span class="badge ${badgeClass}" style="margin-bottom: 8px;">${hotspotData.badge || 'MODUS PENYELUNDUPAN'}</span>
-          <h3 style="margin: 0; font-size: var(--font-size-title-lg); color: var(--color-primary-container); line-height: 1.3;">${hotspotData.label}</h3>
+          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+            <span class="callout-pin-tag">📌 CALLOUT</span>
+            <span class="badge ${badgeClass}">${hotspotData.badge || 'MODUS PENYELUNDUPAN'}</span>
+          </div>
+          <h3 style="margin: 0; font-size: var(--font-size-title-lg); color: #FFFFFF; line-height: 1.3;">${hotspotData.label}</h3>
         </div>
-        <button id="close-info-drawer-btn" class="btn-icon" style="width:34px; height:34px; flex-shrink: 0;">✕</button>
+        <button id="close-info-drawer-btn" class="btn-icon" style="width:34px; height:34px; flex-shrink: 0; color: #FFF; background: rgba(255,255,255,0.15);">✕</button>
       </div>
 
       <div class="drawer-body">
