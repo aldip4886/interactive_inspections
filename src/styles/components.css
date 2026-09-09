@@ -437,29 +437,6 @@
   gap: 16px;
 }
 
-.hero-badge-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 5px 14px;
-  border-radius: var(--radius-full);
-  background: rgba(253, 192, 3, 0.15);
-  border: 1px solid rgba(253, 192, 3, 0.4);
-  color: var(--color-secondary-container);
-  font-size: var(--font-size-label-sm);
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  width: fit-content;
-}
-
-.hero-badge-pill .badge-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--color-secondary-container);
-  box-shadow: 0 0 8px var(--color-secondary-container);
-}
-
 .beranda-hero-title {
   font-size: var(--font-size-headline-lg);
   font-weight: 800;

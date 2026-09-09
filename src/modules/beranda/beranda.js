@@ -15,10 +15,6 @@ export class BerandaView {
         <section class="beranda-hero">
           <div class="beranda-hero-bg-overlay"></div>
           <div class="beranda-hero-content">
-            <div class="hero-badge-pill">
-              <span class="badge-dot"></span>
-              <span>MP3 — MODUS OPERANDI & INSPEKSI NARKOTIKA DJBC</span>
-            </div>
             <h1 class="beranda-hero-title">
               Interactive Narcotics Inspection Simulator
             </h1>
