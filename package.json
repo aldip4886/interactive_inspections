@@ -10,7 +10,8 @@
     "package:scorm": "node scripts/package-scorm.js"
   },
   "devDependencies": {
-    "vite": "^5.4.21"
+    "vite": "^5.4.21",
+    "ws": "^8.21.3"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^4.7.0",
