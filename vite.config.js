@@ -3,7 +3,7 @@ import { defineConfig } from 'vite';
 export default defineConfig({
   base: './',
   optimizeDeps: {
-    exclude: ['@google/model-viewer']
+    exclude: ['@google/model-viewer', 'three']
   },
   build: {
     outDir: 'dist',
