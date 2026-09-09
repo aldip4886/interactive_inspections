@@ -83,7 +83,8 @@
 
 /* ══════════════════════ MAIN VIEWPORT WORKSPACE ══════════════════════ */
 #modul1-app-root,
-#modul2-app-root {
+#modul2-app-root,
+#modul4a-app-root {
   width: 100%;
   height: 100%;
   display: flex;
@@ -91,7 +92,8 @@
 }
 
 #modul1-viewport,
-#modul2-viewport {
+#modul2-viewport,
+#modul4a-viewport {
   flex: 1;
   height: 100%;
   display: flex;
@@ -102,7 +104,8 @@
 
 /* Sub-header Bar inside Modul 1 (Stitch Forensic Strip) */
 #modul1-top-bar.modul1-top-bar,
-#modul2-top-bar.modul1-top-bar {
+#modul2-top-bar.modul1-top-bar,
+#modul4a-top-bar.modul1-top-bar {
   min-height: 50px;
   height: 50px;
   background: #FFFFFF;
