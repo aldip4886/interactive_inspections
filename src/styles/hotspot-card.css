@@ -1527,10 +1527,7 @@
 }
 
 .card-page-info {
-  font-family: 'Poppins', sans-serif !important;
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--color-on-surface-variant, #64748B);
+  display: none !important;
 }
 
 .card-close-pill-btn {

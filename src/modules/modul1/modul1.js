@@ -326,8 +326,6 @@ export class Modul1View extends BaseModuleView {
               <button class="page-pill" data-page="3" title="4. Indikator Risiko"></button>
             </div>
 
-            <span class="card-page-info" id="card-page-info">1 / 4</span>
-
             <button id="btn-page-next" class="card-page-nav-btn" title="Halaman Tab Selanjutnya">&gt;</button>
           </div>
         </div>
@@ -729,12 +727,6 @@ export class Modul1View extends BaseModuleView {
       if (idx === pageIndex) pill.classList.add('active');
       else pill.classList.remove('active');
     });
-
-    // Sync pagination status text
-    const pageInfo = this.container.querySelector('#card-page-info');
-    if (pageInfo) {
-      pageInfo.textContent = `${pageIndex + 1} / ${this.cardPages.length}`;
-    }
 
     // Update prev/next button states
     const btnPagePrev = this.container.querySelector('#btn-page-prev');
