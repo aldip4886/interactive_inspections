@@ -1,7 +1,7 @@
 {
   "moduleId": "modul4a",
   "moduleTitle": "Modul 4A: Penyelundupan Melalui Sarana Pengangkut Darat (Ford Ranger Next-Gen 2023 Sport)",
-  "description": "Inspeksi titik-titik penyembunyian pada kendaraan darat: Interior (dashboard, bawah jok), Bagasi (lantai, bak belakang), Kolong (sasis, knalpot), Ban (ban serep), Kompartemen (pintu mobil, konsol), & Struktur (bumper, mesin).",
+  "description": "Inspeksi titik-titik penyembunyian pada kendaraan darat: Interior dan Konsol, Bagasi Barang, Ban Cadangan, Tangki Bahan Bakar, Kompartemen Pintu, & Bumper dan Ruang Mesin.",
   "supportsRotation": true,
   "centralImages": {
     "cutaway": {
@@ -18,8 +18,8 @@
   "filterCategories": [
     { "id": "all", "label": "Semua Titik" },
     { "id": "interior", "label": "1. Interior & Konsol" },
-    { "id": "bagasi", "label": "2. Bagasi & Ban" },
-    { "id": "kolong", "label": "3. Kolong & Tangki" },
+    { "id": "bagasi", "label": "2. Bagasi Barang & Ban" },
+    { "id": "kolong", "label": "3. Tangki & Kolong" },
     { "id": "kompartemen", "label": "4. Kompartemen Pintu" },
     { "id": "struktur", "label": "5. Bumper & Ruang Mesin" }
   ],
@@ -31,20 +31,22 @@
       "angleMin": 0,
       "angleMax": 360,
       "position": { "x": 48.0, "y": 42.0 },
-      "worldPos": { "x": 0.35, "y": 0.25, "z": 0.35 },
-      "label": "1. Interior: Dashboard & Rongga Bawah Jok Mobil",
-      "badge": "INTERIOR",
+      "worldPos": { "x": 0.2, "y": 0.6, "z": 0.3 },
+      "modelViewerPos": "0.2m 0.6m 0.3m",
+      "modelViewerNormal": "0m 1m 0m",
+      "label": "1. Interior dan Konsol",
+      "badge": "INTERIOR & KONSOL",
       "badgeType": "warning",
       "mainImage": "assets/images/hotspots/hs_door_panel_compartment.png",
       "galleryImages": ["assets/images/hotspots/hs_door_panel_compartment.png"],
-      "description": "Rongga airbag kosong di dashboard atau sela pembungkus busa di bawah jok depan/belakang diisi kantong sabu.",
+      "description": "Rongga airbag kosong di dashboard, konsol tengah, atau sela pembungkus busa di bawah jok depan/belakang diisi kantong sabu/ekstasi.",
       "riskIndicators": [
         "Lampu indikator airbag menyala terus di instrument cluster.",
-        "Busa jok terasa keras dan ada bekas jahitan manual."
+        "Konsol tengah atau busa jok terasa keras dan ada bekas bongkaran."
       ],
       "inspectionActions": [
         "Buka konsol dashboard bawah dengan alat perenggang.",
-        "Periksa bawah karpet lantai dan jok."
+        "Periksa bawah karpet lantai, konsol tengah, dan rongga jok."
       ]
     },
     {
@@ -54,43 +56,22 @@
       "angleMin": 120,
       "angleMax": 240,
       "position": { "x": 28.0, "y": 46.0 },
-      "worldPos": { "x": -1.2, "y": 0.25, "z": 0.0 },
-      "label": "2. Bak Belakang / Bagasi: Bedliner & Storage Box",
-      "badge": "BAGASI / BAK",
+      "worldPos": { "x": -1.2, "y": 0.75, "z": 0.0 },
+      "modelViewerPos": "-1.2m 0.75m 0.0m",
+      "modelViewerNormal": "0m 1m 0m",
+      "label": "2. Bagasi Barang",
+      "badge": "BAGASI BARANG",
       "badgeType": "info",
       "mainImage": "assets/images/hotspots/hs_door_panel_compartment.png",
       "galleryImages": ["assets/images/hotspots/hs_door_panel_compartment.png"],
-      "description": "Kompartemen bawah alas bedliner bak belakang atau box penyimpanan dimodifikasi untuk menampung bungkusan ekstasi.",
+      "description": "Kompartemen bawah alas bedliner bak belakang atau box penyimpanan barang dimodifikasi untuk menampung bungkusan narkotika.",
       "riskIndicators": [
         "Lantai bedliner bak cembung tidak rata.",
         "Dinding pelindung bak berbunyi padat saat diketuk."
       ],
       "inspectionActions": [
         "Angkat papan alas bedliner bak belakang.",
-        "Buka sekrup cover kompartemen penyimpanan samping."
-      ]
-    },
-    {
-      "id": "hs-m4a-kolong",
-      "category": "kolong",
-      "view": "cutaway",
-      "angleMin": 0,
-      "angleMax": 360,
-      "position": { "x": 58.0, "y": 72.0 },
-      "worldPos": { "x": -0.1, "y": -0.55, "z": 0.45 },
-      "label": "3. Kolong: Sasis Bawah & Knalpot Ganda",
-      "badge": "KOLONG MOBIL",
-      "badgeType": "danger",
-      "mainImage": "assets/images/hotspots/hs_door_panel_compartment.png",
-      "galleryImages": ["assets/images/hotspots/hs_door_panel_compartment.png"],
-      "description": "Pipa sasis berongga di bagian kolong atau tabung knalpot palsu dilas untuk menyembunyikan bungkusan sabu.",
-      "riskIndicators": [
-        "Bekas las baru pada pipa sasis kolong.",
-        "Asap knalpot hanya keluar dari satu pipa pada knalpot ganda."
-      ],
-      "inspectionActions": [
-        "Pindahkan mobil ke atas pit car-lift.",
-        "Gunakan boroskop kabel untuk melihat rongga sasis."
+        "Buka sekrup cover kompartemen penyimpanan samping bagasi."
       ]
     },
     {
@@ -100,20 +81,47 @@
       "angleMin": 120,
       "angleMax": 240,
       "position": { "x": 22.0, "y": 68.0 },
-      "worldPos": { "x": -1.25, "y": -0.45, "z": 0.75 },
-      "label": "4. Ban: Ban Serep & Velg Roda Belakang",
-      "badge": "BAN SEREP",
+      "worldPos": { "x": -1.1, "y": 0.35, "z": 0.75 },
+      "modelViewerPos": "-1.1m 0.35m 0.75m",
+      "modelViewerNormal": "0m 0m 1m",
+      "label": "3. Ban Cadangan",
+      "badge": "BAN CADANGAN",
       "badgeType": "warning",
       "mainImage": "assets/images/hotspots/hs_door_panel_compartment.png",
       "galleryImages": ["assets/images/hotspots/hs_door_panel_compartment.png"],
-      "description": "Ban serep gantung di bawah bagasi/bak dikempiskan dan diisi puluhan bungkus sabu sebelum dipompa kembali.",
+      "description": "Ban serep / cadangan dikempiskan dan diisi puluhan bungkus sabu sebelum dipompa kembali atau velg ganda berongga rahasia.",
       "riskIndicators": [
-        "Tekanan ban serep keras namun berbunyi berat.",
-        "K-9 memberikan respon positif pada ban serep."
+        "Tekanan ban cadangan keras namun berbunyi berat saat ditepuk.",
+        "K-9 memberikan respon positif pada area ban cadangan."
       ],
       "inspectionActions": [
-        "Turunkan ban serep dari dongkrak gantung.",
-        "Kempiskan angin dan lepas velg ban."
+        "Turunkan ban cadangan dari gantung kompartemen bawah.",
+        "Kempiskan angin dan lepas velg dari karet ban."
+      ]
+    },
+    {
+      "id": "hs-m4a-tangki",
+      "category": "kolong",
+      "view": "cutaway",
+      "angleMin": 0,
+      "angleMax": 360,
+      "position": { "x": 58.0, "y": 72.0 },
+      "worldPos": { "x": -0.2, "y": 0.3, "z": 0.65 },
+      "modelViewerPos": "-0.2m 0.3m 0.65m",
+      "modelViewerNormal": "0m -1m 1m",
+      "label": "4. Tangki Bahan Bakar",
+      "badge": "TANGKI BAHAN BAKAR",
+      "badgeType": "danger",
+      "mainImage": "assets/images/hotspots/hs_door_panel_compartment.png",
+      "galleryImages": ["assets/images/hotspots/hs_door_panel_compartment.png"],
+      "description": "Tangki bahan bakar dimodifikasi dengan partisi ganda (double bottom) atau tabung tangki cadangan berisi cairan sabu cair.",
+      "riskIndicators": [
+        "Indikator bensin di dashboard menunjukkan penuh padat namun jarak tempuh pendek.",
+        "Bau bensin tercampur bahan kimia menyengat dari tutup tangki."
+      ],
+      "inspectionActions": [
+        "Gunakan alat density meter atau X-Ray scanner pada tangki BBM.",
+        "Pindahkan mobil ke atas pit car-lift dan cek baut pengikat tangki."
       ]
     },
     {
@@ -123,13 +131,15 @@
       "angleMin": 0,
       "angleMax": 360,
       "position": { "x": 42.0, "y": 52.0 },
-      "worldPos": { "x": 0.2, "y": 0.15, "z": 0.85 },
-      "label": "5. Kompartemen: Pintu Mobil & Konsol Tengah",
-      "badge": "PINTU MOBIL",
+      "worldPos": { "x": 0.2, "y": 0.7, "z": 0.85 },
+      "modelViewerPos": "0.2m 0.7m 0.85m",
+      "modelViewerNormal": "0m 0m 1m",
+      "label": "5. Kompartemen Pintu",
+      "badge": "KOMPARTEMEN PINTU",
       "badgeType": "danger",
       "mainImage": "assets/images/hotspots/hs_door_panel_compartment.png",
       "galleryImages": ["assets/images/hotspots/hs_door_panel_compartment.png"],
-      "description": "Rongga di balik panel interior pintu mobil diisi bungkus sabu berperedam perak foil.",
+      "description": "Rongga di balik panel interior pintu mobil diisi bungkus sabu berperedam perak foil agar tidak berbunyi.",
       "riskIndicators": [
         "Suara ketukan pintu terdengar soliter/padat.",
         "Klip trim pintu bergaris bekas dibuka perkakas."
@@ -146,13 +156,15 @@
       "angleMin": 0,
       "angleMax": 90,
       "position": { "x": 78.0, "y": 45.0 },
-      "worldPos": { "x": 1.6, "y": 0.15, "z": 0.0 },
-      "label": "6. Struktur: Bumper Depan & Ruang Mesin",
-      "badge": "RUANG MESIN",
+      "worldPos": { "x": 1.6, "y": 0.65, "z": 0.0 },
+      "modelViewerPos": "1.6m 0.65m 0.0m",
+      "modelViewerNormal": "1m 0m 0m",
+      "label": "6. Bumper dan Ruang Mesin",
+      "badge": "BUMPER & RUANG MESIN",
       "badgeType": "danger",
       "mainImage": "assets/images/hotspots/hs_door_panel_compartment.png",
       "galleryImages": ["assets/images/hotspots/hs_door_panel_compartment.png"],
-      "description": "Rongga di balik bumper plastik depan atau box filter udara ruang mesin diisi paket sabu.",
+      "description": "Rongga di balik bumper plastik depan atau box filter udara ruang mesin dimodifikasi untuk menyelundupkan paket narkotika.",
       "riskIndicators": [
         "Bumper depan berjarak renggang dari gril.",
         "Baut penyangga bumper menunjukkan bekas kunci shock."
