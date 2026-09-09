@@ -1,7 +1,7 @@
 {
   "moduleId": "modul2",
   "moduleTitle": "Modul 2: Penyelundupan Melalui Barang Bawaan (Luggage Concealment)",
-  "description": "Inspeksi barang bawaan bagasi penumpang: Koper & Tas, Pakaian, Sepatu (False Sole), Makanan, Buku/Kitab (Hollow Book), Kemasan Kosmetik, dan Barang Pribadi.",
+  "description": "Inspeksi barang bawaan bagasi penumpang berdasarkan pedoman DJBC: Sisi Koper & Tas, Pouch Personal Items, Buku/Kitab, Kemasan Makanan Ringan, Makanan Sachet, dan Sepatu (False Sole).",
   "supportsRotation": false,
   "centralImages": {
     "xray": {
@@ -14,151 +14,132 @@
     }
   },
   "filterCategories": [
-    { "id": "all", "label": "Semua Titik" },
+    { "id": "all", "label": "Semua Titik (6 Hotspot)" },
     { "id": "koper_tas", "label": "Koper & Tas" },
-    { "id": "pakaian_sepatu", "label": "Pakaian & Sepatu" },
-    { "id": "makanan_buku", "label": "Makanan & Buku/Kitab" },
-    { "id": "kemasan_pribadi", "label": "Kemasan & Barang Pribadi" }
+    { "id": "personal_items", "label": "Pouch Personal Items" },
+    { "id": "buku_dokumen", "label": "Buku & Kitab" },
+    { "id": "makanan_snack", "label": "Makanan & Snack" },
+    { "id": "sepatu_footwear", "label": "Sepatu & Footwear" }
   ],
   "hotspots": [
     {
       "id": "hs-m2-koper-tas",
       "category": "koper_tas",
       "view": "xray",
-      "position": { "x": 51.0, "y": 72.0 },
-      "label": "Koper & Tas: False Bottom & Dinding Ganda",
-      "badge": "FALSE BOTTOM",
+      "position": { "x": 40.0, "y": 30.0 },
+      "label": "1. Sisi Koper & Tas Bawaan (Handbag Concealment)",
+      "badge": "FALSE WALL",
       "badgeType": "danger",
       "mainImage": "assets/images/hotspots/hs_sardine_can_false.png",
       "galleryImages": ["assets/images/hotspots/hs_sardine_can_false.png"],
-      "description": "Kompartemen rahasia yang dibuat di balik alas koper. Lembaran sabu dipres tebal lalu ditutup dengan lapisan plastik sintetis menyerupai alas koper.",
+      "description": "Paket Sabu/Heroin dipres tipis kedap udara diselipkan di antara lapisan kulit luar dan furing dalam tas tangan / sisi koper.",
       "riskIndicators": [
-        "Citra X-Ray menampilkan warna oranye pekat (organik) tebal merata pada alas koper.",
-        "Kedalaman bagian dalam koper tidak sebanding dengan ketinggian fisik luar koper."
+        "Citra X-Ray memperlihatkan warna oranye pekat (materi organik) tebal berlebih pada dinding tas.",
+        "Ketebalan dan bobot tas tidak seimbang saat diangkat."
       ],
       "inspectionActions": [
-        "Ukur selisih kedalaman alas koper.",
-        "Buka paksa alas koper menggunakan pisau pemotong medis."
+        "Ukur selisih ketebalan furing dalam tas.",
+        "Lakukan pengirisan jahitan furing di ruang penggeledahan steril."
       ]
     },
     {
-      "id": "hs-m2-pakaian",
-      "category": "pakaian_sepatu",
-      "view": "normal",
-      "position": { "x": 38.0, "y": 45.0 },
-      "label": "Pakaian: Lipatan Jaket & Baju Berlapis",
-      "badge": "SELIPAN KAIN",
-      "badgeType": "warning",
-      "mainImage": "assets/images/hotspots/hs_sardine_can_false.png",
-      "galleryImages": ["assets/images/hotspots/hs_sardine_can_false.png"],
-      "description": "Serbuk sabu dibungkus plastik memanjang lalu diselipkan di dalam kerah atau lipatan jaket tebal bertumpuk.",
-      "riskIndicators": [
-        "Kerah jaket terasa kaku saat ditekuk.",
-        "Bobot jaket tidak proporsional saat diangkat."
-      ],
-      "inspectionActions": [
-        "Iris jahitan kerah jaket dengan cutter.",
-        "Uji serbuk menggunakan Narcotest kit."
-      ]
-    },
-    {
-      "id": "hs-m2-sepatu",
-      "category": "pakaian_sepatu",
+      "id": "hs-m2-pouch",
+      "category": "personal_items",
       "view": "xray",
-      "position": { "x": 28.0, "y": 80.0 },
-      "label": "Sepatu: Sol Sepatu Berongga (False Sole)",
-      "badge": "FALSE SOLE",
+      "position": { "x": 65.0, "y": 30.0 },
+      "label": "2. Pouch Personal Items & Kosmetik",
+      "badge": "FALSE CONTAINER",
       "badgeType": "danger",
       "mainImage": "assets/images/hotspots/hs_sardine_can_false.png",
       "galleryImages": ["assets/images/hotspots/hs_sardine_can_false.png"],
-      "description": "Sol bagian dalam sepatu dikikis dan dijadikan ruang penyembunyian paket ekstasi / sabu kristal.",
+      "description": "Cairan Methamphetamine (Liquid Meth) disamarkan di dalam botol sampo, tube krim kosmetik, atau perlengkapan pribadi.",
       "riskIndicators": [
-        "X-Ray menunjukkan rongga sol sepatu berisi materi organik pekat.",
-        "Sol sepatu terasa keras dan tidak lentur saat ditekuk."
+        "X-Ray memperlihatkan anomali warna densitas cairan di botol kosmetik.",
+        "Segel pabrik pada kemasan tampak pernah dibuka dan diresat ulang."
       ],
       "inspectionActions": [
-        "Lepaskan insole sepatu.",
-        "Bongkar lapisan karet sol luar."
-      ]
-    },
-    {
-      "id": "hs-m2-makanan",
-      "category": "makanan_buku",
-      "view": "normal",
-      "position": { "x": 68.0, "y": 38.0 },
-      "label": "Makanan: Kemasan Cokelat & Snack Impor",
-      "badge": "KAMUFLASE SNACK",
-      "badgeType": "warning",
-      "mainImage": "assets/images/hotspots/hs_sardine_can_false.png",
-      "galleryImages": ["assets/images/hotspots/hs_sardine_can_false.png"],
-      "description": "Butiran ekstasi/sabu dibentuk dan dibungkus menyerupai butiran permen atau cokelat impor bersampul rapi.",
-      "riskIndicators": [
-        "Kemasan makanan bersegel rakitan manual.",
-        "Bau cokelat bercampur aroma kimia menyengat."
-      ],
-      "inspectionActions": [
-        "Buka sampel kemasan permen/cokelat.",
-        "Teteskan Reagen Marquis untuk pengujian warna."
+        "Uji sampel cairan dengan Ion Mobility Spectrometer (IMS).",
+        "Teteskan Reagen Marquis pada sampel gel/krim."
       ]
     },
     {
       "id": "hs-m2-buku",
-      "category": "makanan_buku",
+      "category": "buku_dokumen",
       "view": "xray",
-      "position": { "x": 42.0, "y": 32.0 },
-      "label": "Buku/Kitab: Halaman Berongga (Hollow Book)",
+      "position": { "x": 38.0, "y": 54.0 },
+      "label": "3. Buku & Kitab (Halaman Berongga / Hollow Book)",
       "badge": "HOLLOW BOOK",
-      "badgeType": "info",
-      "mainImage": "assets/images/hotspots/hs_sardine_can_false.png",
-      "galleryImages": ["assets/images/hotspots/hs_sardine_can_false.png"],
-      "description": "Bagian tengah lembaran buku tebal dipotong rapi membentuk kotak rongga untuk menyimpan sabu/heroin.",
-      "riskIndicators": [
-        "Buku terasa sangat berat saat dipegang.",
-        "X-Ray memperlihatkan persegi berongga di tengah halaman buku."
-      ],
-      "inspectionActions": [
-        "Buka setiap lembar halaman buku tebal.",
-        "Amankan paket dari dalam rongga buku."
-      ]
-    },
-    {
-      "id": "hs-m2-kemasan",
-      "category": "kemasan_pribadi",
-      "view": "normal",
-      "position": { "x": 75.0, "y": 60.0 },
-      "label": "Kemasan: Kotak Kosmetik & Perlengkapan Mandi",
-      "badge": "KOSMETIK",
       "badgeType": "warning",
       "mainImage": "assets/images/hotspots/hs_sardine_can_false.png",
       "galleryImages": ["assets/images/hotspots/hs_sardine_can_false.png"],
-      "description": "Botol krim kecantikan / bedak padat diisi cairan sabu sintesis yang dibekukan.",
+      "description": "Lembaran bagian tengah buku tebal dipotong rapi membentuk rongga rahasia persegi untuk menyimpan Narkotika.",
       "riskIndicators": [
-        "Tekstur krim tidak konsisten dan menggumpal.",
-        "Berat wadah melebihi isi netto kemasan."
+        "X-Ray memperlihatkan persegi berongga di tengah tumpukan buku.",
+        "Buku terasa kaku dan berat tidak wajar."
       ],
       "inspectionActions": [
-        "Ambil sampel krim/bedak dengan kawat steril.",
-        "Uji sampel dengan alat Ion Mobility Spectrometer (IMS)."
+        "Buka setiap halaman buku secara manual (page flipping).",
+        "Amankan paket Narkotika dari rongga buku."
       ]
     },
     {
-      "id": "hs-m2-pribadi",
-      "category": "kemasan_pribadi",
-      "view": "normal",
-      "position": { "x": 22.0, "y": 48.0 },
-      "label": "Barang Pribadi Lainnya: Gagang Payung & Termos",
-      "badge": "BARANG PRIBADI",
+      "id": "hs-m2-snack",
+      "category": "makanan_snack",
+      "view": "xray",
+      "position": { "x": 57.5, "y": 54.0 },
+      "label": "4. Kemasan Makanan Ringan & Snack Impor",
+      "badge": "KAMUFLASE SNACK",
+      "badgeType": "warning",
+      "mainImage": "assets/images/hotspots/hs_sardine_can_false.png",
+      "galleryImages": ["assets/images/hotspots/hs_sardine_can_false.png"],
+      "description": "Butiran ekstasi atau kristal sabu dikemas menyerupai kacang/permen di dalam kantong makanan ringan bersampul rapi.",
+      "riskIndicators": [
+        "X-Ray menunjukkan butiran berdensitas tinggi di dalam kantong snack.",
+        "Segel kemasan plastik dipres sealer manual."
+      ],
+      "inspectionActions": [
+        "Buka kantong snack dan ambil sampel butiran.",
+        "Uji Reagen Marquis untuk identifikasi reaksi warna."
+      ]
+    },
+    {
+      "id": "hs-m2-makanan",
+      "category": "makanan_snack",
+      "view": "xray",
+      "position": { "x": 70.0, "y": 56.0 },
+      "label": "5. Makanan Sachet & Biskuit Olahan",
+      "badge": "PACKAGED FOOD",
       "badgeType": "info",
       "mainImage": "assets/images/hotspots/hs_sardine_can_false.png",
       "galleryImages": ["assets/images/hotspots/hs_sardine_can_false.png"],
-      "description": "Rongga gagang payung atau dinding ganda termos stainless diisi kristal Narkotika.",
+      "description": "Kepingan biskuit atau sachet makanan dimodifikasi dengan menyelipkan serbuk Narkotika di dalam kepingan biskuit atau sachet foil.",
       "riskIndicators": [
-        "Termos tidak dapat diisi cairan secara maksimal.",
-        "Bunyi derak benda padat saat payung digoyangkan."
+        "Warna densitas X-Ray tidak seragam di dalam kemasan biskuit.",
+        "Kemasan makanan memancarkan bau kimia saat dibuka."
       ],
       "inspectionActions": [
-        "Buka bagian penutup bawah termos/gagang payung.",
-        "Keluarkan bungkusan kristal sabu."
+        "Iris kepingan biskuit/sachet olahan.",
+        "Lakukan pengujian cepat sampel dengan Narcotic Test Kit."
+      ]
+    },
+    {
+      "id": "hs-m2-sepatu",
+      "category": "sepatu_footwear",
+      "view": "xray",
+      "position": { "x": 43.0, "y": 74.0 },
+      "label": "6. Sepatu & Footwear (Sol Berongga / False Sole)",
+      "badge": "FALSE SOLE",
+      "badgeType": "danger",
+      "mainImage": "assets/images/hotspots/hs_sardine_can_false.png",
+      "galleryImages": ["assets/images/hotspots/hs_sardine_can_false.png"],
+      "description": "Sol bagian dalam sepatu dikikis dan dijadikan kompartemen rahasia penyembunyian paket ekstasi / sabu kristal.",
+      "riskIndicators": [
+        "X-Ray menunjukkan rongga sol sepatu berisi materi organik pekat.",
+        "Sol sepatu terasa kaku dan berat tidak simetris."
+      ],
+      "inspectionActions": [
+        "Lepaskan insole sepatu.",
+        "Bongkar lapisan karet sol luar menggunakan pisau bedah."
       ]
     }
   ]
