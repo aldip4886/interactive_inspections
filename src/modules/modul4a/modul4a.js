@@ -10,7 +10,7 @@ import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
 export class Modul4aView extends BaseModuleView {
   constructor(container) {
     super(container, 'src/data/modul4a-hotspots.json');
-    this.currentHotspotId = 'hs-m4a-mesin';
+    this.currentHotspotId = 'hs-m4a-interior-konsol';
     this.visitedHotspots = new Set();
     this.currentActiveTab = 'tab-modus';
     this.activeFilter = 'all';
@@ -166,14 +166,14 @@ export class Modul4aView extends BaseModuleView {
                 <div class="detail-badge-row">
                   <span class="floating-card-drag-indicator" title="Geser posisi kartu">⋮⋮</span>
                   <span id="detail-tag-badge" class="detail-tag-badge">MODUS #01</span>
-                  <span id="detail-cat-badge" class="detail-cat-badge">INTERIOR MOBIL</span>
+                  <span id="detail-cat-badge" class="detail-cat-badge">INTERIOR & KONSOL MOBIL</span>
                 </div>
-                <h3 id="detail-title" class="detail-title">1. Interior: Dashboard & Rongga Jok</h3>
+                <h3 id="detail-title" class="detail-title">1. Interior & Konsol Tengah Kendaraan</h3>
               </div>
               <div class="modal-header-right">
                 <div class="card-quick-nav">
                   <button id="btn-prev-hotspot" class="card-nav-arrow-btn" title="Modus Sebelumnya">←</button>
-                  <span id="card-nav-counter" class="card-nav-counter">1 / 5</span>
+                  <span id="card-nav-counter" class="card-nav-counter">1 / 2</span>
                   <button id="btn-next-hotspot" class="card-nav-arrow-btn" title="Modus Berikutnya">→</button>
                 </div>
                 <button id="btn-close-detail-modal" class="modal-close-btn" aria-label="Tutup Kartu" title="Tutup Kartu">✕</button>

@@ -23,8 +23,45 @@
   ],
   "hotspots": [
     {
-      "id": "hs-m4a-mesin",
+      "id": "hs-m4a-interior-konsol",
       "num": 1,
+      "category": "interior",
+      "view": "cutaway",
+      "angleMin": 0,
+      "angleMax": 360,
+      "position": {
+        "x": 48.0,
+        "y": 48.0
+      },
+      "worldPos": {
+        "x": -0.35,
+        "y": 0.25,
+        "z": 0.0
+      },
+      "label": "1. Interior & Konsol Tengah Kendaraan",
+      "badge": "INTERIOR & KONSOL MOBIL",
+      "badgeType": "danger",
+      "mainImage": "assets/images/hotspots/hs_door_panel_compartment.png",
+      "galleryImages": [
+        "assets/images/hotspots/hs_door_panel_compartment.png"
+      ],
+      "description": "Penyembunyian paket narkotika di balik konsol tengah (center console), rongga dashboard/head unit audio, glove box bertingkat ganda, serta di bawah jok penumpang dan busa kursi mobil.",
+      "riskIndicators": [
+        "Panel konsol tengah atau dashboard tampak renggang atau terdapat bekas cungkilan obeng manual.",
+        "Aroma parfum mobil atau kopi yang menyengat di kabin guna mengelabui indra penciuman anjing pelacak (K-9).",
+        "Baut pengikat jok dan rel kursi menunjukkan bekas dibongkar atau terdapat modifikasi rongga las tambahan di bawah karpet dasar.",
+        "Kabel instalasi audio atau panel AC terlihat tidak rapi/sambungan non-standar pabrik."
+      ],
+      "inspectionActions": [
+        "Lakukan pemeriksaan visual dan fisik pada konsol transmisi serta sela-sela rel jok penumpang.",
+        "Gunakan boroskop fleksibel untuk memeriksa rongga di balik head unit/dashboard dan saluran sirkulasi AC.",
+        "Gunakan K-9 narkotika untuk pelacakan bau aktif di dalam kabin kendaraan.",
+        "Bila ditemukan ketebalan anomali di bawah karpet dasar, lakukan pemeriksaan ketukan (density tap) atau pemindaian x-ray bergerak."
+      ]
+    },
+    {
+      "id": "hs-m4a-mesin",
+      "num": 6,
       "category": "struktur",
       "view": "cutaway",
       "angleMin": 0,
@@ -38,7 +75,7 @@
         "y": -0.20,
         "z": 0.0
       },
-      "label": "1. Kap / Ruang Mesin & Bumper Depan",
+      "label": "6. Kap / Ruang Mesin & Bumper Depan",
       "badge": "KAP / RUANG MESIN",
       "badgeType": "danger",
       "mainImage": "assets/images/hotspots/hs_door_panel_compartment.png",
