@@ -183,11 +183,6 @@ export class Modul1View extends BaseModuleView {
               <h3 id="detail-title" class="detail-title">1. Rongga Mulut</h3>
             </div>
             <div class="modal-header-right">
-              <div class="card-quick-nav">
-                <button id="btn-prev-hotspot" class="card-nav-arrow-btn" title="Modus Sebelumnya">←</button>
-                <span id="card-nav-counter" class="card-nav-counter">1 / 8</span>
-                <button id="btn-next-hotspot" class="card-nav-arrow-btn" title="Modus Berikutnya">→</button>
-              </div>
               <button id="btn-close-detail-modal" class="modal-close-btn" aria-label="Tutup Kartu" title="Tutup Kartu">✕</button>
             </div>
           </div>
@@ -315,28 +310,40 @@ export class Modul1View extends BaseModuleView {
             </div>
           </div>
 
-          <!-- Bottom Pagination Bar -->
+          <!-- Bottom Carousel & Modus Pagination Bar -->
           <div class="card-pagination-bar" id="card-pagination-bar">
-            <button id="btn-page-prev" class="card-page-nav-btn" title="Halaman Sebelumnya" disabled>
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
-              <span>Prev</span>
-            </button>
-
-            <div class="card-page-pills" id="card-page-pills">
-              <button class="page-pill active" data-page="0" title="1. Modus Operandi">1</button>
-              <button class="page-pill" data-page="1" title="2. Foto Gambar Real">2</button>
-              <button class="page-pill" data-page="2" title="3. Ciri Pelaku & SOP">3</button>
-              <button class="page-pill" data-page="3" title="4. Indikator Risiko">4</button>
+            <!-- Navigasi Modus Concealment (Beralih ke Modus Berikutnya / Sebelumnya) -->
+            <div class="modus-nav-group">
+              <button id="btn-prev-hotspot" class="btn-modus-nav" title="Modus Concealment Sebelumnya">
+                ← Modus Sblm
+              </button>
+              <span id="card-nav-counter" class="modus-nav-counter font-code-tech">1 / 8</span>
+              <button id="btn-next-hotspot" class="btn-modus-nav" title="Modus Concealment Berikutnya">
+                Modus Lanjut →
+              </button>
             </div>
 
-            <span class="card-page-info" id="card-page-info">Hal 1 / 4</span>
+            <!-- Navigasi Carousel Tab Informasi (Tab Carousel) -->
+            <div class="tab-carousel-nav-group">
+              <button id="btn-page-prev" class="card-page-nav-btn" title="Halaman Tab Sebelumnya" disabled>
+                ‹ Prev
+              </button>
 
-            <button id="btn-page-next" class="card-page-nav-btn" title="Halaman Selanjutnya">
-              <span>Lanjut</span>
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
-            </button>
+              <div class="card-page-pills" id="card-page-pills">
+                <button class="page-pill active" data-page="0" title="1. Modus Operandi"></button>
+                <button class="page-pill" data-page="1" title="2. Foto Gambar Real"></button>
+                <button class="page-pill" data-page="2" title="3. Ciri Pelaku & SOP"></button>
+                <button class="page-pill" data-page="3" title="4. Indikator Risiko"></button>
+              </div>
 
-            <button id="btn-modal-close-footer" class="card-close-pill-btn" title="Tutup Floating Card">✕ Tutup</button>
+              <span class="card-page-info" id="card-page-info">Hal 1 / 4</span>
+
+              <button id="btn-page-next" class="card-page-nav-btn" title="Halaman Tab Selanjutnya">
+                Lanjut ›
+              </button>
+            </div>
+
+            <button id="btn-modal-close-footer" class="card-close-pill-btn" title="Tutup Card">✕ Tutup</button>
           </div>
         </div>
       </div>
@@ -752,9 +759,9 @@ export class Modul1View extends BaseModuleView {
     }
     if (btnPageNext) {
       if (pageIndex === this.cardPages.length - 1) {
-        btnPageNext.innerHTML = `<span>Modus Berikutnya</span> <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>`;
+        btnPageNext.textContent = 'Modus Lanjut ›';
       } else {
-        btnPageNext.innerHTML = `<span>Lanjut</span> <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>`;
+        btnPageNext.textContent = 'Lanjut ›';
       }
     }
 
