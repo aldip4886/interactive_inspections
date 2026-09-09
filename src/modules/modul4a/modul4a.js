@@ -10,7 +10,7 @@ import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
 export class Modul4aView extends BaseModuleView {
   constructor(container) {
     super(container, 'src/data/modul4a-hotspots.json');
-    this.currentHotspotId = 'hs-m4a-interior';
+    this.currentHotspotId = 'hs-m4a-mesin';
     this.visitedHotspots = new Set();
     this.currentActiveTab = 'tab-modus';
     this.activeFilter = 'all';
