@@ -489,7 +489,7 @@ export class Modul4aView extends BaseModuleView {
             if (anchor) {
               const anchorWorldPos = new THREE.Vector3();
               anchor.getWorldPosition(anchorWorldPos);
-              if (hit.point.distanceTo(anchorWorldPos) < 1.2) {
+              if (hit.point.distanceTo(anchorWorldPos) < 2.5) {
                 this.openHotspotDetail(hs.id);
                 return;
               }
@@ -591,6 +591,18 @@ export class Modul4aView extends BaseModuleView {
         hotspotId: hs.id,
         label: hs.label
       };
+
+      // Add hitMesh sphere for 3D raycast detection
+      const hitMesh = new THREE.Mesh(
+        new THREE.SphereGeometry(0.5, 16, 16),
+        new THREE.MeshBasicMaterial({ visible: false })
+      );
+      hitMesh.userData = {
+        isHotspotAnchor: true,
+        hotspotId: hs.id,
+        label: hs.label
+      };
+      anchorGroup.add(hitMesh);
 
       // Add 3D hotspot object directly to vehicleGroup mesh hierarchy
       this.vehicleGroup.add(anchorGroup);
@@ -795,6 +807,7 @@ export class Modul4aView extends BaseModuleView {
     const overlay = this.container.querySelector('#hotspot-card-modal-overlay');
     if (overlay) {
       overlay.classList.remove('hidden');
+      overlay.style.display = 'flex';
     }
 
     this.renderHotspots();
@@ -920,6 +933,7 @@ export class Modul4aView extends BaseModuleView {
     if (closeBtn && overlay) {
       closeBtn.addEventListener('click', () => {
         overlay.classList.add('hidden');
+        overlay.style.display = '';
         this.isModalOpen = false;
         this.renderHotspots();
       });
@@ -929,6 +943,7 @@ export class Modul4aView extends BaseModuleView {
       overlay.addEventListener('click', (e) => {
         if (e.target === overlay) {
           overlay.classList.add('hidden');
+          overlay.style.display = '';
           this.isModalOpen = false;
           this.renderHotspots();
         }
