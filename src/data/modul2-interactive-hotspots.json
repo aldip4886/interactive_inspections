@@ -53,10 +53,10 @@
       "categoryId": "koper_tas",
       "categoryLabel": "Koper & Tas Bawaan",
       "color": "#E53E3E",
-      "position": { "x": 22.0, "y": 24.0 },
+      "position": { "x": 34.0, "y": 30.0 },
       "coordsByView": {
-        "xray": { "x": 22.0, "y": 24.0 },
-        "normal": { "x": 22.0, "y": 26.0 }
+        "xray": { "x": 34.0, "y": 30.0 },
+        "normal": { "x": 34.0, "y": 30.0 }
       },
       "riskLevel": "critical",
       "riskScore": 90,
