@@ -693,6 +693,10 @@ export class Modul4aView extends BaseModuleView {
     const layerEl = this.container.querySelector('#m4a-hotspots-layer');
     if (!layerEl || !this.moduleData) return;
 
+    if (this.vehicleGroup) {
+      this.init3DHotspotAnchors();
+    }
+
     const hotspots = this.moduleData.hotspots || [];
     layerEl.innerHTML = '';
 

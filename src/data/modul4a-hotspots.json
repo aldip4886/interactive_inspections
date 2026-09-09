@@ -18,5 +18,32 @@
   "filterCategories": [
     { "id": "all", "label": "Semua Titik" }
   ],
-  "hotspots": []
+  "hotspots": [
+    {
+      "id": "hs-m4a-mesin",
+      "num": 1,
+      "category": "struktur",
+      "view": "cutaway",
+      "angleMin": 0,
+      "angleMax": 360,
+      "position": { "x": 78.0, "y": 45.0 },
+      "worldPos": { "x": 1.25, "y": 0.45, "z": 0.0 },
+      "label": "1. Kap / Ruang Mesin & Bumper Depan",
+      "badge": "KAP / RUANG MESIN",
+      "badgeType": "danger",
+      "mainImage": "assets/images/hotspots/hs_door_panel_compartment.png",
+      "galleryImages": ["assets/images/hotspots/hs_door_panel_compartment.png"],
+      "description": "Rongga di balik kap mesin, box filter udara, atau kompartemen bumper depan dimodifikasi oleh sindikat untuk menyembunyikan bungkusan narkotika.",
+      "riskIndicators": [
+        "Baut penyangga kap dan bumper menunjukkan bekas guratan kunci shock.",
+        "Box filter udara atau sekring terasa lebih berat dari bobot standar.",
+        "K-9 menunjukkan respons penciuman positif di bagian depan gril."
+      ],
+      "inspectionActions": [
+        "Buka kap mesin dan lakukan inspeksi visual di area filter udara.",
+        "Gunakan boroskop kabel untuk mengintip sela-sela radiator dan kompartemen mesin.",
+        "Periksa klip plastik bumper depan dari bekas kelonggaran manual."
+      ]
+    }
+  ]
 }
