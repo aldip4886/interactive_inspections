@@ -1,11 +1,11 @@
-﻿import React from 'react';
+import React from 'react';
 import { useApp } from './context/AppContext';
 import { Sidebar } from './components/Sidebar';
 import { Header } from './components/Header';
 import { BerandaView } from './views/BerandaView';
-import { Modul1View } from './views/Modul1View';
 import { LegacyModuleWrapper } from './components/LegacyModuleWrapper';
 
+import { Modul1View } from '../modules/modul1/modul1.js';
 import { Modul2View } from '../modules/modul2/modul2.js';
 import { Modul3View } from '../modules/modul3/modul3.js';
 import { Modul4aView } from '../modules/modul4a/modul4a.js';
@@ -20,7 +20,7 @@ export function App() {
       case 'beranda':
         return <BerandaView />;
       case 'modul1':
-        return <Modul1View />;
+        return <LegacyModuleWrapper ViewClass={Modul1View} moduleId="modul1" />;
       case 'modul2':
         return <LegacyModuleWrapper ViewClass={Modul2View} moduleId="modul2" />;
       case 'modul3':
