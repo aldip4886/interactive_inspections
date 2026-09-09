@@ -91,7 +91,7 @@
       "packagingTechnique": "Balon lateks tipis, plastik klip ganda kedap air, atau kondom mini terikat benang gigi (dental floss)",
       "mainIllustration": "assets/mockup/thumb_mulut.jpg",
       "thumb": "assets/mockup/thumb_mulut.jpg",
-      "description": "Paket kecil sabu/kokain dibungkus balon tipis atau plastik permen.",
+      "description": "Paket kecil sabu/kokain dibungkus balon tipis atau plastik permen disembunyikan di rongga mulut.",
       "modusDetail": "Metode ini lazim dilakukan oleh kurir jarak pendek atau kurir transit yang membawa muatan 10-50 gram. Bungkusan kerap diikatkan ke gigi geraham menggunakan benang nilon atau benang gigi agar mudah ditarik kembali setelah melewati gerbang pemeriksaan.",
       "findings": [
         {
@@ -126,7 +126,7 @@
         "Gunakan sarung tangan nitril medis jika perlu melakukan pemeriksaan palpasi pipi luar"
       ],
       "medicalRisk": "SANGAT TINGGI: Bahaya ruptur (pecah pembungkus) menyebabkan penyerapan transmukosa yang sangat cepat ke aliran darah otak, memicu kejang tonik-klonik akut, aritmia jantung fatal, dan koma dalam hitungan menit.",
-      "inspectionNote": "Petugas dilarang memaksa memasukkan jari ke mulut tersangka untuk mencegah gigitan refleks dan bahaya tertusuk benda tajam. Bawa segera ke fasilitas medis rujukan bila dicurigai terjadi ruptur.",
+      "inspectionNote": "SOP Resmi DJBC: Petugas dilarang memaksa memasukkan jari ke mulut tersangka untuk mencegah gigitan refleks dan bahaya tertusuk benda tajam. Bawa segera ke fasilitas medis rujukan bila dicurigai terjadi ruptur.",
       "bodyLocation": "Rongga mulut (sublingual, kantung bukal pipi, orofaring / penelanan kilat saat razia)."
     },
     {
@@ -158,7 +158,7 @@
       "packagingTechnique": "Kondom lateks multilayer (3-7 lapis) dipres mesin hidrolik bertekanan tinggi, dilapis lilin parafin dan selotip medis tahan asam lambung",
       "mainIllustration": "assets/mockup/card_digestive_main.png",
       "thumb": "assets/mockup/thumb_saluran_cerna.jpg",
-      "description": "Body packing puluhan hingga ratusan kapsul lateks berbobot 1-2 kg.",
+      "description": "Body packing puluhan hingga ratusan kapsul lateks berbobot 1-2 kg di lambung dan usus.",
       "modusDetail": "Subjek dipersiapkan 24-48 jam sebelum keberangkatan dengan meminum obat anti-motilitas usus (Loperamide/Imodium). Setiap kapsul berbobot 8-12 gram dengan muatan total mencapai 1 hingga 2 kilogram narkotika bernilai miliaran rupiah.",
       "findings": [
         {
@@ -184,7 +184,7 @@
         "Menolak mengonsumsi makanan atau minuman selama penerbangan rute panjang",
         "Gaya duduk kaku dan membungkuk menahan rasa penuh di rongga perut",
         "Membawa obat antidiare dalam jumlah tidak wajar di saku pakaian",
-        "Tampak sangat cemas dan menghindari kontak mata dengan petugas custom"
+        "Tampak sangat cemas dan menghindari kontak mata dengan petugas customs"
       ],
       "detection": [
         "Analisis profil manifes penumpang dan kesesuaian negara asal berisiko tinggi (high-risk origin)",
@@ -193,7 +193,7 @@
         "Pengawasan ketat dokter spesialis radiologi dan forensik kepabeanan"
       ],
       "medicalRisk": "KRITIS (100/100): Pecahnya 1 kapsul saja melepaskan dosis mematikan (lethal dose) ke dalam sirkulasi darah, menyebabkan henti jantung dalam waktu kurang dari 15 menit. DILARANG MEMBERI OBAT PENCAHAR STIMULAN PAKSA!",
-      "inspectionNote": "Wajib dirujuk ke Rumah Sakit Rujukan DJBC. Petugas tidak diperkenankan melakukan intervensi medis invasif mandiri.",
+      "inspectionNote": "SOP Resmi DJBC: Wajib dirujuk ke Rumah Sakit Rujukan DJBC (RS Bhayangkara). Petugas tidak diperkenankan melakukan intervensi medis invasif mandiri.",
       "bodyLocation": "Saluran gastrointestinal / lambung."
     },
     {
@@ -225,7 +225,7 @@
       "packagingTechnique": "Bentuk silinder atau torpedo padat dibungkus kondom tebal berlapis 4-6 lapis, dilumuri gel silikon/vaselin, dan diikat tali benang bedah pengaman",
       "mainIllustration": "assets/mockup/thumb_panggul.jpg",
       "thumb": "assets/mockup/thumb_panggul.jpg",
-      "description": "Paket silinder besar berpelumas silikon, sering diikat benang penarik.",
+      "description": "Paket silinder besar berpelumas silikon disembunyikan di rongga anal/rektum.",
       "modusDetail": "Paket silinder umumnya berdiameter 2-4 cm dan panjang 10-15 cm dengan bobot 100-500 gram. Kurir menahan paket ini di rongga ampula rektum selama perjalanan penerbangan atau penyeberangan feri.",
       "findings": [
         {
@@ -260,7 +260,7 @@
         "Proses evakuasi medis di bawah supervisi tenaga kesehatan rumah sakit rujukan"
       ],
       "medicalRisk": "KRITIS: Risiko perforasi usus besar / rektum yang berujung peritonitis dan syok sepsis berat. Keracunan sistemik masif bila dinding pembungkus bocor di area vaskular rektum yang kaya pembuluh darah.",
-      "inspectionNote": "Pemeriksaan rektal (colok dubur) HANYA BOLEH DILAKUKAN OLEH TENAGA MEDIS RESMI (DOKTER) di fasilitas kesehatan rujukan, bukan oleh petugas bea cukai di lapangan.",
+      "inspectionNote": "SOP Resmi DJBC: Pemeriksaan rektal (colok dubur) HANYA BOLEH DILAKUKAN OLEH TENAGA MEDIS RESMI (DOKTER) di fasilitas kesehatan rujukan, bukan oleh petugas bea cukai di lapangan.",
       "bodyLocation": "Saluran anal / rektum kurir (body pushing)."
     },
     {
@@ -326,7 +326,7 @@
         "Penggeledahan badan menyeluruh (strip search) sesuai Peraturan Direktur Jenderal Bea dan Cukai"
       ],
       "medicalRisk": "SEDANG - TINGGI: Iskemia lokal akibat lilitan lakban yang terlalu kuat memotong aliran darah vena/arteri femoralis, dermatitis kontak iritan hebat, dan lecet epidermis luas saat lakban dicabut paksa.",
-      "inspectionNote": "Petugas wajib melakukan pemeriksaan oleh personel berjenis kelamin sama di ruang tertutup dengan pencahayaan cukup dan disaksikan minimal 2 petugas.",
+      "inspectionNote": "SOP Resmi DJBC: Petugas wajib melakukan pemeriksaan oleh personel berjenis kelamin sama di ruang tertutup dengan pencahayaan cukup dan disaksikan minimal 2 petugas. Buka peratan lakban menggunakan gunting perban berujung tumpul.",
       "bodyLocation": "Paha kiri dan kanan."
     },
     {
@@ -392,7 +392,7 @@
         "Pemeriksaan sepatu bot dan kaus kaki secara terpisah melalui X-Ray mesin bagasi kabin"
       ],
       "medicalRisk": "SEDANG: Edema perifer tungkai bawah dan risiko parestesia sementara akibat kompresi nervus peroneus bila lakban dililit terlalu kencang.",
-      "inspectionNote": "Waspadai kurir menyembunyikan silet atau benda tajam di balik perban lakban sebagai upaya melukai diri atau menyerang petugas saat lakban dibuka.",
+      "inspectionNote": "SOP Resmi DJBC: Waspadai kurir menyembunyikan silet atau benda tajam di balik perban lakban sebagai upaya melukai diri atau menyerang petugas saat lakban dibuka.",
       "bodyLocation": "Otot betis dan tulang kering tungkai bawah / lengan atas sebelah kanan."
     },
     {
@@ -424,7 +424,7 @@
       "packagingTechnique": "Rompi modifikasi atau puluhan paket pipih disusun bertingkat melingkari torso/abdomen, kemudian dibalut putaran penuh lakban duct-tape tebal",
       "mainIllustration": "assets/mockup/thumb_pakaian.jpg",
       "thumb": "assets/mockup/thumb_pakaian.jpg",
-      "description": "Rompi korset atau lempengan berat 1-2 kg dililit rapat dengan lakban bertingkat.",
+      "description": "Rompi korset atau lempengan berat 1-3 kg dililit rapat dengan lakban bertingkat.",
       "modusDetail": "Metode ini mampu membawa muatan paling banyak pada tubuh kurir (hingga 3-4 kg). Pelaku memakai jaket tebal atau baju hangat berukuran besar (oversized) untuk menyembunyikan siluet perut yang kaku.",
       "findings": [
         {
@@ -458,7 +458,7 @@
         "Penggunaan Body Scanner bandara yang mendeteksi ketebalan material non-organik di permukaan kulit"
       ],
       "medicalRisk": "TINGGI: Restriksi pernapasan diafragma yang dapat memicu hiperventilasi, dehidrasi parah akibat penumpukan keringat di balik lakban, dan kerusakan kulit saat pelepasan.",
-      "inspectionNote": "Buka balutan lakban menggunakan gunting medis berujung tumpul (bandage scissors) agar tidak melukai kulit tersangka dan tidak merobek kemasan barang bukti.",
+      "inspectionNote": "SOP Resmi DJBC: Buka balutan lakban menggunakan gunting medis berujung tumpul (bandage scissors) agar tidak melukai kulit tersangka dan tidak merobek kemasan barang bukti.",
       "bodyLocation": "Dinding abdomen dan pinggang (torso wrap)."
     },
     {
@@ -524,7 +524,7 @@
         "Gunakan sarung tangan nitril medis dan alat uji tes narkotika cepat (narcotic test kit)"
       ],
       "medicalRisk": "SEDANG - TINGGI: Iritasi mukosa vulva hebat, vaginitis kimiawi bila ada kebocoran zat narkotika korosif, dan risiko infeksi bakteri saluran kemih.",
-      "inspectionNote": "Lakukan pemeriksaan secara humanis, profesional, menjunjung tinggi hak asasi manusia, serta wajib didokumentasikan dalam Berita Acara Penggeledahan Badan resmi DJBC.",
+      "inspectionNote": "SOP Resmi DJBC: Lakukan pemeriksaan secara humanis, profesional, menjunjung tinggi hak asasi manusia, serta wajib didokumentasikan dalam Berita Acara Penggeledahan Badan resmi DJBC.",
       "bodyLocation": "Lipatan genitalia / celana dalam wanita."
     },
     {
@@ -590,7 +590,7 @@
         "Koordinasi dengan dokter bandara untuk pembongkaran gips menggunakan gergaji gips medis khusus"
       ],
       "medicalRisk": "SEDANG: Risiko cedera jaringan lunak bila gips dibongkar tanpa prosedur orthopedi yang benar, serta potensi komplikasi infeksi kulit sekunder.",
-      "inspectionNote": "Pembongkaran gips medis wajib dilakukan di hadapan dan atas rekomendasi dokter kesehatan pelabuhan/bandara untuk memastikan keselamatan fisik tersangka dan keabsahan alat bukti di persidangan.",
+      "inspectionNote": "SOP Resmi DJBC: Pembongkaran gips medis wajib dilakukan di hadapan dan atas rekomendasi dokter kesehatan pelabuhan/bandara untuk memastikan keselamatan fisik tersangka dan keabsahan alat bukti di persidangan.",
       "bodyLocation": "Gips medis palsu pada lengan/kaki atau rongga kaki/tangan palsu."
     }
   ]
