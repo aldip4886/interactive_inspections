@@ -210,9 +210,9 @@
       "categoryId": "makanan_snack",
       "categoryLabel": "Makanan & Snack",
       "color": "#F5A623",
-      "position": { "x": 57.5, "y": 50.0 },
+      "position": { "x": 54.0, "y": 50.0 },
       "coordsByView": {
-        "xray": { "x": 57.5, "y": 50.0 },
+        "xray": { "x": 54.0, "y": 50.0 },
         "normal": { "x": 62.0, "y": 48.0 }
       },
       "riskLevel": "warning",
