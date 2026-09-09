@@ -119,9 +119,9 @@ export class Modul4aView extends BaseModuleView {
               </div>
 
               <!-- Central Active 3D Vehicle Container with Hotspots Layer -->
-              <div class="body-image-container" id="vehicle-image-container" style="max-width:920px; width:100%; aspect-ratio: auto; margin:0 auto; position:relative;">
-                <div id="m4a-3d-canvas-wrapper" style="width:100%; height:62vh; min-height:420px; position:relative; display:flex; align-items:center; justify-content:center;">
-                  <img id="m4a-central-image" src="assets/images/central/m4a_suv_cutaway.png" alt="KIA Carnival 2023" class="main-body-img" style="display:none; max-height:60vh; object-fit:contain; filter:drop-shadow(0 12px 32px rgba(0,37,59,0.16)); pointer-events:none;" />
+              <div class="body-image-container" id="vehicle-image-container" style="max-width:1150px; width:100%; aspect-ratio: auto; margin:0 auto; position:relative;">
+                <div id="m4a-3d-canvas-wrapper" style="width:100%; height:74vh; min-height:520px; position:relative; display:flex; align-items:center; justify-content:center;">
+                  <img id="m4a-central-image" src="assets/images/central/m4a_suv_cutaway.png" alt="KIA Carnival 2023" class="main-body-img" style="display:none; max-height:72vh; object-fit:contain; filter:drop-shadow(0 12px 32px rgba(0,37,59,0.16)); pointer-events:none;" />
                   <div id="three-canvas-container" style="width:100%; height:100%; position:absolute; inset:0; z-index:2;"></div>
                   <div id="m4a-hotspots-layer" class="hotspots-layer" style="position:absolute; inset:0; z-index:30; pointer-events:none;"></div>
                 </div>
@@ -441,7 +441,7 @@ export class Modul4aView extends BaseModuleView {
             const maxDim = Math.max(size.x, size.y, size.z);
 
             model.position.sub(center);
-            const scale = 3.5 / (maxDim || 1);
+            const scale = 4.2 / (maxDim || 1);
             model.scale.set(scale, scale, scale);
 
             this.vehicleGroup.add(model);
