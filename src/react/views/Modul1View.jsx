@@ -1,18 +1,19 @@
-﻿import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useApp } from '../context/AppContext';
 import { courseProgress } from '../../core/progress';
 import { xapi } from '../../core/xapi';
+import modul1Data from '../../data/modul1-interactive-hotspots.json';
 
 export function Modul1View() {
   const { refreshProgress } = useApp();
-  const [moduleData, setModuleData] = useState(null);
+  const [moduleData] = useState(modul1Data);
   const [currentAngle, setCurrentAngle] = useState(0);
   const [currentZoom, setCurrentZoom] = useState(1.5);
   const [isAutoPlaying, setIsAutoPlaying] = useState(false);
-  const [selectedHotspot, setSelectedHotspot] = useState(null);
+  const [selectedHotspot, setSelectedHotspot] = useState(() => modul1Data?.hotspots?.[0] || null);
   const [activeTab, setActiveTab] = useState('tab-modus');
   const [currentPage, setCurrentPage] = useState(0);
-  const [visitedHotspots, setVisitedHotspots] = useState(() => new Set());
+  const [visitedHotspots, setVisitedHotspots] = useState(() => new Set(['rongga-mulut']));
   const [modalPos, setModalPos] = useState({ x: 0, y: 0 });
   const [showQuiz, setShowQuiz] = useState(false);
   const [quizIndex, setQuizIndex] = useState(0);
@@ -24,23 +25,14 @@ export function Modul1View() {
   const autoPlayRef = useRef(null);
   const isDraggingRef = useRef(false);
   const startXRef = useRef(0);
-  const modalRef = useRef(null);
   const isModalDraggingRef = useRef(false);
   const modalDragStartRef = useRef({ x: 0, y: 0 });
 
   useEffect(() => {
-    fetch('src/data/modul1-interactive-hotspots.json')
-      .then(res => res.json())
-      .then(data => {
-        setModuleData(data);
-        if (data.hotspots && data.hotspots.length > 0) {
-          // Pre-select first hotspot
-          setSelectedHotspot(data.hotspots[0]);
-        }
-      })
-      .catch(err => console.error('Failed to load Modul 1 hotspots:', err));
-
     xapi.trackModuleView('modul1', 'Modul 1: Penyelundupan Melalui Tubuh Kurir (React)');
+    courseProgress.recordModuleVisit('modul1');
+    courseProgress.recordHotspotVisit('modul1', 'rongga-mulut');
+    refreshProgress();
   }, []);
 
   // Auto-play 360 loop
@@ -93,6 +85,7 @@ export function Modul1View() {
       return next;
     });
     courseProgress.recordHotspotVisit('modul1', hs.id);
+    xapi.trackHotspotClick('modul1', hs.id, hs.label, hs.categoryLabel);
     refreshProgress();
   };
 
@@ -104,18 +97,23 @@ export function Modul1View() {
       x: e.clientX - modalPos.x,
       y: e.clientY - modalPos.y
     };
-  };
 
-  const handleModalPointerMove = (e) => {
-    if (!isModalDraggingRef.current) return;
-    setModalPos({
-      x: e.clientX - modalDragStartRef.current.x,
-      y: e.clientY - modalDragStartRef.current.y
-    });
-  };
+    const onPointerMove = (moveEvent) => {
+      if (!isModalDraggingRef.current) return;
+      setModalPos({
+        x: moveEvent.clientX - modalDragStartRef.current.x,
+        y: moveEvent.clientY - modalDragStartRef.current.y
+      });
+    };
 
-  const handleModalPointerUp = () => {
-    isModalDraggingRef.current = false;
+    const onPointerUp = () => {
+      isModalDraggingRef.current = false;
+      window.removeEventListener('pointermove', onPointerMove);
+      window.removeEventListener('pointerup', onPointerUp);
+    };
+
+    window.addEventListener('pointermove', onPointerMove);
+    window.addEventListener('pointerup', onPointerUp);
   };
 
   // Canvas Drag/Swipe
@@ -150,7 +148,7 @@ export function Modul1View() {
     image: 'assets/body_views/body_view_0_front.png'
   };
 
-  const currentHotspots = moduleData?.hotspots?.filter(hs => hs.visibleAngles.includes(currentAngle)) || [];
+  const currentHotspots = (moduleData?.hotspots || []).filter(hs => hs.visibleAngles?.includes(currentAngle));
   const progressPct = courseProgress.getModuleProgress('modul1');
 
   const pages = [
@@ -270,10 +268,10 @@ export function Modul1View() {
               {/* Hotspots Layer */}
               <div id="hotspots-layer" className="hotspots-layer">
                 {currentHotspots.map(hs => {
-                  const coords = hs.coordsByAngle[String(currentAngle)] || { x: 50, y: 50 };
+                  const coords = hs.coordsByAngle?.[String(currentAngle)] || { x: 50, y: 50 };
                   const isVisited = visitedHotspots.has(hs.id);
                   const isActive = selectedHotspot?.id === hs.id;
-                  const cleanName = hs.label.replace(/^\d+\.\s*/, '');
+                  const cleanName = (hs.label || '').replace(/^\d+\.\s*/, '');
 
                   return (
                     <div
@@ -377,13 +375,8 @@ export function Modul1View() {
 
             {/* ─── FLOATING HOTSPOT CARD MODAL ─── */}
             {selectedHotspot && (
-              <div
-                id="hotspot-card-modal-overlay"
-                onPointerMove={handleModalPointerMove}
-                onPointerUp={handleModalPointerUp}
-              >
+              <div id="hotspot-card-modal-overlay">
                 <div
-                  ref={modalRef}
                   id="hotspot-modal-card"
                   className="modal-card tabbed-hotspot-modal"
                   style={{
@@ -401,11 +394,11 @@ export function Modul1View() {
                         <span className="floating-card-drag-indicator" title="Geser posisi kartu">⋮⋮</span>
                         <span className="detail-tag-badge font-code-tech">MODUS #{String(selectedHotspot.badgeNum).padStart(2, '0')}</span>
                         <span className={`detail-cat-badge font-code-tech cat-${selectedHotspot.categoryId}`}>
-                          {selectedHotspot.categoryLabel?.toUpperCase() || 'MODUS'}
+                          {(selectedHotspot.categoryLabel || selectedHotspot.tag || 'MODUS').toUpperCase()}
                         </span>
                       </div>
                       <h3 className="detail-title">{selectedHotspot.label}</h3>
-                      <p className="detail-subtitle">{selectedHotspot.tagline}</p>
+                      <p className="detail-subtitle">{selectedHotspot.tag || selectedHotspot.shortName || selectedHotspot.label}</p>
                     </div>
 
                     <div className="modal-header-right">
@@ -445,9 +438,12 @@ export function Modul1View() {
                         <div className="detail-media-row">
                           <div className="detail-illustration-box">
                             <img
-                              src={selectedHotspot.illustrationImage || 'assets/mockup/card_digestive_main.png'}
+                              src={selectedHotspot.mainIllustration || selectedHotspot.illustrationImage || selectedHotspot.thumb || 'assets/mockup/card_digestive_main.png'}
                               alt="Visual"
                               className="detail-main-img"
+                              onError={(e) => {
+                                e.currentTarget.src = 'assets/mockup/card_digestive_main.png';
+                              }}
                             />
                           </div>
                           <div className="detail-desc-box">
@@ -458,25 +454,29 @@ export function Modul1View() {
                         <div className="modus-params-grid">
                           <div className="param-box">
                             <span className="param-label font-code-tech">Metode:</span>
-                            <p className="param-val">{selectedHotspot.concealmentMethod}</p>
+                            <p className="param-val">{selectedHotspot.tag || selectedHotspot.categoryLabel || 'Modus Penyembunyian Tubuh'}</p>
                           </div>
                           <div className="param-box">
                             <span className="param-label font-code-tech">Lokasi:</span>
-                            <p className="param-val">{selectedHotspot.bodyLocation}</p>
+                            <p className="param-val">{selectedHotspot.bodyLocation || 'Tubuh Kurir'}</p>
                           </div>
                           <div className="param-box">
                             <span className="param-label font-code-tech">Narkotika:</span>
-                            <p className="param-val">{selectedHotspot.drugTypes?.join(', ')}</p>
+                            <p className="param-val">
+                              {Array.isArray(selectedHotspot.drugTypes)
+                                ? selectedHotspot.drugTypes.join(', ')
+                                : (selectedHotspot.drugTypes || 'Narkotika Golongan I')}
+                            </p>
                           </div>
                           <div className="param-box">
                             <span className="param-label font-code-tech">Kemasan:</span>
-                            <p className="param-val">{selectedHotspot.packaging}</p>
+                            <p className="param-val">{selectedHotspot.packagingTechnique || selectedHotspot.packaging || 'Kemasan khusus kedap air'}</p>
                           </div>
                         </div>
 
                         <div className="deep-modus-note">
                           <span className="note-label font-code-tech">Detail Teknis Modus:</span>
-                          <p className="note-text">{selectedHotspot.technicalDetails}</p>
+                          <p className="note-text">{selectedHotspot.modusDetail || selectedHotspot.technicalDetails || selectedHotspot.description}</p>
                         </div>
                       </div>
                     )}
@@ -487,13 +487,26 @@ export function Modul1View() {
                           <span className="photos-tab-title">Barang Bukti Sitaan & Citra Forensik:</span>
                         </div>
                         <div className="findings-thumbnails-grid">
-                          {selectedHotspot.findings?.map((f, i) => (
-                            <div key={i} className="evidence-card" style={{ background: '#F8FAFC', border: '1px solid #E2E8F0', borderRadius: '8px', padding: '10px' }}>
-                              <img src={f.image} alt={f.title} style={{ width: '100%', height: '90px', objectFit: 'cover', borderRadius: '4px' }} />
-                              <span style={{ fontSize: '11px', fontWeight: '700', color: 'var(--color-primary)', display: 'block', marginTop: '6px' }}>{f.title}</span>
-                              <p style={{ fontSize: '10px', color: '#64748B', margin: 0 }}>{f.caption}</p>
-                            </div>
-                          ))}
+                          {(selectedHotspot.findings && selectedHotspot.findings.length > 0) ? (
+                            selectedHotspot.findings.map((f, i) => (
+                              <div key={i} className="evidence-card" style={{ background: '#F8FAFC', border: '1px solid #E2E8F0', borderRadius: '8px', padding: '10px' }}>
+                                <img
+                                  src={f.thumb || f.full || f.image || 'assets/mockup/finding_capsules.jpg'}
+                                  alt={f.caption || f.title || 'Bukti'}
+                                  style={{ width: '100%', height: '90px', objectFit: 'cover', borderRadius: '4px' }}
+                                  onError={(e) => {
+                                    e.currentTarget.src = 'assets/mockup/finding_capsules.jpg';
+                                  }}
+                                />
+                                <span style={{ fontSize: '11px', fontWeight: '700', color: 'var(--color-primary-navy)', display: 'block', marginTop: '6px' }}>
+                                  {f.tag || f.title || 'Barang Bukti Sitaan'}
+                                </span>
+                                <p style={{ fontSize: '10px', color: '#64748B', margin: 0 }}>{f.caption || 'Dokumentasi penindakan'}</p>
+                              </div>
+                            ))
+                          ) : (
+                            <p style={{ fontSize: '12px', color: '#64748B', padding: '12px' }}>Dokumentasi foto barang bukti sedang dimuat.</p>
+                          )}
                         </div>
                       </div>
                     )}
@@ -507,7 +520,10 @@ export function Modul1View() {
                               <span className="block-title">Indikator Tingkah Laku & Fisik</span>
                             </div>
                             <ul className="block-list">
-                              {selectedHotspot.detectionIndicators?.map((ind, i) => (
+                              {(selectedHotspot.indicators || selectedHotspot.detectionIndicators || [
+                                'Tersangka menunjukkan kegelisahan ekstrem',
+                                'Gerak-gerik mencurigakan saat wawancara'
+                              ]).map((ind, i) => (
                                 <li key={i}>{ind}</li>
                               ))}
                             </ul>
@@ -519,7 +535,10 @@ export function Modul1View() {
                               <span className="block-title">Standar Prosedur Pemeriksaan (SOP)</span>
                             </div>
                             <ul className="block-list">
-                              {selectedHotspot.inspectionProcedures?.map((p, i) => (
+                              {(selectedHotspot.detection || selectedHotspot.inspectionProcedures || [
+                                'Lakukan pemeriksaan badan secara menyeluruh',
+                                'Koordinasikan dengan dokter medis bila diduga body packing'
+                              ]).map((p, i) => (
                                 <li key={i}>{p}</li>
                               ))}
                             </ul>
@@ -533,10 +552,12 @@ export function Modul1View() {
                         <div className="risk-meter-widget">
                           <div className="risk-meter-header">
                             <span className="risk-meter-title">Tingkat Bahaya Penyelundupan:</span>
-                            <span className="risk-meter-score font-code-tech">KRITIS (100/100)</span>
+                            <span className="risk-meter-score font-code-tech">
+                              {(selectedHotspot.riskLevel || 'Tinggi').toUpperCase()} ({selectedHotspot.riskScore || 80}/100)
+                            </span>
                           </div>
                           <div className="risk-meter-bar-track">
-                            <div className="risk-meter-bar-fill" style={{ width: '100%' }}></div>
+                            <div className="risk-meter-bar-fill" style={{ width: `${selectedHotspot.riskScore || 80}%` }}></div>
                           </div>
                         </div>
 
@@ -544,7 +565,9 @@ export function Modul1View() {
                           <div className="hazard-icon">🚨</div>
                           <div className="hazard-content">
                             <span className="hazard-title">Bahaya Medis Darurat Tersangka:</span>
-                            <p className="hazard-desc">{selectedHotspot.riskIndicators?.medicalEmergency}</p>
+                            <p className="hazard-desc">
+                              {selectedHotspot.medicalRisk || selectedHotspot.riskIndicators?.medicalEmergency || 'Bahaya ruptur (pecah pembungkus) menyebabkan penyerapan dosis masif yang mematikan dalam hitungan menit.'}
+                            </p>
                           </div>
                         </div>
 
@@ -552,7 +575,9 @@ export function Modul1View() {
                           <div className="hazard-icon">🛡️</div>
                           <div className="hazard-content">
                             <span className="hazard-title">Protokol Keselamatan Petugas:</span>
-                            <p className="hazard-desc">{selectedHotspot.riskIndicators?.officerSafety}</p>
+                            <p className="hazard-desc">
+                              {selectedHotspot.inspectionNote || selectedHotspot.riskIndicators?.officerSafety || 'SOP Resmi DJBC: Gunakan sarung tangan nitril dan hindari intervensi manual tanpa pendampingan tim medis.'}
+                            </p>
                           </div>
                         </div>
                       </div>
@@ -626,7 +651,7 @@ export function Modul1View() {
                   <span className="badge badge-gold font-code-tech">MODUL 1: KUIS</span>
                   <button className="modal-close-btn" onClick={() => setShowQuiz(false)}>✕</button>
                 </div>
-                <h3 style={{ color: 'var(--color-primary)', fontSize: '16px', marginBottom: '16px' }}>
+                <h3 style={{ color: 'var(--color-primary-navy)', fontSize: '16px', marginBottom: '16px' }}>
                   Soal {quizIndex + 1}: Apa risiko utama pecahnya kemasan narkotika pada metode body packing di lambung?
                 </h3>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '20px' }}>
@@ -642,8 +667,8 @@ export function Modul1View() {
                       style={{
                         padding: '12px 16px',
                         borderRadius: '8px',
-                        border: selectedOption === idx ? '2px solid var(--color-primary)' : '1px solid #E2E8F0',
-                        background: selectedOption === idx ? 'rgba(0, 37, 59, 0.08)' : '#FFFFFF',
+                        border: selectedOption === idx ? '2px solid var(--color-primary-navy)' : '1px solid #E2E8F0',
+                        background: selectedOption === idx ? 'rgba(11, 58, 111, 0.08)' : '#FFFFFF',
                         textAlign: 'left',
                         cursor: 'pointer',
                         fontSize: '13px'
@@ -669,8 +694,8 @@ export function Modul1View() {
             ) : (
               <div style={{ textAlign: 'center', padding: '20px' }}>
                 <div style={{ fontSize: '48px', marginBottom: '12px' }}>🏆</div>
-                <h2 style={{ color: 'var(--color-primary)' }}>Hasil Penilaian Kuis</h2>
-                <div style={{ fontSize: '32px', fontWeight: '800', color: 'var(--color-secondary-container)', margin: '16px 0' }}>
+                <h2 style={{ color: 'var(--color-primary-navy)' }}>Hasil Penilaian Kuis</h2>
+                <div style={{ fontSize: '32px', fontWeight: '800', color: 'var(--color-gold)', margin: '16px 0' }}>
                   {quizScore} / 100
                 </div>
                 <p style={{ color: '#475569', marginBottom: '24px' }}>
