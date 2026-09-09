@@ -54,10 +54,8 @@ export class BaseModuleView {
           <div class="nav-right">
             <!-- Module Progress Widget -->
             <div class="module-progress-widget">
-              <div class="progress-info-row">
-                <span class="progress-title">Hotspot Terverifikasi:</span>
-                <span id="${data.moduleId}-progress-pct" class="progress-value font-code-tech">${modPct}%</span>
-              </div>
+              <span class="progress-title">Hotspot Terverifikasi:</span>
+              <span id="${data.moduleId}-progress-pct" class="progress-value font-code-tech">${modPct}%</span>
               <div class="progress-track">
                 <div id="${data.moduleId}-progress-fill" class="progress-fill" style="width: ${modPct}%;"></div>
               </div>

@@ -360,8 +360,10 @@ html, body {
 /* ─── Persistent Course Progress Widget in Header (Every Page) ─── */
 .course-header-progress-widget {
   display: flex;
-  flex-direction: column;
-  gap: 3px;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 3px 8px;
   min-width: 170px;
   background: #F8FAFC;
   padding: 6px 14px;
@@ -370,12 +372,8 @@ html, body {
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.03);
 }
 
-.course-header-progress-widget .progress-info-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-  line-height: 1.2;
+.course-header-progress-widget .progress-track {
+  width: 100%;
 }
 
 .course-header-progress-widget .progress-title {

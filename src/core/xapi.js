@@ -152,6 +152,32 @@ export class XAPIEngine {
     });
     this.sendStatement(stmt);
   }
+
+  trackCourseProgress(progressPct) {
+    const currentPct = progressPct !== undefined ? progressPct : (window.currentCourseProgressPct || 0);
+    const stmt = this.buildStatement({
+      verb: {
+        id: 'http://adlnet.gov/expapi/verbs/progressed',
+        display: { 'id-ID': 'mengalami kemajuan', 'en-US': 'progressed' }
+      },
+      activityId: 'course-progress-tracker',
+      activityName: 'Progress Kursus Penyelundupan Narkotika DJBC',
+      activityDesc: `Kemajuan total kursus peserta mencapai ${currentPct}%`,
+      result: {
+        score: {
+          scaled: Number((currentPct / 100).toFixed(2)),
+          raw: currentPct,
+          min: 0,
+          max: 100
+        },
+        completion: currentPct >= 100
+      },
+      contextExtensions: {
+        'http://klc2.kemenkeu.go.id/xapi/extensions/course-progress': currentPct
+      }
+    });
+    return this.sendStatement(stmt);
+  }
 }
 
 export const xapi = new XAPIEngine();

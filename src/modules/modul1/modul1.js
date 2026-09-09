@@ -63,10 +63,8 @@ export class Modul1View extends BaseModuleView {
             <div class="nav-right">
               <!-- Module Progress Widget -->
               <div class="module-progress-widget">
-                <div class="progress-info-row">
-                  <span class="progress-title">Hotspot Terverifikasi:</span>
-                  <span id="progress-percentage-text" class="progress-value font-code-tech">12%</span>
-                </div>
+                <span class="progress-title">Hotspot Terverifikasi:</span>
+                <span id="progress-percentage-text" class="progress-value font-code-tech">12%</span>
                 <div class="progress-track">
                   <div id="progress-fill-bar" class="progress-fill" style="width: 12%;"></div>
                 </div>

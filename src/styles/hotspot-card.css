@@ -177,8 +177,10 @@
 /* ─── Gold Module Progress Widget (Nav Right) ─── */
 .module-progress-widget {
   display: flex;
-  flex-direction: column;
-  gap: 3px;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 3px 8px;
   min-width: 150px;
   background: #F8FAFC;
   padding: 5px 12px;
@@ -187,12 +189,8 @@
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.03);
 }
 
-.progress-info-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-  line-height: 1.2;
+.module-progress-widget .progress-track {
+  width: 100%;
 }
 
 .progress-title {

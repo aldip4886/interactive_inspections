@@ -1,13 +1,15 @@
 import { scorm } from './scorm.js';
+import { xapi } from './xapi.js';
 
 /**
  * Course Progress Manager
  * Tracks overall course progress across Beranda, Modul 1-4b, and Evaluasi.
- * Syncs state to localStorage and SCORM LMS.
+ * Syncs state to localStorage, SCORM LMS, and LRS via xAPI.
  */
 export class CourseProgressManager {
   constructor() {
     this.STORAGE_KEY = 'elearning_narkotika_progress_v1';
+    this.currentProgressPct = 0;
     
     // Module hotspot totals
     this.moduleTotals = {
@@ -34,6 +36,9 @@ export class CourseProgressManager {
 
   init() {
     this.loadState();
+    const overallPct = this.getOverallProgress();
+    this.currentProgressPct = overallPct;
+    window.currentCourseProgressPct = overallPct;
     this.updateDOM();
   }
 
@@ -57,6 +62,12 @@ export class CourseProgressManager {
     }
     
     const overallPct = this.getOverallProgress();
+    const prevPct = this.currentProgressPct;
+
+    // Save and sync course progress percentage in variable
+    this.currentProgressPct = overallPct;
+    window.currentCourseProgressPct = overallPct;
+
     if (scorm && typeof scorm.setValue === 'function') {
       try {
         if (scorm.version === '2004') {
@@ -71,6 +82,11 @@ export class CourseProgressManager {
       } catch (err) {
         // ignore SCORM errors in standalone mode
       }
+    }
+
+    // Send xAPI statement to LRS whenever progress percentage updates
+    if (overallPct !== prevPct && xapi && typeof xapi.trackCourseProgress === 'function') {
+      xapi.trackCourseProgress(overallPct);
     }
 
     this.updateDOM();
@@ -133,6 +149,8 @@ export class CourseProgressManager {
 
   updateDOM() {
     const overallPct = this.getOverallProgress();
+    this.currentProgressPct = overallPct;
+    window.currentCourseProgressPct = overallPct;
 
     // 1. Header Course Progress Widget
     const headerPctText = document.getElementById('course-progress-pct');
