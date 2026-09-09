@@ -106,7 +106,7 @@ export class Modul2View extends BaseModuleView {
               <div class="modal-header-right">
                 <div class="card-quick-nav">
                   <button id="btn-prev-hotspot" class="card-nav-arrow-btn" title="Modus Sebelumnya">←</button>
-                  <span id="card-nav-counter" class="card-nav-counter">1 / 6</span>
+                  <span id="card-nav-counter" class="card-nav-counter">1 / 5</span>
                   <button id="btn-next-hotspot" class="card-nav-arrow-btn" title="Modus Berikutnya">→</button>
                 </div>
                 <button id="btn-close-detail-modal" class="modal-close-btn" aria-label="Tutup Kartu" title="Tutup Kartu">✕</button>

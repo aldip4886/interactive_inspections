@@ -1,7 +1,7 @@
 {
   "moduleId": "modul2",
   "moduleTitle": "Modul 2: Penyelundupan Melalui Barang Bawaan (Luggage Concealment)",
-  "description": "Inspeksi barang bawaan bagasi penumpang berdasarkan pedoman DJBC: Sisi Koper & Tas, Pouch Personal Items, Buku/Kitab, Kemasan Makanan Ringan, Makanan Sachet, dan Sepatu (False Sole).",
+  "description": "Inspeksi barang bawaan bagasi penumpang berdasarkan pedoman DJBC: Sisi Koper & Tas, Pouch Personal Items, Buku/Kitab, Kemasan Makanan & Snack, dan Sepatu (False Sole).",
   "supportsRotation": false,
   "centralImages": {
     "xray": {
@@ -14,7 +14,7 @@
     }
   },
   "filterCategories": [
-    { "id": "all", "label": "Semua Titik (6 Hotspot)" },
+    { "id": "all", "label": "Semua Titik (5 Hotspot)" },
     { "id": "koper_tas", "label": "Koper & Tas" },
     { "id": "personal_items", "label": "Pouch Personal Items" },
     { "id": "buku_dokumen", "label": "Buku & Kitab" },
@@ -26,7 +26,7 @@
       "id": "hs-m2-koper-tas",
       "category": "koper_tas",
       "view": "xray",
-      "position": { "x": 40.0, "y": 30.0 },
+      "position": { "x": 36.0, "y": 25.0 },
       "label": "1. Sisi Koper & Tas Bawaan (Handbag Concealment)",
       "badge": "FALSE WALL",
       "badgeType": "danger",
@@ -46,7 +46,7 @@
       "id": "hs-m2-pouch",
       "category": "personal_items",
       "view": "xray",
-      "position": { "x": 65.0, "y": 30.0 },
+      "position": { "x": 65.0, "y": 25.0 },
       "label": "2. Pouch Personal Items & Kosmetik",
       "badge": "FALSE CONTAINER",
       "badgeType": "danger",
@@ -66,7 +66,7 @@
       "id": "hs-m2-buku",
       "category": "buku_dokumen",
       "view": "xray",
-      "position": { "x": 38.0, "y": 54.0 },
+      "position": { "x": 36.0, "y": 50.0 },
       "label": "3. Buku & Kitab (Halaman Berongga / Hollow Book)",
       "badge": "HOLLOW BOOK",
       "badgeType": "warning",
@@ -86,40 +86,20 @@
       "id": "hs-m2-snack",
       "category": "makanan_snack",
       "view": "xray",
-      "position": { "x": 57.5, "y": 54.0 },
-      "label": "4. Kemasan Makanan Ringan & Snack Impor",
-      "badge": "KAMUFLASE SNACK",
+      "position": { "x": 62.0, "y": 52.0 },
+      "label": "4. Kemasan Makanan & Snack",
+      "badge": "KAMUFLASE MAKANAN & SNACK",
       "badgeType": "warning",
       "mainImage": "assets/images/hotspots/hs_sardine_can_false.png",
       "galleryImages": ["assets/images/hotspots/hs_sardine_can_false.png"],
-      "description": "Butiran ekstasi atau kristal sabu dikemas menyerupai kacang/permen di dalam kantong makanan ringan bersampul rapi.",
+      "description": "Penyamaran pil ekstasi, sabu kristal, atau serbuk di dalam kantong makanan ringan, keping biskuit, sachet minuman, atau makanan kaleng.",
       "riskIndicators": [
-        "X-Ray menunjukkan butiran berdensitas tinggi di dalam kantong snack.",
-        "Segel kemasan plastik dipres sealer manual."
+        "X-Ray menunjukkan butiran berdensitas tinggi atau warna densitas tidak homogen di dalam kemasan makanan.",
+        "Segel kemasan plastik dipres sealer manual atau perekat lem tambahan."
       ],
       "inspectionActions": [
-        "Buka kantong snack dan ambil sampel butiran.",
+        "Buka kantong snack / iris sachet dan ambil sampel.",
         "Uji Reagen Marquis untuk identifikasi reaksi warna."
-      ]
-    },
-    {
-      "id": "hs-m2-makanan",
-      "category": "makanan_snack",
-      "view": "xray",
-      "position": { "x": 70.0, "y": 56.0 },
-      "label": "5. Makanan Sachet & Biskuit Olahan",
-      "badge": "PACKAGED FOOD",
-      "badgeType": "info",
-      "mainImage": "assets/images/hotspots/hs_sardine_can_false.png",
-      "galleryImages": ["assets/images/hotspots/hs_sardine_can_false.png"],
-      "description": "Kepingan biskuit atau sachet makanan dimodifikasi dengan menyelipkan serbuk Narkotika di dalam kepingan biskuit atau sachet foil.",
-      "riskIndicators": [
-        "Warna densitas X-Ray tidak seragam di dalam kemasan biskuit.",
-        "Kemasan makanan memancarkan bau kimia saat dibuka."
-      ],
-      "inspectionActions": [
-        "Iris kepingan biskuit/sachet olahan.",
-        "Lakukan pengujian cepat sampel dengan Narcotic Test Kit."
       ]
     },
     {
@@ -127,7 +107,7 @@
       "category": "sepatu_footwear",
       "view": "xray",
       "position": { "x": 43.0, "y": 74.0 },
-      "label": "6. Sepatu & Footwear (Sol Berongga / False Sole)",
+      "label": "5. Sepatu & Footwear (Sol Berongga / False Sole)",
       "badge": "FALSE SOLE",
       "badgeType": "danger",
       "mainImage": "assets/images/hotspots/hs_sardine_can_false.png",

@@ -2,7 +2,7 @@
   "categories": [
     {
       "id": "all",
-      "label": "Seluruh Modus (6 Hotspot)",
+      "label": "Seluruh Modus (5 Hotspot)",
       "icon": "🧳",
       "color": "#F5A623"
     },
@@ -30,14 +30,14 @@
     {
       "id": "makanan_snack",
       "label": "Makanan & Snack",
-      "sub": "4. Snack & 5. Makanan Sachet",
+      "sub": "4. Makanan & Snack",
       "icon": "🍿",
       "color": "#F5A623"
     },
     {
       "id": "sepatu_footwear",
       "label": "Sepatu & Footwear",
-      "sub": "6. False Sole",
+      "sub": "5. False Sole",
       "icon": "👟",
       "color": "#E53E3E"
     }
@@ -204,112 +204,60 @@
       "id": "hs-m2-snack",
       "num": "04",
       "badgeNum": 4,
-      "label": "4. Kemasan Makanan Ringan & Snack",
-      "shortName": "4. Snack & Makanan Ringan",
-      "tag": "Kamuflase Snack",
+      "label": "4. Kemasan Makanan & Snack",
+      "shortName": "4. Makanan & Snack",
+      "tag": "Kamuflase Makanan & Snack",
       "categoryId": "makanan_snack",
       "categoryLabel": "Makanan & Snack",
       "color": "#F5A623",
-      "position": { "x": 54.0, "y": 50.0 },
+      "position": { "x": 62.0, "y": 52.0 },
       "coordsByView": {
-        "xray": { "x": 54.0, "y": 50.0 },
-        "normal": { "x": 62.0, "y": 48.0 }
+        "xray": { "x": 62.0, "y": 52.0 },
+        "normal": { "x": 63.0, "y": 56.0 }
       },
       "riskLevel": "warning",
       "riskScore": 75,
-      "drugTypes": "Pil Ekstasi (MDMA), Sabu butiran kristal, Fentanyl tablet, Happy Five (H5)",
-      "packagingTechnique": "Butiran tablet/kristal dimasukkan ke dalam kantong plastik snack aluminium foil, dicampur permen/kacang asli, lalu dipres ulang dengan hand sealer",
+      "drugTypes": "Pil Ekstasi (MDMA), Sabu kristal/serbuk, Fentanyl, Liquid Meth, Happy Five (H5)",
+      "packagingTechnique": "Pil/kristal/serbuk diselipkan di dalam kantong plastik snack aluminium foil, kepingan biskuit, sachet kopi/minuman, atau kaleng makanan berlabel palsu",
       "mainIllustration": "assets/images/hotspots/hs_sardine_can_false.png",
       "thumb": "assets/images/hotspots/hs_sardine_can_false.png",
-      "description": "Penyamaran pil ekstasi atau sabu kristal di dalam kantong plastik makanan ringan impor.",
-      "modusDetail": "Pil ekstasi atau sabu kristal dibungkus dalam kantong snack permen/kacang bersampul merk impor. Kurir mencampur butiran obat berbahaya dengan makanan asli untuk mengelabui pemeriksaan visual awal petugas.",
+      "description": "Penyamaran Narkotika (ekstasi, sabu kristal, atau serbuk) di dalam kantong makanan ringan, biskuit, atau sachet olahan.",
+      "modusDetail": "Kurir mencampur pil/kristal Narkotika ke dalam kemasan snack permen/kacang impor atau menyelipkan padatan Narkotika di dalam kepingan biskuit rekat ganda dan sachet minuman instan untuk mengelabui pemeriksaan visual awal petugas.",
       "findings": [
         {
           "thumb": "assets/images/hotspots/hs_sardine_can_false.png",
           "full": "assets/images/hotspots/hs_sardine_can_false.png",
-          "caption": "Sitaan Kantong Makanan Ringan Berisi Butiran Ekstasi Warna-Warni",
+          "caption": "Sitaan Kemasan Makanan Ringan & Biskuit Berisi Narkotika",
           "tag": "Barang Bukti Sitaan"
         },
         {
           "thumb": "assets/images/central/m2_luggage_xray.png",
           "full": "assets/images/central/m2_luggage_xray.png",
-          "caption": "Tampilan X-Ray Menunjukkan Butiran Berdensitas Tinggi di Dalam Kemasan",
+          "caption": "Tampilan X-Ray Menunjukkan Anomali Densitas Tinggi pada Kemasan Makanan",
           "tag": "Pencitraan X-Ray"
         }
       ],
       "indicators": [
-        "Tampilan X-Ray memperlihatkan butiran-butiran berdensitas tinggi yang seragam di dalam kantong snack",
-        "Ujung segel kemasan plastik snack terdapat bekas kerutan pemanasan *hand-sealer* manual",
-        "Kantong snack terasa padat berlebih dan tidak kembung udara nitrogen standar pabrik",
-        "Aroma kimia atau wangi permen buatan yang sangat menyengat keluar dari celah segel"
+        "Tampilan X-Ray memperlihatkan butiran atau warna densitas tinggi yang tidak homogen di dalam kemasan snack/sachet",
+        "Ujung segel kemasan terdapat bekas kerutan pemanasan hand-sealer manual atau lem perekat buatan",
+        "Kantong snack terasa padat berlebih dan keping biskuit terasa kaku tidak renyah",
+        "Tercium aroma kimia atau wangi buatan yang menyengat keluar dari celah kemasan"
       ],
       "detection": [
-        "Pembukaan segel kantong snack dan pemisahan butiran makanan vs butiran sampel",
-        "Pengujian Reagen Marquis/Simon untuk identifikasi kandungan zat MDMA/Methamphetamine",
-        "Pengujian konfirmasi spektrofotometri di laboratorium Bea Cukai (BLBC)"
+        "Pembukaan segel kemasan snack / pengirisan sachet minuman di meja pemeriksaan steril",
+        "Pengujian sampel dengan Reagen Marquis/Simon atau Narcotic Test Kit DJBC",
+        "Pengujian konfirmasi laboratorium di Balai Laboratorium Bea Cukai (BLBC)"
       ],
-      "medicalRisk": "BAHAYA RACUN TINGGI: Tertelan secara tidak sengaja dapat menyebabkan overdosis fatal.",
-      "inspectionNote": "SOP Resmi DJBC: Makanan ringan berbungkusan tidak standar atau bawaan dalam jumlah banyak wajib dibuka sampel kemasannya untuk diuji dengan Narcotic Test Kit.",
-      "bodyLocation": "Kantong snack kemasan foil/plastik di dalam koper."
-    },
-    {
-      "id": "hs-m2-makanan",
-      "num": "05",
-      "badgeNum": 5,
-      "label": "5. Makanan Sachet & Biskuit Olahan",
-      "shortName": "5. Makanan Sachet",
-      "tag": "Packaged Food Concealment",
-      "categoryId": "makanan_snack",
-      "categoryLabel": "Makanan & Snack",
-      "color": "#F5A623",
-      "position": { "x": 70.0, "y": 54.0 },
-      "coordsByView": {
-        "xray": { "x": 70.0, "y": 54.0 },
-        "normal": { "x": 63.0, "y": 66.0 }
-      },
-      "riskLevel": "medium",
-      "riskScore": 70,
-      "drugTypes": "Sabu serbuk, Heroin bubuk, Ekstasi bubuk, Liquid Meth dalam kaleng sarden",
-      "packagingTechnique": "Serbuk Narkotika diselipkan di dalam kepingan biskuit rekat ganda, sachet kopi/minuman instan, atau kaleng sarden berlabel palsu",
-      "mainIllustration": "assets/images/hotspots/hs_sardine_can_false.png",
-      "thumb": "assets/images/hotspots/hs_sardine_can_false.png",
-      "description": "Modifikasi keping biskuit olahan, sachet minuman, atau makanan kaleng kemasan.",
-      "modusDetail": "Kepingan biskuit dibor atau dibagi dua untuk diisi padatan Narkotika lalu diringkatkan kembali dengan krim gula. Sachet minuman instan atau makanan kemasan dus juga sering dimanfaatkan untuk menyimpan serbuk Narkotika berbobot 100-300 gram.",
-      "findings": [
-        {
-          "thumb": "assets/images/hotspots/hs_sardine_can_false.png",
-          "full": "assets/images/hotspots/hs_sardine_can_false.png",
-          "caption": "Pembongkaran Biskuit dan Kaleng Makanan Berisi Sabu",
-          "tag": "Barang Bukti Sitaan"
-        },
-        {
-          "thumb": "assets/images/central/m2_luggage_xray.png",
-          "full": "assets/images/central/m2_luggage_xray.png",
-          "caption": "Deteksi Warna Densitas Anomali pada Kemasan Makanan Sachet",
-          "tag": "Pencitraan X-Ray"
-        }
-      ],
-      "indicators": [
-        "Warna densitas X-Ray tidak homogen pada kepingan biskuit atau sachet olahan",
-        "Kepingan biskuit terasa keras kaku tidak renyah dan ada garis rekaan perekat buatan",
-        "Sachet aluminium foil memiliki bekas pres perekat di bagian bawah kemasan",
-        "Jumlah bungkusan makanan bawaan berlebihan dan tidak wajar untuk konsumsi pribadi"
-      ],
-      "detection": [
-        "Pengirisan keping biskuit / sachet minuman di meja pemeriksaan steril",
-        "Pengujian reaksi warna sampel dengan Reagen Uji Narkotika DJBC",
-        "Pengamanan seluruh barang bukti dus makanan kemasan"
-      ],
-      "medicalRisk": "SEDANG: Risiko kontaminasi bahan kimia berbahaya pada area kerja pemeriksaan.",
-      "inspectionNote": "SOP Resmi DJBC: Iris bagian tengah keping biskuit atau sachet makanan yang mencurigakan dan lakukan uji laboratorium instan.",
-      "bodyLocation": "Dus biskuit, sachet minuman, dan kemasan olahan makanan."
+      "medicalRisk": "BAHAYA RACUN TINGGI: Tertelan secara tidak sengaja dapat menyebabkan overdosis fatal & kontaminasi bahan kimia.",
+      "inspectionNote": "SOP Resmi DJBC: Makanan ringan & sachet olahan berbungkusan tidak standar atau dalam jumlah berlebih wajib dibuka sampel kemasannya untuk diuji dengan Narcotic Test Kit.",
+      "bodyLocation": "Kantong snack foil/plastik, dus biskuit, dan sachet minuman di dalam koper."
     },
     {
       "id": "hs-m2-sepatu",
-      "num": "06",
-      "badgeNum": 6,
-      "label": "6. Sepatu & Footwear (False Sole)",
-      "shortName": "6. Sepatu & Footwear",
+      "num": "05",
+      "badgeNum": 5,
+      "label": "5. Sepatu & Footwear (False Sole)",
+      "shortName": "5. Sepatu & Footwear",
       "tag": "False Sole Concealment",
       "categoryId": "sepatu_footwear",
       "categoryLabel": "Sepatu & Footwear",
