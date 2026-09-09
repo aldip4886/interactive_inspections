@@ -16,7 +16,10 @@
     "side2": "assets/images/central/m4a_suv_cutaway.png"
   },
   "filterCategories": [
-    { "id": "all", "label": "Semua Titik" }
+    {
+      "id": "all",
+      "label": "Semua Titik"
+    }
   ],
   "hotspots": [
     {
@@ -26,13 +29,22 @@
       "view": "cutaway",
       "angleMin": 0,
       "angleMax": 360,
-      "position": { "x": 78.0, "y": 45.0 },
-      "worldPos": { "x": -2.00, "y": 0.00, "z": -1.0 },
+      "position": {
+        "x": 78.0,
+        "y": 45.0
+      },
+      "worldPos": {
+        "x": -2.20,
+        "y": -0.20,
+        "z": 0.0
+      },
       "label": "1. Kap / Ruang Mesin & Bumper Depan",
       "badge": "KAP / RUANG MESIN",
       "badgeType": "danger",
       "mainImage": "assets/images/hotspots/hs_door_panel_compartment.png",
-      "galleryImages": ["assets/images/hotspots/hs_door_panel_compartment.png"],
+      "galleryImages": [
+        "assets/images/hotspots/hs_door_panel_compartment.png"
+      ],
       "description": "Rongga di balik kap mesin, box filter udara, atau kompartemen bumper depan dimodifikasi oleh sindikat untuk menyembunyikan bungkusan narkotika.",
       "riskIndicators": [
         "Baut penyangga kap dan bumper menunjukkan bekas guratan kunci shock.",
