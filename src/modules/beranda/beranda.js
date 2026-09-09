@@ -1,5 +1,6 @@
 import { userProfile } from '../../core/user-profile.js';
 import { xapi } from '../../core/xapi.js';
+import { courseProgress } from '../../core/progress.js';
 
 export class BerandaView {
   constructor(container) {
@@ -8,6 +9,7 @@ export class BerandaView {
 
   async render() {
     const profile = userProfile.getProfile();
+    const overallPct = courseProgress.getOverallProgress();
 
     const html = `
       <div class="beranda-container">
@@ -31,6 +33,44 @@ export class BerandaView {
             </div>
           </div>
         </section>
+
+        <!-- ─── COURSE PROGRESS CARD ─── -->
+        <div class="beranda-progress-summary-card">
+          <div class="progress-summary-header">
+            <div class="progress-summary-title-group">
+              <span class="progress-summary-badge">PROGRES LATIHAN & COMPLIANCE</span>
+              <h3 class="progress-summary-title">Progres Pembelajaran Kursus Anda</h3>
+            </div>
+            <div class="progress-summary-pct-badge font-code-tech">
+              <span id="beranda-course-pct">${overallPct}%</span> Selesai
+            </div>
+          </div>
+          <div class="progress-track progress-track-lg">
+            <div id="beranda-course-fill" class="progress-fill" style="width: ${overallPct}%;"></div>
+          </div>
+          <div class="progress-module-grid">
+            <div class="mod-prog-item">
+              <span class="mod-prog-label">Modul 1: Tubuh Kurir</span>
+              <span id="modul1-progress-pct" class="mod-prog-val font-code-tech">${courseProgress.getModuleProgress('modul1')}%</span>
+            </div>
+            <div class="mod-prog-item">
+              <span class="mod-prog-label">Modul 2: Barang Bawaan</span>
+              <span id="modul2-progress-pct" class="mod-prog-val font-code-tech">${courseProgress.getModuleProgress('modul2')}%</span>
+            </div>
+            <div class="mod-prog-item">
+              <span class="mod-prog-label">Modul 3: Barang Kiriman</span>
+              <span id="modul3-progress-pct" class="mod-prog-val font-code-tech">${courseProgress.getModuleProgress('modul3')}%</span>
+            </div>
+            <div class="mod-prog-item">
+              <span class="mod-prog-label">Modul 4A: SUV</span>
+              <span id="modul4a-progress-pct" class="mod-prog-val font-code-tech">${courseProgress.getModuleProgress('modul4a')}%</span>
+            </div>
+            <div class="mod-prog-item">
+              <span class="mod-prog-label">Modul 4B: Kapal Cargo</span>
+              <span id="modul4b-progress-pct" class="mod-prog-val font-code-tech">${courseProgress.getModuleProgress('modul4b')}%</span>
+            </div>
+          </div>
+        </div>
 
         <!-- ─── 2. DISCLAIMER BANNER ─── -->
         <div class="beranda-disclaimer-box">

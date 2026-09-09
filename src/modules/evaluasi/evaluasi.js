@@ -1,5 +1,6 @@
 import { scorm } from '../../core/scorm.js';
 import { xapi } from '../../core/xapi.js';
+import { courseProgress } from '../../core/progress.js';
 
 export class EvaluasiView {
   constructor(container) {
@@ -153,8 +154,9 @@ export class EvaluasiView {
     const scorePercent = Math.round((correctCount / total) * 100);
     const passed = scorePercent >= this.quizData.passingScorePercent;
 
-    // Send SCORM & xAPI completion
+    // Send SCORM & xAPI completion & update course progress
     scorm.setCompleted(scorePercent);
+    courseProgress.recordEvaluasiComplete(scorePercent);
     xapi.trackQuizCompleted(scorePercent, passed, total);
 
     this.renderResultScreen(scorePercent, passed, correctCount, total);

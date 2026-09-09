@@ -2,6 +2,7 @@ import { BaseModuleView } from '../../core/base-module.js';
 import { scorm } from '../../core/scorm.js';
 import { xapi } from '../../core/xapi.js';
 import { QuizModule } from './anatomy3d/QuizModule.js';
+import { courseProgress } from '../../core/progress.js';
 
 export class Modul1View extends BaseModuleView {
   constructor(container) {
@@ -838,6 +839,7 @@ export class Modul1View extends BaseModuleView {
     this.currentHotspotId = id;
     this.isModalOpen = true;
     this.visitedHotspots.add(id);
+    courseProgress.recordHotspotVisit('modul1', id);
 
     const overlay = this.container.querySelector('#hotspot-card-modal-overlay');
     if (overlay) {
@@ -988,6 +990,8 @@ export class Modul1View extends BaseModuleView {
 
     if (text) text.textContent = `${totalPct}%`;
     if (fill) fill.style.width = `${totalPct}%`;
+
+    courseProgress.updateDOM();
 
     try {
       if (scorm) {

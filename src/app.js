@@ -3,6 +3,7 @@ import { userProfile } from './core/user-profile.js';
 import { lrsConfig } from './core/lrs-config.js';
 import { AppRouter } from './core/router.js';
 import { LRSConfigModal } from './components/lrs-config-modal.js';
+import { courseProgress } from './core/progress.js';
 
 export class App {
   static async init() {
@@ -11,8 +12,9 @@ export class App {
     // 1. Initialize SCORM API
     scorm.init();
 
-    // 2. Initialize User Profile Manager (KLC2 session fetch & fallback)
+    // 2. Initialize User Profile & Course Progress Manager
     await userProfile.init();
+    courseProgress.init();
 
     // 3. Setup LRS Button & Status Dot
     const lrsBtn = document.getElementById('lrs-config-btn');

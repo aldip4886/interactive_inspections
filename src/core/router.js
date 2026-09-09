@@ -6,6 +6,7 @@ import { Modul4aView } from '../modules/modul4a/modul4a.js';
 import { Modul4bView } from '../modules/modul4b/modul4b.js';
 import { EvaluasiView } from '../modules/evaluasi/evaluasi.js';
 import { scorm } from './scorm.js';
+import { courseProgress } from './progress.js';
 
 export class AppRouter {
   constructor(contentContainer) {
@@ -45,12 +46,15 @@ export class AppRouter {
     // Update active nav state in sidebar
     this.updateSidebarActive(routeKey);
 
-    // Save SCORM bookmark
+    // Save SCORM bookmark & record module visit in courseProgress
     scorm.setBookmark(routeKey);
+    courseProgress.recordModuleVisit(routeKey);
+    courseProgress.updateDOM();
 
     // Render View
     this.currentViewInstance = new ViewClass(this.container);
     await this.currentViewInstance.render();
+    courseProgress.updateDOM();
 
     // Scroll to top
     this.container.scrollTop = 0;

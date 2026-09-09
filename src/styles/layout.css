@@ -351,4 +351,161 @@ html, body {
     width: 100%;
     min-width: 100%;
   }
+  .course-header-progress-widget {
+    min-width: 130px;
+    padding: 4px 8px;
+  }
+}
+
+/* ─── Persistent Course Progress Widget in Header (Every Page) ─── */
+.course-header-progress-widget {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 170px;
+  background: #F8FAFC;
+  padding: 6px 14px;
+  border-radius: 8px;
+  border: 1px solid #E2E8F0;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.03);
+}
+
+.course-header-progress-widget .progress-info-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  line-height: 1.2;
+}
+
+.course-header-progress-widget .progress-title {
+  color: #475569;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+.course-header-progress-widget .progress-value {
+  color: #0B2C6E;
+  font-weight: 800;
+  font-size: 11.5px;
+  letter-spacing: 0.5px;
+}
+
+.course-header-progress-widget .progress-track {
+  width: 100%;
+  height: 6px;
+  background: #E2E8F0;
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+}
+
+.course-header-progress-widget .progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #F5A623 0%, #FDC003 100%);
+  border-radius: 4px;
+  box-shadow: 0 0 8px rgba(253, 192, 3, 0.6);
+  transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ─── Sticky Top Gold Progress Line ─── */
+.top-progress-line-container {
+  width: 100%;
+  height: 3px;
+  background: rgba(226, 232, 240, 0.5);
+  position: relative;
+  z-index: 99;
+}
+
+.top-progress-line {
+  height: 100%;
+  background: linear-gradient(90deg, #F5A623 0%, #FDC003 100%);
+  box-shadow: 0 0 10px rgba(253, 192, 3, 0.8);
+  transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ─── Beranda Progress Summary Card ─── */
+.beranda-progress-summary-card {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 12px;
+  padding: 20px 24px;
+  margin: 16px 0 24px 0;
+  box-shadow: 0 4px 14px rgba(0, 37, 59, 0.05);
+}
+
+.progress-summary-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  gap: 16px;
+}
+
+.progress-summary-badge {
+  font-size: 10.5px;
+  font-weight: 700;
+  color: #0B2C6E;
+  letter-spacing: 0.08em;
+  background: #EFF6FF;
+  padding: 3px 8px;
+  border-radius: 4px;
+  border: 1px solid #DBEAFE;
+}
+
+.progress-summary-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #0F172A;
+  margin-top: 4px;
+}
+
+.progress-summary-pct-badge {
+  font-size: 18px;
+  font-weight: 800;
+  color: #0B2C6E;
+  background: #FFFBEB;
+  border: 1px solid #FDE68A;
+  padding: 6px 14px;
+  border-radius: 8px;
+  white-space: nowrap;
+}
+
+.progress-track-lg {
+  height: 10px !important;
+  border-radius: 6px !important;
+  margin-bottom: 16px;
+}
+
+.progress-module-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 10px;
+}
+
+.mod-prog-item {
+  background: #F8FAFC;
+  border: 1px solid #F1F5F9;
+  border-radius: 8px;
+  padding: 8px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.mod-prog-label {
+  font-size: 11px;
+  color: #64748B;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mod-prog-val {
+  font-size: 13px;
+  color: #0F172A;
+  font-weight: 700;
 }

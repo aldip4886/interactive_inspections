@@ -126,6 +126,17 @@
         </div>
 
         <div style="display: flex; align-items: center; gap: 16px;">
+          <!-- Course Progress Bar Widget (Visible on EVERY page) -->
+          <div id="course-header-progress-widget" class="course-header-progress-widget">
+            <div class="progress-info-row">
+              <span class="progress-title">PROGRESS KURSUS:</span>
+              <span id="course-progress-pct" class="progress-value font-code-tech">0%</span>
+            </div>
+            <div class="progress-track">
+              <div id="course-progress-bar-fill" class="progress-fill" style="width: 0%;"></div>
+            </div>
+          </div>
+
           <!-- LRS Connection Config Button -->
           <button id="lrs-config-btn" class="btn-icon" title="Pengaturan LRS / xAPI Analytics"
             style="position: relative;">
@@ -148,6 +159,11 @@
           </div>
         </div>
       </header>
+
+      <!-- Sticky Top Gold Progress Fill Line -->
+      <div class="top-progress-line-container">
+        <div id="top-progress-line" class="top-progress-line" style="width: 0%;"></div>
+      </div>
 
       <!-- Viewport Content Render Area -->
       <div id="content-area">

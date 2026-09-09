@@ -4,6 +4,7 @@ import { ViewToggle } from '../components/view-toggle.js';
 import { Carousel } from '../components/carousel.js';
 import { RotationControl } from '../components/rotation.js';
 import { xapi } from './xapi.js';
+import { courseProgress } from './progress.js';
 
 export class BaseModuleView {
   constructor(container, jsonPath) {
@@ -35,8 +36,35 @@ export class BaseModuleView {
     this.activeView = viewKeys[0] || 'front';
     this.currentAngle = 0;
 
+    const modPct = courseProgress.getModuleProgress(data.moduleId);
+
     const html = `
       <div class="inspection-workspace">
+        <!-- Sub Header Bar -->
+        <div class="modul1-top-bar">
+          <div class="nav-left">
+            <div class="header-breadcrumb">
+              <span class="modul-code-badge font-code-tech">${(data.moduleId || '').toUpperCase()}</span>
+              <span class="course-main-title">${data.moduleTitle || 'Pemeriksaan Interaktif'}</span>
+              <span class="breadcrumb-separator">•</span>
+              <span class="modul-ref-tag font-code-tech">PMK-188/2021 & S-39/BC/2023</span>
+            </div>
+          </div>
+
+          <div class="nav-right">
+            <!-- Module Progress Widget -->
+            <div class="module-progress-widget">
+              <div class="progress-info-row">
+                <span class="progress-title">Hotspot Terverifikasi:</span>
+                <span id="${data.moduleId}-progress-pct" class="progress-value font-code-tech">${modPct}%</span>
+              </div>
+              <div class="progress-track">
+                <div id="${data.moduleId}-progress-fill" class="progress-fill" style="width: ${modPct}%;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <!-- Floating Filter Category Bar -->
         <div class="filter-category-bar">
           ${(data.filterCategories || []).map(cat => `
@@ -74,6 +102,8 @@ export class BaseModuleView {
     // Initialize sub-components
     this.initComponents();
 
+    courseProgress.updateDOM();
+
     // Track xAPI module view
     xapi.trackModuleView(data.moduleId, data.moduleTitle);
   }
@@ -91,6 +121,7 @@ export class BaseModuleView {
     this.hotspotLayer = new HotspotLayer(hotspotRoot, {
       onHotspotClick: (hotspot) => {
         this.infoPanel.show(hotspot);
+        courseProgress.recordHotspotVisit(data.moduleId, hotspot.id);
         xapi.trackHotspotClick(data.moduleId, hotspot.id, hotspot.label, hotspot.category);
       }
     });
