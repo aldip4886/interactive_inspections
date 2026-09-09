@@ -372,14 +372,27 @@ export class Modul4aView extends BaseModuleView {
       this.threeRenderer.shadowMap.type = THREE.PCFSoftShadowMap;
       container.appendChild(this.threeRenderer.domElement);
 
-      // 3. Orbit Controls — Lock Zoom at default 250% level
+      // 3. Orbit Controls — Allow Zooming via Mouse Wheel and HUD buttons
       this.threeControls = new OrbitControls(this.threeCamera, this.threeRenderer.domElement);
       this.threeControls.enableDamping = true;
       this.threeControls.dampingFactor = 0.05;
       this.threeControls.maxPolarAngle = Math.PI / 2 + 0.05;
-      this.threeControls.enableZoom = false;
-      this.threeControls.minDistance = 2.84;
-      this.threeControls.maxDistance = 2.84;
+      this.threeControls.enableZoom = true;
+      this.threeControls.minDistance = 1.775; // Max 400% zoom (7.1 / 4.0)
+      this.threeControls.maxDistance = 7.1;   // Min 100% zoom (7.1 / 1.0)
+
+      this.threeControls.addEventListener('change', () => {
+        if (!this.threeControls || !this.threeCamera) return;
+        const distance = this.threeCamera.position.distanceTo(this.threeControls.target);
+        if (distance > 0) {
+          const factor = 7.1 / distance;
+          this.currentZoomFactor = Math.min(4.0, Math.max(1.0, factor));
+          const zoomResetBtn = this.container.querySelector('#btn-zoom-reset');
+          if (zoomResetBtn) {
+            zoomResetBtn.textContent = `${Math.round(this.currentZoomFactor * 100)}%`;
+          }
+        }
+      });
 
       // 4. Lighting
       const ambientLight = new THREE.AmbientLight(0xffffff, 1.2);
@@ -679,8 +692,8 @@ export class Modul4aView extends BaseModuleView {
     if (dir.length() === 0) dir.set(0, 0, 1);
 
     this.threeCamera.position.copy(this.threeControls.target).add(dir.multiplyScalar(distance));
-    this.threeControls.minDistance = distance;
-    this.threeControls.maxDistance = distance;
+    this.threeControls.minDistance = 1.775;
+    this.threeControls.maxDistance = 7.1;
     this.threeControls.update();
 
     const zoomResetBtn = this.container.querySelector('#btn-zoom-reset');
