@@ -555,51 +555,33 @@ export class Modul4aView extends BaseModuleView {
     const hotspots = this.moduleData.hotspots || [];
 
     hotspots.forEach(hs => {
-      const wp = hs.worldPos || { x: 1.15, y: 0.35, z: 0.0 };
+      const wp = hs.worldPos || { x: 1.25, y: 0.45, z: 0.0 };
 
       const anchorGroup = new THREE.Group();
       anchorGroup.name = `hotspot-anchor-${hs.id}`;
 
-      // Candidates targeting front hood area across major model axes
-      const candidates = [
-        new THREE.Vector3(1.40, 0.25, 0.0),   // +X front
-        new THREE.Vector3(-1.40, 0.25, 0.0),  // -X front
-        new THREE.Vector3(0.0, 0.25, 1.40),   // +Z front
-        new THREE.Vector3(0.0, 0.25, -1.40),  // -Z front
-        new THREE.Vector3(wp.x, wp.y, wp.z)
-      ];
+      // Surface raycast directly at specified worldPos (wp)
+      const localRayStart = new THREE.Vector3(wp.x, wp.y + 2.0, wp.z);
+      const localRayDir = new THREE.Vector3(0, -1, 0);
 
-      let bestHoodHit = null;
-      let maxDistFromCenter = -Infinity;
+      const worldRayStart = localRayStart.clone().applyMatrix4(this.vehicleGroup.matrixWorld);
+      const worldRayDir = localRayDir.clone().transformDirection(this.vehicleGroup.matrixWorld).normalize();
+
       const surfaceRaycaster = new THREE.Raycaster();
+      surfaceRaycaster.set(worldRayStart, worldRayDir);
+      const hits = surfaceRaycaster.intersectObjects(this.vehicleGroup.children, true);
 
-      for (let cand of candidates) {
-        // Local ray start 1.8 units above candidate, shooting straight down (-Y)
-        const localRayStart = new THREE.Vector3(cand.x, cand.y + 1.8, cand.z);
-        const localRayDir = new THREE.Vector3(0, -1, 0);
-
-        // Convert local ray to world space
-        const worldRayStart = localRayStart.clone().applyMatrix4(this.vehicleGroup.matrixWorld);
-        const worldRayDir = localRayDir.clone().transformDirection(this.vehicleGroup.matrixWorld).normalize();
-
-        surfaceRaycaster.set(worldRayStart, worldRayDir);
-        const hits = surfaceRaycaster.intersectObjects(this.vehicleGroup.children, true);
-
-        for (let hit of hits) {
-          const localP = this.vehicleGroup.worldToLocal(hit.point.clone());
-          // Target hood metal surface height (0.15 <= Y <= 0.48, excluding roof Y > 0.5)
-          if (localP.y >= 0.15 && localP.y <= 0.48) {
-            const horizontalDist = Math.hypot(localP.x, localP.z);
-            if (horizontalDist > maxDistFromCenter) {
-              maxDistFromCenter = horizontalDist;
-              bestHoodHit = localP;
-            }
-          }
+      let bestHit = null;
+      for (let hit of hits) {
+        const localP = this.vehicleGroup.worldToLocal(hit.point.clone());
+        if (localP.y > 0.05) {
+          bestHit = localP;
+          break;
         }
       }
 
-      if (bestHoodHit) {
-        anchorGroup.position.copy(bestHoodHit);
+      if (bestHit) {
+        anchorGroup.position.copy(bestHit);
       } else {
         anchorGroup.position.set(wp.x, wp.y, wp.z);
       }
