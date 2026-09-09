@@ -60,12 +60,6 @@ export class Modul1View extends BaseModuleView {
             </div>
 
             <div class="nav-right">
-              <!-- Live Sensor State Indicator -->
-              <div class="sensor-state-chip font-code-tech">
-                <span class="sensor-dot live"></span>
-                <span>BODY SCANNER: AKTIF</span>
-              </div>
-
               <!-- Module Progress Widget -->
               <div class="module-progress-widget">
                 <div class="progress-info-row">
@@ -79,7 +73,6 @@ export class Modul1View extends BaseModuleView {
 
               <!-- Kuis Button -->
               <button class="quiz-nav-pill-btn" id="btn-open-quiz" title="Latihan Soal Penilaian Kompetensi">
-                <span class="pill-icon">📝</span>
                 <span>Kuis Penilaian</span>
               </button>
 
