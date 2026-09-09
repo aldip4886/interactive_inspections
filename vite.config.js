@@ -2,6 +2,9 @@ import { defineConfig } from 'vite';
 
 export default defineConfig({
   base: './',
+  optimizeDeps: {
+    exclude: ['@google/model-viewer']
+  },
   build: {
     outDir: 'dist',
     assetsDir: 'assets',
