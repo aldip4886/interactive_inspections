@@ -61,15 +61,6 @@ export class Modul1View extends BaseModuleView {
             </div>
 
             <div class="nav-right">
-              <!-- Module Progress Widget -->
-              <div class="module-progress-widget">
-                <span class="progress-title">Hotspot Terverifikasi:</span>
-                <span id="progress-percentage-text" class="progress-value font-code-tech">12%</span>
-                <div class="progress-track">
-                  <div id="progress-fill-bar" class="progress-fill" style="width: 12%;"></div>
-                </div>
-              </div>
-
               <!-- Help Button -->
               <button id="btn-help-modal" class="icon-btn circle-btn" title="Panduan Penggunaan">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">

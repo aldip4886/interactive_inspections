@@ -51,16 +51,6 @@ export class BaseModuleView {
             </div>
           </div>
 
-          <div class="nav-right">
-            <!-- Module Progress Widget -->
-            <div class="module-progress-widget">
-              <span class="progress-title">Hotspot Terverifikasi:</span>
-              <span id="${data.moduleId}-progress-pct" class="progress-value font-code-tech">${modPct}%</span>
-              <div class="progress-track">
-                <div id="${data.moduleId}-progress-fill" class="progress-fill" style="width: ${modPct}%;"></div>
-              </div>
-            </div>
-          </div>
         </div>
 
         <!-- Floating Filter Category Bar -->

@@ -55,27 +55,6 @@ export class Modul2View extends BaseModuleView {
                 <span class="modul-ref-tag font-code-tech">PMK-188/2021 & S-39/BC/2023</span>
               </div>
             </div>
-
-            <div class="nav-right">
-              <!-- Module Progress Widget -->
-              <div class="module-progress-widget">
-                <span class="progress-title">Hotspot Terverifikasi:</span>
-                <span id="modul2-progress-pct" class="progress-value font-code-tech">${modPct}%</span>
-                <div class="progress-track">
-                  <div id="modul2-progress-fill" class="progress-fill" style="width: ${modPct}%;"></div>
-                </div>
-              </div>
-
-              <!-- View Switcher (X-Ray / Normal) -->
-              <div class="view-mode-switcher-pill" style="display:flex; background:rgba(3,15,38,0.85); padding:3px; border-radius:20px; border:1px solid rgba(255,255,255,0.15);">
-                <button id="btn-view-xray" class="mode-pill-btn active" style="padding:4px 12px; border-radius:16px; border:none; background:#F5A623; color:#030F26; font-size:11px; font-weight:700; cursor:pointer;">
-                  🔍 X-Ray Scanner
-                </button>
-                <button id="btn-view-normal" class="mode-pill-btn" style="padding:4px 12px; border-radius:16px; border:none; background:transparent; color:#CBD5E1; font-size:11px; font-weight:600; cursor:pointer;">
-                  👜 Tampak Normal
-                </button>
-              </div>
-            </div>
           </div>
 
           <!-- Floating Filter Category Bar -->
@@ -88,11 +67,23 @@ export class Modul2View extends BaseModuleView {
           </div>
 
           <!-- Central Inspection Viewport Scene -->
-          <div class="scene-viewport" style="position:relative; width:100%; height:calc(100vh - 120px); display:flex; justify-content:center; align-items:center; background:#030F26; overflow:hidden;">
-            <div class="scene-container" style="position:relative; max-width:900px; width:100%; height:100%; display:flex; justify-content:center; align-items:center;">
+          <div class="scene-viewport" style="position:relative; width:100%; min-height:calc(100vh - 120px); display:flex; flex-direction:column; justify-content:center; align-items:center; background:#030F26; padding:20px 0; overflow:hidden;">
+            
+            <!-- View Mode Switcher Pill (Centered Above Main Image) -->
+            <div class="view-mode-switcher-pill" style="display:inline-flex; align-items:center; gap:4px; background:rgba(3,15,38,0.92); padding:4px 8px; border-radius:24px; border:1px solid rgba(245,166,35,0.4); margin-bottom:16px; z-index:10; box-shadow:0 4px 20px rgba(0,0,0,0.6);">
+              <button id="btn-view-xray" class="mode-pill-btn active" style="padding:6px 18px; border-radius:20px; border:none; background:#F5A623; color:#030F26; font-size:12px; font-weight:700; cursor:pointer; transition:all 0.2s ease;">
+                🔍 X-Ray Scanner
+              </button>
+              <button id="btn-view-normal" class="mode-pill-btn" style="padding:6px 18px; border-radius:20px; border:none; background:transparent; color:#CBD5E1; font-size:12px; font-weight:600; cursor:pointer; transition:all 0.2s ease;">
+                👜 Tampak Normal
+              </button>
+            </div>
+
+            <!-- Central Main Image Container with Hotspots -->
+            <div class="scene-container" style="position:relative; max-width:850px; width:100%; display:flex; justify-content:center; align-items:center;">
               <img id="m2-central-image" src="assets/images/central/m2_luggage_xray.png" 
                    alt="X-Ray Scanner Koper Bagasi Bawaan" 
-                   style="max-height:88vh; max-width:100%; object-fit:contain; filter:drop-shadow(0 10px 30px rgba(0,0,0,0.7));" />
+                   style="max-height:76vh; max-width:100%; object-fit:contain; filter:drop-shadow(0 10px 30px rgba(0,0,0,0.7)); display:block; margin:0 auto;" />
               
               <!-- Hotspots Interactive Layer -->
               <div id="m2-hotspots-layer" class="hotspots-layer" style="position:absolute; inset:0;"></div>
