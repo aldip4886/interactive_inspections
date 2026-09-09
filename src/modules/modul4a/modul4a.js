@@ -357,7 +357,7 @@ export class Modul4aView extends BaseModuleView {
       this.threeScene = new THREE.Scene();
 
       this.threeCamera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
-      this.threeCamera.position.set(4, 2.2, 5);
+      this.threeCamera.position.set(4.5, 2.2, 5.0);
 
       // 2. Renderer
       this.threeRenderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
@@ -367,13 +367,14 @@ export class Modul4aView extends BaseModuleView {
       this.threeRenderer.shadowMap.type = THREE.PCFSoftShadowMap;
       container.appendChild(this.threeRenderer.domElement);
 
-      // 3. Orbit Controls
+      // 3. Orbit Controls — Lock Zoom at default 100% level
       this.threeControls = new OrbitControls(this.threeCamera, this.threeRenderer.domElement);
       this.threeControls.enableDamping = true;
       this.threeControls.dampingFactor = 0.05;
       this.threeControls.maxPolarAngle = Math.PI / 2 + 0.05;
-      this.threeControls.minDistance = 2;
-      this.threeControls.maxDistance = 12;
+      this.threeControls.enableZoom = false;
+      this.threeControls.minDistance = 7.1;
+      this.threeControls.maxDistance = 7.1;
 
       // 4. Lighting
       const ambientLight = new THREE.AmbientLight(0xffffff, 1.2);
