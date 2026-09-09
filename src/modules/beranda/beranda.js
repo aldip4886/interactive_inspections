@@ -19,9 +19,6 @@ export class BerandaView {
             <h1 class="beranda-hero-title">
               Interactive Narcotics Inspection Simulator
             </h1>
-            <p class="beranda-hero-subtitle">
-              Selamat datang, <strong>${profile.name}</strong> (${profile.nip || profile.username || 'Petugas DJBC'}). Media pembelajaran interaktif berbasis simulasi X-Ray forensik, 360° rotation, dan hotspot interaktif untuk mendeteksi titik-titik penyembunyian Narkotika pada 4 kategori pengawasan utama.
-            </p>
             <div class="beranda-hero-actions">
               <a href="#/modul1" class="btn-hero-primary">
                 <span>Mulai Inspeksi Modul 1</span>

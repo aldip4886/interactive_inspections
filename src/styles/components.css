@@ -460,19 +460,6 @@
   margin: 0;
 }
 
-.beranda-hero-subtitle {
-  font-size: var(--font-size-body-md);
-  line-height: var(--line-height-body-md);
-  color: #E2E8F0 !important;
-  font-weight: 400;
-  margin: 0;
-}
-
-.beranda-hero-subtitle strong {
-  color: var(--color-secondary-container) !important;
-  font-weight: 600;
-}
-
 .beranda-hero-actions {
   display: flex;
   align-items: center;
