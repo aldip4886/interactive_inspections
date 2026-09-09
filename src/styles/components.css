@@ -412,7 +412,7 @@
 .beranda-hero {
   background: linear-gradient(135deg, #001529 0%, #071d31 60%, #030d17 100%);
   border-radius: var(--radius-xl);
-  padding: 40px 44px;
+  padding: 24px 44px 32px 44px;
   position: relative;
   overflow: hidden;
   box-shadow: 0 12px 32px rgba(0, 21, 41, 0.25), 0 0 0 1px rgba(253, 192, 3, 0.2);
@@ -434,23 +434,24 @@
   max-width: 820px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 8px;
 }
 
 .beranda-hero-pretitle {
-  font-size: 13.5px;
+  font-size: 13px;
   font-weight: 700;
   color: var(--color-secondary-container, #FDBB24);
   letter-spacing: 0.06em;
   text-transform: uppercase;
   margin: 0;
+  line-height: 1.2;
 }
 
 .beranda-hero-title {
   font-size: var(--font-size-headline-lg);
   font-weight: 800;
   color: #FDC003 !important;
-  line-height: var(--line-height-headline-lg);
+  line-height: 1.2;
   letter-spacing: -0.02em;
   text-shadow: 0 2px 12px rgba(0, 0, 0, 0.85), 0 0 20px rgba(253, 192, 3, 0.3);
   margin: 0;
