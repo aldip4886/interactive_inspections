@@ -41,12 +41,12 @@ export class Modul2View extends BaseModuleView {
     const categories = this.moduleData.categories || [];
 
     return `
-      <div id="modul2-app-root">
+      <div id="modul2-app-root" style="width:100%; display:flex; flex-direction:column; align-items:center;">
         <!-- ─── MAIN VIEWPORT ─── -->
-        <div id="modul2-viewport">
+        <div id="modul2-viewport" style="width:100%; display:flex; flex-direction:column; align-items:center;">
 
           <!-- Sub Header Bar (Stitch Forensic Module Strip) -->
-          <div id="modul2-top-bar" class="modul1-top-bar">
+          <div id="modul2-top-bar" class="modul1-top-bar" style="width:100%;">
             <div class="nav-left">
               <div class="header-breadcrumb">
                 <span class="modul-code-badge font-code-tech">MODUL 02</span>
@@ -67,10 +67,10 @@ export class Modul2View extends BaseModuleView {
           </div>
 
           <!-- Central Inspection Viewport Scene -->
-          <div class="scene-viewport" style="position:relative; width:100%; min-height:calc(100vh - 120px); display:flex; flex-direction:column; justify-content:center; align-items:center; background:#030F26; padding:20px 0; overflow:hidden;">
+          <div class="scene-viewport" style="position:relative; width:100%; min-height:calc(100vh - 120px); display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; background:#030F26; padding:20px 0; overflow:hidden;">
             
             <!-- View Mode Switcher Pill (Centered Above Main Image) -->
-            <div class="view-mode-switcher-pill" style="display:inline-flex; align-items:center; gap:4px; background:rgba(3,15,38,0.92); padding:4px 8px; border-radius:24px; border:1px solid rgba(245,166,35,0.4); margin-bottom:16px; z-index:10; box-shadow:0 4px 20px rgba(0,0,0,0.6);">
+            <div class="view-mode-switcher-pill" style="display:inline-flex; align-items:center; justify-content:center; gap:6px; background:rgba(3,15,38,0.92); padding:5px 10px; border-radius:24px; border:1px solid rgba(245,166,35,0.4); margin:0 auto 16px auto; z-index:10; box-shadow:0 4px 20px rgba(0,0,0,0.6);">
               <button id="btn-view-xray" class="mode-pill-btn active" style="padding:6px 18px; border-radius:20px; border:none; background:#F5A623; color:#030F26; font-size:12px; font-weight:700; cursor:pointer; transition:all 0.2s ease;">
                 🔍 X-Ray Scanner
               </button>
@@ -80,7 +80,7 @@ export class Modul2View extends BaseModuleView {
             </div>
 
             <!-- Central Main Image Container with Hotspots -->
-            <div class="scene-container" style="position:relative; max-width:850px; width:100%; display:flex; justify-content:center; align-items:center;">
+            <div class="scene-container" style="position:relative; max-width:850px; width:100%; margin:0 auto; display:flex; justify-content:center; align-items:center;">
               <img id="m2-central-image" src="assets/images/central/m2_luggage_xray.png" 
                    alt="X-Ray Scanner Koper Bagasi Bawaan" 
                    style="max-height:76vh; max-width:100%; object-fit:contain; filter:drop-shadow(0 10px 30px rgba(0,0,0,0.7)); display:block; margin:0 auto;" />
