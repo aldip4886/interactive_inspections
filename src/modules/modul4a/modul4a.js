@@ -529,7 +529,19 @@ export class Modul4aView extends BaseModuleView {
       // Create 3D Hotspot Object attached directly to vehicleGroup GLB model tree
       const anchorGroup = new THREE.Group();
       anchorGroup.name = `hotspot-anchor-${hs.id}`;
-      anchorGroup.position.set(wp.x, wp.y, wp.z);
+
+      // Surface raycast to snap anchor directly onto exact GLB hood mesh surface
+      const surfaceRaycaster = new THREE.Raycaster();
+      const downDir = new THREE.Vector3(0, -1, 0);
+      const rayStart = new THREE.Vector3(wp.x, wp.y + 2.0, wp.z);
+      surfaceRaycaster.set(rayStart, downDir);
+      const hits = surfaceRaycaster.intersectObjects(this.vehicleGroup.children, true);
+      if (hits.length > 0) {
+        anchorGroup.position.copy(hits[0].point);
+      } else {
+        anchorGroup.position.set(wp.x, wp.y, wp.z);
+      }
+
       anchorGroup.userData = {
         isHotspotAnchor: true,
         hotspotId: hs.id,
