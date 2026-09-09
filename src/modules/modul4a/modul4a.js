@@ -766,8 +766,16 @@ export class Modul4aView extends BaseModuleView {
       pin.setAttribute('role', 'button');
       pin.setAttribute('aria-label', `Hotspot ${num}: ${label}`);
 
+      // pointer-events: auto agar pin bisa diklik meski layer induk punya pointer-events:none
+      pin.style.pointerEvents = 'auto';
+
       pin.addEventListener('pointerenter', () => pin.classList.add('is-hovered'));
       pin.addEventListener('pointerleave', () => pin.classList.remove('is-hovered'));
+
+      // Hentikan OrbitControls dari menyerap event sebelum click sempat ter-fire
+      pin.addEventListener('pointerdown', (e) => {
+        e.stopPropagation();
+      });
 
       pin.addEventListener('click', (e) => {
         e.stopPropagation();
@@ -787,7 +795,7 @@ export class Modul4aView extends BaseModuleView {
     this.visitedHotspots.add(hotspotId);
     this.isModalOpen = true;
 
-    courseProgress.markHotspotVisited('modul4a', hotspotId, hotspots.length);
+    courseProgress.recordHotspotVisit('modul4a', hotspotId);
     this.updateProgressUI();
 
     this.renderModalContent(hs, hotspots);
@@ -1069,10 +1077,12 @@ export class Modul4aView extends BaseModuleView {
   updateProgressUI() {
     const total = this.moduleData?.hotspots?.length || 5;
     const progress = Math.min(100, Math.round((this.visitedHotspots.size / total) * 100));
-    courseProgress.setModuleProgress('modul4a', progress);
 
     this.currentProgressPct = progress;
     window.currentCourseProgressPct = progress;
+
+    // Refresh course progress DOM (getModuleProgress sudah dihitung dari recordHotspotVisit)
+    courseProgress.updateDOM();
 
     if (window.trackCourseProgress) {
       window.trackCourseProgress(progress);
