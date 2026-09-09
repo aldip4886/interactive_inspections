@@ -15,6 +15,7 @@ export class BerandaView {
         <section class="beranda-hero">
           <div class="beranda-hero-bg-overlay"></div>
           <div class="beranda-hero-content">
+            <div class="beranda-hero-pretitle">e-Learning Narkotika dan Pengawasannya</div>
             <h1 class="beranda-hero-title">
               Interactive Narcotics Inspection Simulator
             </h1>
