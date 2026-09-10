@@ -135,9 +135,9 @@ export class Modul4aView extends BaseModuleView {
               </div>
 
               <!-- Central Active 3D Vehicle Container with Hotspots Layer -->
-              <div class="body-image-container" id="vehicle-image-container" style="max-width:960px; width:100%; aspect-ratio: auto; margin:0 auto; position:relative;">
-                <div id="m4a-3d-canvas-wrapper" style="width:100%; height:62vh; min-height:420px; position:relative; display:flex; align-items:center; justify-content:center; cursor:grab;">
-                  <img id="m4a-central-image" src="assets/images/modul4a/depan.png" alt="KIA Carnival 2023" class="main-body-img" style="display:block; max-height:60vh; object-fit:contain; filter:drop-shadow(0 12px 32px rgba(0,37,59,0.16)); user-select:none; -webkit-user-drag:none;" />
+              <div class="body-image-container" id="vehicle-image-container" style="max-width:100%; width:100%; aspect-ratio:auto; height:auto; margin:0 auto; position:relative;">
+                <div id="m4a-3d-canvas-wrapper" style="width:100%; height:65vh; min-height:440px; position:relative; display:flex; align-items:center; justify-content:center; cursor:grab; overflow:hidden;">
+                  <img id="m4a-central-image" src="assets/images/modul4a/depan.png" alt="KIA Carnival 2023" class="main-body-img" style="display:block; width:100%; height:100%; object-fit:contain; filter:drop-shadow(0 12px 32px rgba(0,37,59,0.16)); user-select:none; -webkit-user-drag:none;" />
                   <div id="three-canvas-container" style="width:100%; height:100%; position:absolute; inset:0; z-index:2; pointer-events:none;"></div>
                   <div id="m4a-hotspots-layer" class="hotspots-layer" style="position:absolute; inset:0; z-index:30; pointer-events:none;"></div>
                 </div>
@@ -160,7 +160,7 @@ export class Modul4aView extends BaseModuleView {
                   <button id="btn-zoom-out" class="pedestal-ctrl-btn hud-zoom-btn" title="Perkecil (Zoom Out)" aria-label="Zoom Out">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line></svg>
                   </button>
-                  <button id="btn-zoom-reset" class="pedestal-ctrl-btn hud-zoom-btn font-code-tech" title="Reset Zoom (250%)">250%</button>
+                  <button id="btn-zoom-reset" class="pedestal-ctrl-btn hud-zoom-btn font-code-tech" title="Reset Zoom (100%)">100%</button>
                   <button id="btn-zoom-in" class="pedestal-ctrl-btn hud-zoom-btn" title="Perbesar (Zoom In)" aria-label="Zoom In">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
                   </button>

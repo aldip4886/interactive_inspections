@@ -119,7 +119,16 @@
   background-color: var(--bg-stage);
 }
 
-/* Sub-header Bar inside Modul 1 (Stitch Forensic Strip) */
+/* Override body-image-container khusus modul4a agar landscape penuh */
+#vehicle-image-container {
+  height: auto !important;
+  max-height: none !important;
+  aspect-ratio: auto !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+
 #modul1-top-bar.modul1-top-bar,
 #modul2-top-bar.modul1-top-bar,
 #modul4a-top-bar.modul1-top-bar {
