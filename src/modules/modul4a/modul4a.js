@@ -17,8 +17,8 @@ export class Modul4aView extends BaseModuleView {
     this.isModalOpen = false;
     this.isAutoRotating = false;
     this.currentZoomFactor = 1.0;   // 100% = tampilan normal
-    this.minZoomFactor = 1.0;
-    this.maxZoomFactor = 4.0;
+    this.minZoomFactor = 0.5;        // 50%
+    this.maxZoomFactor = 2.0;        // 200%
     this.cardPages = [
       { id: 'tab-modus', num: 1, title: 'Modus Operandi' },
       { id: 'tab-photos', num: 2, title: 'Foto Gambar Real' },
@@ -107,12 +107,12 @@ export class Modul4aView extends BaseModuleView {
               <div class="current-angle-badge" id="current-angle-badge">
                 <span class="angle-deg font-code-tech" id="view-mode-badge">0°</span>
                 <span class="angle-sep">•</span>
-                <span class="angle-name" id="view-mode-title">KIA Carnival 2023</span>
-                <span class="angle-sub" id="view-mode-sub">(Tampak Depan (0°))</span>
+                <span class="angle-name" id="view-mode-title">5-Seater SUV Car</span>
+                <!-- <span class="angle-sub" id="view-mode-sub">(Tampak Depan (0°))</span>    -->
               </div>
               <div class="angle-instruction-tag">
                 <span class="instruction-dot">●</span>
-                <span>Klik hotspot bernomor pada kendaraan untuk menganalisis modus operandi & bukti forensik</span>
+                <span>Klik hotspot bernomor pada kendaraan untuk menganalisis modus operandi.</span>
               </div>
             </div>
 
@@ -126,7 +126,7 @@ export class Modul4aView extends BaseModuleView {
               <div class="forensic-hud-telemetry" aria-hidden="true">
                 <div class="forensic-hud-top-left font-code-tech">
                   <div class="hud-line-title">STASIUN PEMINDAIAN KENDARAAN DARAT</div>
-                  <div class="hud-line-sub">SUBJEK ID: VEHICLE-MPV-KC23 / KIA CARNIVAL 2023</div>
+                  <div class="hud-line-sub">SUBJEK ID: VEHICLE-MPV-KC23</div>
                 </div>
                 <div class="forensic-hud-top-right font-code-tech">
                   <div class="hud-line-azimuth" id="hud-azimuth-text">MODE AKTIF: 360° ROTATABLE IMAGE (0°)</div>
@@ -160,7 +160,7 @@ export class Modul4aView extends BaseModuleView {
                   <button id="btn-zoom-out" class="pedestal-ctrl-btn hud-zoom-btn" title="Perkecil (Zoom Out)" aria-label="Zoom Out">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line></svg>
                   </button>
-                  <button id="btn-zoom-reset" class="pedestal-ctrl-btn hud-zoom-btn font-code-tech" title="Reset Zoom (100%)">100%</button>
+                  <button id="btn-zoom-reset" class="pedestal-ctrl-btn hud-zoom-btn font-code-tech" title="Reset Zoom (250%)">250%</button>
                   <button id="btn-zoom-in" class="pedestal-ctrl-btn hud-zoom-btn" title="Perbesar (Zoom In)" aria-label="Zoom In">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
                   </button>
@@ -807,8 +807,8 @@ export class Modul4aView extends BaseModuleView {
     if (dir.length() === 0) dir.set(0, 0, 1);
 
     this.threeCamera.position.copy(this.threeControls.target).add(dir.multiplyScalar(distance));
-    this.threeControls.minDistance = 1.775;
-    this.threeControls.maxDistance = 7.1;
+    this.threeControls.minDistance = 7.1 / this.maxZoomFactor;  // 200% zoom
+    this.threeControls.maxDistance = 7.1 / this.minZoomFactor;  // 50% zoom
     this.threeControls.update();
 
     const zoomResetBtn = this.container.querySelector('#btn-zoom-reset');
