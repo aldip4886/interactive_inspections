@@ -16,7 +16,9 @@ export class Modul4aView extends BaseModuleView {
     this.activeFilter = 'all';
     this.isModalOpen = false;
     this.isAutoRotating = false;
-    this.currentZoomFactor = 2.5;
+    this.currentZoomFactor = 1.0;   // 100% = tampilan normal
+    this.minZoomFactor = 1.0;
+    this.maxZoomFactor = 4.0;
     this.cardPages = [
       { id: 'tab-modus', num: 1, title: 'Modus Operandi' },
       { id: 'tab-photos', num: 2, title: 'Foto Gambar Real' },
@@ -158,7 +160,7 @@ export class Modul4aView extends BaseModuleView {
                   <button id="btn-zoom-out" class="pedestal-ctrl-btn hud-zoom-btn" title="Perkecil (Zoom Out)" aria-label="Zoom Out">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line></svg>
                   </button>
-                  <button id="btn-zoom-reset" class="pedestal-ctrl-btn hud-zoom-btn font-code-tech" title="Reset Zoom (250%)">250%</button>
+                  <button id="btn-zoom-reset" class="pedestal-ctrl-btn hud-zoom-btn font-code-tech" title="Reset Zoom (100%)">100%</button>
                   <button id="btn-zoom-in" class="pedestal-ctrl-btn hud-zoom-btn" title="Perbesar (Zoom In)" aria-label="Zoom In">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
                   </button>
@@ -756,25 +758,49 @@ export class Modul4aView extends BaseModuleView {
     const btnZoomIn = this.container.querySelector('#btn-zoom-in');
 
     btnZoomOut?.addEventListener('click', () => {
-      this.currentZoomFactor = Math.max(1.0, (this.currentZoomFactor || 2.5) - 0.5);
+      this.currentZoomFactor = Math.max(this.minZoomFactor, (this.currentZoomFactor || 1.0) - 0.25);
       this.updateZoomLevel();
     });
 
     btnZoomIn?.addEventListener('click', () => {
-      this.currentZoomFactor = Math.min(4.0, (this.currentZoomFactor || 2.5) + 0.5);
+      this.currentZoomFactor = Math.min(this.maxZoomFactor, (this.currentZoomFactor || 1.0) + 0.25);
       this.updateZoomLevel();
     });
 
     btnZoomReset?.addEventListener('click', () => {
-      this.currentZoomFactor = 2.5;
+      this.currentZoomFactor = 1.0;
       this.updateZoomLevel();
     });
   }
 
   updateZoomLevel() {
+    const factor = this.currentZoomFactor || 1.0;
+
+    // --- Zoom untuk mode 2D Gambar Rotasi ---
+    const centralImg = this.container?.querySelector('#m4a-central-image');
+    const canvasWrapper = this.container?.querySelector('#m4a-3d-canvas-wrapper');
+
+    if (centralImg && centralImg.style.display !== 'none') {
+      // Terapkan zoom CSS scale ke gambar sentral
+      centralImg.style.transform = `scale(${factor})`;
+      centralImg.style.transformOrigin = 'center center';
+      centralImg.style.transition = 'transform 0.25s ease';
+
+      // Pastikan overflow hidden pada wrapper agar gambar tidak keluar batas
+      if (canvasWrapper) {
+        canvasWrapper.style.overflow = 'hidden';
+      }
+
+      // Update label indikator zoom
+      const zoomResetBtn = this.container.querySelector('#btn-zoom-reset');
+      if (zoomResetBtn) {
+        zoomResetBtn.textContent = `${Math.round(factor * 100)}%`;
+      }
+      return;
+    }
+
+    // --- Zoom untuk mode 3D Three.js (OrbitControls) ---
     if (!this.threeControls || !this.threeCamera) return;
-    const factor = this.currentZoomFactor || 2.5;
-    // Base 100% zoom distance is 7.1
     const distance = 7.1 / factor;
 
     const dir = this.threeCamera.position.clone().sub(this.threeControls.target).normalize();

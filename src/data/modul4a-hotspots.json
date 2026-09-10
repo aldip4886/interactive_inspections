@@ -104,15 +104,13 @@
       "view": "cutaway",
       "angleMin": 0,
       "angleMax": 360,
-      "visibleAngles": [0, 45, 315, 360],
+      "visibleAngles": [0, 360],
       "position": {
         "x": 50.0,
         "y": 58.0
       },
       "positionsByAngle": {
         "0": { "x": 50.0, "y": 58.0 },
-        "45": { "x": 68.0, "y": 60.0 },
-        "315": { "x": 32.0, "y": 60.0 },
         "360": { "x": 50.0, "y": 58.0 }
       },
       "worldPos": {
