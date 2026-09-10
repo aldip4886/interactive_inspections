@@ -839,6 +839,7 @@ export class Modul4aView extends BaseModuleView {
       const label = hs.label || `Hotspot #${num}`;
 
       pin.innerHTML = `
+        <div class="pin-pulse-ring"></div>
         <div class="pin-point"></div>
         <div class="pin-tooltip" role="tooltip">
           <span class="pin-tooltip-num">${num}</span>
