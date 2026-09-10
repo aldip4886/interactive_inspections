@@ -574,6 +574,12 @@ export class Modul4aView extends BaseModuleView {
   }
 
   updateHotspotPositions3D() {
+    // When using 2D rotatable central images, 2D percentage positioning set by renderHotspots is active.
+    const centralImg = this.container?.querySelector('#m4a-central-image');
+    if (centralImg && centralImg.style.display !== 'none') {
+      return;
+    }
+
     if (!this.threeCamera || !this.container || !this.vehicleGroup) return;
     const container = this.container.querySelector('#m4a-3d-canvas-wrapper');
     if (!container) return;
@@ -796,9 +802,19 @@ export class Modul4aView extends BaseModuleView {
     const hotspots = this.moduleData.hotspots || [];
     layerEl.innerHTML = '';
 
+    const currentFrame = this.angleFrames ? this.angleFrames[this.currentAngleIndex] : null;
+    const currentAngle = currentFrame ? currentFrame.angle : 0;
+
     hotspots.forEach((hs, idx) => {
       if (this.activeFilter !== 'all' && hs.category !== this.activeFilter && hs.categoryId !== this.activeFilter) {
         return;
+      }
+
+      // Check if hotspot is configured to be visible on specific angles
+      if (hs.visibleAngles && Array.isArray(hs.visibleAngles)) {
+        if (!hs.visibleAngles.includes(currentAngle)) {
+          return;
+        }
       }
 
       const isVisited = this.visitedHotspots.has(hs.id);
@@ -808,7 +824,12 @@ export class Modul4aView extends BaseModuleView {
       pin.className = `body-hotspot-pin ${isActive ? 'active' : ''} ${isVisited ? 'visited' : ''}`;
       pin.dataset.id = hs.id;
 
-      const coords = hs.position || { x: 50, y: 50 };
+      // Select angle-specific coordinates if defined, or default position
+      let coords = hs.position || { x: 50, y: 50 };
+      if (hs.positionsByAngle && hs.positionsByAngle[currentAngle]) {
+        coords = hs.positionsByAngle[currentAngle];
+      }
+
       pin.style.left = `${coords.x}%`;
       pin.style.top = `${coords.y}%`;
       pin.style.position = 'absolute';
