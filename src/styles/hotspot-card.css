@@ -1173,42 +1173,82 @@ model-viewer .body-hotspot-pin {
 /* TAB 1: MODUS OPERANDI */
 .detail-media-row {
   display: flex;
-  gap: 10px;
-  align-items: center;
+  gap: 14px;
+  align-items: stretch;
   background: #F8FAFC;
   border: 1px solid #E2E8F0;
-  border-radius: 8px;
-  padding: 8px 10px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+  border-radius: 10px;
+  padding: 12px 14px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
 }
 
 .detail-illustration-box {
-  width: 95px;
-  min-width: 95px;
-  height: 80px;
-  border-radius: 6px;
+  width: 210px;
+  min-width: 210px;
+  height: 140px;
+  border-radius: 8px;
   overflow: hidden;
-  background: #FFFFFF;
-  border: 1px solid #CBD5E1;
+  background: #F1F5F9;
+  border: 1.5px solid #CBD5E1;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 2px 8px rgba(0, 37, 59, 0.08);
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.detail-illustration-box:hover {
+  transform: translateY(-2px);
+  border-color: var(--color-secondary-container, #FDBB24);
+  box-shadow: 0 6px 16px rgba(0, 37, 59, 0.14);
+}
+
+.detail-illustration-box::after {
+  content: '🔍 Perbesar';
+  position: absolute;
+  bottom: 6px;
+  right: 6px;
+  background: rgba(0, 25, 45, 0.82);
+  backdrop-filter: blur(4px);
+  color: #FFFFFF;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 4px;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: all 0.2s ease;
+  pointer-events: none;
+}
+
+.detail-illustration-box:hover::after {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .detail-main-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.detail-illustration-box:hover .detail-main-img {
+  transform: scale(1.04);
 }
 
 .detail-desc-box {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .detail-desc-text {
-  font-size: 11.5px;
-  line-height: 1.45;
+  font-size: 12px;
+  line-height: 1.55;
   color: #334155;
   font-weight: 400;
 }
@@ -1975,4 +2015,117 @@ model-viewer .body-hotspot-pin {
     max-height: 80vh !important;
     border-radius: 16px 16px 0 0 !important;
   }
+}
+
+/* ══════════════════════ MODUL 4A / POPUP MODAL GAMBAR FORENSIK ══════════════════════ */
+.m4a-image-popup-overlay {
+  position: fixed !important;
+  inset: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  z-index: 1000000 !important;
+  background: rgba(0, 15, 28, 0.88) !important;
+  backdrop-filter: blur(8px) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 24px !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+  transition: opacity 0.2s ease, visibility 0.2s ease !important;
+}
+
+.m4a-image-popup-overlay.hidden {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+.m4a-image-popup-content {
+  position: relative !important;
+  max-width: min(92vw, 1000px) !important;
+  max-height: 90vh !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  background: #021320 !important;
+  border: 1.5px solid rgba(253, 187, 36, 0.5) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.75), 0 0 0 1px rgba(255, 255, 255, 0.1) !important;
+  overflow: hidden !important;
+  animation: floatingCardSlideIn 0.24s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.m4a-img-popup-close {
+  position: absolute !important;
+  top: 12px !important;
+  right: 12px !important;
+  width: 36px !important;
+  height: 36px !important;
+  border-radius: 50% !important;
+  background: rgba(0, 0, 0, 0.65) !important;
+  color: #FFFFFF !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  font-size: 18px !important;
+  font-weight: 700 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  z-index: 20 !important;
+  transition: all 0.2s ease !important;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3) !important;
+}
+
+.m4a-img-popup-close:hover {
+  background: #EF4444 !important;
+  border-color: #EF4444 !important;
+  transform: scale(1.1) !important;
+}
+
+.m4a-img-popup-frame {
+  width: 100% !important;
+  max-height: 74vh !important;
+  overflow: hidden !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: radial-gradient(circle at center, #072238 0%, #010c14 100%) !important;
+}
+
+.m4a-img-popup-frame img {
+  max-width: 100% !important;
+  max-height: 74vh !important;
+  object-fit: contain !important;
+  display: block !important;
+  user-select: none !important;
+}
+
+.m4a-img-popup-caption {
+  width: 100% !important;
+  padding: 12px 20px !important;
+  background: #00253B !important;
+  color: #F8FAFC !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  gap: 12px !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-sizing: border-box !important;
+}
+
+.m4a-img-popup-caption span {
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  color: #FFFFFF !important;
+}
+
+.m4a-img-popup-sub {
+  color: #FDBB24 !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px !important;
 }

@@ -79,9 +79,10 @@
       "label": "1. Interior & Konsol Tengah Kendaraan",
       "badge": "INTERIOR & KONSOL MOBIL",
       "badgeType": "danger",
-      "mainImage": "assets/images/hotspots/hs_door_panel_compartment.png",
+      "mainImage": "assets/images/hotspots/bumper_ruang_mesin.png",
       "galleryImages": [
-        "assets/images/hotspots/hs_door_panel_compartment.png"
+        "assets/images/hotspots/bumper_ruang_mesin.png",
+        "assets/images/hotspots/interiod_konsol.png"
       ],
       "description": "Penyembunyian paket narkotika di balik konsol tengah (center console), rongga dashboard/head unit audio, glove box bertingkat ganda, serta di bawah jok penumpang dan busa kursi mobil.",
       "riskIndicators": [
@@ -121,9 +122,9 @@
       "label": "6. Kap / Ruang Mesin & Bumper Depan",
       "badge": "KAP / RUANG MESIN",
       "badgeType": "danger",
-      "mainImage": "assets/images/hotspots/hs_door_panel_compartment.png",
+      "mainImage": "assets/images/hotspots/bumper_ruang_mesin.png",
       "galleryImages": [
-        "assets/images/hotspots/hs_door_panel_compartment.png"
+        "assets/images/hotspots/bumper_ruang_mesin.png"
       ],
       "description": "Rongga di balik kap mesin, box filter udara, atau kompartemen bumper depan dimodifikasi oleh sindikat untuk menyembunyikan bungkusan narkotika.",
       "riskIndicators": [

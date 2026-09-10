@@ -216,8 +216,8 @@ export class Modul4aView extends BaseModuleView {
               <!-- TAB 1: MODUS -->
               <div class="tab-pane active" id="tab-modus">
                 <div class="detail-media-row">
-                  <div class="detail-illustration-box">
-                    <img id="detail-main-img" src="assets/images/hotspots/hs_door_panel_compartment.png" alt="Visualisasi Modus Kendaraan" class="detail-main-img" />
+                  <div class="detail-illustration-box" title="Klik untuk melihat gambar ukuran penuh">
+                    <img id="detail-main-img" src="assets/images/hotspots/bumper_ruang_mesin.png" alt="Visualisasi Modus Kendaraan" class="detail-main-img" />
                   </div>
                   <div class="detail-desc-box">
                     <p id="detail-desc" class="detail-desc-text"></p>
@@ -358,6 +358,20 @@ export class Modul4aView extends BaseModuleView {
             </div>
             <div class="modal-footer">
               <button id="btn-help-ok" class="btn-primary-action">Mengerti</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- High-Res Forensic Photo Lightbox Modal Popup -->
+        <div id="m4a-image-popup-modal" class="m4a-image-popup-overlay hidden" role="dialog" aria-modal="true">
+          <div class="m4a-image-popup-content">
+            <button id="btn-close-img-popup" class="m4a-img-popup-close" aria-label="Tutup Preview" title="Tutup Preview (Esc)">✕</button>
+            <div class="m4a-img-popup-frame">
+              <img id="m4a-popup-img-el" src="" alt="Bukti Foto Real" />
+            </div>
+            <div class="m4a-img-popup-caption">
+              <span id="m4a-popup-img-title">Dokumentasi Penindakan DJBC</span>
+              <span id="m4a-popup-img-sub" class="m4a-img-popup-sub">Foto Real Forensik</span>
             </div>
           </div>
         </div>
@@ -959,9 +973,25 @@ export class Modul4aView extends BaseModuleView {
     const note = this.container.querySelector('#detail-inspection-note');
 
     if (mainImg) {
-      mainImg.src = hs.mainIllustration || hs.mainImage || 'assets/images/hotspots/hs_door_panel_compartment.png';
+      mainImg.src = hs.mainIllustration || hs.mainImage || 'assets/images/hotspots/bumper_ruang_mesin.png';
       mainImg.alt = hs.label;
     }
+
+    // Klik gambar utama pada Modus Operandi untuk memperbesar ke mode popup
+    const illustrationBox = this.container.querySelector('.detail-illustration-box');
+    if (illustrationBox) {
+      illustrationBox.onclick = () => {
+        const curImg = this.container.querySelector('#detail-main-img');
+        const curTitle = this.container.querySelector('#detail-title');
+        const curCat = this.container.querySelector('#detail-cat-badge');
+        this.openImagePopup(
+          curImg ? curImg.src : (hs.mainImage || 'assets/images/hotspots/bumper_ruang_mesin.png'),
+          curTitle ? curTitle.textContent : hs.label,
+          curCat ? curCat.textContent : 'Modus Operandi Kendaraan'
+        );
+      };
+    }
+
     if (desc) desc.textContent = hs.description;
     if (concealmentMethod) concealmentMethod.textContent = hs.badge || 'Vehicle Concealment';
     if (bodyLocation) bodyLocation.textContent = hs.label;
@@ -970,39 +1000,38 @@ export class Modul4aView extends BaseModuleView {
     if (narrative) narrative.textContent = hs.description;
     if (note) note.textContent = hs.inspectionNote || 'SOP DJBC Pemeriksaan Kendaraan Darat';
 
-    // TAB 2: Foto Real
+    // TAB 2: Foto Real dengan Fitur Popup Gambar
     const findingsGrid = this.container.querySelector('#findings-thumbnails-grid');
     if (findingsGrid) {
       findingsGrid.innerHTML = '';
       const findingsList = (hs.galleryImages && hs.galleryImages.length > 0)
         ? hs.galleryImages.map(img => ({ full: img, thumb: img, caption: hs.label, tag: hs.badge }))
-        : [{ full: hs.mainImage || 'assets/images/hotspots/hs_door_panel_compartment.png', caption: hs.label, tag: hs.badge }];
+        : [{ full: hs.mainImage || 'assets/images/hotspots/bumper_ruang_mesin.png', caption: hs.label, tag: hs.badge }];
 
       findingsList.forEach(f => {
-        const a = document.createElement('a');
-        a.href = f.full;
-        a.className = 'finding-thumb-item glightbox';
-        a.setAttribute('data-gallery', `findings-gallery-${hs.id}`);
-        a.setAttribute('data-title', `${f.caption} — [${f.tag || 'Barang Bukti'}]`);
-        a.innerHTML = `
-          <img src="${f.full}" alt="${f.caption}" onerror="this.src='assets/images/hotspots/hs_door_panel_compartment.png'" />
+        const item = document.createElement('div');
+        item.className = 'finding-thumb-item';
+        item.setAttribute('role', 'button');
+        item.setAttribute('tabindex', '0');
+        item.setAttribute('title', `Klik untuk memperbesar: ${f.caption}`);
+        item.style.cursor = 'pointer';
+        item.innerHTML = `
+          <img src="${f.full}" alt="${f.caption}" onerror="this.src='assets/images/hotspots/bumper_ruang_mesin.png'" />
           <span class="finding-thumb-label">${f.tag || 'Barang Bukti'}</span>
         `;
-        findingsGrid.appendChild(a);
+        item.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          this.openImagePopup(f.full, `${f.caption} — [${f.tag || 'Barang Bukti'}]`, 'Foto Real Penindakan DJBC');
+        });
+        item.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            this.openImagePopup(f.full, `${f.caption} — [${f.tag || 'Barang Bukti'}]`, 'Foto Real Penindakan DJBC');
+          }
+        });
+        findingsGrid.appendChild(item);
       });
-
-      try {
-        if (typeof window.GLightbox !== 'undefined') {
-          if (this.glightboxInstance) this.glightboxInstance.destroy();
-          this.glightboxInstance = window.GLightbox({
-            selector: '.glightbox',
-            touchNavigation: true,
-            loop: true
-          });
-        }
-      } catch (gErr) {
-        console.warn('GLightbox warning:', gErr);
-      }
     }
 
     // TAB 3: Deteksi & SOP
@@ -1117,6 +1146,57 @@ export class Modul4aView extends BaseModuleView {
     });
 
     this.initCardDraggable();
+
+    // Popup Foto Real / Preview Gambar Resolusi Penuh
+    const imgPopupModal = this.container.querySelector('#m4a-image-popup-modal');
+    const btnCloseImgPopup = this.container.querySelector('#btn-close-img-popup');
+
+    if (btnCloseImgPopup) {
+      btnCloseImgPopup.addEventListener('click', (e) => {
+        e.stopPropagation();
+        this.closeImagePopup();
+      });
+    }
+
+    if (imgPopupModal) {
+      imgPopupModal.addEventListener('click', (e) => {
+        if (e.target === imgPopupModal) {
+          this.closeImagePopup();
+        }
+      });
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        const popup = this.container?.querySelector('#m4a-image-popup-modal');
+        if (popup && !popup.classList.contains('hidden')) {
+          this.closeImagePopup();
+        }
+      }
+    });
+  }
+
+  openImagePopup(src, title, subtitle = 'Foto Real Penindakan DJBC') {
+    const popup = this.container.querySelector('#m4a-image-popup-modal');
+    const imgEl = this.container.querySelector('#m4a-popup-img-el');
+    const titleEl = this.container.querySelector('#m4a-popup-img-title');
+    const subEl = this.container.querySelector('#m4a-popup-img-sub');
+
+    if (!popup || !imgEl) return;
+
+    imgEl.src = src;
+    imgEl.alt = title || 'Foto Forensik';
+    if (titleEl) titleEl.textContent = title || 'Dokumentasi Penindakan DJBC';
+    if (subEl) subEl.textContent = subtitle;
+
+    popup.classList.remove('hidden');
+  }
+
+  closeImagePopup() {
+    const popup = this.container.querySelector('#m4a-image-popup-modal');
+    if (popup) {
+      popup.classList.add('hidden');
+    }
   }
 
   switchCardPage(pageIndex) {
