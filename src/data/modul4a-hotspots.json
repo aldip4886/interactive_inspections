@@ -45,7 +45,8 @@
     "180": "assets/images/modul4a/belakang.png",
     "225": "assets/images/modul4a/belakang_samping_2.png",
     "270": "assets/images/modul4a/samping_kiri.png",
-    "315": "assets/images/modul4a/depan_samping_2.png"
+    "315": "assets/images/modul4a/depan_samping_2.png",
+    "360": "assets/images/modul4a/depan.png"
   },
   "filterCategories": [
     {
