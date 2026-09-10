@@ -750,6 +750,20 @@ export class Modul4aView extends BaseModuleView {
       wrapper.addEventListener('touchstart', onStart, { passive: true });
       window.addEventListener('touchmove', onMove, { passive: true });
       window.addEventListener('touchend', onEnd);
+
+      // Scroll wheel = Zoom
+      wrapper.addEventListener('wheel', (e) => {
+        e.preventDefault();
+        const step = 0.1;
+        if (e.deltaY < 0) {
+          // Scroll ke atas → zoom in
+          this.currentZoomFactor = Math.min(this.maxZoomFactor, (this.currentZoomFactor || 1.0) + step);
+        } else {
+          // Scroll ke bawah → zoom out
+          this.currentZoomFactor = Math.max(this.minZoomFactor, (this.currentZoomFactor || 1.0) - step);
+        }
+        this.updateZoomLevel();
+      }, { passive: false });
     }
 
     // Zoom Controls: Zoom Out (-), Reset Zoom, Zoom In (+)
