@@ -10,7 +10,7 @@ import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
 export class Modul4aView extends BaseModuleView {
   constructor(container) {
     super(container, 'src/data/modul4a-hotspots.json');
-    this.currentHotspotId = 'hs-m4a-interior-konsol';
+    this.currentHotspotId = 'hs-m4a-mesin';
     this.visitedHotspots = new Set();
     this.currentActiveTab = 'tab-modus';
     this.activeFilter = 'all';
@@ -24,20 +24,6 @@ export class Modul4aView extends BaseModuleView {
       { id: 'tab-risk', num: 4, title: 'Indikator Risiko' }
     ];
     this.currentCardPageIndex = 0;
-
-    // 2D Rotatable Image Frames (8 Angles)
-    this.angleFrames = [
-      { angle: 0, label: 'Tampak Depan (0°)', src: 'assets/images/modul4a/depan.png' },
-      { angle: 45, label: 'Tampak Depan Samping Kanan (45°)', src: 'assets/images/modul4a/depan_samping.png' },
-      { angle: 90, label: 'Tampak Samping Kanan (90°)', src: 'assets/images/modul4a/samping_kanan.png' },
-      { angle: 135, label: 'Tampak Belakang Samping Kanan (135°)', src: 'assets/images/modul4a/belakang_samping.png' },
-      { angle: 180, label: 'Tampak Belakang (180°)', src: 'assets/images/modul4a/belakang.png' },
-      { angle: 225, label: 'Tampak Belakang Samping Kiri (225°)', src: 'assets/images/modul4a/belakang_samping_2.png' },
-      { angle: 270, label: 'Tampak Samping Kiri (270°)', src: 'assets/images/modul4a/samping_kiri.png' },
-      { angle: 315, label: 'Tampak Depan Samping Kiri (315°)', src: 'assets/images/modul4a/depan_samping_2.png' }
-    ];
-    this.currentAngleIndex = 0;
-    this.autoRotateTimer = null;
 
     // 3D Three.js objects
     this.threeScene = null;
@@ -103,10 +89,10 @@ export class Modul4aView extends BaseModuleView {
             <!-- Angle / View Header Bar -->
             <div class="angle-header-bar">
               <div class="current-angle-badge" id="current-angle-badge">
-                <span class="angle-deg font-code-tech" id="view-mode-badge">0°</span>
+                <span class="angle-deg font-code-tech" id="view-mode-badge">3D MODEL</span>
                 <span class="angle-sep">•</span>
                 <span class="angle-name" id="view-mode-title">KIA Carnival 2023</span>
-                <span class="angle-sub" id="view-mode-sub">(Tampak Depan (0°))</span>
+                <span class="angle-sub" id="view-mode-sub">(Inspeksi 3D Interaktif 360°)</span>
               </div>
               <div class="angle-instruction-tag">
                 <span class="instruction-dot">●</span>
@@ -123,20 +109,20 @@ export class Modul4aView extends BaseModuleView {
               <!-- HUD Telemetry Watermark Overlay -->
               <div class="forensic-hud-telemetry" aria-hidden="true">
                 <div class="forensic-hud-top-left font-code-tech">
-                  <div class="hud-line-title">STASIUN PEMINDAIAN KENDARAAN DARAT</div>
+                  <div class="hud-line-title">STASIUN PEMINDAIAN KENDARAAN DARAT 3D</div>
                   <div class="hud-line-sub">SUBJEK ID: VEHICLE-MPV-KC23 / KIA CARNIVAL 2023</div>
                 </div>
                 <div class="forensic-hud-top-right font-code-tech">
-                  <div class="hud-line-azimuth" id="hud-azimuth-text">MODE AKTIF: 360° ROTATABLE IMAGE (0°)</div>
-                  <div class="hud-line-status">SENSOR: DUAL-ENERGY TRANSMISSION & MULTI-ANGLE INSPECTION</div>
+                  <div class="hud-line-azimuth" id="hud-azimuth-text">MODE AKTIF: 3D INTERACTIVE INSPECTION</div>
+                  <div class="hud-line-status">SENSOR: DUAL-ENERGY TRANSMISSION & 3D WEBGL</div>
                 </div>
               </div>
 
               <!-- Central Active 3D Vehicle Container with Hotspots Layer -->
-              <div class="body-image-container" id="vehicle-image-container" style="max-width:960px; width:100%; aspect-ratio: auto; margin:0 auto; position:relative;">
-                <div id="m4a-3d-canvas-wrapper" style="width:100%; height:62vh; min-height:420px; position:relative; display:flex; align-items:center; justify-content:center; cursor:grab;">
-                  <img id="m4a-central-image" src="assets/images/modul4a/depan.png" alt="KIA Carnival 2023" class="main-body-img" style="display:block; max-height:60vh; object-fit:contain; filter:drop-shadow(0 12px 32px rgba(0,37,59,0.16)); user-select:none; -webkit-user-drag:none;" />
-                  <div id="three-canvas-container" style="width:100%; height:100%; position:absolute; inset:0; z-index:2; pointer-events:none;"></div>
+              <div class="body-image-container" id="vehicle-image-container" style="max-width:1150px; width:100%; aspect-ratio: auto; margin:0 auto; position:relative;">
+                <div id="m4a-3d-canvas-wrapper" style="width:100%; height:74vh; min-height:520px; position:relative; display:flex; align-items:center; justify-content:center;">
+                  <img id="m4a-central-image" src="assets/images/central/m4a_suv_cutaway.png" alt="KIA Carnival 2023" class="main-body-img" style="display:none; max-height:72vh; object-fit:contain; filter:drop-shadow(0 12px 32px rgba(0,37,59,0.16)); pointer-events:none;" />
+                  <div id="three-canvas-container" style="width:100%; height:100%; position:absolute; inset:0; z-index:2;"></div>
                   <div id="m4a-hotspots-layer" class="hotspots-layer" style="position:absolute; inset:0; z-index:30; pointer-events:none;"></div>
                 </div>
                 <div class="body-pedestal-platform"></div>
@@ -180,14 +166,14 @@ export class Modul4aView extends BaseModuleView {
                 <div class="detail-badge-row">
                   <span class="floating-card-drag-indicator" title="Geser posisi kartu">⋮⋮</span>
                   <span id="detail-tag-badge" class="detail-tag-badge">MODUS #01</span>
-                  <span id="detail-cat-badge" class="detail-cat-badge">INTERIOR & KONSOL MOBIL</span>
+                  <span id="detail-cat-badge" class="detail-cat-badge">INTERIOR MOBIL</span>
                 </div>
-                <h3 id="detail-title" class="detail-title">1. Interior & Konsol Tengah Kendaraan</h3>
+                <h3 id="detail-title" class="detail-title">1. Interior: Dashboard & Rongga Jok</h3>
               </div>
               <div class="modal-header-right">
                 <div class="card-quick-nav">
                   <button id="btn-prev-hotspot" class="card-nav-arrow-btn" title="Modus Sebelumnya">←</button>
-                  <span id="card-nav-counter" class="card-nav-counter">1 / 2</span>
+                  <span id="card-nav-counter" class="card-nav-counter">1 / 5</span>
                   <button id="btn-next-hotspot" class="card-nav-arrow-btn" title="Modus Berikutnya">→</button>
                 </div>
                 <button id="btn-close-detail-modal" class="modal-close-btn" aria-label="Tutup Kartu" title="Tutup Kartu">✕</button>
@@ -455,7 +441,7 @@ export class Modul4aView extends BaseModuleView {
             const maxDim = Math.max(size.x, size.y, size.z);
 
             model.position.sub(center);
-            const scale = 3.5 / (maxDim || 1);
+            const scale = 4.2 / (maxDim || 1);
             model.scale.set(scale, scale, scale);
 
             this.vehicleGroup.add(model);
@@ -475,8 +461,17 @@ export class Modul4aView extends BaseModuleView {
       // Raycasting for direct clicks on 3D hotspot objects or vehicle mesh surface
       const raycaster = new THREE.Raycaster();
       const mouse = new THREE.Vector2();
-      container.addEventListener('click', (e) => {
+      let pointerDownPos = { x: 0, y: 0 };
+      container.addEventListener('pointerdown', (e) => {
+        pointerDownPos = { x: e.clientX, y: e.clientY };
+      });
+
+      container.addEventListener('pointerup', (e) => {
         if (!this.threeCamera || !this.vehicleGroup) return;
+
+        const distMoved = Math.hypot(e.clientX - pointerDownPos.x, e.clientY - pointerDownPos.y);
+        if (distMoved > 8) return; // Ignore drag rotation movements
+
         const rect = container.getBoundingClientRect();
         mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
         mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
@@ -487,27 +482,37 @@ export class Modul4aView extends BaseModuleView {
         const hotspots = this.moduleData?.hotspots || [];
         if (hotspots.length === 0) return;
 
-        for (let hit of intersects) {
-          let obj = hit.object;
-          while (obj && obj !== this.vehicleGroup) {
-            if (obj.userData?.isHotspotAnchor) {
-              this.openHotspotDetail(obj.userData.hotspotId);
-              return;
+        if (intersects.length > 0) {
+          for (let hit of intersects) {
+            let obj = hit.object;
+            while (obj && obj !== this.vehicleGroup) {
+              if (obj.userData?.isHotspotAnchor) {
+                this.openHotspotDetail(obj.userData.hotspotId);
+                return;
+              }
+              obj = obj.parent;
             }
-            obj = obj.parent;
           }
 
-          // Check proximity of 3D hit point to any hotspot anchor
+          // If clicking vehicle mesh surface, open closest hotspot (or first hotspot)
+          let closestHs = hotspots[0];
+          let minDistance = Infinity;
+
           for (let hs of hotspots) {
             const anchor = this.vehicleGroup.getObjectByName(`hotspot-anchor-${hs.id}`);
             if (anchor) {
               const anchorWorldPos = new THREE.Vector3();
               anchor.getWorldPosition(anchorWorldPos);
-              if (hit.point.distanceTo(anchorWorldPos) < 1.2) {
-                this.openHotspotDetail(hs.id);
-                return;
+              const dist = intersects[0].point.distanceTo(anchorWorldPos);
+              if (dist < minDistance) {
+                minDistance = dist;
+                closestHs = hs;
               }
             }
+          }
+
+          if (closestHs) {
+            this.openHotspotDetail(closestHs.id);
           }
         }
       });
@@ -606,6 +611,18 @@ export class Modul4aView extends BaseModuleView {
         label: hs.label
       };
 
+      // Add hitMesh sphere for 3D raycast detection
+      const hitMesh = new THREE.Mesh(
+        new THREE.SphereGeometry(0.5, 16, 16),
+        new THREE.MeshBasicMaterial({ visible: false })
+      );
+      hitMesh.userData = {
+        isHotspotAnchor: true,
+        hotspotId: hs.id,
+        label: hs.label
+      };
+      anchorGroup.add(hitMesh);
+
       // Add 3D hotspot object directly to vehicleGroup mesh hierarchy
       this.vehicleGroup.add(anchorGroup);
     });
@@ -641,59 +658,21 @@ export class Modul4aView extends BaseModuleView {
         const x = (worldVec.x * 0.5 + 0.5) * width;
         const y = (-worldVec.y * 0.5 + 0.5) * height;
 
-        // Check if inside canvas frustum
-        const isVisible = worldVec.z < 1 && x >= -40 && x <= width + 40 && y >= -40 && y <= height + 40;
+        // Check if inside camera view frustum
+        const isVisible = worldVec.z < 1;
 
         if (isVisible) {
+          const clampedX = Math.max(30, Math.min(width - 30, x));
+          const clampedY = Math.max(30, Math.min(height - 30, y));
+
           pin.style.display = 'flex';
-          pin.style.left = `${x}px`;
-          pin.style.top = `${y}px`;
+          pin.style.left = `${clampedX}px`;
+          pin.style.top = `${clampedY}px`;
         } else {
           pin.style.display = 'none';
         }
       }
     });
-  }
-
-  setAngleIndex(idx) {
-    if (!this.angleFrames || this.angleFrames.length === 0) return;
-    this.currentAngleIndex = (idx % this.angleFrames.length + this.angleFrames.length) % this.angleFrames.length;
-    const frame = this.angleFrames[this.currentAngleIndex];
-
-    const centralImg = this.container.querySelector('#m4a-central-image');
-    if (centralImg) {
-      centralImg.src = frame.src;
-      centralImg.style.display = 'block';
-    }
-
-    const viewModeBadge = this.container.querySelector('#view-mode-badge');
-    const viewModeSub = this.container.querySelector('#view-mode-sub');
-    const hudAzimuth = this.container.querySelector('#hud-azimuth-text');
-
-    if (viewModeBadge) viewModeBadge.textContent = `${frame.angle}°`;
-    if (viewModeSub) viewModeSub.textContent = `(${frame.label})`;
-    if (hudAzimuth) hudAzimuth.textContent = `MODE AKTIF: 360° ROTATABLE IMAGE (${frame.angle}°)`;
-
-    if (this.vehicleGroup) {
-      const targetRad = (frame.angle * Math.PI) / 180;
-      this.vehicleGroup.rotation.y = targetRad;
-    }
-
-    this.renderHotspots();
-  }
-
-  startAutoRotate() {
-    this.stopAutoRotate();
-    this.autoRotateTimer = setInterval(() => {
-      this.setAngleIndex(this.currentAngleIndex + 1);
-    }, 850);
-  }
-
-  stopAutoRotate() {
-    if (this.autoRotateTimer) {
-      clearInterval(this.autoRotateTimer);
-      this.autoRotateTimer = null;
-    }
   }
 
   initInteractiveViewer() {
@@ -717,11 +696,15 @@ export class Modul4aView extends BaseModuleView {
     const playIcon = this.container.querySelector('#play-pause-icon');
 
     btnPrev?.addEventListener('click', () => {
-      this.setAngleIndex(this.currentAngleIndex - 1);
+      if (this.vehicleGroup) {
+        this.vehicleGroup.rotation.y -= 0.25;
+      }
     });
 
     btnNext?.addEventListener('click', () => {
-      this.setAngleIndex(this.currentAngleIndex + 1);
+      if (this.vehicleGroup) {
+        this.vehicleGroup.rotation.y += 0.25;
+      }
     });
 
     btnPlay?.addEventListener('click', () => {
@@ -730,57 +713,7 @@ export class Modul4aView extends BaseModuleView {
       if (playIcon) {
         playIcon.textContent = this.isAutoRotating ? '⏸' : '▶';
       }
-      if (this.isAutoRotating) {
-        this.startAutoRotate();
-      } else {
-        this.stopAutoRotate();
-      }
     });
-
-    // Mouse & Touch Drag-to-Rotate on Central Canvas
-    const wrapper = this.container.querySelector('#m4a-3d-canvas-wrapper');
-    if (wrapper) {
-      let isDragging = false;
-      let startX = 0;
-      const threshold = 35; // Drag distance in pixels to step angle frame
-
-      const onStart = (e) => {
-        if (e.target.closest('button') || e.target.closest('.body-hotspot-pin') || e.target.closest('#hotspot-card-modal-overlay')) return;
-        isDragging = true;
-        startX = e.clientX || (e.touches && e.touches[0].clientX) || 0;
-        wrapper.style.cursor = 'grabbing';
-      };
-
-      const onMove = (e) => {
-        if (!isDragging) return;
-        const currentX = e.clientX || (e.touches && e.touches[0].clientX) || 0;
-        const deltaX = currentX - startX;
-
-        if (Math.abs(deltaX) >= threshold) {
-          if (deltaX > 0) {
-            this.setAngleIndex(this.currentAngleIndex - 1);
-          } else {
-            this.setAngleIndex(this.currentAngleIndex + 1);
-          }
-          startX = currentX;
-        }
-      };
-
-      const onEnd = () => {
-        if (isDragging) {
-          isDragging = false;
-          wrapper.style.cursor = 'grab';
-        }
-      };
-
-      wrapper.addEventListener('mousedown', onStart);
-      window.addEventListener('mousemove', onMove);
-      window.addEventListener('mouseup', onEnd);
-
-      wrapper.addEventListener('touchstart', onStart, { passive: true });
-      window.addEventListener('touchmove', onMove, { passive: true });
-      window.addEventListener('touchend', onEnd);
-    }
 
     // Zoom Controls: Zoom Out (-), Reset Zoom, Zoom In (+)
     const btnZoomOut = this.container.querySelector('#btn-zoom-out');
@@ -867,16 +800,8 @@ export class Modul4aView extends BaseModuleView {
       pin.setAttribute('role', 'button');
       pin.setAttribute('aria-label', `Hotspot ${num}: ${label}`);
 
-      // pointer-events: auto agar pin bisa diklik meski layer induk punya pointer-events:none
-      pin.style.pointerEvents = 'auto';
-
       pin.addEventListener('pointerenter', () => pin.classList.add('is-hovered'));
       pin.addEventListener('pointerleave', () => pin.classList.remove('is-hovered'));
-
-      // Hentikan OrbitControls dari menyerap event sebelum click sempat ter-fire
-      pin.addEventListener('pointerdown', (e) => {
-        e.stopPropagation();
-      });
 
       pin.addEventListener('click', (e) => {
         e.stopPropagation();
@@ -888,15 +813,15 @@ export class Modul4aView extends BaseModuleView {
   }
 
   openHotspotDetail(hotspotId) {
-    const hotspots = this.moduleData.hotspots || [];
-    const hs = hotspots.find(h => h.id === hotspotId);
+    const hotspots = this.moduleData?.hotspots || [];
+    const hs = hotspots.find(h => h.id === hotspotId) || hotspots[0];
     if (!hs) return;
 
-    this.currentHotspotId = hotspotId;
-    this.visitedHotspots.add(hotspotId);
+    this.currentHotspotId = hs.id;
+    this.visitedHotspots.add(hs.id);
     this.isModalOpen = true;
 
-    courseProgress.recordHotspotVisit('modul4a', hotspotId);
+    courseProgress.markHotspotVisited('modul4a', hs.id, hotspots.length);
     this.updateProgressUI();
 
     this.renderModalContent(hs, hotspots);
@@ -904,6 +829,19 @@ export class Modul4aView extends BaseModuleView {
     const overlay = this.container.querySelector('#hotspot-card-modal-overlay');
     if (overlay) {
       overlay.classList.remove('hidden');
+      overlay.style.display = 'flex';
+      overlay.style.opacity = '1';
+      overlay.style.visibility = 'visible';
+      overlay.style.zIndex = '9999';
+    }
+
+    const card = this.container.querySelector('#hotspot-modal-card');
+    if (card) {
+      card.style.display = 'flex';
+      card.style.opacity = '1';
+      card.style.visibility = 'visible';
+      card.style.transform = 'none';
+      card.style.pointerEvents = 'auto';
     }
 
     this.renderHotspots();
@@ -1029,6 +967,7 @@ export class Modul4aView extends BaseModuleView {
     if (closeBtn && overlay) {
       closeBtn.addEventListener('click', () => {
         overlay.classList.add('hidden');
+        overlay.style.display = '';
         this.isModalOpen = false;
         this.renderHotspots();
       });
@@ -1038,6 +977,7 @@ export class Modul4aView extends BaseModuleView {
       overlay.addEventListener('click', (e) => {
         if (e.target === overlay) {
           overlay.classList.add('hidden');
+          overlay.style.display = '';
           this.isModalOpen = false;
           this.renderHotspots();
         }
@@ -1178,12 +1118,10 @@ export class Modul4aView extends BaseModuleView {
   updateProgressUI() {
     const total = this.moduleData?.hotspots?.length || 5;
     const progress = Math.min(100, Math.round((this.visitedHotspots.size / total) * 100));
+    courseProgress.setModuleProgress('modul4a', progress);
 
     this.currentProgressPct = progress;
     window.currentCourseProgressPct = progress;
-
-    // Refresh course progress DOM (getModuleProgress sudah dihitung dari recordHotspotVisit)
-    courseProgress.updateDOM();
 
     if (window.trackCourseProgress) {
       window.trackCourseProgress(progress);

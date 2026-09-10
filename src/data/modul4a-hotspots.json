@@ -4,16 +4,48 @@
   "description": "Inspeksi titik-titik penyembunyian pada kendaraan darat (SUV / Passenger Vehicle).",
   "supportsRotation": true,
   "centralImages": {
-    "cutaway": {
-      "url": "assets/images/central/m4a_suv_cutaway.png",
-      "label": "Tampak Irisan Penampang Kendaraan (SUV Cutaway)"
+    "depan": {
+      "url": "assets/images/modul4a/depan.png",
+      "label": "Tampak Depan (0°)"
+    },
+    "depan_samping": {
+      "url": "assets/images/modul4a/depan_samping.png",
+      "label": "Tampak Depan Samping Kanan (45°)"
+    },
+    "samping_kanan": {
+      "url": "assets/images/modul4a/samping_kanan.png",
+      "label": "Tampak Samping Kanan (90°)"
+    },
+    "belakang_samping": {
+      "url": "assets/images/modul4a/belakang_samping.png",
+      "label": "Tampak Belakang Samping Kanan (135°)"
+    },
+    "belakang": {
+      "url": "assets/images/modul4a/belakang.png",
+      "label": "Tampak Belakang (180°)"
+    },
+    "belakang_samping_2": {
+      "url": "assets/images/modul4a/belakang_samping_2.png",
+      "label": "Tampak Belakang Samping Kiri (225°)"
+    },
+    "samping_kiri": {
+      "url": "assets/images/modul4a/samping_kiri.png",
+      "label": "Tampak Samping Kiri (270°)"
+    },
+    "depan_samping_2": {
+      "url": "assets/images/modul4a/depan_samping_2.png",
+      "label": "Tampak Depan Samping Kiri (315°)"
     }
   },
   "angleImages": {
-    "front": "assets/images/central/m4a_suv_cutaway.png",
-    "side": "assets/images/central/m4a_suv_cutaway.png",
-    "back": "assets/images/central/m4a_suv_cutaway.png",
-    "side2": "assets/images/central/m4a_suv_cutaway.png"
+    "0": "assets/images/modul4a/depan.png",
+    "45": "assets/images/modul4a/depan_samping.png",
+    "90": "assets/images/modul4a/samping_kanan.png",
+    "135": "assets/images/modul4a/belakang_samping.png",
+    "180": "assets/images/modul4a/belakang.png",
+    "225": "assets/images/modul4a/belakang_samping_2.png",
+    "270": "assets/images/modul4a/samping_kiri.png",
+    "315": "assets/images/modul4a/depan_samping_2.png"
   },
   "filterCategories": [
     {
