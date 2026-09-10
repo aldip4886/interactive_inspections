@@ -572,7 +572,7 @@ export function Modul1View() {
 
                           <div className="info-block-col block-procedure">
                             <div className="block-header">
-                              <span className="block-icon">✔</span>
+                              <span className="block-icon"></span>
                               <span className="block-title">Standar Prosedur Pemeriksaan (SOP)</span>
                             </div>
                             <ul className="block-list">

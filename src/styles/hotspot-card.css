@@ -1467,33 +1467,23 @@ model-viewer .body-hotspot-pin {
 
 .block-list li {
   position: relative;
-  padding-left: 14px;
+  padding-left: 0;
   font-size: 11px;
-  line-height: 1.4;
+  line-height: 1.45;
 }
 
 .block-warning .block-list li {
   color: #78350F;
 }
 .block-warning .block-list li::before {
-  content: "•";
-  position: absolute;
-  left: 2px;
-  color: #D97706;
-  font-weight: 800;
-  font-size: 13px;
+  content: none;
 }
 
 .block-procedure .block-list li {
   color: #0C4A6E;
 }
 .block-procedure .block-list li::before {
-  content: "•";
-  position: absolute;
-  left: 2px;
-  color: #0284C7;
-  font-weight: 800;
-  font-size: 13px;
+  content: none;
 }
 
 /* TAB 4: RISIKO & BAHAYA MEDIS */

@@ -259,7 +259,7 @@ export class Modul4aView extends BaseModuleView {
                   </div>
                   <div class="info-block-col block-procedure" id="block-detection">
                     <div class="block-header">
-                      <span class="block-icon procedure-icon">✔</span>
+                      <span class="block-icon procedure-icon"></span>
                       <span class="block-title">Standar Prosedur Pemeriksaan (SOP)</span>
                     </div>
                     <ul id="detail-detection-list" class="block-list"></ul>
@@ -925,13 +925,13 @@ export class Modul4aView extends BaseModuleView {
 
     if (indicatorsList) {
       indicatorsList.innerHTML = (hs.riskIndicators || [])
-        .map(ind => `<li><span class="bullet-dot">•</span><span>${ind}</span></li>`)
+        .map(ind => `<li><span>${ind}</span></li>`)
         .join('');
     }
 
     if (detectionList) {
       detectionList.innerHTML = (hs.inspectionActions || [])
-        .map(act => `<li><span class="bullet-dot">✔</span><span>${act}</span></li>`)
+        .map(act => `<li><span>${act}</span></li>`)
         .join('');
     }
 

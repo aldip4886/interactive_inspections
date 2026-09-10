@@ -260,7 +260,7 @@ export class Modul1View extends BaseModuleView {
                 </div>
                 <div class="info-block-col block-procedure" id="block-detection">
                   <div class="block-header">
-                    <span class="block-icon procedure-icon">✔</span>
+                    <span class="block-icon procedure-icon"></span>
                     <span class="block-title">Standar Prosedur Pemeriksaan (SOP)</span>
                   </div>
                   <ul id="detail-detection-list" class="block-list"></ul>
