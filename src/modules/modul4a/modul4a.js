@@ -428,49 +428,11 @@ export class Modul4aView extends BaseModuleView {
       this.vehicleGroup = new THREE.Group();
       this.threeScene.add(this.vehicleGroup);
 
-      // Load GLB model
-      const loader = new GLTFLoader();
-      loader.setMeshoptDecoder(MeshoptDecoder);
-
-      const modelPaths = [
-        'assets/models/kia_carnival.glb',
-        'assets/images/central/kia_carnival.glb'
-      ];
-
-      const loadModel = (index) => {
-        if (index >= modelPaths.length) {
-          console.warn('GLB 3D model not loaded, showing fallback image');
-          if (fallbackImg) fallbackImg.style.display = 'block';
-          return;
-        }
-
-        loader.load(
-          modelPaths[index],
-          (gltf) => {
-            const model = gltf.scene;
-
-            const box = new THREE.Box3().setFromObject(model);
-            const center = box.getCenter(new THREE.Vector3());
-            const size = box.getSize(new THREE.Vector3());
-            const maxDim = Math.max(size.x, size.y, size.z);
-
-            model.position.sub(center);
-            const scale = 3.5 / (maxDim || 1);
-            model.scale.set(scale, scale, scale);
-
-            this.vehicleGroup.add(model);
-            this.init3DHotspotAnchors();
-            if (fallbackImg) fallbackImg.style.display = 'none';
-          },
-          undefined,
-          (err) => {
-            console.warn(`Attempt ${index + 1} failed loading GLB:`, err.message);
-            loadModel(index + 1);
-          }
-        );
-      };
-
-      loadModel(0);
+      // Display central 8-angle rotatable image on canvas
+      if (fallbackImg) {
+        fallbackImg.style.display = 'block';
+      }
+      this.init3DHotspotAnchors();
 
       // Raycasting for direct clicks on 3D hotspot objects or vehicle mesh surface
       const raycaster = new THREE.Raycaster();
