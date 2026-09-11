@@ -16,11 +16,26 @@
     "side2": "assets/images/central/m4b_ship_cutaway.jpeg"
   },
   "filterCategories": [
-    { "id": "all", "label": "Semua Zona (01–10)" },
-    { "id": "cargo", "label": "Palka & Muatan" },
-    { "id": "technical", "label": "Mesin & Teknis" },
-    { "id": "superstructure", "label": "Akomodasi & Geladak" },
-    { "id": "safety_access", "label": "Keselamatan & Akses" }
+    {
+      "id": "all",
+      "label": "Semua Zona (01–10)"
+    },
+    {
+      "id": "cargo",
+      "label": "Palka & Muatan"
+    },
+    {
+      "id": "technical",
+      "label": "Mesin & Teknis"
+    },
+    {
+      "id": "superstructure",
+      "label": "Akomodasi & Geladak"
+    },
+    {
+      "id": "safety_access",
+      "label": "Keselamatan & Akses"
+    }
   ],
   "hotspots": [
     {
@@ -30,7 +45,10 @@
       "view": "cutaway",
       "angleMin": 0,
       "angleMax": 360,
-      "position": { "x": 31.5, "y": 53.0 },
+      "position": {
+        "x": 31,
+        "y": 52
+      },
       "label": "Zone 01: Cargo Area (Palka & Ruang Muat Utama)",
       "badge": "ZONE 01",
       "badgeType": "danger",
@@ -60,7 +78,26 @@
         "Gunakan boroskop pada celah sekat dinding ganda palka."
       ],
       "medicalHazard": "Risiko kekurangan oksigen (asfiksia) dan keracunan gas berbahaya akibat dekomposisi muatan curah (batu bara / biji-bijian). Wajib tes atmosfer sebelum masuk.",
-      "officerSafety": "Wajib mengenakan helm keselamatan (hard hat), safety boots tahan benturan, masker respirator gas, dan gas detector 4-gas aktif."
+      "officerSafety": "Wajib mengenakan helm keselamatan (hard hat), safety boots tahan benturan, masker respirator gas, dan gas detector 4-gas aktif.",
+      "callout": {
+        "title": "CARGO AREA",
+        "anchor": {
+          "x": 31,
+          "y": 52
+        },
+        "elbow": {
+          "x": 26.5,
+          "y": 38.5
+        },
+        "badge": {
+          "x": 17.94,
+          "y": 37.77
+        },
+        "lineEnd": {
+          "x": 17.5,
+          "y": 38.5
+        }
+      }
     },
     {
       "id": "zone-02",
@@ -69,7 +106,10 @@
       "view": "cutaway",
       "angleMin": 0,
       "angleMax": 360,
-      "position": { "x": 45.0, "y": 42.0 },
+      "position": {
+        "x": 45,
+        "y": 40
+      },
       "label": "Zone 02: Container Area (Geladak Peti Kemas & Reefer)",
       "badge": "ZONE 02",
       "badgeType": "danger",
@@ -99,7 +139,26 @@
         "Uji keaslian segel pabean menggunakan tes putar dan uji magnetik."
       ],
       "medicalHazard": "Bahaya sengatan listrik tegangan tinggi dari kabel unit reefer dan risiko kebocoran gas pendingin di celah kontainer.",
-      "officerSafety: ": "Gunakan sarung tangan isolasi elektrik, safety shoes pelindung benturan, kacamata pelindung, dan harness saat memeriksa kontainer tingkat atas."
+      "officerSafety: ": "Gunakan sarung tangan isolasi elektrik, safety shoes pelindung benturan, kacamata pelindung, dan harness saat memeriksa kontainer tingkat atas.",
+      "callout": {
+        "title": "CONTAINER AREA",
+        "anchor": {
+          "x": 45,
+          "y": 40
+        },
+        "elbow": {
+          "x": 42,
+          "y": 29.8
+        },
+        "badge": {
+          "x": 31.75,
+          "y": 29.1
+        },
+        "lineEnd": {
+          "x": 31.5,
+          "y": 29.8
+        }
+      }
     },
     {
       "id": "zone-03",
@@ -108,7 +167,10 @@
       "view": "cutaway",
       "angleMin": 0,
       "angleMax": 360,
-      "position": { "x": 76.5, "y": 48.5 },
+      "position": {
+        "x": 77,
+        "y": 50.5
+      },
       "label": "Zone 03: Engine Room (Kamar Mesin Utama & Poros Propulsi)",
       "badge": "ZONE 03",
       "badgeType": "danger",
@@ -138,7 +200,26 @@
         "Gunakan cermin inspeksi teleskopik dan borescope pada celah sempit di belakang blok mesin utama."
       ],
       "medicalHazard": "Suhu ruangan sangat tinggi (heat stress), kebisingan ekstrem (>90 dB), permukaan licin oli, dan bagian mesin berputar tanpa pelindung.",
-      "officerSafety": "Wajib memakai pelindung telinga (earmuff), baju wearpack katun tebal tahan panas, sarung tangan mekanik, safety shoes anti-slip, dan senter anti-ledakan."
+      "officerSafety": "Wajib memakai pelindung telinga (earmuff), baju wearpack katun tebal tahan panas, sarung tangan mekanik, safety shoes anti-slip, dan senter anti-ledakan.",
+      "callout": {
+        "title": "ENGINE ROOM",
+        "anchor": {
+          "x": 77,
+          "y": 50.5
+        },
+        "elbow": {
+          "x": 81.5,
+          "y": 61.2
+        },
+        "badge": {
+          "x": 82.88,
+          "y": 60.62
+        },
+        "lineEnd": {
+          "x": 93.5,
+          "y": 61.2
+        }
+      }
     },
     {
       "id": "zone-04",
@@ -147,7 +228,10 @@
       "view": "cutaway",
       "angleMin": 0,
       "angleMax": 360,
-      "position": { "x": 49.0, "y": 68.0 },
+      "position": {
+        "x": 48.5,
+        "y": 69
+      },
       "label": "Zone 04: Technical & Utility Spaces (Ruang Utilitas & Pompa)",
       "badge": "ZONE 04",
       "badgeType": "warning",
@@ -177,7 +261,26 @@
         "Cocokkan modifikasi instalasi listrik dengan diagram sirkuit resmi kapal."
       ],
       "medicalHazard": "Bahaya sengatan listrik tegangan menengah/tinggi dan bahaya terhirup debu isolator serat kaca atau asbes.",
-      "officerSafety": "Sepatu berisolasi dielektrik (anti-electric shock), sarung tangan non-konduktif, kacamata safety, dan senter non-logam."
+      "officerSafety": "Sepatu berisolasi dielektrik (anti-electric shock), sarung tangan non-konduktif, kacamata safety, dan senter non-logam.",
+      "callout": {
+        "title": "TECHNICAL & UTILITY SPACES",
+        "anchor": {
+          "x": 48.5,
+          "y": 69
+        },
+        "elbow": {
+          "x": 51.5,
+          "y": 81.5
+        },
+        "badge": {
+          "x": 53.6,
+          "y": 80.97
+        },
+        "lineEnd": {
+          "x": 71,
+          "y": 81.5
+        }
+      }
     },
     {
       "id": "zone-05",
@@ -186,7 +289,10 @@
       "view": "cutaway",
       "angleMin": 0,
       "angleMax": 360,
-      "position": { "x": 40.0, "y": 75.0 },
+      "position": {
+        "x": 39.5,
+        "y": 76.5
+      },
       "label": "Zone 05: Tank & Structural Spaces (Tangki Balas & Double Bottom)",
       "badge": "ZONE 05",
       "badgeType": "danger",
@@ -216,7 +322,26 @@
         "Penerjunan tim periksa berpasangan (buddy system) dengan harness pengaman dan tali penarik darurat (lifeline)."
       ],
       "medicalHazard": "ASFIKSIA MEMATIKAN akibat kekurangan oksigen mendadak dan paparan gas beracun mematikan (H2S / Hidrogen Sulfida).",
-      "officerSafety": "Wajib menggunakan SCBA (Self-Contained Breathing Apparatus) atau Escape Respirator, Gas Detector Personal 4-Gas aktif di dada, harness keselamatan, dan lifeline."
+      "officerSafety": "Wajib menggunakan SCBA (Self-Contained Breathing Apparatus) atau Escape Respirator, Gas Detector Personal 4-Gas aktif di dada, harness keselamatan, dan lifeline.",
+      "callout": {
+        "title": "TANK & STRUCTURAL SPACES",
+        "anchor": {
+          "x": 39.5,
+          "y": 76.5
+        },
+        "elbow": {
+          "x": 43.5,
+          "y": 88.1
+        },
+        "badge": {
+          "x": 45.49,
+          "y": 87.56
+        },
+        "lineEnd": {
+          "x": 63,
+          "y": 88.1
+        }
+      }
     },
     {
       "id": "zone-06",
@@ -225,7 +350,10 @@
       "view": "cutaway",
       "angleMin": 0,
       "angleMax": 360,
-      "position": { "x": 62.0, "y": 37.0 },
+      "position": {
+        "x": 62.5,
+        "y": 35
+      },
       "label": "Zone 06: Deck & Superstructure (Geladak Terbuka & Bangunan Atas)",
       "badge": "ZONE 06",
       "badgeType": "info",
@@ -255,7 +383,26 @@
         "Inspeksi kompartemen winch dan tali tambat di haluan serta buritan kapal."
       ],
       "medicalHazard": "Risiko terpeleset dan jatuh ke laut (man overboard), terbentur perlengkapan bergerak saat ombak kencang, dan sengatan panas matahari.",
-      "officerSafety": "Life jacket pelampung otomatis, helm keselamatan, kacamata UV polaroid, dan safety shoes bersol karet anti-selip."
+      "officerSafety": "Life jacket pelampung otomatis, helm keselamatan, kacamata UV polaroid, dan safety shoes bersol karet anti-selip.",
+      "callout": {
+        "title": "DECK & SUPERSTRUCTURE",
+        "anchor": {
+          "x": 62.5,
+          "y": 35
+        },
+        "elbow": {
+          "x": 59.5,
+          "y": 23.5
+        },
+        "badge": {
+          "x": 44.61,
+          "y": 22.87
+        },
+        "lineEnd": {
+          "x": 44.4,
+          "y": 23.5
+        }
+      }
     },
     {
       "id": "zone-07",
@@ -264,7 +411,10 @@
       "view": "cutaway",
       "angleMin": 0,
       "angleMax": 360,
-      "position": { "x": 73.0, "y": 30.0 },
+      "position": {
+        "x": 69.5,
+        "y": 25.5
+      },
       "label": "Zone 07: Accommodation (Kabin Awak & Ruang Bersama)",
       "badge": "ZONE 07",
       "badgeType": "warning",
@@ -294,7 +444,26 @@
         "Penggeledahan tas bawaan dan koper pribadi ABK dengan disaksikan oleh pemilik barang."
       ],
       "medicalHazard": "Potensi ancaman fisik atau perlawanan dari awak kapal yang panik serta bahaya jarum suntik bekas tersembunyi.",
-      "officerSafety": "Rompi anti-senjata tajam (stab vest), sarung tangan tahan tusukan jarum (needle-stick resistant gloves), dan body-worn camera pengawas."
+      "officerSafety": "Rompi anti-senjata tajam (stab vest), sarung tangan tahan tusukan jarum (needle-stick resistant gloves), dan body-worn camera pengawas.",
+      "callout": {
+        "title": "ACCOMMODATION",
+        "anchor": {
+          "x": 69.5,
+          "y": 25.5
+        },
+        "elbow": {
+          "x": 64.5,
+          "y": 12.3
+        },
+        "badge": {
+          "x": 52.37,
+          "y": 11.63
+        },
+        "lineEnd": {
+          "x": 52,
+          "y": 12.3
+        }
+      }
     },
     {
       "id": "zone-08",
@@ -303,7 +472,10 @@
       "view": "cutaway",
       "angleMin": 0,
       "angleMax": 360,
-      "position": { "x": 78.0, "y": 27.0 },
+      "position": {
+        "x": 79.5,
+        "y": 24
+      },
       "label": "Zone 08: Provision & Store (Gudang Perbekalan & Logistik)",
       "badge": "ZONE 08",
       "badgeType": "info",
@@ -333,7 +505,26 @@
         "Pengambilan sampel cepat menggunakan alat uji narkotika Raman Spectrometer / Trunarc."
       ],
       "medicalHazard": "Bahaya hipotermia dan terkunci di dalam kamar pendingin (cold storage) serta uap toksik dari tiner/cat di paint locker.",
-      "officerSafety": "Jaket termal tahan dingin saat memeriksa cold store, masker uap organik karbon aktif di gudang cat, dan sarung tangan nitril."
+      "officerSafety": "Jaket termal tahan dingin saat memeriksa cold store, masker uap organik karbon aktif di gudang cat, dan sarung tangan nitril.",
+      "callout": {
+        "title": "PROVISION & STORE",
+        "anchor": {
+          "x": 79.5,
+          "y": 24
+        },
+        "elbow": {
+          "x": 81.5,
+          "y": 9.5
+        },
+        "badge": {
+          "x": 82.94,
+          "y": 8.92
+        },
+        "lineEnd": {
+          "x": 95,
+          "y": 9.5
+        }
+      }
     },
     {
       "id": "zone-09",
@@ -342,7 +533,10 @@
       "view": "cutaway",
       "angleMin": 0,
       "angleMax": 360,
-      "position": { "x": 81.0, "y": 34.0 },
+      "position": {
+        "x": 81,
+        "y": 34
+      },
       "label": "Zone 09: Safety Equipment (Peralatan Keselamatan Jiwa)",
       "badge": "ZONE 09",
       "badgeType": "warning",
@@ -372,7 +566,26 @@
         "Pemeriksaan tanggal sertifikasi inspeksi tahunan keselamatan (Safety Equipment Certificate)."
       ],
       "medicalHazard": "Risiko pemicuan tidak sengaja pada mekanisme peluncur darurat (accidental release) sekoci yang dapat melukai pemeriksa.",
-      "officerSafety": "Safety harness yang dikaitkan pada tali pengaman kapal, helm pengaman, dan safety boots."
+      "officerSafety": "Safety harness yang dikaitkan pada tali pengaman kapal, helm pengaman, dan safety boots.",
+      "callout": {
+        "title": "SAFETY EQUIPMENT",
+        "anchor": {
+          "x": 81,
+          "y": 34
+        },
+        "elbow": {
+          "x": 84,
+          "y": 18
+        },
+        "badge": {
+          "x": 85.49,
+          "y": 17.44
+        },
+        "lineEnd": {
+          "x": 97.5,
+          "y": 18
+        }
+      }
     },
     {
       "id": "zone-10",
@@ -381,7 +594,10 @@
       "view": "cutaway",
       "angleMin": 0,
       "angleMax": 360,
-      "position": { "x": 67.0, "y": 50.0 },
+      "position": {
+        "x": 64.5,
+        "y": 49.5
+      },
       "label": "Zone 10: Access & Transfer Points (Jalur Akses & Titik Transfer)",
       "badge": "ZONE 10",
       "badgeType": "danger",
@@ -411,7 +627,26 @@
         "Penggunaan kamera pengawas thermal imaging / night vision jarak jauh dari kapal patroli."
       ],
       "medicalHazard": "Risiko jatuh ke laut di antara celah kapal dan dinding dermaga (crush hazard) serta ancaman perlawanan dari kurir penyelundup.",
-      "officerSafety": "Life jacket pelampung otomatis (inflatable PFD), body armor, sarung tangan taktis, dan senter taktis berkekuatan tinggi."
+      "officerSafety": "Life jacket pelampung otomatis (inflatable PFD), body armor, sarung tangan taktis, dan senter taktis berkekuatan tinggi.",
+      "callout": {
+        "title": "ACCESS & TRANSFER POINTS",
+        "anchor": {
+          "x": 64.5,
+          "y": 49.5
+        },
+        "elbow": {
+          "x": 67.5,
+          "y": 70.2
+        },
+        "badge": {
+          "x": 69.89,
+          "y": 69.64
+        },
+        "lineEnd": {
+          "x": 85.5,
+          "y": 70.2
+        }
+      }
     }
   ]
 }

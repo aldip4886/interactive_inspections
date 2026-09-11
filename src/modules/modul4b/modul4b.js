@@ -475,40 +475,92 @@ export class Modul4bView extends BaseModuleView {
 
     const hotspots = this.moduleData.hotspots || [];
 
+    // 1. Create SVG layer for callout lines
+    const svgNS = 'http://www.w3.org/2000/svg';
+    const svg = document.createElementNS(svgNS, 'svg');
+    svg.setAttribute('class', 'm4b-callout-lines-svg');
+    svg.setAttribute('viewBox', '0 0 100 100');
+    svg.setAttribute('preserveAspectRatio', 'none');
+
+    // Store references for synchronized hover
+    const groupMap = new Map();
+
     hotspots.forEach((hs, idx) => {
       const isCurrentActive = this.currentHotspotId === hs.id;
       const isVisited = this.visitedHotspots.has(hs.id);
-      const isTopArea = hs.position.y < 28;
-
-      const pin = document.createElement('button');
-      pin.className = `body-hotspot-pin ${isCurrentActive ? 'active active-zone' : ''} ${isVisited ? 'visited' : ''} ${isTopArea ? 'tooltip-bottom' : ''}`;
-      pin.style.left = `${hs.position.x}%`;
-      pin.style.top = `${hs.position.y}%`;
-      pin.setAttribute('data-id', hs.id);
-      pin.setAttribute('aria-label', hs.label);
-
       const displayNum = hs.code || (idx < 9 ? `0${idx + 1}` : `${idx + 1}`);
 
-      pin.innerHTML = `
-        <div class="pin-point">
-          <div class="pin-pulse-ring"></div>
-        </div>
-        <div class="pin-tooltip font-tech" role="tooltip">
-          <span class="pin-tooltip-num">#${displayNum}</span>
-          <span class="pin-tooltip-name">${hs.label}</span>
-        </div>
+      const callout = hs.callout || {
+        title: hs.label.split(':')[1]?.split('(')[0]?.trim() || hs.label,
+        anchor: hs.position,
+        elbow: { x: hs.position.x - 5, y: hs.position.y - 10 },
+        badge: { x: hs.position.x - 12, y: hs.position.y - 12 },
+        lineEnd: { x: hs.position.x - 12, y: hs.position.y - 10 }
+      };
+
+      const title = callout.title || hs.label;
+      const anchor = callout.anchor || hs.position;
+      const elbow = callout.elbow || anchor;
+      const badge = callout.badge || anchor;
+      const lineEnd = callout.lineEnd || elbow;
+
+      // SVG Line
+      const polyline = document.createElementNS(svgNS, 'polyline');
+      polyline.setAttribute('class', `m4b-callout-line ${isCurrentActive ? 'active' : ''}`);
+      polyline.setAttribute('points', `${anchor.x},${anchor.y} ${elbow.x},${elbow.y} ${lineEnd.x},${elbow.y}`);
+      polyline.setAttribute('data-id', hs.id);
+      svg.appendChild(polyline);
+
+      // HTML Anchor Dot button at ship coordinate
+      const anchorBtn = document.createElement('button');
+      anchorBtn.className = `m4b-callout-anchor ${isCurrentActive ? 'active' : ''} ${isVisited ? 'visited' : ''}`;
+      anchorBtn.style.left = `${anchor.x}%`;
+      anchorBtn.style.top = `${anchor.y}%`;
+      anchorBtn.setAttribute('data-id', hs.id);
+      anchorBtn.setAttribute('title', `${displayNum} ${title}`);
+      anchorBtn.setAttribute('aria-label', `${displayNum} ${title}`);
+      anchorBtn.innerHTML = `<span class="m4b-callout-anchor-dot"></span>`;
+
+      // HTML Callout Pill (badge + label text)
+      const pill = document.createElement('div');
+      pill.className = `m4b-callout-item ${isCurrentActive ? 'active' : ''} ${isVisited ? 'visited' : ''}`;
+      pill.style.left = `${badge.x}%`;
+      pill.style.top = `${badge.y}%`;
+      pill.setAttribute('data-id', hs.id);
+      pill.setAttribute('role', 'button');
+      pill.setAttribute('tabindex', '0');
+      pill.setAttribute('title', `${displayNum} ${title}`);
+      pill.innerHTML = `
+        <div class="m4b-callout-badge">${displayNum}</div>
+        <span class="m4b-callout-text">${title}</span>
       `;
 
-      pin.addEventListener('pointerenter', () => pin.classList.add('is-hovered'));
-      pin.addEventListener('pointerleave', () => pin.classList.remove('is-hovered'));
+      groupMap.set(hs.id, [polyline, anchorBtn, pill]);
 
-      pin.addEventListener('click', (e) => {
+      const onEnter = () => {
+        const elems = groupMap.get(hs.id);
+        elems?.forEach(el => el.classList.add('is-hovered'));
+      };
+      const onLeave = () => {
+        const elems = groupMap.get(hs.id);
+        elems?.forEach(el => el.classList.remove('is-hovered'));
+      };
+      const onClick = (e) => {
         e.stopPropagation();
         this.openHotspotDetail(hs.id);
+      };
+
+      [polyline, anchorBtn, pill].forEach(el => {
+        el.addEventListener('pointerenter', onEnter);
+        el.addEventListener('pointerleave', onLeave);
+        el.addEventListener('click', onClick);
       });
 
-      layer.appendChild(pin);
+      layer.appendChild(anchorBtn);
+      layer.appendChild(pill);
     });
+
+    layer.insertBefore(svg, layer.firstChild);
   }
 
   openHotspotDetail(hotspotId) {
