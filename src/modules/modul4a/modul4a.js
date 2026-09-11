@@ -404,15 +404,18 @@ export class Modul4aView extends BaseModuleView {
       this.threeControls.dampingFactor = 0.05;
       this.threeControls.maxPolarAngle = Math.PI / 2 + 0.05;
       this.threeControls.enableZoom = true;
-      this.threeControls.minDistance = 1.775; // Max 400% zoom (7.1 / 4.0)
-      this.threeControls.maxDistance = 7.1;   // Min 100% zoom (7.1 / 1.0)
+      this.threeControls.minDistance = 7.1 / this.maxZoomFactor; // Max zoom (200%)
+      this.threeControls.maxDistance = 7.1 / this.minZoomFactor; // Min zoom (50%)
 
       this.threeControls.addEventListener('change', () => {
+        const centralImg = this.container?.querySelector('#m4a-central-image');
+        if (centralImg && centralImg.style.display !== 'none') return;
+
         if (!this.threeControls || !this.threeCamera) return;
         const distance = this.threeCamera.position.distanceTo(this.threeControls.target);
         if (distance > 0) {
           const factor = 7.1 / distance;
-          this.currentZoomFactor = Math.min(4.0, Math.max(1.0, factor));
+          this.currentZoomFactor = Math.min(this.maxZoomFactor, Math.max(this.minZoomFactor, factor));
           const zoomResetBtn = this.container.querySelector('#btn-zoom-reset');
           if (zoomResetBtn) {
             zoomResetBtn.textContent = `${Math.round(this.currentZoomFactor * 100)}%`;
@@ -803,6 +806,7 @@ export class Modul4aView extends BaseModuleView {
     // --- Zoom untuk mode 2D Gambar Rotasi ---
     const centralImg = this.container?.querySelector('#m4a-central-image');
     const canvasWrapper = this.container?.querySelector('#m4a-3d-canvas-wrapper');
+    const layerEl = this.container?.querySelector('#m4a-hotspots-layer');
 
     if (centralImg && centralImg.style.display !== 'none') {
       // Terapkan zoom CSS scale ke gambar sentral
@@ -813,6 +817,21 @@ export class Modul4aView extends BaseModuleView {
       // Pastikan overflow hidden pada wrapper agar gambar tidak keluar batas
       if (canvasWrapper) {
         canvasWrapper.style.overflow = 'hidden';
+      }
+
+      // Update posisi setiap pin hotspot sesuai level zoom (acuan 100% / factor = 1.0)
+      if (layerEl) {
+        const pins = layerEl.querySelectorAll('.body-hotspot-pin');
+        pins.forEach(pin => {
+          const baseX = parseFloat(pin.dataset.baseX);
+          const baseY = parseFloat(pin.dataset.baseY);
+          if (!isNaN(baseX) && !isNaN(baseY)) {
+            const leftPct = 50 + (baseX - 50) * factor;
+            const topPct = 50 + (baseY - 50) * factor;
+            pin.style.left = `${leftPct}%`;
+            pin.style.top = `${topPct}%`;
+          }
+        });
       }
 
       // Update label indikator zoom
@@ -880,8 +899,17 @@ export class Modul4aView extends BaseModuleView {
         coords = hs.positionsByAngle[currentAngle];
       }
 
-      pin.style.left = `${coords.x}%`;
-      pin.style.top = `${coords.y}%`;
+      // Simpan koordinat dasar (acuan zoom 100%)
+      pin.dataset.baseX = coords.x;
+      pin.dataset.baseY = coords.y;
+
+      // Hitung posisi visual sesuai faktor zoom saat ini
+      const factor = this.currentZoomFactor || 1.0;
+      const leftPct = 50 + (coords.x - 50) * factor;
+      const topPct = 50 + (coords.y - 50) * factor;
+
+      pin.style.left = `${leftPct}%`;
+      pin.style.top = `${topPct}%`;
       pin.style.position = 'absolute';
       pin.style.transform = 'translate(-50%, -50%)';
 
