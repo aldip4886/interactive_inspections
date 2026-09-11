@@ -38,7 +38,6 @@ export class Modul2View extends BaseModuleView {
 
   getTemplateHTML() {
     const modPct = courseProgress.getModuleProgress('modul2');
-    const categories = this.moduleData.categories || [];
 
     return `
       <div id="modul2-app-root">
@@ -57,6 +56,12 @@ export class Modul2View extends BaseModuleView {
             </div>
 
             <div class="nav-right">
+              <!-- Angle Instruction Tag (pindah ke sebelah kiri tombol panduan) -->
+              <div class="angle-instruction-tag">
+                <span class="instruction-dot">●</span>
+                <span>Klik hotspot bernomor untuk menganalisis modus operandi & bukti forensik</span>
+              </div>
+
               <!-- Help Button -->
               <button id="btn-help-modal" class="icon-btn circle-btn" title="Panduan Penggunaan">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
@@ -70,20 +75,6 @@ export class Modul2View extends BaseModuleView {
 
           <!-- Inspection View Stage -->
           <div class="rotatable-body-view">
-
-            <!-- Angle / View Header Bar -->
-            <div class="angle-header-bar">
-              <div class="current-angle-badge" id="current-angle-badge">
-                <span class="angle-deg font-code-tech" id="view-mode-badge">X-RAY SCANNER</span>
-                <span class="angle-sep">•</span>
-                <span class="angle-name" id="view-mode-title">Pemeriksaan Koper Bagasi (X-Ray)</span>
-                <span class="angle-sub" id="view-mode-sub">(Koper Trolley & Barang Bawaan)</span>
-              </div>
-              <div class="angle-instruction-tag">
-                <span class="instruction-dot">●</span>
-                <span>Klik hotspot bernomor untuk menganalisis modus operandi & bukti forensik</span>
-              </div>
-            </div>
 
             <!-- Luggage Canvas Wrapper with Technical Forensic Grid & HUD Overlay -->
             <div class="body-canvas-wrapper" id="luggage-canvas-wrapper">
@@ -125,15 +116,6 @@ export class Modul2View extends BaseModuleView {
                     <span class="hud-btn-icon">👜</span>
                     <span class="hud-btn-text">TAMPAK NORMAL</span>
                   </button>
-
-                  <div class="hud-pill-divider"></div>
-
-                  <!-- Category Filter Buttons -->
-                  ${categories.map(cat => `
-                    <button class="filter-btn m2-dock-filter-btn ${cat.id === 'all' ? 'active' : ''}" data-filter="${cat.id}" title="${cat.label}">
-                      ${cat.icon || ''} <span>${cat.label}</span>
-                    </button>
-                  `).join('')}
                 </div>
               </div>
 
@@ -312,16 +294,13 @@ export class Modul2View extends BaseModuleView {
             </div>
             <div class="modal-body help-content">
               <div class="help-item">
-                <strong>1. Switcher Mode Tampilan:</strong> Gunakan tombol <strong>🔍 X-Ray Scanner</strong> dan <strong>hb Tampak Normal</strong> pada dock bawah untuk berpindah citra radiologi atau visual fisik barang bawaan.
+                <strong>1. Switcher Mode Tampilan:</strong> Gunakan tombol <strong>🔍 X-Ray Scanner</strong> dan <strong>👜 Tampak Normal</strong> pada dock bawah untuk berpindah citra radiologi atau visual fisik barang bawaan.
               </div>
               <div class="help-item">
-                <strong>2. Filter Kategori Modus:</strong> Filter titik-titik hotspot berdasarkan jenis koper, personal items, buku, makanan, atau sepatu melalui tombol kategori pada dock bawah.
+                <strong>2. Titik Hotspot Interaktif:</strong> Klik callout bernomor pada koper untuk menginspeksi modus penyembunyian & barang bukti.
               </div>
               <div class="help-item">
-                <strong>3. Titik Hotspot Interaktif:</strong> Klik nomor callout bernomor pada koper untuk menginspeksi modus penyembunyian & barang bukti.
-              </div>
-              <div class="help-item">
-                <strong>4. Format Tabbed Card:</strong> Pelajari rincian lengkap melalui 4 tab: <em>Modus Operandi</em>, <em>Foto Gambar Real</em>, <em>Ciri Pelaku & SOP</em>, dan <em>Indikator Risiko</em>.
+                <strong>3. Format Tabbed Card:</strong> Pelajari rincian lengkap melalui 4 tab: <em>Modus Operandi</em>, <em>Foto Gambar Real</em>, <em>Ciri Pelaku & SOP</em>, dan <em>Indikator Risiko</em>.
               </div>
             </div>
             <div class="modal-footer">
@@ -349,23 +328,10 @@ export class Modul2View extends BaseModuleView {
   initInteractiveViewer() {
     this.renderHotspots();
 
-    // Setup Category Filter Buttons (HUD Dock Pills)
-    const filterBtns = this.container.querySelectorAll('.m2-dock-filter-btn, .filter-btn');
-    filterBtns.forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        filterBtns.forEach(b => b.classList.remove('active'));
-        e.currentTarget.classList.add('active');
-        this.activeFilter = e.currentTarget.dataset.filter;
-        this.renderHotspots();
-      });
-    });
-
     // View Mode Toggle (X-Ray vs Normal)
     const btnXray = this.container.querySelector('#btn-view-xray');
     const btnNormal = this.container.querySelector('#btn-view-normal');
     const centralImg = this.container.querySelector('#m2-central-image');
-    const viewBadge = this.container.querySelector('#view-mode-badge');
-    const viewTitle = this.container.querySelector('#view-mode-title');
     const azimuthText = this.container.querySelector('#hud-azimuth-text');
 
     if (btnXray && btnNormal && centralImg) {
@@ -374,8 +340,6 @@ export class Modul2View extends BaseModuleView {
         btnNormal.classList.remove('active');
         this.currentViewMode = 'xray';
         centralImg.src = 'assets/images/central/m2_luggage_xray.png';
-        if (viewBadge) viewBadge.textContent = 'X-RAY SCANNER';
-        if (viewTitle) viewTitle.textContent = 'Pemeriksaan Koper Bagasi (X-Ray)';
         if (azimuthText) azimuthText.textContent = 'MODE AKTIF: SCANNER X-RAY HI-PENETRATION';
         this.renderHotspots();
       });
@@ -385,8 +349,6 @@ export class Modul2View extends BaseModuleView {
         btnXray.classList.remove('active');
         this.currentViewMode = 'normal';
         centralImg.src = 'assets/images/central/m2_luggage_normal.png';
-        if (viewBadge) viewBadge.textContent = 'TAMPAK NORMAL';
-        if (viewTitle) viewTitle.textContent = 'Pemeriksaan Koper Bagasi (Fisik)';
         if (azimuthText) azimuthText.textContent = 'MODE AKTIF: INSPEKSI FISIK TAMPAK NORMAL';
         this.renderHotspots();
       });
