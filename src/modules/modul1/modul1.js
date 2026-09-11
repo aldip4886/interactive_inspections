@@ -167,7 +167,6 @@ export class Modul1View extends BaseModuleView {
               <div class="detail-badge-row">
                 <span class="floating-card-drag-indicator" title="Geser posisi kartu">⋮⋮</span>
                 <span id="detail-tag-badge" class="detail-tag-badge">MODUS #01</span>
-                <span id="detail-cat-badge" class="detail-cat-badge">METODE INGESTION</span>
               </div>
               <h3 id="detail-title" class="detail-title">1. Rongga Mulut</h3>
             </div>
@@ -591,9 +590,10 @@ export class Modul1View extends BaseModuleView {
       const coords = hs.coordsByAngle[String(this.currentAngle)] || { x: 50, y: 50 };
       const isVisited = this.visitedHotspots.has(hs.id);
       const isActive = this.isModalOpen && hs.id === this.currentHotspotId;
+      const isTopArea = coords.y < 18;
 
       const pin = document.createElement('div');
-      pin.className = `body-hotspot-pin ${isActive ? 'active' : ''} ${isVisited ? 'visited' : ''}`;
+      pin.className = `body-hotspot-pin ${isActive ? 'active' : ''} ${isVisited ? 'visited' : ''} ${isTopArea ? 'tooltip-bottom' : ''}`;
       pin.setAttribute('data-id', hs.id);
       pin.style.left = `${coords.x}%`;
       pin.style.top = `${coords.y}%`;
@@ -832,7 +832,6 @@ export class Modul1View extends BaseModuleView {
 
     const badgeRow = this.container.querySelector('.detail-badge-row');
     const tagBadge = this.container.querySelector('#detail-tag-badge');
-    const catBadge = this.container.querySelector('#detail-cat-badge');
     const title = this.container.querySelector('#detail-title');
     const sub = this.container.querySelector('#detail-subtitle');
 
@@ -840,10 +839,6 @@ export class Modul1View extends BaseModuleView {
     if (tagBadge) {
       tagBadge.textContent = `MODUS #${hs.num}`;
       tagBadge.className = `detail-tag-badge cat-${hs.categoryId}`;
-    }
-    if (catBadge) {
-      catBadge.textContent = (hs.categoryLabel || '').toUpperCase();
-      catBadge.className = `detail-cat-badge cat-${hs.categoryId}`;
     }
     if (title) title.textContent = hs.label;
     if (sub) sub.textContent = hs.tag;

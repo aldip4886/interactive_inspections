@@ -151,7 +151,6 @@ export class Modul2View extends BaseModuleView {
                 <div class="detail-badge-row">
                   <span class="floating-card-drag-indicator" title="Geser posisi kartu">⋮⋮</span>
                   <span id="detail-tag-badge" class="detail-tag-badge">MODUS #01</span>
-                  <span id="detail-cat-badge" class="detail-cat-badge">KOPER & TAS BAWAAN</span>
                 </div>
                 <h3 id="detail-title" class="detail-title">1. Sisi Koper & Tas Bawaan</h3>
               </div>
@@ -469,17 +468,12 @@ export class Modul2View extends BaseModuleView {
 
     const badgeRow = this.container.querySelector('.detail-badge-row');
     const tagBadge = this.container.querySelector('#detail-tag-badge');
-    const catBadge = this.container.querySelector('#detail-cat-badge');
     const title = this.container.querySelector('#detail-title');
 
     if (badgeRow) badgeRow.className = `detail-badge-row cat-${hs.categoryId || hs.category}`;
     if (tagBadge) {
       tagBadge.textContent = `MODUS #${hs.num || String(idx + 1).padStart(2, '0')}`;
       tagBadge.className = `detail-tag-badge cat-${hs.categoryId || hs.category}`;
-    }
-    if (catBadge) {
-      catBadge.textContent = (hs.categoryLabel || hs.tag || 'BARANG BAWAAN').toUpperCase();
-      catBadge.className = `detail-cat-badge cat-${hs.categoryId || hs.category}`;
     }
     if (title) title.textContent = hs.label;
 

@@ -277,10 +277,11 @@ export function Modul1View() {
                   const isActive = selectedHotspot?.id === hs.id;
                   const cleanName = (hs.label || '').replace(/^\d+\.\s*/, '');
 
+                  const isTopArea = coords.y < 18;
                   return (
                     <div
                       key={hs.id}
-                      className={`body-hotspot-pin ${isActive ? 'active' : ''} ${isVisited ? 'visited' : ''}`}
+                      className={`body-hotspot-pin ${isActive ? 'active' : ''} ${isVisited ? 'visited' : ''} ${isTopArea ? 'tooltip-bottom' : ''}`}
                       style={{ left: `${coords.x}%`, top: `${coords.y}%` }}
                       onPointerDown={(e) => e.stopPropagation()}
                       onClick={(e) => {
@@ -402,9 +403,6 @@ export function Modul1View() {
                 <div className="detail-badge-row">
                   <span className="floating-card-drag-indicator" title="Geser posisi kartu">⋮⋮</span>
                   <span className="detail-tag-badge font-code-tech">MODUS #{String(selectedHotspot.badgeNum).padStart(2, '0')}</span>
-                  <span className={`detail-cat-badge font-code-tech cat-${selectedHotspot.categoryId}`}>
-                    {(selectedHotspot.categoryLabel || selectedHotspot.tag || 'MODUS').toUpperCase()}
-                  </span>
                 </div>
                 <h3 className="detail-title">{selectedHotspot.label}</h3>
                 <p className="detail-subtitle">{selectedHotspot.tag || selectedHotspot.shortName || selectedHotspot.label}</p>

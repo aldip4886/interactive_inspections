@@ -182,7 +182,6 @@ export class Modul4aView extends BaseModuleView {
                 <div class="detail-badge-row">
                   <span class="floating-card-drag-indicator" title="Geser posisi kartu">⋮⋮</span>
                   <span id="detail-tag-badge" class="detail-tag-badge">MODUS #01</span>
-                  <span id="detail-cat-badge" class="detail-cat-badge">INTERIOR & KONSOL MOBIL</span>
                 </div>
                 <h3 id="detail-title" class="detail-title">1. Interior & Konsol Tengah Kendaraan</h3>
               </div>
@@ -950,12 +949,10 @@ export class Modul4aView extends BaseModuleView {
     const total = hotspots.length;
 
     const tagBadge = this.container.querySelector('#detail-tag-badge');
-    const catBadge = this.container.querySelector('#detail-cat-badge');
     const title = this.container.querySelector('#detail-title');
     const navCounter = this.container.querySelector('#card-nav-counter');
 
     if (tagBadge) tagBadge.textContent = `MODUS #${hs.badgeNum || hs.num || (idx + 1)}`;
-    if (catBadge) catBadge.textContent = (hs.badge || hs.category || 'KENDARAAN DARAT').toUpperCase();
     if (title) title.textContent = hs.label;
     if (navCounter) navCounter.textContent = `${idx + 1} / ${total}`;
 
@@ -980,11 +977,10 @@ export class Modul4aView extends BaseModuleView {
       illustrationBox.onclick = () => {
         const curImg = this.container.querySelector('#detail-main-img');
         const curTitle = this.container.querySelector('#detail-title');
-        const curCat = this.container.querySelector('#detail-cat-badge');
         this.openImagePopup(
           curImg ? curImg.src : (hs.mainImage || 'assets/images/hotspots/bumper_ruang_mesin.png'),
           curTitle ? curTitle.textContent : hs.label,
-          curCat ? curCat.textContent : 'Modus Operandi Kendaraan'
+          hs.badge || hs.category || 'Modus Operandi Kendaraan'
         );
       };
     }
