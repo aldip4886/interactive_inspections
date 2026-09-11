@@ -38,7 +38,8 @@
   --success-green: var(--color-success, #10B981);
   --sidebar-width-mod1: 230px;
   --navbar-height-mod1: 52px;
-  --body-zoom: 1.5;
+  --body-zoom: 1.2;
+  --tooltip-counter-scale: calc(1 / var(--body-zoom, 1.2));
 }
 
 /* Radar Pulse at Hotspot Pin Point */
@@ -611,7 +612,8 @@ model-viewer .body-hotspot-pin {
   border-color: rgba(253, 187, 36, 0.6);
   box-shadow: 0 4px 12px rgba(0, 21, 41, 0.35);
   bottom: calc(100% + 6px);
-  transform: translateX(-50%) translateY(3px) scale(0.95);
+  transform-origin: 50% 100%;
+  transform: translateX(-50%) translateY(3px) scale(calc(var(--tooltip-counter-scale, 0.8333) * 0.95));
 }
 
 #modul1-app-root .pin-tooltip-num {
@@ -635,7 +637,7 @@ model-viewer .body-hotspot-pin {
 #modul1-app-root .body-hotspot-pin:focus-visible .pin-tooltip {
   opacity: 1;
   visibility: visible;
-  transform: translateX(-50%) translateY(0) scale(1);
+  transform: translateX(-50%) translateY(0) scale(var(--tooltip-counter-scale, 0.8333));
 }
 
 #modul1-app-root .pin-tooltip::after {
@@ -646,14 +648,14 @@ model-viewer .body-hotspot-pin {
   bottom: auto;
   top: calc(100% + 6px);
   transform-origin: 50% 0%;
-  transform: translateX(-50%) translateY(-3px) scale(0.95);
+  transform: translateX(-50%) translateY(-3px) scale(calc(var(--tooltip-counter-scale, 0.8333) * 0.95));
 }
 
 #modul1-app-root .body-hotspot-pin.tooltip-bottom:hover .pin-tooltip,
 #modul1-app-root .body-hotspot-pin.tooltip-bottom.is-hovered .pin-tooltip,
 #modul1-app-root .body-hotspot-pin.tooltip-bottom:focus .pin-tooltip,
 #modul1-app-root .body-hotspot-pin.tooltip-bottom:focus-visible .pin-tooltip {
-  transform: translateX(-50%) translateY(0) scale(1);
+  transform: translateX(-50%) translateY(0) scale(var(--tooltip-counter-scale, 0.8333));
 }
 
 #modul1-app-root .body-hotspot-pin.tooltip-bottom .pin-tooltip::after {

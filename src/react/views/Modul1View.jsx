@@ -8,7 +8,7 @@ export function Modul1View() {
   const { refreshProgress } = useApp();
   const [moduleData] = useState(modul1Data);
   const [currentAngle, setCurrentAngle] = useState(0);
-  const [currentZoom, setCurrentZoom] = useState(1.5);
+  const [currentZoom, setCurrentZoom] = useState(1.2);
   const [isAutoPlaying, setIsAutoPlaying] = useState(false);
   const [selectedHotspot, setSelectedHotspot] = useState(null);
   const [activeTab, setActiveTab] = useState('tab-modus');
@@ -259,7 +259,9 @@ export function Modul1View() {
               style={{
                 transform: `scale(${currentZoom})`,
                 transformOrigin: 'center center',
-                transition: 'transform 0.15s ease'
+                transition: 'transform 0.15s ease',
+                '--body-zoom': currentZoom,
+                '--tooltip-counter-scale': (1 / currentZoom).toFixed(4)
               }}
             >
               <img
@@ -369,8 +371,8 @@ export function Modul1View() {
                 <button
                   id="btn-zoom-reset"
                   className="pedestal-ctrl-btn hud-zoom-btn reset-btn"
-                  title="Reset Zoom (150%)"
-                  onClick={() => handleZoom(1.5)}
+                  title="Reset Zoom (120%)"
+                  onClick={() => handleZoom(1.2)}
                 >
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><polyline points="3 3 3 8 8 8"></polyline></svg>
                 </button>

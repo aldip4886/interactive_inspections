@@ -11,7 +11,7 @@ export class Modul1View extends BaseModuleView {
     this.visitedHotspots = new Set();
     this.currentActiveTab = 'tab-modus';
     this.currentAngle = 0; // 0, 90, 180, 270
-    this.currentZoom = 1.5;
+    this.currentZoom = 1.2;
     this.isModalOpen = false;
     this.isAutoPlaying = false;
     this.autoPlayTimer = null;
@@ -139,11 +139,11 @@ export class Modul1View extends BaseModuleView {
                   <button id="btn-zoom-out" class="pedestal-ctrl-btn hud-zoom-btn" title="Perkecil (Zoom Out)" aria-label="Zoom Out">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line></svg>
                   </button>
-                  <span id="zoom-level-text" class="zoom-level-badge font-code-tech">150%</span>
+                  <span id="zoom-level-text" class="zoom-level-badge font-code-tech">120%</span>
                   <button id="btn-zoom-in" class="pedestal-ctrl-btn hud-zoom-btn" title="Perbesar (Zoom In)" aria-label="Zoom In">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
                   </button>
-                  <button id="btn-zoom-reset" class="pedestal-ctrl-btn hud-zoom-btn reset-btn" title="Reset Zoom (150%)" aria-label="Reset Zoom">
+                  <button id="btn-zoom-reset" class="pedestal-ctrl-btn hud-zoom-btn reset-btn" title="Reset Zoom (120%)" aria-label="Reset Zoom">
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><polyline points="3 3 3 8 8 8"></polyline></svg>
                   </button>
                 </div>
@@ -412,9 +412,9 @@ export class Modul1View extends BaseModuleView {
     this.setupZoomControls();
     this.setupDetailModal();
 
-    // Initial angle & zoom 150%
+    // Initial angle & zoom 120%
     this.setBodyAngle(0);
-    this.applyZoom(1.5);
+    this.applyZoom(1.2);
   }
 
   setupRotationControls() {
@@ -531,7 +531,7 @@ export class Modul1View extends BaseModuleView {
 
     btnIn?.addEventListener('click', () => this.applyZoom(this.currentZoom + 0.15));
     btnOut?.addEventListener('click', () => this.applyZoom(this.currentZoom - 0.15));
-    btnReset?.addEventListener('click', () => this.applyZoom(1.5));
+    btnReset?.addEventListener('click', () => this.applyZoom(1.2));
 
     canvasWrap?.addEventListener('wheel', (e) => {
       e.preventDefault();
@@ -544,14 +544,17 @@ export class Modul1View extends BaseModuleView {
     this.currentZoom = Math.min(Math.max(val, 0.75), 2.2);
     const container = this.container.querySelector('#body-image-container');
     const badge = this.container.querySelector('#zoom-level-text');
+    const counterScale = (1 / this.currentZoom).toFixed(4);
 
     if (container) {
       container.style.transform = `scale(${this.currentZoom})`;
       container.style.transformOrigin = 'center center';
       container.style.transition = 'transform 0.15s ease';
       container.style.setProperty('--body-zoom', this.currentZoom);
+      container.style.setProperty('--tooltip-counter-scale', counterScale);
     }
     document.documentElement.style.setProperty('--body-zoom', this.currentZoom);
+    document.documentElement.style.setProperty('--tooltip-counter-scale', counterScale);
     if (badge) {
       badge.textContent = `${Math.round(this.currentZoom * 100)}%`;
     }
