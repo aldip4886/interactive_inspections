@@ -101,7 +101,9 @@
 /* ══════════════════════ MAIN VIEWPORT WORKSPACE ══════════════════════ */
 #modul1-app-root,
 #modul2-app-root,
-#modul4a-app-root {
+#modul3-app-root,
+#modul4a-app-root,
+#modul4b-app-root {
   width: 100%;
   height: 100%;
   display: flex;
@@ -111,7 +113,9 @@
 
 #modul1-viewport,
 #modul2-viewport,
-#modul4a-viewport {
+#modul3-viewport,
+#modul4a-viewport,
+#modul4b-viewport {
   flex: 1;
   height: 100%;
   display: flex;
@@ -129,10 +133,26 @@
   max-width: 100% !important;
 }
 
+#m3-image-container,
+#m4b-image-container {
+  height: auto !important;
+  max-height: 70vh !important;
+  aspect-ratio: auto !important;
+  width: auto !important;
+  max-width: 950px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  position: relative !important;
+  margin: 0 auto !important;
+}
+
 
 #modul1-top-bar.modul1-top-bar,
 #modul2-top-bar.modul1-top-bar,
-#modul4a-top-bar.modul1-top-bar {
+#modul3-top-bar.modul1-top-bar,
+#modul4a-top-bar.modul1-top-bar,
+#modul4b-top-bar.modul1-top-bar {
   min-height: 50px;
   height: 50px;
   background: #FFFFFF;
@@ -603,8 +623,11 @@ model-viewer .body-hotspot-pin {
   transform: translateX(-50%) translateY(0) scale(1.15);
 }
 
-/* ─── Compact Tooltip for Modul 1 (Pemeriksaan Tubuh Kurir) ─── */
-#modul1-app-root .pin-tooltip {
+/* ─── Compact Tooltip for All Modules ─── */
+#modul1-app-root .pin-tooltip,
+#modul2-app-root .pin-tooltip,
+#modul3-app-root .pin-tooltip,
+#modul4b-app-root .pin-tooltip {
   gap: 5px;
   padding: 3px 8px;
   border-radius: 5px;
@@ -613,10 +636,13 @@ model-viewer .body-hotspot-pin {
   box-shadow: 0 4px 12px rgba(0, 21, 41, 0.35);
   bottom: calc(100% + 6px);
   transform-origin: 50% 100%;
-  transform: translateX(-50%) translateY(3px) scale(calc(var(--tooltip-counter-scale, 0.8333) * 0.95));
+  transform: translateX(-50%) translateY(3px) scale(calc(var(--tooltip-counter-scale, 1) * 0.95));
 }
 
-#modul1-app-root .pin-tooltip-num {
+#modul1-app-root .pin-tooltip-num,
+#modul2-app-root .pin-tooltip-num,
+#modul3-app-root .pin-tooltip-num,
+#modul4b-app-root .pin-tooltip-num {
   font-size: 10px;
   font-weight: 800;
   padding: 1px 5px;
@@ -625,7 +651,10 @@ model-viewer .body-hotspot-pin {
   letter-spacing: 0.1px;
 }
 
-#modul1-app-root .pin-tooltip-name {
+#modul1-app-root .pin-tooltip-name,
+#modul2-app-root .pin-tooltip-name,
+#modul3-app-root .pin-tooltip-name,
+#modul4b-app-root .pin-tooltip-name {
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.1px;
@@ -634,28 +663,58 @@ model-viewer .body-hotspot-pin {
 #modul1-app-root .body-hotspot-pin:hover .pin-tooltip,
 #modul1-app-root .body-hotspot-pin.is-hovered .pin-tooltip,
 #modul1-app-root .body-hotspot-pin:focus .pin-tooltip,
-#modul1-app-root .body-hotspot-pin:focus-visible .pin-tooltip {
+#modul1-app-root .body-hotspot-pin:focus-visible .pin-tooltip,
+#modul2-app-root .body-hotspot-pin:hover .pin-tooltip,
+#modul2-app-root .body-hotspot-pin.is-hovered .pin-tooltip,
+#modul2-app-root .body-hotspot-pin:focus .pin-tooltip,
+#modul2-app-root .body-hotspot-pin:focus-visible .pin-tooltip,
+#modul3-app-root .body-hotspot-pin:hover .pin-tooltip,
+#modul3-app-root .body-hotspot-pin.is-hovered .pin-tooltip,
+#modul3-app-root .body-hotspot-pin:focus .pin-tooltip,
+#modul3-app-root .body-hotspot-pin:focus-visible .pin-tooltip,
+#modul4b-app-root .body-hotspot-pin:hover .pin-tooltip,
+#modul4b-app-root .body-hotspot-pin.is-hovered .pin-tooltip,
+#modul4b-app-root .body-hotspot-pin:focus .pin-tooltip,
+#modul4b-app-root .body-hotspot-pin:focus-visible .pin-tooltip {
   opacity: 1;
   visibility: visible;
-  transform: translateX(-50%) translateY(0) scale(var(--tooltip-counter-scale, 0.8333));
+  transform: translateX(-50%) translateY(0) scale(var(--tooltip-counter-scale, 1));
 }
 
-#modul1-app-root .pin-tooltip::after {
+#modul1-app-root .pin-tooltip::after,
+#modul2-app-root .pin-tooltip::after,
+#modul3-app-root .pin-tooltip::after,
+#modul4b-app-root .pin-tooltip::after {
   border-width: 4px 4px 0 4px;
 }
 
-#modul1-app-root .body-hotspot-pin.tooltip-bottom .pin-tooltip {
+#modul1-app-root .body-hotspot-pin.tooltip-bottom .pin-tooltip,
+#modul2-app-root .body-hotspot-pin.tooltip-bottom .pin-tooltip,
+#modul3-app-root .body-hotspot-pin.tooltip-bottom .pin-tooltip,
+#modul4b-app-root .body-hotspot-pin.tooltip-bottom .pin-tooltip {
   bottom: auto;
   top: calc(100% + 6px);
   transform-origin: 50% 0%;
-  transform: translateX(-50%) translateY(-3px) scale(calc(var(--tooltip-counter-scale, 0.8333) * 0.95));
+  transform: translateX(-50%) translateY(-3px) scale(calc(var(--tooltip-counter-scale, 1) * 0.95));
 }
 
 #modul1-app-root .body-hotspot-pin.tooltip-bottom:hover .pin-tooltip,
 #modul1-app-root .body-hotspot-pin.tooltip-bottom.is-hovered .pin-tooltip,
 #modul1-app-root .body-hotspot-pin.tooltip-bottom:focus .pin-tooltip,
-#modul1-app-root .body-hotspot-pin.tooltip-bottom:focus-visible .pin-tooltip {
-  transform: translateX(-50%) translateY(0) scale(var(--tooltip-counter-scale, 0.8333));
+#modul1-app-root .body-hotspot-pin.tooltip-bottom:focus-visible .pin-tooltip,
+#modul2-app-root .body-hotspot-pin.tooltip-bottom:hover .pin-tooltip,
+#modul2-app-root .body-hotspot-pin.tooltip-bottom.is-hovered .pin-tooltip,
+#modul2-app-root .body-hotspot-pin.tooltip-bottom:focus .pin-tooltip,
+#modul2-app-root .body-hotspot-pin.tooltip-bottom:focus-visible .pin-tooltip,
+#modul3-app-root .body-hotspot-pin.tooltip-bottom:hover .pin-tooltip,
+#modul3-app-root .body-hotspot-pin.tooltip-bottom.is-hovered .pin-tooltip,
+#modul3-app-root .body-hotspot-pin.tooltip-bottom:focus .pin-tooltip,
+#modul3-app-root .body-hotspot-pin.tooltip-bottom:focus-visible .pin-tooltip,
+#modul4b-app-root .body-hotspot-pin.tooltip-bottom:hover .pin-tooltip,
+#modul4b-app-root .body-hotspot-pin.tooltip-bottom.is-hovered .pin-tooltip,
+#modul4b-app-root .body-hotspot-pin.tooltip-bottom:focus .pin-tooltip,
+#modul4b-app-root .body-hotspot-pin.tooltip-bottom:focus-visible .pin-tooltip {
+  transform: translateX(-50%) translateY(0) scale(var(--tooltip-counter-scale, 1));
 }
 
 #modul1-app-root .body-hotspot-pin.tooltip-bottom .pin-tooltip::after {

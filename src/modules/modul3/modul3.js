@@ -1,7 +1,780 @@
 import { BaseModuleView } from '../../core/base-module.js';
+import { courseProgress } from '../../core/progress.js';
+import { xapi } from '../../core/xapi.js';
 
 export class Modul3View extends BaseModuleView {
   constructor(container) {
     super(container, 'src/data/modul3-hotspots.json');
+    this.currentHotspotId = null;
+    this.visitedHotspots = new Set();
+    this.currentActiveTab = 'tab-modus';
+    this.currentViewMode = 'cutaway'; // 'cutaway' or 'normal'
+    this.currentZoom = 1.0;
+    this.isModalOpen = false;
+    this.glightboxInstance = null;
+    this.cardPages = [
+      { id: 'tab-modus', num: 1, title: 'Modus Operandi' },
+      { id: 'tab-photos', num: 2, title: 'Foto Gambar Real' },
+      { id: 'tab-detection', num: 3, title: 'Ciri Pelaku & SOP' },
+      { id: 'tab-risk', num: 4, title: 'Indikator Risiko' }
+    ];
+    this.currentCardPageIndex = 0;
+  }
+
+  async render() {
+    await this.loadData();
+    if (!this.moduleData) return;
+
+    this.container.innerHTML = this.getTemplateHTML();
+
+    this.initInteractiveViewer();
+    this.initModals();
+    this.updateProgressUI();
+  }
+
+  getTemplateHTML() {
+    return `
+      <div id="modul3-app-root">
+        <!-- ─── MAIN VIEWPORT ─── -->
+        <div id="modul3-viewport">
+
+          <!-- Sub Header Bar (Stitch Forensic Module Strip) -->
+          <div id="modul3-top-bar" class="modul1-top-bar">
+            <div class="nav-left">
+              <div class="header-breadcrumb">
+                <span class="modul-code-badge font-code-tech">MODUL 03</span>
+                <span class="course-main-title">Pemeriksaan Barang Kiriman (Postal & Courier Cargo)</span>
+                <span class="breadcrumb-separator">•</span>
+                <span class="modul-ref-tag font-code-tech">PMK-188/2021 & S-39/BC/2023</span>
+              </div>
+            </div>
+
+            <div class="nav-right">
+              <!-- Angle Instruction Tag (di sebelah kiri tombol panduan) -->
+              <div class="angle-instruction-tag">
+                <span class="instruction-dot">●</span>
+                <span>Klik hotspot bernomor untuk menganalisis modus operandi & bukti forensik</span>
+              </div>
+
+              <!-- Help Button -->
+              <button id="btn-help-modal" class="icon-btn circle-btn" title="Panduan Penggunaan">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                  <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Inspection View Stage -->
+          <div class="rotatable-body-view">
+
+            <!-- Postal Canvas Wrapper with Technical Forensic Grid & HUD Overlay -->
+            <div class="body-canvas-wrapper" id="m3-canvas-wrapper">
+
+              <!-- Technical Forensic Grid Background Overlay -->
+              <div class="forensic-grid-background" aria-hidden="true"></div>
+
+              <!-- HUD Telemetry Watermark Overlay -->
+              <div class="forensic-hud-telemetry" aria-hidden="true">
+                <div class="forensic-hud-top-left font-code-tech">
+                  <div class="hud-line-title">STASIUN PEMINDAIAN KARGO POS & BARANG KIRIMAN</div>
+                  <div class="hud-line-sub">SUBJEK ID: SUSPECT-POSTAL-PKG-7741 / KARDUS KEMASAN POS & PJT</div>
+                </div>
+                <div class="forensic-hud-top-right font-code-tech">
+                  <div class="hud-line-azimuth" id="hud-azimuth-text">MODE AKTIF: CUTAWAY INSPECTION & X-RAY DUAL-VIEW</div>
+                  <div class="hud-line-status">SENSOR: HIGH-RESOLUTION DIGITAL RADIOGRAPHY / PHYSICAL INSPECTION</div>
+                </div>
+              </div>
+
+              <!-- Central Active Parcel Image Container with Hotspots Layer -->
+              <div class="body-image-container" id="m3-image-container" style="max-width:850px; aspect-ratio: auto; margin:0 auto;">
+                <img id="m3-central-image" src="assets/images/central/m3_parcel_cutaway.png" 
+                     alt="Pemeriksaan Barang Kiriman Kargo Pos" 
+                     class="main-body-img"
+                     style="max-height: 68vh; filter: drop-shadow(0 12px 32px rgba(0, 37, 59, 0.16)); pointer-events:none;" />
+                <div class="body-pedestal-platform"></div>
+                <div id="m3-hotspots-layer" class="hotspots-layer"></div>
+              </div>
+
+              <!-- Floating HUD Segmented Pill Controls Dock (Center Bottom) -->
+              <div class="pedestal-rotation-dock" id="pedestal-rotation-dock">
+                <div class="pedestal-carousel-controls">
+                  <!-- Mode Switcher Pill Buttons -->
+                  <button id="btn-view-cutaway" class="hud-pill-action-btn active" title="Tampak Irisan Dalam (Cutaway View)">
+                    <span class="hud-btn-icon">📦</span>
+                    <span class="hud-btn-text">TAMPAK IRISAN</span>
+                  </button>
+                  <button id="btn-view-normal" class="hud-pill-action-btn mode-btn-secondary" title="Tampak Luar Kemasan Pos/PJT">
+                    <span class="hud-btn-icon">📮</span>
+                    <span class="hud-btn-text">TAMPAK NORMAL</span>
+                  </button>
+
+                  <div class="hud-pill-divider"></div>
+
+                  <!-- Zoom Controls integrated into segmented dock -->
+                  <button id="btn-zoom-out" class="pedestal-ctrl-btn hud-zoom-btn" title="Perkecil (Zoom Out)" aria-label="Zoom Out">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                  </button>
+                  <span id="zoom-level-text" class="zoom-level-badge font-code-tech">100%</span>
+                  <button id="btn-zoom-in" class="pedestal-ctrl-btn hud-zoom-btn" title="Perbesar (Zoom In)" aria-label="Zoom In">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                  </button>
+                  <button id="btn-zoom-reset" class="pedestal-ctrl-btn hud-zoom-btn reset-btn" title="Reset Zoom (100%)" aria-label="Reset Zoom">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><polyline points="3 3 3 8 8 8"></polyline></svg>
+                  </button>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- ─── TABBED HOTSPOT CALLOUT CARD (MODUL 4A STANDARD) ─── -->
+        <div id="hotspot-card-modal-overlay" class="modal-overlay hidden" role="dialog" aria-modal="true">
+          <div id="hotspot-modal-card" class="modal-card tabbed-hotspot-modal hotspot-callout-card">
+            <div class="modal-header tabbed-modal-header" title="Tahan dan geser untuk memindahkan kartu callout">
+              <div class="modal-header-left">
+                <div class="detail-badge-row">
+                  <span class="floating-card-drag-indicator" title="Geser posisi kartu">⋮⋮</span>
+                  <span id="detail-tag-badge" class="detail-tag-badge">MODUS #01</span>
+                </div>
+                <h3 id="detail-title" class="detail-title">Detail Pemeriksaan</h3>
+              </div>
+              <div class="modal-header-right">
+                <div class="card-quick-nav">
+                  <button id="btn-prev-hotspot" class="card-nav-arrow-btn" title="Modus Sebelumnya">←</button>
+                  <span id="card-nav-counter" class="card-nav-counter">1 / 4</span>
+                  <button id="btn-next-hotspot" class="card-nav-arrow-btn" title="Modus Berikutnya">→</button>
+                </div>
+                <button id="btn-close-detail-modal" class="modal-close-btn" aria-label="Tutup Kartu" title="Tutup Kartu">✕</button>
+              </div>
+            </div>
+
+            <!-- Compact Segmented Tab Navigation -->
+            <div class="card-tabs-nav" id="card-tabs-nav">
+              <button class="tab-btn active" data-tab="tab-modus" title="Halaman 1: Modus Operandi">
+                <span class="tab-label">Modus Operandi</span>
+              </button>
+              <button class="tab-btn" data-tab="tab-photos" title="Halaman 2: Foto Gambar Real">
+                <span class="tab-label">Foto Real</span>
+              </button>
+              <button class="tab-btn" data-tab="tab-detection" title="Halaman 3: Ciri Pelaku & SOP">
+                <span class="tab-label">Ciri Pelaku & SOP</span>
+              </button>
+              <button class="tab-btn" data-tab="tab-risk" title="Halaman 4: Indikator Risiko">
+                <span class="tab-label">Indikator Risiko</span>
+              </button>
+            </div>
+
+            <div class="tab-content-container" id="tab-content-container">
+              <!-- TAB 1: MODUS -->
+              <div class="tab-pane active" id="tab-modus">
+                <div class="detail-media-row">
+                  <div class="detail-illustration-box" title="Klik untuk melihat gambar ukuran penuh">
+                    <img id="detail-main-img" src="assets/mockup/image_placeholder.svg" alt="Visualisasi Modus" class="detail-main-img" />
+                  </div>
+                  <div class="detail-desc-box">
+                    <p id="detail-desc" class="detail-desc-text"></p>
+                  </div>
+                </div>
+                <div class="modus-params-grid">
+                  <div class="param-box">
+                    <span class="param-label">Metode:</span>
+                    <p id="detail-concealment-method" class="param-val"></p>
+                  </div>
+                  <div class="param-box">
+                    <span class="param-label">Lokasi:</span>
+                    <p id="detail-body-location" class="param-val"></p>
+                  </div>
+                  <div class="param-box">
+                    <span class="param-label">Narkotika:</span>
+                    <p id="detail-drug-types" class="param-val"></p>
+                  </div>
+                  <div class="param-box">
+                    <span class="param-label">Kemasan:</span>
+                    <p id="detail-packaging" class="param-val"></p>
+                  </div>
+                </div>
+                <div class="deep-modus-note">
+                  <span class="note-label">Detail Teknis Modus:</span>
+                  <p id="detail-modus-narrative" class="note-text"></p>
+                </div>
+                <div class="inspection-guideline-box">
+                  <span class="guide-title">📋 Catatan Penindakan DJBC:</span>
+                  <p id="detail-inspection-note" class="guide-text"></p>
+                </div>
+              </div>
+
+              <!-- TAB 2: FOTO REAL -->
+              <div class="tab-pane" id="tab-photos">
+                <div class="photos-tab-header">
+                  <span class="photos-tab-title">Barang Bukti Sitaan & Citra Forensik:</span>
+                  <span class="photos-tab-hint">Klik gambar untuk melihat resolusi penuh & zoom</span>
+                </div>
+                <div class="findings-thumbnails-grid" id="findings-thumbnails-grid"></div>
+              </div>
+
+              <!-- TAB 3: DETEKSI & SOP -->
+              <div class="tab-pane" id="tab-detection">
+                <div class="detection-two-columns">
+                  <div class="info-block-col block-warning" id="block-indicators">
+                    <div class="block-header">
+                      <span class="block-icon warning-icon">⚠️</span>
+                      <span class="block-title">Indikator Anomali Pemeriksaan</span>
+                    </div>
+                    <ul id="detail-indicators-list" class="block-list"></ul>
+                  </div>
+                  <div class="info-block-col block-procedure" id="block-detection">
+                    <div class="block-header">
+                      <span class="block-icon procedure-icon">📋</span>
+                      <span class="block-title">Standar Prosedur Pemeriksaan (SOP)</span>
+                    </div>
+                    <ul id="detail-detection-list" class="block-list"></ul>
+                  </div>
+                </div>
+              </div>
+
+              <!-- TAB 4: INDIKATOR RISIKO -->
+              <div class="tab-pane" id="tab-risk">
+                <div class="risk-meter-widget">
+                  <div class="risk-meter-header">
+                    <span class="risk-meter-title">Tingkat Bahaya Penyelundupan:</span>
+                    <span id="risk-score-val" class="risk-meter-score">TINGGI (85/100)</span>
+                  </div>
+                  <div class="risk-meter-bar-track">
+                    <div id="risk-meter-bar-fill" class="risk-meter-bar-fill" style="width: 85%;"></div>
+                  </div>
+                  <div class="risk-meter-scale">
+                    <span>Rendah (0)</span>
+                    <span>Sedang (50)</span>
+                    <span>Tinggi (75)</span>
+                    <span>Kritis (100)</span>
+                  </div>
+                </div>
+                <div class="hazard-alert-box hazard-medical">
+                  <div class="hazard-icon">🚨</div>
+                  <div class="hazard-content">
+                    <span class="hazard-title">Bahaya Kargo / Bahan Kimia:</span>
+                    <p id="detail-medical-risk" class="hazard-desc"></p>
+                  </div>
+                </div>
+                <div class="hazard-alert-box hazard-officer">
+                  <div class="hazard-icon">🛡️</div>
+                  <div class="hazard-content">
+                    <span class="hazard-title">Protokol Keselamatan Petugas:</span>
+                    <p class="hazard-desc">
+                      Gunakan APD lengkap, masker medis, dan sarung tangan nitril saat memeriksa kemasan berpori atau cairan kimia.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Bottom Carousel Pagination Bar -->
+            <div class="card-pagination-bar" id="card-pagination-bar">
+              <button id="btn-page-prev" class="card-page-nav-btn" title="Halaman Tab Sebelumnya" disabled>&lt;</button>
+
+              <div class="card-page-pills" id="card-page-pills">
+                <button class="page-pill active" data-page="0" title="1. Modus Operandi"></button>
+                <button class="page-pill" data-page="1" title="2. Foto Gambar Real"></button>
+                <button class="page-pill" data-page="2" title="3. Ciri Pelaku & SOP"></button>
+                <button class="page-pill" data-page="3" title="4. Indikator Risiko"></button>
+              </div>
+
+              <button id="btn-page-next" class="card-page-nav-btn" title="Halaman Tab Selanjutnya">&gt;</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- High-Res Forensic Photo Lightbox Modal Popup -->
+        <div id="m3-image-popup-modal" class="m4a-image-popup-overlay hidden" role="dialog" aria-modal="true">
+          <div class="m4a-image-popup-dialog">
+            <div class="m4a-image-popup-header">
+              <span id="m3-popup-img-title" class="m4a-img-popup-title">Foto Barang Bukti</span>
+              <button id="btn-close-m3-popup" class="m4a-img-popup-close-btn" aria-label="Tutup Foto" title="Tutup">✕</button>
+            </div>
+            <div class="m4a-image-popup-body">
+              <img id="m3-popup-img-el" src="" alt="Bukti Forensik Penuh" class="m4a-img-popup-main" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Help Guide Overlay Modal -->
+        <div id="help-overlay" class="modal-overlay hidden" role="dialog" aria-modal="true">
+          <div class="modal-card help-modal-card">
+            <div class="modal-header">
+              <h3>Panduan Pemeriksaan Barang Kiriman (Modul 03)</h3>
+              <button id="btn-close-help" class="modal-close-btn" aria-label="Tutup Panduan">✕</button>
+            </div>
+            <div class="modal-body help-content">
+              <div class="help-item">
+                <strong>1. Switcher Mode Tampilan:</strong> Gunakan tombol <strong>📦 Tampak Irisan</strong> dan <strong>📮 Tampak Normal</strong> pada dock bawah untuk berpindah antara tampilan irisan paket internal atau kemasan luar pos/PJT.
+              </div>
+              <div class="help-item">
+                <strong>2. Titik Hotspot Interaktif:</strong> Klik callout bernomor pada paket untuk menginspeksi modus penyembunyian, ciri-ciri pelaku, dan bukti sitaan resmi.
+              </div>
+              <div class="help-item">
+                <strong>3. Kontrol Zoom Interaktif:</strong> Gunakan tombol <strong>-</strong>, <strong>+</strong>, atau <strong>↺ (Reset)</strong> pada dock kontrol bawah untuk memperbesar atau mengembalikan ukuran tampilan paket.
+              </div>
+              <div class="help-item">
+                <strong>4. Format Tabbed Card:</strong> Pelajari rincian lengkap melalui 4 tab: <em>Modus Operandi</em>, <em>Foto Real</em>, <em>Ciri Pelaku & SOP</em>, dan <em>Indikator Risiko</em>.
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button id="btn-help-ok" class="btn btn-primary">Mengerti & Mulai Simulasi</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    `;
+  }
+
+  initInteractiveViewer() {
+    this.renderHotspots();
+
+    // View Mode Toggle (Cutaway vs Normal)
+    const btnCutaway = this.container.querySelector('#btn-view-cutaway');
+    const btnNormal = this.container.querySelector('#btn-view-normal');
+    const centralImg = this.container.querySelector('#m3-central-image');
+    const azimuthText = this.container.querySelector('#hud-azimuth-text');
+
+    if (btnCutaway && btnNormal && centralImg) {
+      btnCutaway.addEventListener('click', () => {
+        btnCutaway.classList.add('active');
+        btnNormal.classList.remove('active');
+        this.currentViewMode = 'cutaway';
+        centralImg.src = 'assets/images/central/m3_parcel_cutaway.png';
+        if (azimuthText) azimuthText.textContent = 'MODE AKTIF: CUTAWAY INSPECTION & X-RAY DUAL-VIEW';
+        this.renderHotspots();
+      });
+
+      btnNormal.addEventListener('click', () => {
+        btnNormal.classList.add('active');
+        btnCutaway.classList.remove('active');
+        this.currentViewMode = 'normal';
+        centralImg.src = 'assets/images/central/m3_parcel_normal.png';
+        if (azimuthText) azimuthText.textContent = 'MODE AKTIF: INSPEKSI FISIK KEMASAN LUAR POS/PJT';
+        this.renderHotspots();
+      });
+    }
+
+    // Zoom Controls
+    const btnZoomIn = this.container.querySelector('#btn-zoom-in');
+    const btnZoomOut = this.container.querySelector('#btn-zoom-out');
+    const btnZoomReset = this.container.querySelector('#btn-zoom-reset');
+
+    btnZoomIn?.addEventListener('click', () => this.applyZoom(this.currentZoom + 0.15));
+    btnZoomOut?.addEventListener('click', () => this.applyZoom(this.currentZoom - 0.15));
+    btnZoomReset?.addEventListener('click', () => this.applyZoom(1.0));
+  }
+
+  applyZoom(val) {
+    this.currentZoom = Math.min(2.0, Math.max(0.7, parseFloat(val.toFixed(2))));
+    const container = this.container.querySelector('#m3-image-container');
+    const zoomText = this.container.querySelector('#zoom-level-text');
+
+    if (container) {
+      container.style.transform = `scale(${this.currentZoom})`;
+      container.style.transformOrigin = 'center center';
+    }
+
+    const counterScale = (1 / this.currentZoom).toFixed(4);
+    if (container) {
+      container.style.setProperty('--body-zoom', this.currentZoom);
+      container.style.setProperty('--tooltip-counter-scale', counterScale);
+    }
+    document.documentElement.style.setProperty('--body-zoom', this.currentZoom);
+    document.documentElement.style.setProperty('--tooltip-counter-scale', counterScale);
+
+    if (zoomText) {
+      zoomText.textContent = `${Math.round(this.currentZoom * 100)}%`;
+    }
+  }
+
+  renderHotspots() {
+    const layer = this.container.querySelector('#m3-hotspots-layer');
+    if (!layer || !this.moduleData) return;
+    layer.innerHTML = '';
+
+    const hotspots = this.moduleData.hotspots || [];
+    const filtered = hotspots.filter(h => {
+      const matchMode = !h.view || h.view === 'all' || h.view === this.currentViewMode;
+      return matchMode;
+    });
+
+    filtered.forEach((hs, idx) => {
+      const pin = document.createElement('button');
+      pin.className = `body-hotspot-pin ${hs.badgeType || 'warning'}`;
+      pin.style.left = `${hs.position.x}%`;
+      pin.style.top = `${hs.position.y}%`;
+      pin.setAttribute('data-id', hs.id);
+      pin.setAttribute('aria-label', hs.label);
+
+      const isVisited = this.visitedHotspots.has(hs.id);
+      if (isVisited) pin.classList.add('visited');
+
+      pin.innerHTML = `
+        <div class="pin-marker-pulse"></div>
+        <div class="pin-marker-ring"></div>
+        <div class="pin-marker-dot font-code-tech">${idx + 1}</div>
+        <div class="pin-tooltip font-tech">
+          <span class="pin-tooltip-num">#${idx + 1}</span>
+          <span class="pin-tooltip-name">${hs.label}</span>
+        </div>
+      `;
+
+      pin.addEventListener('click', (e) => {
+        e.stopPropagation();
+        this.openHotspotDetail(hs.id);
+      });
+
+      layer.appendChild(pin);
+    });
+  }
+
+  openHotspotDetail(hotspotId) {
+    const hotspots = this.moduleData?.hotspots || [];
+    const hs = hotspots.find(h => h.id === hotspotId);
+    if (!hs) return;
+
+    this.currentHotspotId = hotspotId;
+    this.isModalOpen = true;
+    this.visitedHotspots.add(hotspotId);
+
+    const overlay = this.container.querySelector('#hotspot-card-modal-overlay');
+    if (overlay) {
+      overlay.classList.remove('hidden');
+      overlay.style.display = 'flex';
+    }
+
+    this.renderModalContent(hs);
+    this.switchCardPage(0);
+    this.renderHotspots();
+
+    this.updateProgressUI();
+    xapi.trackHotspotClick(this.moduleData.moduleId || 'modul3', hs.id, hs.label, hs.category || 'all');
+  }
+
+  renderModalContent(hs) {
+    const hotspots = (this.moduleData?.hotspots || []).filter(h => !h.view || h.view === this.currentViewMode);
+    const totalCount = hotspots.length || (this.moduleData?.hotspots || []).length;
+    const currentIdx = hotspots.findIndex(h => h.id === hs.id);
+
+    const tagBadge = this.container.querySelector('#detail-tag-badge');
+    const title = this.container.querySelector('#detail-title');
+    const counter = this.container.querySelector('#card-nav-counter');
+
+    if (tagBadge) tagBadge.textContent = (hs.badge || `MODUS #${currentIdx + 1}`).toUpperCase();
+    if (title) title.textContent = hs.label;
+    if (counter) counter.textContent = `${currentIdx >= 0 ? currentIdx + 1 : 1} / ${totalCount}`;
+
+    // TAB 1: Modus Operandi
+    const mainImg = this.container.querySelector('#detail-main-img');
+    const desc = this.container.querySelector('#detail-desc');
+    const paramMethod = this.container.querySelector('#detail-concealment-method');
+    const paramLocation = this.container.querySelector('#detail-body-location');
+    const paramDrug = this.container.querySelector('#detail-drug-types');
+    const paramPackaging = this.container.querySelector('#detail-packaging');
+    const narrative = this.container.querySelector('#detail-modus-narrative');
+    const note = this.container.querySelector('#detail-inspection-note');
+
+    if (mainImg) {
+      mainImg.src = hs.mainImage || 'assets/mockup/image_placeholder.svg';
+      mainImg.alt = hs.label;
+    }
+    if (desc) desc.textContent = hs.description || '';
+    if (paramMethod) paramMethod.textContent = hs.badge || 'Kargo Pos Khusus';
+    if (paramLocation) paramLocation.textContent = hs.category ? hs.category.replace('_', ' ').toUpperCase() : 'PAKET KIRIMAN';
+    if (paramDrug) paramDrug.textContent = hs.drugTypes || 'Metamfetamin / Sabu / Ekstasi';
+    if (paramPackaging) paramPackaging.textContent = hs.packaging || 'Kardus, Botol, Kaleng, Mainan';
+    if (narrative) narrative.textContent = hs.description || 'Pemeriksaan fisik menunjukkan kompartemen tersembunyi.';
+    if (note) note.textContent = hs.inspectionActions ? hs.inspectionActions.join(' ') : 'Lakukan penindakan dengan teliti dan dokumentasikan bukti forensik.';
+
+    // TAB 2: Foto Real
+    const findingsGrid = this.container.querySelector('#findings-thumbnails-grid');
+    if (findingsGrid) {
+      const photos = hs.galleryImages || (hs.mainImage ? [hs.mainImage] : []);
+      findingsGrid.innerHTML = photos.map((imgSrc, pIdx) => `
+        <div class="finding-thumb-card" data-idx="${pIdx}" title="Klik untuk memperbesar bukti sitaan">
+          <div class="finding-thumb-wrapper">
+            <img src="${imgSrc}" alt="Bukti ${pIdx + 1}" class="finding-thumb-img" />
+          </div>
+          <span class="finding-thumb-caption">Barang Bukti #${pIdx + 1}</span>
+        </div>
+      `).join('');
+
+      findingsGrid.querySelectorAll('.finding-thumb-card').forEach((card, idx) => {
+        card.addEventListener('click', () => {
+          this.openImagePopup(photos[idx], `${hs.label} (Foto #${idx + 1})`);
+        });
+      });
+    }
+
+    // TAB 3: Deteksi & SOP
+    const indicatorsList = this.container.querySelector('#detail-indicators-list');
+    const detectionList = this.container.querySelector('#detail-detection-list');
+
+    if (indicatorsList) {
+      indicatorsList.innerHTML = (hs.riskIndicators || [])
+        .map(ind => `<li><span class="bullet-dot">⚠️</span><span>${ind}</span></li>`)
+        .join('');
+    }
+
+    if (detectionList) {
+      detectionList.innerHTML = (hs.inspectionActions || [])
+        .map(act => `<li><span class="bullet-dot">✔</span><span>${act}</span></li>`)
+        .join('');
+    }
+
+    // TAB 4: Indikator Risiko
+    const riskScoreVal = this.container.querySelector('#risk-score-val');
+    const riskBarFill = this.container.querySelector('#risk-meter-bar-fill');
+    const medRisk = this.container.querySelector('#detail-medical-risk');
+
+    const score = hs.riskScore || 85;
+    const level = (hs.badgeType || 'HIGH').toUpperCase();
+    if (riskScoreVal) riskScoreVal.textContent = `${level} (${score}/100)`;
+    if (riskBarFill) riskBarFill.style.width = `${score}%`;
+    if (medRisk) medRisk.textContent = 'BAHAYA KARGO: Waspadai zat kimia cair mudah menguap atau racun kontak saat membuka bungkusan barang kiriman.';
+  }
+
+  initModals() {
+    // Help Modal
+    const btnHelp = this.container.querySelector('#btn-help-modal');
+    const helpOverlay = this.container.querySelector('#help-overlay');
+    const btnCloseHelp = this.container.querySelector('#btn-close-help');
+    const btnOkHelp = this.container.querySelector('#btn-help-ok');
+
+    btnHelp?.addEventListener('click', () => helpOverlay?.classList.remove('hidden'));
+    btnCloseHelp?.addEventListener('click', () => helpOverlay?.classList.add('hidden'));
+    btnOkHelp?.addEventListener('click', () => helpOverlay?.classList.add('hidden'));
+
+    // Hotspot Callout Modal
+    const overlay = this.container.querySelector('#hotspot-card-modal-overlay');
+    const closeBtn = this.container.querySelector('#btn-close-detail-modal');
+    const prevBtn = this.container.querySelector('#btn-prev-hotspot');
+    const nextBtn = this.container.querySelector('#btn-next-hotspot');
+    const btnPagePrev = this.container.querySelector('#btn-page-prev');
+    const btnPageNext = this.container.querySelector('#btn-page-next');
+
+    if (closeBtn && overlay) {
+      closeBtn.addEventListener('click', () => {
+        overlay.classList.add('hidden');
+        overlay.style.display = 'none';
+        this.isModalOpen = false;
+        this.renderHotspots();
+      });
+    }
+
+    if (overlay) {
+      overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) {
+          overlay.classList.add('hidden');
+          overlay.style.display = 'none';
+          this.isModalOpen = false;
+          this.renderHotspots();
+        }
+      });
+    }
+
+    if (prevBtn) {
+      prevBtn.addEventListener('click', () => {
+        const hotspots = (this.moduleData?.hotspots || []).filter(h => !h.view || h.view === this.currentViewMode);
+        const currentIdx = hotspots.findIndex(h => h.id === this.currentHotspotId);
+        const prevIdx = (currentIdx - 1 + hotspots.length) % hotspots.length;
+        if (hotspots[prevIdx]) this.openHotspotDetail(hotspots[prevIdx].id);
+      });
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener('click', () => {
+        const hotspots = (this.moduleData?.hotspots || []).filter(h => !h.view || h.view === this.currentViewMode);
+        const currentIdx = hotspots.findIndex(h => h.id === this.currentHotspotId);
+        const nextIdx = (currentIdx + 1) % hotspots.length;
+        if (hotspots[nextIdx]) this.openHotspotDetail(hotspots[nextIdx].id);
+      });
+    }
+
+    // Tabs
+    const tabBtns = Array.from(this.container.querySelectorAll('.card-tabs-nav .tab-btn'));
+    tabBtns.forEach((btn, idx) => {
+      btn.addEventListener('click', () => {
+        this.switchCardPage(idx);
+      });
+    });
+
+    const pagePills = Array.from(this.container.querySelectorAll('.card-page-pills .page-pill'));
+
+    btnPagePrev?.addEventListener('click', () => {
+      if (this.currentCardPageIndex > 0) {
+        this.switchCardPage(this.currentCardPageIndex - 1);
+      }
+    });
+
+    btnPageNext?.addEventListener('click', () => {
+      if (this.currentCardPageIndex < this.cardPages.length - 1) {
+        this.switchCardPage(this.currentCardPageIndex + 1);
+      } else {
+        const hotspots = (this.moduleData?.hotspots || []).filter(h => !h.view || h.view === this.currentViewMode);
+        const idx = hotspots.findIndex(h => h.id === this.currentHotspotId);
+        const nextIdx = (idx + 1) % hotspots.length;
+        if (hotspots[nextIdx]) this.openHotspotDetail(hotspots[nextIdx].id);
+      }
+    });
+
+    pagePills.forEach((pill, idx) => {
+      pill.addEventListener('click', () => {
+        this.switchCardPage(idx);
+      });
+    });
+
+    // Lightbox image click on Tab 1
+    const mainImgBox = this.container.querySelector('.detail-illustration-box');
+    if (mainImgBox) {
+      mainImgBox.addEventListener('click', () => {
+        const hs = (this.moduleData?.hotspots || []).find(h => h.id === this.currentHotspotId);
+        if (hs) {
+          this.openImagePopup(hs.mainImage || 'assets/mockup/image_placeholder.svg', hs.label);
+        }
+      });
+    }
+
+    // Popup Lightbox Close listeners
+    const popupOverlay = this.container.querySelector('#m3-image-popup-modal');
+    const btnClosePopup = this.container.querySelector('#btn-close-m3-popup');
+
+    if (btnClosePopup) {
+      btnClosePopup.addEventListener('click', () => this.closeImagePopup());
+    }
+    if (popupOverlay) {
+      popupOverlay.addEventListener('click', (e) => {
+        if (e.target === popupOverlay) this.closeImagePopup();
+      });
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && popupOverlay && !popupOverlay.classList.contains('hidden')) {
+        this.closeImagePopup();
+      }
+    });
+
+    this.initCardDraggable();
+  }
+
+  openImagePopup(src, title) {
+    const popup = this.container.querySelector('#m3-image-popup-modal');
+    const imgEl = this.container.querySelector('#m3-popup-img-el');
+    const titleEl = this.container.querySelector('#m3-popup-img-title');
+    if (popup && imgEl) {
+      imgEl.src = src;
+      if (titleEl) titleEl.textContent = title || 'Foto Real Forensik';
+      popup.classList.remove('hidden');
+    }
+  }
+
+  closeImagePopup() {
+    const popup = this.container.querySelector('#m3-image-popup-modal');
+    if (popup) {
+      popup.classList.add('hidden');
+    }
+  }
+
+  switchCardPage(pageIndex) {
+    if (pageIndex < 0) pageIndex = 0;
+    if (pageIndex >= this.cardPages.length) pageIndex = this.cardPages.length - 1;
+    this.currentCardPageIndex = pageIndex;
+    const page = this.cardPages[pageIndex];
+    this.currentActiveTab = page.id;
+
+    this.container.querySelectorAll('.card-tabs-nav .tab-btn').forEach((b, idx) => {
+      if (idx === pageIndex) b.classList.add('active');
+      else b.classList.remove('active');
+    });
+
+    this.container.querySelectorAll('.tab-content-container .tab-pane').forEach(p => {
+      if (p.id === page.id) p.classList.add('active');
+      else p.classList.remove('active');
+    });
+
+    this.container.querySelectorAll('.card-page-pills .page-pill').forEach((pill, idx) => {
+      if (idx === pageIndex) pill.classList.add('active');
+      else pill.classList.remove('active');
+    });
+
+    const btnPagePrev = this.container.querySelector('#btn-page-prev');
+    if (btnPagePrev) {
+      btnPagePrev.disabled = (pageIndex === 0);
+    }
+
+    const content = this.container.querySelector('#tab-content-container');
+    if (content) content.scrollTop = 0;
+  }
+
+  initCardDraggable() {
+    const card = this.container.querySelector('#hotspot-modal-card');
+    const header = this.container.querySelector('.tabbed-modal-header');
+    if (!card || !header) return;
+
+    let isDragging = false;
+    let startMouseX = 0, startMouseY = 0;
+    let initialTransformX = 0, initialTransformY = 0;
+
+    const onMouseDown = (e) => {
+      if (e.target.closest('button') || e.target.closest('.card-quick-nav')) return;
+      isDragging = true;
+      startMouseX = e.clientX;
+      startMouseY = e.clientY;
+
+      const transform = window.getComputedStyle(card).transform;
+      if (transform && transform !== 'none') {
+        const matrix = new DOMMatrixReadOnly(transform);
+        initialTransformX = matrix.m41;
+        initialTransformY = matrix.m42;
+      } else {
+        initialTransformX = 0;
+        initialTransformY = 0;
+      }
+
+      header.style.cursor = 'grabbing';
+      document.addEventListener('mousemove', onMouseMove);
+      document.addEventListener('mouseup', onMouseUp);
+      e.preventDefault();
+    };
+
+    const onMouseMove = (e) => {
+      if (!isDragging) return;
+      const dx = e.clientX - startMouseX;
+      const dy = e.clientY - startMouseY;
+      card.style.transform = `translate(${initialTransformX + dx}px, ${initialTransformY + dy}px)`;
+    };
+
+    const onMouseUp = () => {
+      if (!isDragging) return;
+      isDragging = false;
+      header.style.cursor = 'grab';
+      document.removeEventListener('mousemove', onMouseMove);
+      document.removeEventListener('mouseup', onMouseUp);
+    };
+
+    header.addEventListener('mousedown', onMouseDown);
+  }
+
+  updateProgressUI() {
+    const total = this.moduleData?.hotspots?.length || 8;
+    const progress = Math.min(100, Math.round((this.visitedHotspots.size / total) * 100));
+    courseProgress.setModuleProgress('modul3', progress);
+
+    this.currentProgressPct = progress;
+    window.currentCourseProgressPct = progress;
+
+    if (window.trackCourseProgress) {
+      window.trackCourseProgress(progress);
+    }
   }
 }
+
