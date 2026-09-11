@@ -1,137 +1,417 @@
 {
   "moduleId": "modul4b",
-  "moduleTitle": "Modul 4B: Penyelundupan Melalui Sarana Pengangkut Laut (Cargo Ship & Container)",
-  "description": "Inspeksi sarana laut: ABK (kabin & bawaan ABK), Kompartemen (mess room, kabin kapten), Tangki (air balas, bahan bakar), Struktur Kapal (palka kargo, dinding kontainer reefer), & Muatan (curah, kontainer).",
-  "supportsRotation": true,
+  "moduleTitle": "Modul 4B: Pemeriksaan Sarana Pengangkut Laut (Cargo Ship & Container)",
+  "description": "Interactive Inspection Map Sarana Pengangkut Laut: Peta 10 Zona Pemeriksaan (Inspection Zones) berbasis risiko untuk mengenali anomali, verifikasi fisik vs dokumen, dan penindakan penyelundupan narkotika sesuai SOP DJBC.",
+  "supportsRotation": false,
   "centralImages": {
     "cutaway": {
-      "url": "assets/images/central/m4b_cargo_ship_cutaway.png",
-      "label": "Tampak Irisan Lambung Kapal Kargo (Cargo Vessel Cutaway)"
+      "url": "assets/images/central/m4b_ship_cutaway.jpeg",
+      "label": "Tampak Irisan Lambung Kapal Kargo (Cargo Vessel Cutaway Inspection Map)"
     }
   },
   "angleImages": {
-    "front": "assets/images/central/m4b_cargo_ship_cutaway.png",
-    "side": "assets/images/central/m4b_cargo_ship_cutaway.png",
-    "back": "assets/images/central/m4b_cargo_ship_cutaway.png",
-    "side2": "assets/images/central/m4b_cargo_ship_cutaway.png"
+    "front": "assets/images/central/m4b_ship_cutaway.jpeg",
+    "side": "assets/images/central/m4b_ship_cutaway.jpeg",
+    "back": "assets/images/central/m4b_ship_cutaway.jpeg",
+    "side2": "assets/images/central/m4b_ship_cutaway.jpeg"
   },
   "filterCategories": [
-    { "id": "all", "label": "Semua Titik" },
-    { "id": "abk_kabin", "label": "1. ABK & Kabin Kapten" },
-    { "id": "tangki", "label": "2. Tangki Balas & Bahan Bakar" },
-    { "id": "palka_kontainer", "label": "3. Palka & Kontainer Reefer" },
-    { "id": "muatan", "label": "4. Muatan Curah / Kargo" }
+    { "id": "all", "label": "Semua Zona (01–10)" },
+    { "id": "cargo", "label": "Palka & Muatan" },
+    { "id": "technical", "label": "Mesin & Teknis" },
+    { "id": "superstructure", "label": "Akomodasi & Geladak" },
+    { "id": "safety_access", "label": "Keselamatan & Akses" }
   ],
   "hotspots": [
     {
-      "id": "hs-m4b-abk",
-      "category": "abk_kabin",
+      "id": "zone-01",
+      "code": "01",
+      "category": "cargo",
       "view": "cutaway",
       "angleMin": 0,
       "angleMax": 360,
-      "position": { "x": 18.0, "y": 42.0 },
-      "label": "ABK: Barang Bawaan & Ruang Istirahat ABK",
-      "badge": "ABK SHIP",
-      "badgeType": "warning",
-      "mainImage": "assets/images/hotspots/hs_door_panel_compartment.png",
-      "galleryImages": ["assets/images/hotspots/hs_door_panel_compartment.png"],
-      "description": "ABK menyimpan paket sabu di selipan kasur atau plafon ruang istirahat (crew cabin).",
+      "position": { "x": 31.5, "y": 53.0 },
+      "label": "Zone 01: Cargo Area (Palka & Ruang Muat Utama)",
+      "badge": "ZONE 01",
+      "badgeType": "danger",
+      "mainImage": "assets/images/central/m4b_ship_cutaway.jpeg",
+      "galleryImages": [
+        "assets/images/central/m4b_ship_cutaway.jpeg",
+        "assets/images/hotspots/hs_door_panel_compartment.png"
+      ],
+      "description": "Area palka terbuka dan ruang muat utama kapal kargo untuk pengangkutan barang curah, kargo umum, maupun peti kemas internal.",
+      "concealmentMethod": "Penyembunyian di sela-sela muatan curah, dinding ganda palka (false bulkhead), atau kompartemen buatan pada bilah penutup palka (hatch cover).",
+      "bodyLocation": "Palka Kargo Depan (Forward Cargo Hold) & Struktur Penopang Palka",
+      "drugTypes": "Kokain (Bulk), Metamfetamin (Sabu), & Ganja Kering",
+      "packaging": "Bungkusan kedap air berlapis karung terpal anti-bau yang ditimbun di bawah komoditas kargo legal",
+      "modusNarrative": "Sindikat memanfaatkan volume kargo yang sangat masif untuk menyamarkan bungkusan narkotika di antara ribuan ton muatan legal. Mereka sering memodifikasi sekat pemisah palka atau menyembunyikan paket di struktur balok lantai palka sebelum muatan curah ditimbun.",
+      "inspectionNote": "Terapkan prinsip Document-to-Physical Consistency: bandingkan cargo manifest & stowage plan dengan fisik muatan. Periksa integritas segel palka dan bekas pengelasan baru pada dinding sekat.",
+      "riskScore": 92,
       "riskIndicators": [
-        "ABK menunjukkan gestur mencurigakan saat kapal berlabuh.",
-        "Langit-langit mess room terlihat bekas dibuka."
+        "Ketidaksesuaian tonase muatan antara manifest resmi dan hasil draf survei kapal.",
+        "Terdapat aroma cat baru atau pelarut kimia di area sekat dinding palka.",
+        "Bekas goresan dan pengelasan segar pada rangka pelindung palka (cargo hold frame).",
+        "Respons agresif dari anjing pelacak K-9 Bea Cukai saat mengendus ventilasi palka."
       ],
       "inspectionActions": [
-        "Gunakan K-9 Pelacak Bea Cukai di seluruh ruang kabin ABK.",
-        "Geledah tas & lemari pakaian ABK."
-      ]
+        "Verifikasi RKSP, manifest muatan, dan stowage plan sebelum pemeriksaan fisik palka.",
+        "Pemeriksaan visual menyeluruh terhadap balok penguat dan dinding sekat palka.",
+        "Ambil sampel fisik muatan curah secara representatif di titik-titik anomali.",
+        "Gunakan boroskop pada celah sekat dinding ganda palka."
+      ],
+      "medicalHazard": "Risiko kekurangan oksigen (asfiksia) dan keracunan gas berbahaya akibat dekomposisi muatan curah (batu bara / biji-bijian). Wajib tes atmosfer sebelum masuk.",
+      "officerSafety": "Wajib mengenakan helm keselamatan (hard hat), safety boots tahan benturan, masker respirator gas, dan gas detector 4-gas aktif."
     },
     {
-      "id": "hs-m4b-kompartemen",
-      "category": "abk_kabin",
+      "id": "zone-02",
+      "code": "02",
+      "category": "cargo",
       "view": "cutaway",
       "angleMin": 0,
       "angleMax": 360,
-      "position": { "x": 22.0, "y": 32.0 },
-      "label": "Kompartemen: Kabin Kapten & Mess Room",
-      "badge": "KABIN KAPTEN",
+      "position": { "x": 45.0, "y": 42.0 },
+      "label": "Zone 02: Container Area (Geladak Peti Kemas & Reefer)",
+      "badge": "ZONE 02",
+      "badgeType": "danger",
+      "mainImage": "assets/images/central/m4b_ship_cutaway.jpeg",
+      "galleryImages": [
+        "assets/images/central/m4b_ship_cutaway.jpeg",
+        "assets/images/hotspots/hs_door_panel_compartment.png"
+      ],
+      "description": "Area geladak terbuka tempat penumpukan peti kemas (container stack) dan unit kontainer pendingin khusus (reefer container).",
+      "concealmentMethod": "Penyisipan paket pada dinding palsu insulasi reefer unit, struktur cross members lantai kontainer, atau manipulasi bolt seal (metode Rip-On/Rip-Off).",
+      "bodyLocation": "Mid-Deck Container Stack & Dinding Insulasi Reefer Unit",
+      "drugTypes": "Kokain Murni, Sabu Kristal, Heroin, & Ekstasi",
+      "packaging": "Paket vacuum-sealed berlapis lakban tebal dan foil anti-xray di dalam kompartemen kompresor pendingin",
+      "modusNarrative": "Metode Rip-On/Rip-Off dilakukan dengan membobol kontainer legal di pelabuhan muat tanpa sepengetahuan pemilik kargo, lalu mengganti segel pabean dengan segel tiruan. Pada kontainer pendingin (reefer), kompartemen motor pendingin dibongkar untuk menyimpan ratusan kilogram narkotika.",
+      "inspectionNote": "Periksa nomor kontainer dan nomor segel bolt seal secara teliti terhadap Container Load Plan. Lakukan pemindaian Hi-Tech Container Scanner Gamma-Ray untuk mendeteksi anomali kerapatan massa pada insulasi.",
+      "riskScore": 95,
+      "riskIndicators": [
+        "Nomor segel bolt seal memiliki guratan fisik, perbedaan font, atau tidak cocok dengan dokumen manifest.",
+        "Hasil pemindaian kontainer (Container Scanner) memperlihatkan anomali kerapatan (densitas) pada dinding depan reefer.",
+        "Baut penutup kompartemen kompresor pendingin menunjukkan bekas dibuka atau diganti.",
+        "Terdapat perbedaan berat kontainer saat ditimbang di weighbridge pelabuhan."
+      ],
+      "inspectionActions": [
+        "Pencocokan nomor seri kontainer dan segel kontainer dengan dokumen resmi impor/ekspor.",
+        "Analisis citra pemindai kontainer x-ray/gamma-ray dengan fokus pada area kompresor dan insulasi.",
+        "Pemeriksaan fisik langsung menggunakan boroskop pada celah panel insulasi reefer.",
+        "Uji keaslian segel pabean menggunakan tes putar dan uji magnetik."
+      ],
+      "medicalHazard": "Bahaya sengatan listrik tegangan tinggi dari kabel unit reefer dan risiko kebocoran gas pendingin di celah kontainer.",
+      "officerSafety: ": "Gunakan sarung tangan isolasi elektrik, safety shoes pelindung benturan, kacamata pelindung, dan harness saat memeriksa kontainer tingkat atas."
+    },
+    {
+      "id": "zone-03",
+      "code": "03",
+      "category": "technical",
+      "view": "cutaway",
+      "angleMin": 0,
+      "angleMax": 360,
+      "position": { "x": 76.5, "y": 48.5 },
+      "label": "Zone 03: Engine Room (Kamar Mesin Utama & Poros Propulsi)",
+      "badge": "ZONE 03",
+      "badgeType": "danger",
+      "mainImage": "assets/images/central/m4b_ship_cutaway.jpeg",
+      "galleryImages": [
+        "assets/images/central/m4b_ship_cutaway.jpeg",
+        "assets/images/hotspots/hs_door_panel_compartment.png"
+      ],
+      "description": "Kompleks ruang mesin utama kapal, generator bantu, terowongan poros baling-baling (shaft tunnel), dan sistem perpipaan sea chest.",
+      "concealmentMethod": "Penyembunyian di dalam saringan sea chest bawah air, celah void space di bawah pelat lantai mesin (floor plates), atau saluran pendingin darurat.",
+      "bodyLocation": "Aft Engine Room, Shaft Tunnel, & Sea Chest Strainer",
+      "drugTypes": "Metamfetamin, Kokain, Ketamin, & Heroin",
+      "packaging": "Silinder baja kedap air atau tabung PVC bermagnet neodymium daya hisap tinggi yang ditempelkan pada rangka baja lambung",
+      "modusNarrative": "Kamar mesin memiliki tata letak perpipaan dan bilik yang sangat rumit. Sindikat yang berkolusi dengan oknum perwira mesin dapat menyembunyikan paket di celah yang tidak tersentuh pemeriksaan rutin, seperti di sela-sela pipa uap atau rongga filter pendingin air laut.",
+      "inspectionNote": "Kamar mesin adalah area berisiko tinggi. Jangan melakukan inspeksi sendirian tanpa didampingi Chief Engineer atau perwira jaga. Periksa area di bawah pelat lantai mesin dan pipa saluran pendingin.",
+      "riskScore": 88,
+      "riskIndicators": [
+        "Pipa atau katup (valves) cadangan tampak sering diputar tanpa ada catatan perbaikan di logbook mesin.",
+        "Baut pelat lantai kamar mesin (engine room floor plates) longgar atau baru saja dilapisi minyak pelumas baru.",
+        "Kabel listrik atau pipa jumper tambahan yang tidak ada dalam diagram rancang resmi kapal.",
+        "Gelisah berlebihan dari petugas kamar mesin saat pemeriksa mendekati area poros propulsi."
+      ],
+      "inspectionActions": [
+        "Koordinasi resmi dengan nakhoda dan Kepala Kamar Mesin (Chief Engineer) sebelum memasuki area.",
+        "Periksa buku harian mesin (engine logbook) untuk mencocokkan riwayat pemeliharaan sistem pipa.",
+        "Pemeriksaan fisik pelat lantai dan rongga dasar kamar mesin dengan senter explosion-proof.",
+        "Gunakan cermin inspeksi teleskopik dan borescope pada celah sempit di belakang blok mesin utama."
+      ],
+      "medicalHazard": "Suhu ruangan sangat tinggi (heat stress), kebisingan ekstrem (>90 dB), permukaan licin oli, dan bagian mesin berputar tanpa pelindung.",
+      "officerSafety": "Wajib memakai pelindung telinga (earmuff), baju wearpack katun tebal tahan panas, sarung tangan mekanik, safety shoes anti-slip, dan senter anti-ledakan."
+    },
+    {
+      "id": "zone-04",
+      "code": "04",
+      "category": "technical",
+      "view": "cutaway",
+      "angleMin": 0,
+      "angleMax": 360,
+      "position": { "x": 49.0, "y": 68.0 },
+      "label": "Zone 04: Technical & Utility Spaces (Ruang Utilitas & Pompa)",
+      "badge": "ZONE 04",
+      "badgeType": "warning",
+      "mainImage": "assets/images/central/m4b_ship_cutaway.jpeg",
+      "galleryImages": [
+        "assets/images/central/m4b_ship_cutaway.jpeg",
+        "assets/images/hotspots/hs_door_panel_compartment.png"
+      ],
+      "description": "Ruang teknis perantara, bilik panel listrik utama (switchboard room), ruang pompa balas, dan bengkel teknis perbaikan kapal.",
+      "concealmentMethod": "Penyembunyian di balik panel switchboard berongga palsu, di dalam saluran ducting ventilasi, atau di dalam casing mesin las/bengkel.",
+      "bodyLocation": "Mid Lower Auxiliary Machinery Room & Electrical Switchboard Compartment",
+      "drugTypes": "Sabu, Ekstasi, & Obat Keras Psikotropika",
+      "packaging": "Bungkusan foil tipis yang diselipkan di sela saluran kabel atau kotak perkakas cadangan",
+      "modusNarrative": "Ruang teknis sering kali tidak dicurigai karena dipenuhi oleh kabel bertegangan tinggi dan komponen rumit. Sindikat memanfaatkan celah ruang hampa di belakang kabinet panel kontrol atau tangki oli kompresor yang sudah dinonaktifkan.",
+      "inspectionNote": "Prinsip utama: Kenali fungsi → pahami konfigurasi → cari penyimpangan. Jangan menyentuh busbar listrik terbuka. Gunakan kamera borescope nirkabel untuk memeriksa ruang di balik panel kabinet.",
+      "riskScore": 78,
+      "riskIndicators": [
+        "Pintu kabinet panel kontrol yang disegel secara tidak lazim atau menggunakan gembok non-standar kapal.",
+        "Kabel berpenampang aneh yang terputus di dalam ruang kosong tanpa menyambung ke beban listrik.",
+        "Alat perkakas pemotong logam portabel dan tabung las berada di ruang teknis tanpa surat izin kerja.",
+        "Suara rongga gema saat panel dinding baja diketuk."
+      ],
+      "inspectionActions": [
+        "Minta teknisi kapal mematikan arus panel (LOTO / Lockout-Tagout) sebelum membuka kabinet kelistrikan.",
+        "Pemeriksaan non-kontak menggunakan boroskop optik fleksibel melalui celah ventilasi panel.",
+        "Pemeriksaan rongga ducting pendingin menggunakan detektor logam sensitif.",
+        "Cocokkan modifikasi instalasi listrik dengan diagram sirkuit resmi kapal."
+      ],
+      "medicalHazard": "Bahaya sengatan listrik tegangan menengah/tinggi dan bahaya terhirup debu isolator serat kaca atau asbes.",
+      "officerSafety": "Sepatu berisolasi dielektrik (anti-electric shock), sarung tangan non-konduktif, kacamata safety, dan senter non-logam."
+    },
+    {
+      "id": "zone-05",
+      "code": "05",
+      "category": "technical",
+      "view": "cutaway",
+      "angleMin": 0,
+      "angleMax": 360,
+      "position": { "x": 40.0, "y": 75.0 },
+      "label": "Zone 05: Tank & Structural Spaces (Tangki Balas & Double Bottom)",
+      "badge": "ZONE 05",
+      "badgeType": "danger",
+      "mainImage": "assets/images/central/m4b_ship_cutaway.jpeg",
+      "galleryImages": [
+        "assets/images/central/m4b_ship_cutaway.jpeg",
+        "assets/images/hotspots/hs_door_panel_compartment.png"
+      ],
+      "description": "Struktur internal dasar ganda kapal (double bottom tanks), tangki bahan bakar (fuel oil tanks), dan ruang hampa struktural (cofferdam).",
+      "concealmentMethod": "Tabung kontainer baja kedap air (canister) yang diikat rantai atau dilas di dasar tangki air balas, atau rongga kompartemen rahasia di dalam cofferdam.",
+      "bodyLocation": "Forward & Midship Double Bottom Ballast Tanks & Cofferdam",
+      "drugTypes": "Kokain & Metamfetamin Murni (High-Purity)",
+      "packaging": "Tabung baja silinder berat dengan segel O-ring hidrolik ganda berlapis gemuk kedap air laut",
+      "modusNarrative": "Dasar kapal kargo memiliki ruang tangki balas yang terendam air ratusan ton. Pelaku memasukkan canister berisi narkotika melalui lubang manhole tangki saat kosong, lalu menguncinya dengan rantai baja sebelum tangki diisi air balas kembali.",
+      "inspectionNote": "PERINGATAN SANGAT KRITIS: Tangki dan ruang struktural adalah CONFINED SPACE dengan potensi atmosfer mematikan. DILARANG MASUK tanpa Surat Izin Kerja (Permit to Enter), pengukuran kadar gas (O2, H2S, LEL, CO), blower ventilasi aktif, dan tim penyelamat siaga di mulut manhole.",
+      "riskScore": 98,
+      "riskIndicators": [
+        "Baut pada penutup manhole tangki air balas tampak baru dibuka atau terdapat sisa gemuk (grease) segar di sekeliling paking.",
+        "Terdapat tali kawat baja tipis atau rantai yang terikat pada struktur penopang internal tangki.",
+        "Tingkat permukaan cairan pada indikator sounding tape tidak sesuai dengan kalkulasi stabilitas kapal.",
+        "Adanya bau bahan bakar atau zat kimia asing pada tangki yang seharusnya hanya berisi air laut balas."
+      ],
+      "inspectionActions": [
+        "Penerbitan Confined Space Entry Permit yang disetujui Nakhoda dan Petugas K3 Bea Cukai.",
+        "Uji atmosfer 4-gas (Oksigen minimal 19.5% - 23.5%, LEL 0%, H2S < 10 ppm, CO < 25 ppm).",
+        "Pemasangan blower ventilasi udara bersih terus menerus selama pemeriksaan berlangsung.",
+        "Penerjunan tim periksa berpasangan (buddy system) dengan harness pengaman dan tali penarik darurat (lifeline)."
+      ],
+      "medicalHazard": "ASFIKSIA MEMATIKAN akibat kekurangan oksigen mendadak dan paparan gas beracun mematikan (H2S / Hidrogen Sulfida).",
+      "officerSafety": "Wajib menggunakan SCBA (Self-Contained Breathing Apparatus) atau Escape Respirator, Gas Detector Personal 4-Gas aktif di dada, harness keselamatan, dan lifeline."
+    },
+    {
+      "id": "zone-06",
+      "code": "06",
+      "category": "superstructure",
+      "view": "cutaway",
+      "angleMin": 0,
+      "angleMax": 360,
+      "position": { "x": 62.0, "y": 37.0 },
+      "label": "Zone 06: Deck & Superstructure (Geladak Terbuka & Bangunan Atas)",
+      "badge": "ZONE 06",
       "badgeType": "info",
-      "mainImage": "assets/images/hotspots/hs_door_panel_compartment.png",
-      "galleryImages": ["assets/images/hotspots/hs_door_panel_compartment.png"],
-      "description": "Penyembunyian di balik panel dinding kayu kapten kapal atau meja peta navigasi.",
+      "mainImage": "assets/images/central/m4b_ship_cutaway.jpeg",
+      "galleryImages": [
+        "assets/images/central/m4b_ship_cutaway.jpeg",
+        "assets/images/hotspots/hs_door_panel_compartment.png"
+      ],
+      "description": "Area geladak terbuka (main deck & weather deck), tiang antena radar (mast), saluran pipa ventilasi udara geladak, dan mooring station.",
+      "concealmentMethod": "Penyisipan di dalam pipa ventilasi palka dinding ganda, modifikasi kotak hidran pemadam kebakaran, atau di dalam drum pelampung penanda.",
+      "bodyLocation": "Weather Deck Catwalk, Mast Radar Tower, & Deck Ventilator Cowls",
+      "drugTypes": "Sabu, Ganja, & Kokain",
+      "packaging": "Bungkusan terpal kanvas kedap air yang diikat tali kawat baja ke struktur tiang atau bagian dalam pipa ventilasi",
+      "modusNarrative": "Geladak terbuka memiliki banyak pipa ventilasi udara (gooseneck ventilators) yang berongga menuju kompartemen bawah. Sindikat menggantungkan paket menggunakan kawat baja di dalam corong ventilasi agar mudah diambil saat kapal merapat di pelabuhan.",
+      "inspectionNote": "Periksa corong ventilasi udara palka dan tangki dengan senter dan cermin inspeksi. Periksa kotak hidran pemadam kebakaran dan kompartemen penyimpanan alat tambat (mooring gear locker).",
+      "riskScore": 65,
       "riskIndicators": [
-        "Panel kayu berbunyi berongga.",
-        "Dokumen pelayaran tidak konsisten."
+        "Kawat atau benang nilon yang menggantung di dalam corong pipa ventilasi udara geladak.",
+        "Segel kotak perlengkapan pemadam kebakaran terbuka atau baut pengaitnya aus karena sering dibuka.",
+        "Terdapat benda asing atau beban tambahan yang terdeteksi di tiang radar atau crane palka.",
+        "Lapisan cat geladak tidak seragam pada pelat sambungan tertentu."
       ],
       "inspectionActions": [
-        "Buka panel meja navigasi.",
-        "Periksa brankas dan ruang simpan kapten."
-      ]
+        "Pemeriksaan visual menyeluruh di sepanjang jalur catwalk geladak utama dan tiang mast.",
+        "Pemeriksaan bagian dalam corong ventilasi menggunakan kamera teleskopik serat optik.",
+        "Pengecekan integritas kotak hidran dan selang pemadam kebakaran darurat.",
+        "Inspeksi kompartemen winch dan tali tambat di haluan serta buritan kapal."
+      ],
+      "medicalHazard": "Risiko terpeleset dan jatuh ke laut (man overboard), terbentur perlengkapan bergerak saat ombak kencang, dan sengatan panas matahari.",
+      "officerSafety": "Life jacket pelampung otomatis, helm keselamatan, kacamata UV polaroid, dan safety shoes bersol karet anti-selip."
     },
     {
-      "id": "hs-m4b-tangki",
-      "category": "tangki",
+      "id": "zone-07",
+      "code": "07",
+      "category": "superstructure",
       "view": "cutaway",
       "angleMin": 0,
       "angleMax": 360,
-      "position": { "x": 28.0, "y": 68.0 },
-      "label": "Tangki: Tangki Air Balas & Tangki Bahan Bakar",
-      "badge": "TANGKI BALAS",
-      "badgeType": "danger",
-      "mainImage": "assets/images/hotspots/hs_door_panel_compartment.png",
-      "galleryImages": ["assets/images/hotspots/hs_door_panel_compartment.png"],
-      "description": "Kotak kedap air diikat rantai baja dan ditenggelamkan ke dalam tangki air balas dasar kapal laut.",
-      "riskIndicators": [
-        "Manhole penutup tangki berminyak atau berbekas dibuka.",
-        "Pergerakan ABK di dekat palka bawah saat malam hari."
-      ],
-      "inspectionActions": [
-        "Turunkan Tim Selam Khusus Bea Cukai.",
-        "Kuras air balas dan periksa dasar tangki."
-      ]
-    },
-    {
-      "id": "hs-m4b-struktur",
-      "category": "palka_kontainer",
-      "view": "cutaway",
-      "angleMin": 0,
-      "angleMax": 360,
-      "position": { "x": 55.0, "y": 48.0 },
-      "label": "Struktur Kapal: Palka Kargo & Reefer Container False Wall",
-      "badge": "REEFER CONTAINER",
-      "badgeType": "danger",
-      "mainImage": "assets/images/hotspots/hs_door_panel_compartment.png",
-      "galleryImages": ["assets/images/hotspots/hs_door_panel_compartment.png"],
-      "description": "Bungkusan Narkotika ditaruh di balik insulasi stainless pendingin (reefer unit) kontainer impor.",
-      "riskIndicators": [
-        "Gamma-Ray Container Scanner memperlihatkan anomali kerapatan insulasi reefer.",
-        "Bolt seal pelabuhan berbekas garitan."
-      ],
-      "inspectionActions": [
-        "Pindai kontainer dengan Hi-Tech Container Scanner.",
-        "Buka panel paking reefer pendingin."
-      ]
-    },
-    {
-      "id": "hs-m4b-muatan",
-      "category": "muatan",
-      "view": "cutaway",
-      "angleMin": 0,
-      "angleMax": 360,
-      "position": { "x": 72.0, "y": 58.0 },
-      "label": "Muatan: Muatan Curah & Kontainer Kargo",
-      "badge": "MUATAN CURAH",
+      "position": { "x": 73.0, "y": 30.0 },
+      "label": "Zone 07: Accommodation (Kabin Awak & Ruang Bersama)",
+      "badge": "ZONE 07",
       "badgeType": "warning",
-      "mainImage": "assets/images/hotspots/hs_door_panel_compartment.png",
-      "galleryImages": ["assets/images/hotspots/hs_door_panel_compartment.png"],
-      "description": "Karung-karung sabu ditanam di tengah tumpukan muatan curah batu bara / semen impor.",
+      "mainImage": "assets/images/central/m4b_ship_cutaway.jpeg",
+      "galleryImages": [
+        "assets/images/central/m4b_ship_cutaway.jpeg",
+        "assets/images/hotspots/hs_door_panel_compartment.png"
+      ],
+      "description": "Struktur bertingkat akomodasi kapal: kabin nakhoda dan perwira, ruang istirahat ABK (crew quarters), mess room, dan anjungan navigasi (bridge).",
+      "concealmentMethod": "Penyembunyian di balik panel plafon langit-langit berongga, rangka ranjang susun ABK, bagian belakang laci lemari, atau kompartemen meja navigasi.",
+      "bodyLocation": "Superstructure Tower, Crew Cabins, & Officers Mess Room",
+      "drugTypes": "Sabu, Pil Ekstasi, Ketamin, & Narkotika Sintetis",
+      "packaging": "Kemasan bungkusan teh Cina, tas ransel travel, atau kaleng kosmetik yang diselipkan di antara kasur atau plafon kabin",
+      "modusNarrative": "Oknum anak buah kapal (ABK) yang direkrut oleh sindikat internasional sering memanfaatkan ruang pribadi mereka untuk menyembunyikan narkotika bernilai tinggi dalam jumlah puluhan kilogram. Mereka membuka plafon kamar mandi kabin atau membuat dinding ganda pada lemari pakaian.",
+      "inspectionNote": "Pemeriksaan ruang personal harus dilakukan secara profesional didampingi nakhoda atau perwira yang ditunjuk. Hormati privasi awak namun lakukan pemeriksaan sistematis dengan pengerahan anjing pelacak K-9 Bea Cukai.",
+      "riskScore": 82,
       "riskIndicators": [
-        "K-9 Pelacak memberikan respon agresif pada palka muatan.",
-        "Manifes barang mencantumkan pengirim berkategori high-risk."
+        "Panel plafon langit-langit di kabin ABK tampak bergeser, terdapat noda debu yang hilang, atau sekrup yang tidak sama jenisnya.",
+        "ABK menunjukkan kegugupan ekstrem, tangan gemetar, atau mencoba mengalihkan perhatian petugas saat kabinnya diperiksa.",
+        "Terdapat perbedaan mencolok antara barang bawaan awak kapal dengan deklarasi Crew Effects List.",
+        "Anjing pelacak K-9 memberikan respon aktif (active alert) pada laci atau tempat tidur tertentu."
       ],
       "inspectionActions": [
-        "Bongkar sebagian sampel muatan curah.",
-        "Lakukan pemeriksaan fisik menyeluruh."
-      ]
+        "Pencocokan daftar awak kapal (Crew List) dan daftar barang pribadi (Crew Effects Declaration).",
+        "Pemeriksaan pendahuluan menggunakan anjing pelacak narkotika K-9 Bea Cukai di lorong dan ruang akomodasi.",
+        "Pemeriksaan manual pada panel dinding, ventilasi AC kabin, dan ruang di bawah ranjang.",
+        "Penggeledahan tas bawaan dan koper pribadi ABK dengan disaksikan oleh pemilik barang."
+      ],
+      "medicalHazard": "Potensi ancaman fisik atau perlawanan dari awak kapal yang panik serta bahaya jarum suntik bekas tersembunyi.",
+      "officerSafety": "Rompi anti-senjata tajam (stab vest), sarung tangan tahan tusukan jarum (needle-stick resistant gloves), dan body-worn camera pengawas."
+    },
+    {
+      "id": "zone-08",
+      "code": "08",
+      "category": "superstructure",
+      "view": "cutaway",
+      "angleMin": 0,
+      "angleMax": 360,
+      "position": { "x": 78.0, "y": 27.0 },
+      "label": "Zone 08: Provision & Store (Gudang Perbekalan & Logistik)",
+      "badge": "ZONE 08",
+      "badgeType": "info",
+      "mainImage": "assets/images/central/m4b_ship_cutaway.jpeg",
+      "galleryImages": [
+        "assets/images/central/m4b_ship_cutaway.jpeg",
+        "assets/images/hotspots/hs_door_panel_compartment.png"
+      ],
+      "description": "Gudang perbekalan makanan kapal (provision store), kamar pendingin daging/sayur (walk-in cold storage), gudang logistik deck/mesin, dan gudang cat (paint locker).",
+      "concealmentMethod": "Penyembunyian paket sabu beku di dalam potongan daging beku atau kotak bahan makanan kaleng, serta di dasar kaleng cat kapal dengan segel modifikasi.",
+      "bodyLocation": "Provision Store Room, Walk-in Freezer, & Bosun Paint Locker",
+      "drugTypes": "Kokain Cair, Metamfetamin, & Heroin",
+      "packaging": "Bungkusan plastik food-grade tahan beku ekstrem atau kaleng bahan makanan kalengan yang ditutup ulang secara pabrikan (re-canned)",
+      "modusNarrative": "Gudang perbekalan kapal memiliki ratusan kotak persediaan makanan untuk pelayaran berbulan-bulan. Sindikat menyusupkan narkotika di dalam bahan makanan beku atau kaleng cat kimia di paint locker karena baunya yang menyengat dapat mengacaukan indra penciuman.",
+      "inspectionNote": "Cocokkan daftar persediaan kapal (Ship Stores Declaration). Periksa kotak makanan beku dengan densitas aneh di cold storage. Buka kaleng cat yang memiliki bobot tidak proporsional atau ada bekas lelehan lem segel.",
+      "riskScore": 72,
+      "riskIndicators": [
+        "Jumlah stok makanan beku atau kaleng cat jauh melampaui kebutuhan pelayaran yang tercantum dalam logbook.",
+        "Kaleng cat atau wadah kimia memiliki berat yang tidak seimbang atau segel penutup tampak pernah dilepas paksa.",
+        "Adanya kemasan makanan beku dengan label tulisan tangan atau tanpa merk resmi pabrik makanan.",
+        "Bau lem resin atau pelarut sintetis di dalam ruang simpan makanan kering."
+      ],
+      "inspectionActions": [
+        "Verifikasi daftar inventaris perbekalan kapal (Ship Stores List) terhadap persediaan fisik riil.",
+        "Pemeriksaan kotak makanan beku di cold room menggunakan termometer inframerah dan detektor portabel.",
+        "Uji berat dan uji guncang pada kaleng-kaleng bahan kimia di paint locker.",
+        "Pengambilan sampel cepat menggunakan alat uji narkotika Raman Spectrometer / Trunarc."
+      ],
+      "medicalHazard": "Bahaya hipotermia dan terkunci di dalam kamar pendingin (cold storage) serta uap toksik dari tiner/cat di paint locker.",
+      "officerSafety": "Jaket termal tahan dingin saat memeriksa cold store, masker uap organik karbon aktif di gudang cat, dan sarung tangan nitril."
+    },
+    {
+      "id": "zone-09",
+      "code": "09",
+      "category": "safety_access",
+      "view": "cutaway",
+      "angleMin": 0,
+      "angleMax": 360,
+      "position": { "x": 81.0, "y": 34.0 },
+      "label": "Zone 09: Safety Equipment (Peralatan Keselamatan Jiwa)",
+      "badge": "ZONE 09",
+      "badgeType": "warning",
+      "mainImage": "assets/images/central/m4b_ship_cutaway.jpeg",
+      "galleryImages": [
+        "assets/images/central/m4b_ship_cutaway.jpeg",
+        "assets/images/hotspots/hs_door_panel_compartment.png"
+      ],
+      "description": "Perlengkapan penyelamat jiwa darurat: sekoci penolong (totally enclosed lifeboat), kapsul rakit penolong otomatis (inflatable life raft), pelampung, dan emergency muster station.",
+      "concealmentMethod": "Penyembunyian di dalam tangki air tawar cadangan sekoci, ruang kosong di bawah dudukan bangku sekoci, atau tabung kontainer liferaft yang dibuka tanpa merusak segel luar.",
+      "bodyLocation": "Starboard Lifeboat Station & Inflatable Life Raft Davits",
+      "drugTypes": "Kokain, Sabu, & MDMA",
+      "packaging": "Bungkusan kedap air berbobot seimbang dengan kemasan perlengkapan darurat sekoci standar SOLAS",
+      "modusNarrative": "Peralatan keselamatan jarang diperiksa oleh pihak berwenang karena dianggap sakral untuk keselamatan jiwa. Pelaku memanfaatkan ruang hampa di bawah dek sekoci penolong atau mengganti kotak pertolongan pertama (First Aid Kit) sekoci dengan paket narkotika.",
+      "inspectionNote": "PRINSIP EMAS SOLAS: Pemeriksaan peralatan keselamatan TIDAK BOLEH merusak kesiapan fungsinya untuk evakuasi darurat. Dilarang merusak segel hydrostatic release unit pada tabung rakit penolong tanpa persetujuan nakhoda.",
+      "riskScore": 70,
+      "riskIndicators": [
+        "Pintu akses sekoci penolong tidak terkunci rapat atau terdapat jejak kaki baru di dalam kabin sekoci.",
+        "Tali pengikat kapsul rakit penyelamat (life raft) menunjukkan bekas ikatan yang tidak rapi atau segel pabrik telah putus.",
+        "Bobot tabung kapsul sekoci terlihat tidak seimbang pada rel peluncurnya.",
+        "Kompartemen perbekalan darurat sekoci tampak telah dimodifikasi engselnya."
+      ],
+      "inspectionActions": [
+        "Pemeriksaan visual eksternal pada sekoci dan mekanisme peluncur dewi-dewi (davit).",
+        "Pemeriksaan non-invasif ke dalam ruang kabin sekoci tanpa mengubah posisi tuas darurat.",
+        "Pemeriksaan cermin inspeksi di bagian bawah bangku dan tangki persediaan darurat sekoci.",
+        "Pemeriksaan tanggal sertifikasi inspeksi tahunan keselamatan (Safety Equipment Certificate)."
+      ],
+      "medicalHazard": "Risiko pemicuan tidak sengaja pada mekanisme peluncur darurat (accidental release) sekoci yang dapat melukai pemeriksa.",
+      "officerSafety": "Safety harness yang dikaitkan pada tali pengaman kapal, helm pengaman, dan safety boots."
+    },
+    {
+      "id": "zone-10",
+      "code": "10",
+      "category": "safety_access",
+      "view": "cutaway",
+      "angleMin": 0,
+      "angleMax": 360,
+      "position": { "x": 67.0, "y": 50.0 },
+      "label": "Zone 10: Access & Transfer Points (Jalur Akses & Titik Transfer)",
+      "badge": "ZONE 10",
+      "badgeType": "danger",
+      "mainImage": "assets/images/central/m4b_ship_cutaway.jpeg",
+      "galleryImages": [
+        "assets/images/central/m4b_ship_cutaway.jpeg",
+        "assets/images/hotspots/hs_door_panel_compartment.png"
+      ],
+      "description": "Titik pertemuan akses keluar-masuk kapal: tangga gangway pelabuhan, tangga monyet (pilot ladder), pintu lambung (side ports), dan area tambat.",
+      "concealmentMethod": "Perpindahan fisik kilat (ship-to-ship transfer), penurunan tas ransel berisi narkotika menggunakan tali di sisi laut (offshore drop-off) ke perahu nelayan, atau pelekatan ransel di balik tangga gangway.",
+      "bodyLocation": "Midship Gangway, Pilot Boarding Station, & Hull Freeboard Ports",
+      "drugTypes": "Kokain, Sabu Kristal, & Heroin",
+      "packaging": "Tas ransel tahan air dengan sistem pengapung (buoyancy bag) dan penanda suar GPS (GPS beacon) untuk dilempar ke laut",
+      "modusNarrative": "Metode paling kritis saat kapal tiba di perairan teritorial adalah pelemparan muatan narkotika ke laut (drop-off) sebelum kapal bersandar di pelabuhan resmi. Paket diikatkan pada pelampung ber-GPS untuk kemudian diambil oleh kapal kecil/speed boat nelayan lokal yang telah menunggu.",
+      "inspectionNote": "Pantau ketat logbook keluar-masuk orang di pos jaga gangway. Koordinasikan dengan kapal patroli cepat Bea Cukai untuk memantau pergerakan kapal kecil mencurigakan di sisi lambung gelap kapal (seaward side).",
+      "riskScore": 96,
+      "riskIndicators": [
+        "Perahu kecil atau speed boat nelayan mendekati lambung kapal kargo di malam hari saat kapal berlabuh jangkar di luar pelabuhan (outer anchorage).",
+        "Terdapat tali tambat atau katrol darurat yang tergantung di sisi luar lambung kapal yang menghadap ke laut lepas.",
+        "Catatan buku tamu (Gangway Security Log) tidak lengkap atau terdapat orang asing tanpa izin pabean naik ke atas kapal.",
+        "Awak kapal membawa tas ransel besar saat turun melalui gangway dengan gelagat terburu-buru."
+      ],
+      "inspectionActions": [
+        "Pemeriksaan buku log penjagaan tangga gangway (Ship Security Logbook) dan daftar izin embarkasi/debarkasi.",
+        "Patroli laut aktif menggunakan Fast Patrol Boat Bea Cukai di sekitar kapal yang sedang berlabuh jangkar.",
+        "Pemeriksaan barang bawaan setiap orang yang turun dari kapal di pos pengawasan pabean dermaga.",
+        "Penggunaan kamera pengawas thermal imaging / night vision jarak jauh dari kapal patroli."
+      ],
+      "medicalHazard": "Risiko jatuh ke laut di antara celah kapal dan dinding dermaga (crush hazard) serta ancaman perlawanan dari kurir penyelundup.",
+      "officerSafety": "Life jacket pelampung otomatis (inflatable PFD), body armor, sarung tangan taktis, dan senter taktis berkekuatan tinggi."
     }
   ]
 }

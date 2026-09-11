@@ -44,7 +44,7 @@ export class Modul4bView extends BaseModuleView {
                 <span class="modul-code-badge font-code-tech">MODUL 04B</span>
                 <span class="course-main-title">Pemeriksaan Sarana Pengangkut Laut (Cargo Ship & Container)</span>
                 <span class="breadcrumb-separator">•</span>
-                <span class="modul-ref-tag font-code-tech">PMK-188/2021 & S-39/BC/2023</span>
+                <span class="modul-ref-tag font-code-tech">UU 17/2006 & PER-8/BC/2024</span>
               </div>
             </div>
 
@@ -52,7 +52,7 @@ export class Modul4bView extends BaseModuleView {
               <!-- Angle Instruction Tag (di sebelah kiri tombol panduan) -->
               <div class="angle-instruction-tag">
                 <span class="instruction-dot">●</span>
-                <span>Klik hotspot bernomor untuk menganalisis modus operandi & bukti forensik</span>
+                <span>Klik zona 01–10 untuk zoom kamera & analisis bukti pemeriksaan</span>
               </div>
 
               <!-- Help Button -->
@@ -78,19 +78,19 @@ export class Modul4bView extends BaseModuleView {
               <!-- HUD Telemetry Watermark Overlay -->
               <div class="forensic-hud-telemetry" aria-hidden="true">
                 <div class="forensic-hud-top-left font-code-tech">
-                  <div class="hud-line-title">STASIUN PEMINDAIAN SARANA PENGANGKUT LAUT (VESSEL CARGO)</div>
+                  <div class="hud-line-title">STASIUN PEMINDAIAN SARANA PENGANGKUT LAUT // 10 INSPECTION ZONES</div>
                   <div class="hud-line-sub">SUBJEK ID: VESSEL-KM-SAMUDRA-09 / CONTAINER CARGO SHIP</div>
                 </div>
                 <div class="forensic-hud-top-right font-code-tech">
-                  <div class="hud-line-azimuth" id="hud-azimuth-text">MODE AKTIF: VESSEL CUTAWAY / STRUCTURAL COMPARTMENT SCAN</div>
-                  <div class="hud-line-status">SENSOR: CARGO CONTAINER SCANNER & FORENSIC BORESCOPE</div>
+                  <div class="hud-line-azimuth" id="hud-azimuth-text">MODE AKTIF: INTERACTIVE INSPECTION MAP // 10 ZONES</div>
+                  <div class="hud-line-status">METODE: RISK-BASED INSPECTION & CAMERA ZOOM FOCUS</div>
                 </div>
               </div>
 
               <!-- Central Active Vessel Image Container with Hotspots Layer -->
               <div class="body-image-container" id="m4b-image-container" style="max-width:960px; aspect-ratio: auto; margin:0 auto;">
-                <img id="m4b-central-image" src="assets/images/central/m4b_cargo_ship_cutaway.png" 
-                     alt="Pemeriksaan Sarana Pengangkut Laut Kapal Kargo" 
+                <img id="m4b-central-image" src="assets/images/central/m4b_ship_cutaway.jpeg" 
+                     alt="Interactive Inspection Map Kapal Kargo" 
                      class="main-body-img"
                      style="max-height: 68vh; filter: drop-shadow(0 12px 32px rgba(0, 37, 59, 0.16)); pointer-events:none;" />
                 <div class="body-pedestal-platform"></div>
@@ -101,10 +101,15 @@ export class Modul4bView extends BaseModuleView {
               <div class="pedestal-rotation-dock" id="pedestal-rotation-dock">
                 <div class="pedestal-carousel-controls">
                   <!-- Inspection Focus Pill Button -->
-                  <button id="btn-view-ship" class="hud-pill-action-btn active" title="Tampak Irisan Lambung Kapal (Cutaway)">
+                  <button id="btn-view-ship" class="hud-pill-action-btn active" title="Tampilan Penuh Kapal (Reset Zoom)">
                     <span class="hud-btn-icon">🚢</span>
-                    <span class="hud-btn-text">CUTAWAY KAPAL KARGO</span>
+                    <span class="hud-btn-text">CUTAWAY KAPAL (RESET)</span>
                   </button>
+
+                  <div class="hud-pill-divider"></div>
+
+                  <!-- Quick Zone Navigator Pills (01–10) -->
+                  <div class="dock-zone-pills" id="dock-zone-pills" title="Pilih Zona Pemeriksaan (01–10)"></div>
 
                   <div class="hud-pill-divider"></div>
 
@@ -261,7 +266,7 @@ export class Modul4bView extends BaseModuleView {
                   <div class="hazard-icon">🛡️</div>
                   <div class="hazard-content">
                     <span class="hazard-title">Protokol Keselamatan Petugas:</span>
-                    <p class="hazard-desc">
+                    <p id="detail-officer-safety" class="hazard-desc">
                       Wajib gunakan Self-Contained Breathing Apparatus (SCBA) & Gas Detector portabel sebelum memasuki tangki balas atau ruang palka kargo tertutup.
                     </p>
                   </div>
@@ -302,21 +307,21 @@ export class Modul4bView extends BaseModuleView {
         <div id="help-overlay" class="modal-overlay hidden" role="dialog" aria-modal="true">
           <div class="modal-card help-modal-card">
             <div class="modal-header">
-              <h3>Panduan Pemeriksaan Sarana Pengangkut Laut (Modul 04B)</h3>
+              <h3>Panduan Interactive Inspection Map Kapal Kargo (Modul 04B)</h3>
               <button id="btn-close-help" class="modal-close-btn" aria-label="Tutup Panduan">✕</button>
             </div>
             <div class="modal-body help-content">
               <div class="help-item">
-                <strong>1. Irisan Struktur Kapal Kargo:</strong> Tampilan memperlihatkan irisan menyeluruh lambung kapal (cutaway), mulai dari kabin ABK, kompartemen navigasi, tangki bahan bakar/balas, palka kargo kontainer reefer, hingga void space lambung.
+                <strong>1. 10 Inspection Zones:</strong> Kapal kargo dibagi ke dalam 10 Inspection Zones sistematis (01–10) berbasis risiko pabean sesuai PER-8/BC/2024 dan PER-11/BC/2024.
               </div>
               <div class="help-item">
-                <strong>2. Titik Hotspot Forensik:</strong> Klik callout bernomor pada struktur kapal untuk memeriksa titik-titik rawan penyelundupan narkotika skala besar.
+                <strong>2. Fitur Zoom Kamera Cerdas:</strong> Klik nomor zona 01–10 pada badan kapal atau dock kontrol bawah. Kamera akan secara otomatis melakukan <em>animated zoom focus</em> langsung ke area kompartemen terpilih.
               </div>
               <div class="help-item">
-                <strong>3. Kontrol Zoom Interaktif:</strong> Gunakan tombol <strong>-</strong>, <strong>+</strong>, atau <strong>↺ (Reset)</strong> pada dock kontrol bawah untuk memperbesar detail teknis kapal kargo.
+                <strong>3. Floating Inspection Card:</strong> Kartu inspeksi melayang memuat 4 tab terpadu: Modus Operandi & Prosedur, Foto Real Bukti Sitaan, Indikator Anomali & SOP, serta Indikator Risiko & Keselamatan Kerja. Kartu dapat digeser (draggable) agar tidak menutupi visual kapal.
               </div>
               <div class="help-item">
-                <strong>4. Protokol Confined Space:</strong> Perhatikan prosedur keselamatan di Tab 4 (Indikator Risiko) terkait bahaya gas beracun di tangki balas dan ruang palka kapal.
+                <strong>4. Navigasi Cepat & Reset:</strong> Gunakan tombol panah ← / → pada kartu untuk menjelajahi zona berikutnya dengan pergerakan kamera dinamis, atau klik tombol <em>CUTAWAY KAPAL (RESET)</em> untuk kembali ke tampilan kapal utuh (100%).
               </div>
             </div>
             <div class="modal-footer">
@@ -331,25 +336,31 @@ export class Modul4bView extends BaseModuleView {
 
   initInteractiveViewer() {
     this.renderHotspots();
+    this.renderDockPills();
+
+    // Reset Full Cutaway View Button
+    const btnViewShip = this.container.querySelector('#btn-view-ship');
+    btnViewShip?.addEventListener('click', () => {
+      this.closeModal();
+    });
 
     // Zoom Controls
     const btnZoomIn = this.container.querySelector('#btn-zoom-in');
     const btnZoomOut = this.container.querySelector('#btn-zoom-out');
     const btnZoomReset = this.container.querySelector('#btn-zoom-reset');
 
-    btnZoomIn?.addEventListener('click', () => this.applyZoom(this.currentZoom + 0.15));
-    btnZoomOut?.addEventListener('click', () => this.applyZoom(this.currentZoom - 0.15));
-    btnZoomReset?.addEventListener('click', () => this.applyZoom(1.0));
+    btnZoomIn?.addEventListener('click', () => this.applyZoom(this.currentZoom + 0.2));
+    btnZoomOut?.addEventListener('click', () => this.applyZoom(this.currentZoom - 0.2));
+    btnZoomReset?.addEventListener('click', () => this.resetCameraZoom());
   }
 
   applyZoom(val) {
-    this.currentZoom = Math.min(2.0, Math.max(0.7, parseFloat(val.toFixed(2))));
+    this.currentZoom = Math.min(2.5, Math.max(0.7, parseFloat(val.toFixed(2))));
     const container = this.container.querySelector('#m4b-image-container');
     const zoomText = this.container.querySelector('#zoom-level-text');
 
     if (container) {
       container.style.transform = `scale(${this.currentZoom})`;
-      container.style.transformOrigin = 'center center';
     }
 
     const counterScale = (1 / this.currentZoom).toFixed(4);
@@ -365,6 +376,98 @@ export class Modul4bView extends BaseModuleView {
     }
   }
 
+  zoomToZone(hs, zoomLevel = 2.0) {
+    this.currentZoom = zoomLevel;
+    const container = this.container.querySelector('#m4b-image-container');
+    const zoomText = this.container.querySelector('#zoom-level-text');
+
+    if (container) {
+      // Smooth focus to target zone coordinates
+      container.style.transformOrigin = `${hs.position.x}% ${hs.position.y}%`;
+      container.style.transform = `scale(${this.currentZoom})`;
+
+      const counterScale = (1 / this.currentZoom).toFixed(4);
+      container.style.setProperty('--body-zoom', this.currentZoom);
+      container.style.setProperty('--tooltip-counter-scale', counterScale);
+    }
+
+    document.documentElement.style.setProperty('--body-zoom', this.currentZoom);
+    document.documentElement.style.setProperty('--tooltip-counter-scale', (1 / this.currentZoom).toFixed(4));
+
+    if (zoomText) {
+      zoomText.textContent = `${Math.round(this.currentZoom * 100)}%`;
+    }
+
+    this.updateDockPills(hs.id);
+  }
+
+  resetCameraZoom() {
+    this.currentZoom = 1.0;
+    const container = this.container.querySelector('#m4b-image-container');
+    const zoomText = this.container.querySelector('#zoom-level-text');
+
+    if (container) {
+      container.style.transformOrigin = 'center center';
+      container.style.transform = 'scale(1.0)';
+      container.style.setProperty('--body-zoom', 1.0);
+      container.style.setProperty('--tooltip-counter-scale', 1.0);
+    }
+
+    document.documentElement.style.setProperty('--body-zoom', 1.0);
+    document.documentElement.style.setProperty('--tooltip-counter-scale', 1.0);
+
+    if (zoomText) {
+      zoomText.textContent = '100%';
+    }
+
+    this.updateDockPills(null);
+  }
+
+  renderDockPills() {
+    const pillsContainer = this.container.querySelector('#dock-zone-pills');
+    if (!pillsContainer || !this.moduleData) return;
+    pillsContainer.innerHTML = '';
+
+    const hotspots = this.moduleData.hotspots || [];
+    hotspots.forEach((hs, idx) => {
+      const btn = document.createElement('button');
+      btn.className = 'dock-zone-pill-btn font-code-tech';
+      btn.setAttribute('data-id', hs.id);
+      btn.setAttribute('title', hs.label);
+      const displayNum = hs.code || (idx < 9 ? `0${idx + 1}` : `${idx + 1}`);
+      btn.textContent = displayNum;
+
+      if (this.currentHotspotId === hs.id) {
+        btn.classList.add('active');
+      }
+      if (this.visitedHotspots.has(hs.id)) {
+        btn.classList.add('visited');
+      }
+
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        this.openHotspotDetail(hs.id);
+      });
+
+      pillsContainer.appendChild(btn);
+    });
+  }
+
+  updateDockPills(activeId = this.currentHotspotId) {
+    const pills = this.container.querySelectorAll('.dock-zone-pill-btn');
+    pills.forEach(p => {
+      const id = p.getAttribute('data-id');
+      if (id === activeId) {
+        p.classList.add('active');
+      } else {
+        p.classList.remove('active');
+      }
+      if (this.visitedHotspots.has(id)) {
+        p.classList.add('visited');
+      }
+    });
+  }
+
   renderHotspots() {
     const layer = this.container.querySelector('#m4b-hotspots-layer');
     if (!layer || !this.moduleData) return;
@@ -374,7 +477,8 @@ export class Modul4bView extends BaseModuleView {
 
     hotspots.forEach((hs, idx) => {
       const pin = document.createElement('button');
-      pin.className = `body-hotspot-pin ${hs.badgeType || 'warning'}`;
+      const isCurrentActive = this.currentHotspotId === hs.id;
+      pin.className = `body-hotspot-pin ${hs.badgeType || 'warning'} ${isCurrentActive ? 'active-zone' : ''}`;
       pin.style.left = `${hs.position.x}%`;
       pin.style.top = `${hs.position.y}%`;
       pin.setAttribute('data-id', hs.id);
@@ -383,12 +487,14 @@ export class Modul4bView extends BaseModuleView {
       const isVisited = this.visitedHotspots.has(hs.id);
       if (isVisited) pin.classList.add('visited');
 
+      const displayNum = hs.code || (idx < 9 ? `0${idx + 1}` : `${idx + 1}`);
+
       pin.innerHTML = `
         <div class="pin-marker-pulse"></div>
         <div class="pin-marker-ring"></div>
-        <div class="pin-marker-dot font-code-tech">${idx + 1}</div>
+        <div class="pin-marker-dot font-code-tech">${displayNum}</div>
         <div class="pin-tooltip font-tech">
-          <span class="pin-tooltip-num">#${idx + 1}</span>
+          <span class="pin-tooltip-num">#${displayNum}</span>
           <span class="pin-tooltip-name">${hs.label}</span>
         </div>
       `;
@@ -411,6 +517,9 @@ export class Modul4bView extends BaseModuleView {
     this.isModalOpen = true;
     this.visitedHotspots.add(hotspotId);
 
+    // Smooth camera animated zoom into zone
+    this.zoomToZone(hs, 2.0);
+
     const overlay = this.container.querySelector('#hotspot-card-modal-overlay');
     if (overlay) {
       overlay.classList.remove('hidden');
@@ -420,9 +529,25 @@ export class Modul4bView extends BaseModuleView {
     this.renderModalContent(hs);
     this.switchCardPage(0);
     this.renderHotspots();
+    this.updateDockPills(hs.id);
 
     this.updateProgressUI();
     xapi.trackHotspotClick(this.moduleData.moduleId || 'modul4b', hs.id, hs.label, hs.category || 'all');
+  }
+
+  closeModal() {
+    const overlay = this.container.querySelector('#hotspot-card-modal-overlay');
+    if (overlay) {
+      overlay.classList.add('hidden');
+      overlay.style.display = 'none';
+    }
+    this.isModalOpen = false;
+    this.currentHotspotId = null;
+
+    // Reset camera zoom back to 100% overview
+    this.resetCameraZoom();
+    this.renderHotspots();
+    this.updateDockPills(null);
   }
 
   renderModalContent(hs) {
@@ -434,7 +559,7 @@ export class Modul4bView extends BaseModuleView {
     const title = this.container.querySelector('#detail-title');
     const counter = this.container.querySelector('#card-nav-counter');
 
-    if (tagBadge) tagBadge.textContent = (hs.badge || `MODUS #${currentIdx + 1}`).toUpperCase();
+    if (tagBadge) tagBadge.textContent = (hs.badge || `ZONE ${hs.code || currentIdx + 1}`).toUpperCase();
     if (title) title.textContent = hs.label;
     if (counter) counter.textContent = `${currentIdx >= 0 ? currentIdx + 1 : 1} / ${totalCount}`;
 
@@ -453,12 +578,12 @@ export class Modul4bView extends BaseModuleView {
       mainImg.alt = hs.label;
     }
     if (desc) desc.textContent = hs.description || '';
-    if (paramMethod) paramMethod.textContent = hs.badge || 'Kompartemen Kapal';
-    if (paramLocation) paramLocation.textContent = hs.category ? hs.category.replace('_', ' ').toUpperCase() : 'STRUKTUR KAPAL';
+    if (paramMethod) paramMethod.textContent = hs.concealmentMethod || hs.badge || 'Kompartemen Kapal';
+    if (paramLocation) paramLocation.textContent = hs.bodyLocation || (hs.category ? hs.category.replace('_', ' ').toUpperCase() : 'STRUKTUR KAPAL');
     if (paramDrug) paramDrug.textContent = hs.drugTypes || 'Kokain / Metamfetamin / Heroin';
     if (paramPackaging) paramPackaging.textContent = hs.packaging || 'Plastik Kedap Air, Lakban, Bungkusan Karung';
-    if (narrative) narrative.textContent = hs.description || 'Penyembunyian pada ruang palka, dinding kargo, atau tangki kapal.';
-    if (note) note.textContent = hs.inspectionActions ? hs.inspectionActions.join(' ') : 'Lakukan pemeriksaan gabungan bersama Tim K-9 dan teknisi kapal.';
+    if (narrative) narrative.textContent = hs.modusNarrative || hs.description || 'Penyembunyian pada ruang palka, dinding kargo, atau tangki kapal.';
+    if (note) note.textContent = hs.inspectionNote || (hs.inspectionActions ? hs.inspectionActions.join(' ') : 'Lakukan pemeriksaan gabungan bersama Tim K-9 dan teknisi kapal.');
 
     // TAB 2: Foto Real
     const findingsGrid = this.container.querySelector('#findings-thumbnails-grid');
@@ -496,16 +621,18 @@ export class Modul4bView extends BaseModuleView {
         .join('');
     }
 
-    // TAB 4: Indikator Risiko
+    // TAB 4: Indikator Risiko & Keselamatan
     const riskScoreVal = this.container.querySelector('#risk-score-val');
     const riskBarFill = this.container.querySelector('#risk-meter-bar-fill');
     const medRisk = this.container.querySelector('#detail-medical-risk');
+    const officerSafety = this.container.querySelector('#detail-officer-safety');
 
     const score = hs.riskScore || 90;
-    const level = (hs.badgeType || 'DANGER').toUpperCase();
+    const level = score >= 90 ? 'KRITIS' : (score >= 75 ? 'TINGGI' : 'SEDANG');
     if (riskScoreVal) riskScoreVal.textContent = `${level} (${score}/100)`;
     if (riskBarFill) riskBarFill.style.width = `${score}%`;
-    if (medRisk) medRisk.textContent = 'BAHAYA RUANG TERBATAS: Risiko kekurangan oksigen (asfiksia) dan gas beracun hidrokarbon/H2S di dasar palka & tangki bahan bakar/balas.';
+    if (medRisk) medRisk.textContent = hs.medicalHazard || 'BAHAYA RUANG TERBATAS: Risiko kekurangan oksigen (asfiksia) dan gas beracun hidrokarbon/H2S di dasar palka & tangki bahan bakar/balas.';
+    if (officerSafety) officerSafety.textContent = hs.officerSafety || 'Wajib gunakan Self-Contained Breathing Apparatus (SCBA) & Gas Detector portabel sebelum memasuki tangki balas atau ruang palka kargo tertutup.';
   }
 
   initModals() {
@@ -527,23 +654,13 @@ export class Modul4bView extends BaseModuleView {
     const btnPagePrev = this.container.querySelector('#btn-page-prev');
     const btnPageNext = this.container.querySelector('#btn-page-next');
 
-    if (closeBtn && overlay) {
-      closeBtn.addEventListener('click', () => {
-        overlay.classList.add('hidden');
-        overlay.style.display = 'none';
-        this.isModalOpen = false;
-        this.renderHotspots();
-      });
+    if (closeBtn) {
+      closeBtn.addEventListener('click', () => this.closeModal());
     }
 
     if (overlay) {
       overlay.addEventListener('click', (e) => {
-        if (e.target === overlay) {
-          overlay.classList.add('hidden');
-          overlay.style.display = 'none';
-          this.isModalOpen = false;
-          this.renderHotspots();
-        }
+        if (e.target === overlay) this.closeModal();
       });
     }
 
@@ -621,8 +738,12 @@ export class Modul4bView extends BaseModuleView {
     }
 
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && popupOverlay && !popupOverlay.classList.contains('hidden')) {
-        this.closeImagePopup();
+      if (e.key === 'Escape') {
+        if (popupOverlay && !popupOverlay.classList.contains('hidden')) {
+          this.closeImagePopup();
+        } else if (this.isModalOpen) {
+          this.closeModal();
+        }
       }
     });
 

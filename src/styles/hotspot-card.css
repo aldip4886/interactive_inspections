@@ -147,6 +147,78 @@
   margin: 0 auto !important;
 }
 
+#m4b-image-container {
+  transition: transform 0.65s cubic-bezier(0.2, 0.8, 0.2, 1), transform-origin 0.4s ease;
+  will-change: transform, transform-origin;
+}
+
+/* Modul 4B Active Inspection Zone Pin */
+.body-hotspot-pin.active-zone {
+  transform: translate(-50%, -50%) scale(1.3) !important;
+  z-index: 60 !important;
+}
+
+.body-hotspot-pin.active-zone .pin-marker-dot {
+  background: #00253B !important;
+  color: #FDBB24 !important;
+  box-shadow: 0 0 0 3px #FDBB24, 0 0 16px rgba(253, 187, 36, 0.95) !important;
+  font-weight: 800 !important;
+}
+
+.body-hotspot-pin.active-zone .pin-marker-ring {
+  border-color: #FDBB24 !important;
+  border-width: 2.5px !important;
+  animation: pulseRadar 1.1s infinite cubic-bezier(0.2, 0.8, 0.2, 1) !important;
+}
+
+/* Modul 4B Inspection Zones Dock Pills */
+.dock-zone-pills {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  flex-shrink: 0;
+}
+
+.dock-zone-pill-btn {
+  width: 25px;
+  height: 25px;
+  border-radius: 5px;
+  border: 1px solid rgba(0, 37, 59, 0.14);
+  background: #FFFFFF;
+  color: #00253B;
+  font-family: var(--font-tech, monospace);
+  font-size: 10px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.dock-zone-pill-btn:hover {
+  background: #F1F5F9;
+  border-color: #00253B;
+  color: #00253B;
+  transform: translateY(-1px);
+}
+
+.dock-zone-pill-btn.active {
+  background: #00253B;
+  color: #FDBB24;
+  border-color: #00253B;
+  box-shadow: 0 2px 6px rgba(0, 37, 59, 0.25);
+}
+
+.dock-zone-pill-btn.visited:not(.active) {
+  background: #ECFDF5;
+  color: #059669;
+  border-color: #A7F3D0;
+}
+
+
 
 #modul1-top-bar.modul1-top-bar,
 #modul2-top-bar.modul1-top-bar,
