@@ -9,23 +9,25 @@ export class Modul3View extends BaseModuleView {
   constructor(container) {
     super(container, 'src/data/modul3-hotspots.json');
     this.moduleData = modul3HotspotsData; // Initial bundle fallback
-    this.currentHotspotId = 'hs-m3-paket-organik-1';
+    this.currentHotspotId = 'hs-m3-makanan-pouch';
     this.visitedHotspots = new Set();
     this.currentActiveTab = 'tab-modus';
     this.currentViewMode = 'lens'; // 'lens', 'xray', or 'normal'
-    this.lensRadius = 120;
+    this.lensRadius = 92;
     this.activeFilter = 'all';
     this.isModalOpen = false;
     this.audioFeedback = false;
     this.audioCtx = null;
     this.magnifier = null;
     this.lastBeepTime = 0;
+    this.currentZoom = 1.2;
+    this.panX = 0;
+    this.panY = 0;
 
     this.cardPages = [
       { id: 'tab-modus', num: 1, title: 'Modus Operandi' },
-      { id: 'tab-photos', num: 2, title: 'Foto Gambar Real' },
-      { id: 'tab-detection', num: 3, title: 'Ciri Pelaku & SOP' },
-      { id: 'tab-risk', num: 4, title: 'Indikator Risiko' }
+      { id: 'tab-detection', num: 2, title: 'Ciri Pelaku & SOP' },
+      { id: 'tab-risk', num: 3, title: 'Indikator Risiko' }
     ];
     this.currentCardPageIndex = 0;
   }
@@ -103,7 +105,6 @@ export class Modul3View extends BaseModuleView {
               <!-- HUD Telemetry Watermark Overlay -->
               <div class="forensic-hud-telemetry" aria-hidden="true">
                 <div class="forensic-hud-top-left font-code-tech">
-                  <div class="hud-line-title">STASIUN PEMINDAIAN KARGO POS & PJT DUAL-ENERGY</div>
                   <div class="hud-line-sub">TARGET ID: PARCEL-EXP-9912 / KARTON POS & CARGO</div>
                 </div>
                 <div class="forensic-hud-top-right font-code-tech">
@@ -112,14 +113,8 @@ export class Modul3View extends BaseModuleView {
                 </div>
               </div>
 
-              <!-- Central Active Cargo Image Container with Magnifier Stage (Centered Horizontally) -->
-              <div class="body-image-container" id="cargo-image-container">
-                <div class="cargo-scanner-stage-wrapper" id="m3-scanner-stage"></div>
-                <div class="body-pedestal-platform"></div>
-              </div>
-
-              <!-- Floating HUD Segmented Pill Controls Dock (Center Bottom) -->
-              <div class="pedestal-rotation-dock" id="pedestal-rotation-dock">
+              <!-- Floating Top Controls Dock (Above Central Image) -->
+              <div class="m3-top-controls-dock" id="m3-top-controls-dock">
                 <div class="pedestal-carousel-controls">
                   <!-- Mode Switcher Pill Buttons -->
                   <button id="btn-view-lens" class="hud-pill-action-btn active" title="Tampilan Lensa Pembesar X-Ray">
@@ -140,8 +135,8 @@ export class Modul3View extends BaseModuleView {
                   <!-- Slider Ukuran Lensa -->
                   <div class="lens-slider-group" title="Atur Radius Lensa Kaca Pembesar">
                     <span class="hud-btn-text" style="font-size:11px; font-family:'JetBrains Mono'; color:#94A3B8;">RADIUS:</span>
-                    <input type="range" id="lens-radius-slider" min="80" max="220" value="120" />
-                    <span id="lens-radius-label" class="hud-angle-indicator font-code-tech" style="min-width:38px;">120px</span>
+                    <input type="range" id="lens-radius-slider" min="80" max="220" value="92" />
+                    <span id="lens-radius-label" class="hud-angle-indicator font-code-tech" style="min-width:38px;">92px</span>
                   </div>
 
                   <div class="hud-pill-divider"></div>
@@ -151,21 +146,49 @@ export class Modul3View extends BaseModuleView {
                     <span id="audio-icon">🔊</span>
                   </button>
                 </div>
+              </div>
 
-                <!-- Density Color Palette Legend (Moved below controls dock) -->
+              <!-- Central Stage Area (Central Image + Vertical Zoom Slider Beside It) -->
+              <div class="m3-central-stage-area" id="m3-central-stage-area">
+                <!-- Central Active Cargo Image Container with Magnifier Stage -->
+                <div class="body-image-container" id="cargo-image-container">
+                  <div class="cargo-scanner-stage-wrapper" id="m3-scanner-stage"></div>
+                  <div class="body-pedestal-platform"></div>
+                </div>
+
+                <!-- Vertical Zoom Slider Dock (Beside Central Image) -->
+                <div class="m3-vertical-zoom-dock" id="m3-vertical-zoom-dock" title="Kontrol Zoom Gambar">
+                  <button id="btn-zoom-in" class="m3-vzoom-btn" title="Perbesar Gambar (Zoom In)" aria-label="Zoom In">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                  </button>
+                  <div class="m3-vzoom-slider-wrap">
+                    <span id="zoom-level-text" class="m3-vzoom-badge font-code-tech">120%</span>
+                    <input type="range" id="m3-zoom-slider" class="m3-vertical-slider" min="100" max="250" step="5" value="120" orient="vertical" aria-label="Tingkat Zoom Gambar" />
+                  </div>
+                  <button id="btn-zoom-out" class="m3-vzoom-btn" title="Perkecil Gambar (Zoom Out)" aria-label="Zoom Out">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                  </button>
+                  <button id="btn-zoom-reset" class="m3-vzoom-btn reset-btn" title="Reset Zoom (120%)" aria-label="Reset Zoom">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><polyline points="3 3 3 8 8 8"></polyline></svg>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Bottom Legend Dock (Center Bottom - 1 Row Density Palette Strip) -->
+              <div class="m3-bottom-legend-dock" id="m3-bottom-legend-dock">
                 <div class="density-palette-strip" aria-label="Legenda Warna Densitas Material X-Ray">
-                  <span style="font-weight: 700; color: #00E5FF; margin-right: 4px;">DENSITAS MATERIAL:</span>
+                  <span class="density-title">DENSITAS MATERIAL:</span>
                   <div class="density-palette-item">
                     <span class="density-dot orange"></span>
-                    <span>Oranye / Cokelat: <strong>Organik / Narkotika</strong></span>
+                    <span class="density-item-text">Oranye / Cokelat: <strong>Organik / Narkotika</strong></span>
                   </div>
                   <div class="density-palette-item">
                     <span class="density-dot green"></span>
-                    <span>Hijau: <strong>Campuran / Anorganik</strong></span>
+                    <span class="density-item-text">Hijau: <strong>Campuran / Anorganik</strong></span>
                   </div>
                   <div class="density-palette-item">
                     <span class="density-dot blue"></span>
-                    <span>Biru / Hitam: <strong>Logam Tebal</strong></span>
+                    <span class="density-item-text">Biru / Hitam: <strong>Logam Tebal</strong></span>
                   </div>
                 </div>
               </div>
@@ -202,13 +225,10 @@ export class Modul3View extends BaseModuleView {
               <button class="tab-btn active" data-tab="tab-modus" title="Halaman 1: Modus Operandi">
                 <span class="tab-label">Modus Operandi</span>
               </button>
-              <button class="tab-btn" data-tab="tab-photos" title="Halaman 2: Foto Gambar Real">
-                <span class="tab-label">Foto Real</span>
-              </button>
-              <button class="tab-btn" data-tab="tab-detection" title="Halaman 3: Ciri Pelaku & SOP">
+              <button class="tab-btn" data-tab="tab-detection" title="Halaman 2: Ciri Pelaku & SOP">
                 <span class="tab-label">Ciri Pelaku & SOP</span>
               </button>
-              <button class="tab-btn" data-tab="tab-risk" title="Halaman 4: Indikator Risiko">
+              <button class="tab-btn" data-tab="tab-risk" title="Halaman 3: Indikator Risiko">
                 <span class="tab-label">Indikator Risiko</span>
               </button>
             </div>
@@ -249,18 +269,6 @@ export class Modul3View extends BaseModuleView {
                 <div class="inspection-guideline-box">
                   <span class="guide-title">Catatan Penindakan DJBC:</span>
                   <p id="detail-inspection-note" class="guide-text"></p>
-                </div>
-              </div>
-
-              <!-- TAB 2: FOTO REAL -->
-              <div class="tab-pane" id="tab-photos">
-                <div class="photos-tab-header">
-                  <span class="photos-tab-title">Barang Bukti Sitaan & Citra Forensik:</span>
-                  <span class="photos-tab-hint">Klik gambar untuk melihat resolusi penuh & zoom</span>
-                </div>
-                <div class="findings-thumbnails-grid" id="findings-thumbnails-grid"></div>
-                <div class="gallery-case-note">
-                  <strong>Penting:</strong> Dokumentasi penindakan riil dan citra radiologis pemindai kargo resmi DJBC.
                 </div>
               </div>
 
@@ -314,13 +322,17 @@ export class Modul3View extends BaseModuleView {
               </div>
             </div>
 
-            <!-- Modal Footer Controls -->
-            <div class="tabbed-modal-footer">
-              <div class="footer-page-stepper">
-                <button id="btn-page-prev" class="footer-step-btn" title="Halaman Sebelumnya">‹ Tab Sebelumnya</button>
-                <span id="footer-page-indicator" class="footer-page-indicator">Hal 1 dari 4: Modus</span>
-                <button id="btn-page-next" class="footer-step-btn" title="Halaman Berikutnya">Tab Berikutnya ›</button>
+            <!-- Bottom Carousel Pagination Bar (<, dot, >) -->
+            <div class="card-pagination-bar" id="card-pagination-bar">
+              <button id="btn-page-prev" class="card-page-nav-btn" title="Halaman Tab Sebelumnya" disabled>&lt;</button>
+
+              <div class="card-page-pills" id="card-page-pills">
+                <button class="page-pill active" data-page="0" title="1. Modus Operandi"></button>
+                <button class="page-pill" data-page="1" title="2. Ciri Pelaku & SOP"></button>
+                <button class="page-pill" data-page="2" title="3. Indikator Risiko"></button>
               </div>
+
+              <button id="btn-page-next" class="card-page-nav-btn" title="Halaman Tab Selanjutnya">&gt;</button>
             </div>
           </div>
         </div>
@@ -451,6 +463,122 @@ export class Modul3View extends BaseModuleView {
         if (audioIcon) audioIcon.textContent = '🔇';
       }
     });
+
+    // Setup Vertical Zoom Slider & Controls
+    this.setupZoomControls();
+  }
+
+  setupZoomControls() {
+    const btnZoomIn = this.container.querySelector('#btn-zoom-in');
+    const btnZoomOut = this.container.querySelector('#btn-zoom-out');
+    const btnZoomReset = this.container.querySelector('#btn-zoom-reset');
+    const zoomSlider = this.container.querySelector('#m3-zoom-slider');
+    const canvasWrap = this.container.querySelector('#cargo-canvas-wrapper');
+
+    zoomSlider?.addEventListener('input', (e) => {
+      this.applyZoom(Number(e.target.value) / 100);
+    });
+
+    btnZoomIn?.addEventListener('click', () => {
+      this.applyZoom(this.currentZoom + 0.15);
+    });
+
+    btnZoomOut?.addEventListener('click', () => {
+      this.applyZoom(this.currentZoom - 0.15);
+    });
+
+    btnZoomReset?.addEventListener('click', () => {
+      this.resetZoom();
+    });
+
+    // Mouse wheel zoom on canvas wrapper
+    canvasWrap?.addEventListener('wheel', (e) => {
+      e.preventDefault();
+      const step = 0.1;
+      if (e.deltaY < 0) {
+        this.applyZoom(this.currentZoom + step);
+      } else {
+        this.applyZoom(this.currentZoom - step);
+      }
+    }, { passive: false });
+
+    // Drag / Pan when zoomed in
+    let isDragging = false;
+    let startX = 0;
+    let startY = 0;
+
+    canvasWrap?.addEventListener('mousedown', (e) => {
+      if (this.currentZoom <= 1.0) return;
+      if (e.target.closest('button') || e.target.closest('input') || e.target.closest('.modal-card') || e.target.closest('.body-hotspot-pin')) {
+        return;
+      }
+      // If clicking inside scanner stage in lens mode with left-click, let lens reveal work
+      if (this.currentViewMode === 'lens' && e.target.closest('#cargo-image-container') && e.button === 0) {
+        return;
+      }
+      isDragging = true;
+      startX = e.clientX - this.panX;
+      startY = e.clientY - this.panY;
+      canvasWrap.style.cursor = 'grabbing';
+    });
+
+    window.addEventListener('mousemove', (e) => {
+      if (!isDragging) return;
+      this.panX = e.clientX - startX;
+      this.panY = e.clientY - startY;
+      const container = this.container.querySelector('#cargo-image-container');
+      if (container) {
+        container.style.transform = `translate(${this.panX}px, ${this.panY}px) scale(${this.currentZoom})`;
+      }
+    });
+
+    window.addEventListener('mouseup', () => {
+      if (isDragging) {
+        isDragging = false;
+        if (canvasWrap) canvasWrap.style.cursor = 'default';
+      }
+    });
+
+    this.applyZoom(1.2);
+  }
+
+  applyZoom(val) {
+    this.currentZoom = Math.min(2.5, Math.max(1.0, parseFloat(val.toFixed(2))));
+    const container = this.container.querySelector('#cargo-image-container');
+    const zoomText = this.container.querySelector('#zoom-level-text');
+    const slider = this.container.querySelector('#m3-zoom-slider');
+
+    if (container) {
+      if (this.panX === 0 && this.panY === 0) {
+        container.style.transformOrigin = 'center center';
+        container.style.transform = `scale(${this.currentZoom})`;
+      } else {
+        container.style.transformOrigin = 'center center';
+        container.style.transform = `translate(${this.panX}px, ${this.panY}px) scale(${this.currentZoom})`;
+      }
+    }
+
+    const counterScale = (1 / this.currentZoom).toFixed(4);
+    if (container) {
+      container.style.setProperty('--body-zoom', this.currentZoom);
+      container.style.setProperty('--tooltip-counter-scale', counterScale);
+    }
+    document.documentElement.style.setProperty('--body-zoom', this.currentZoom);
+    document.documentElement.style.setProperty('--tooltip-counter-scale', counterScale);
+
+    const pct = Math.round(this.currentZoom * 100);
+    if (zoomText) {
+      zoomText.textContent = `${pct}%`;
+    }
+    if (slider && Number(slider.value) !== pct) {
+      slider.value = pct;
+    }
+  }
+
+  resetZoom() {
+    this.panX = 0;
+    this.panY = 0;
+    this.applyZoom(1.2);
   }
 
   updateModePills(activeBtn) {
@@ -527,12 +655,13 @@ export class Modul3View extends BaseModuleView {
 
       const isVisited = this.visitedHotspots.has(hs.id);
       const isActive = this.isModalOpen && hs.id === this.currentHotspotId;
+      const coords = (hs.coordsByView && hs.coordsByView[this.currentViewMode]) || hs.position;
+      const isTopArea = coords.y < 28;
 
       const pin = document.createElement('div');
-      pin.className = `body-hotspot-pin ${isActive ? 'active' : ''} ${isVisited ? 'visited' : ''}`;
+      pin.className = `body-hotspot-pin ${isActive ? 'active' : ''} ${isVisited ? 'visited' : ''} ${isTopArea ? 'tooltip-bottom' : ''}`;
       pin.dataset.id = hs.id;
       
-      const coords = (hs.coordsByView && hs.coordsByView[this.currentViewMode]) || hs.position;
       pin.style.left = `${coords.x}%`;
       pin.style.top = `${coords.y}%`;
       pin.style.position = 'absolute';
@@ -604,7 +733,7 @@ export class Modul3View extends BaseModuleView {
 
     if (badgeRow) badgeRow.className = `detail-badge-row cat-${hs.categoryId || hs.category}`;
     if (tagBadge) {
-      tagBadge.textContent = `MODUS #${hs.num || String(idx + 1).padStart(2, '0')}`;
+      tagBadge.textContent = `MODUS #${hs.badgeNum || String(hs.num || idx + 1).padStart(2, '0')}`;
       tagBadge.className = `detail-tag-badge cat-${hs.categoryId || hs.category}`;
     }
     if (title) title.textContent = hs.label;
@@ -647,35 +776,7 @@ export class Modul3View extends BaseModuleView {
     if (narrative) narrative.textContent = hs.modusDetail || hs.description;
     if (note) note.textContent = hs.inspectionNote || 'SOP DJBC';
 
-    // TAB 2: Foto Real
-    const findingsGrid = this.container.querySelector('#findings-thumbnails-grid');
-    if (findingsGrid) {
-      findingsGrid.innerHTML = '';
-      const findingsList = (hs.galleryImages && hs.galleryImages.length > 0)
-        ? hs.galleryImages.map(img => ({ full: img, thumb: img, caption: hs.label, tag: hs.badge || 'Barang Bukti' }))
-        : [{ full: hs.mainImage || 'assets/images/central/m3_parcel_xray.jpeg', thumb: hs.mainImage || 'assets/images/central/m3_parcel_xray.jpeg', caption: hs.label, tag: hs.badge || 'Barang Bukti' }];
-
-      findingsList.forEach(f => {
-        const item = document.createElement('div');
-        item.className = 'finding-thumb-item';
-        item.setAttribute('role', 'button');
-        item.setAttribute('tabindex', '0');
-        item.setAttribute('title', `Klik untuk memperbesar: ${f.caption}`);
-        item.style.cursor = 'pointer';
-        item.innerHTML = `
-          <img src="${f.thumb || f.full}" alt="${f.caption}" onerror="this.src='assets/images/central/m3_parcel_xray.jpeg'" />
-          <span class="finding-thumb-label">${f.tag || 'Barang Bukti'}</span>
-        `;
-        item.addEventListener('click', (e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          this.openImagePopup(f.full || f.thumb, `${f.caption} — [${f.tag || 'Barang Bukti'}]`);
-        });
-        findingsGrid.appendChild(item);
-      });
-    }
-
-    // TAB 3: Detection & SOP
+    // TAB 2: Detection & SOP
     const indList = this.container.querySelector('#detail-indicators-list');
     if (indList) {
       indList.innerHTML = '';
@@ -772,9 +873,28 @@ export class Modul3View extends BaseModuleView {
     prevBtn?.addEventListener('click', () => this.navigateHotspot(-1));
     nextBtn?.addEventListener('click', () => this.navigateHotspot(1));
 
-    // Card page stepper
-    btnPagePrev?.addEventListener('click', () => this.stepCardPage(-1));
-    btnPageNext?.addEventListener('click', () => this.stepCardPage(1));
+    // Card page carousel pagination (<, dot, >)
+    const pagePills = Array.from(this.container.querySelectorAll('.card-page-pills .page-pill'));
+
+    btnPagePrev?.addEventListener('click', () => {
+      if (this.currentCardPageIndex > 0) {
+        this.switchCardPage(this.currentCardPageIndex - 1);
+      }
+    });
+
+    btnPageNext?.addEventListener('click', () => {
+      if (this.currentCardPageIndex < this.cardPages.length - 1) {
+        this.switchCardPage(this.currentCardPageIndex + 1);
+      } else {
+        this.navigateHotspot(1);
+      }
+    });
+
+    pagePills.forEach((pill, idx) => {
+      pill.addEventListener('click', () => {
+        this.switchCardPage(idx);
+      });
+    });
 
     // Tab buttons
     const tabBtns = this.container.querySelectorAll('#card-tabs-nav .tab-btn');
@@ -895,14 +1015,14 @@ export class Modul3View extends BaseModuleView {
       }
     });
 
-    // Update Footer Stepper
-    const indicator = this.container.querySelector('#footer-page-indicator');
-    const prevBtn = this.container.querySelector('#btn-page-prev');
-    const nextBtn = this.container.querySelector('#btn-page-next');
+    // Sync pagination pills (<, dot, >)
+    this.container.querySelectorAll('.card-page-pills .page-pill').forEach((pill, idx) => {
+      if (idx === pageIndex) pill.classList.add('active');
+      else pill.classList.remove('active');
+    });
 
-    if (indicator) indicator.textContent = `Hal ${page.num} dari ${this.cardPages.length}: ${page.title}`;
+    const prevBtn = this.container.querySelector('#btn-page-prev');
     if (prevBtn) prevBtn.disabled = (pageIndex === 0);
-    if (nextBtn) nextBtn.disabled = (pageIndex === this.cardPages.length - 1);
   }
 
   stepCardPage(step) {

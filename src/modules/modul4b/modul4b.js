@@ -8,7 +8,7 @@ export class Modul4bView extends BaseModuleView {
     this.currentHotspotId = null;
     this.visitedHotspots = new Set();
     this.currentActiveTab = 'tab-modus';
-    this.currentZoom = 1.0;
+    this.currentZoom = 1.4;
     this.isModalOpen = false;
     this.glightboxInstance = null;
     this.cardPages = [
@@ -78,7 +78,6 @@ export class Modul4bView extends BaseModuleView {
               <!-- HUD Telemetry Watermark Overlay -->
               <div class="forensic-hud-telemetry" aria-hidden="true">
                 <div class="forensic-hud-top-left font-code-tech">
-                  <div class="hud-line-title">STASIUN PEMINDAIAN SARANA PENGANGKUT LAUT // 10 INSPECTION ZONES</div>
                   <div class="hud-line-sub">SUBJEK ID: VESSEL-KM-SAMUDRA-09 / CONTAINER CARGO SHIP</div>
                 </div>
                 <div class="forensic-hud-top-right font-code-tech">
@@ -88,40 +87,26 @@ export class Modul4bView extends BaseModuleView {
               </div>
 
               <!-- Central Active Vessel Image Container with Hotspots Layer -->
-              <div class="body-image-container" id="m4b-image-container" style="max-width:960px; aspect-ratio: auto; margin:0 auto;">
-                <img id="m4b-central-image" src="assets/images/central/m4b_ship_cutaway.jpeg" 
+              <div class="body-image-container" id="m4b-image-container">
+                <img id="m4b-central-image" src="assets/images/central/m4b_ship_cutaway_transparent.png" 
                      alt="Interactive Inspection Map Kapal Kargo" 
                      class="main-body-img"
-                     style="max-height: 68vh; filter: drop-shadow(0 12px 32px rgba(0, 37, 59, 0.16)); pointer-events:none;" />
+                     style="filter: drop-shadow(0 16px 36px rgba(0, 37, 59, 0.22)); pointer-events:none;" />
                 <div class="body-pedestal-platform"></div>
                 <div id="m4b-hotspots-layer" class="hotspots-layer"></div>
               </div>
 
-              <!-- Floating HUD Segmented Pill Controls Dock (Center Bottom) -->
+              <!-- Floating HUD Zoom Controls Dock (Center Bottom) -->
               <div class="pedestal-rotation-dock" id="pedestal-rotation-dock">
-                <div class="pedestal-carousel-controls">
-                  <!-- Inspection Focus Pill Button -->
-                  <button id="btn-view-ship" class="hud-pill-action-btn active" title="Tampilan Penuh Kapal (Reset Zoom)">
-                    <span class="hud-btn-icon">🚢</span>
-                    <span class="hud-btn-text">CUTAWAY KAPAL (RESET)</span>
-                  </button>
-
-                  <div class="hud-pill-divider"></div>
-
-                  <!-- Quick Zone Navigator Pills (01–10) -->
-                  <div class="dock-zone-pills" id="dock-zone-pills" title="Pilih Zona Pemeriksaan (01–10)"></div>
-
-                  <div class="hud-pill-divider"></div>
-
-                  <!-- Zoom Controls integrated into segmented dock -->
+                <div class="zoom-controls-bar">
                   <button id="btn-zoom-out" class="pedestal-ctrl-btn hud-zoom-btn" title="Perkecil (Zoom Out)" aria-label="Zoom Out">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line></svg>
                   </button>
-                  <span id="zoom-level-text" class="zoom-level-badge font-code-tech">100%</span>
+                  <span id="zoom-level-text" class="zoom-level-badge font-code-tech">140%</span>
                   <button id="btn-zoom-in" class="pedestal-ctrl-btn hud-zoom-btn" title="Perbesar (Zoom In)" aria-label="Zoom In">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
                   </button>
-                  <button id="btn-zoom-reset" class="pedestal-ctrl-btn hud-zoom-btn reset-btn" title="Reset Zoom (100%)" aria-label="Reset Zoom">
+                  <button id="btn-zoom-reset" class="pedestal-ctrl-btn hud-zoom-btn reset-btn" title="Reset Zoom (140%)" aria-label="Reset Zoom">
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><polyline points="3 3 3 8 8 8"></polyline></svg>
                   </button>
                 </div>
@@ -338,6 +323,9 @@ export class Modul4bView extends BaseModuleView {
     this.renderHotspots();
     this.renderDockPills();
 
+    this.panX = 0;
+    this.panY = 0;
+
     // Reset Full Cutaway View Button
     const btnViewShip = this.container.querySelector('#btn-view-ship');
     btnViewShip?.addEventListener('click', () => {
@@ -352,6 +340,54 @@ export class Modul4bView extends BaseModuleView {
     btnZoomIn?.addEventListener('click', () => this.applyZoom(this.currentZoom + 0.2));
     btnZoomOut?.addEventListener('click', () => this.applyZoom(this.currentZoom - 0.2));
     btnZoomReset?.addEventListener('click', () => this.resetCameraZoom());
+
+    // Mouse Wheel Zoom on Canvas Wrapper
+    const canvasWrap = this.container.querySelector('#m4b-canvas-wrapper');
+    canvasWrap?.addEventListener('wheel', (e) => {
+      e.preventDefault();
+      const step = 0.15;
+      if (e.deltaY < 0) {
+        this.applyZoom(this.currentZoom + step);
+      } else {
+        this.applyZoom(this.currentZoom - step);
+      }
+    }, { passive: false });
+
+    // Drag / Pan when Zoomed in
+    let isDragging = false;
+    let startX = 0;
+    let startY = 0;
+
+    canvasWrap?.addEventListener('mousedown', (e) => {
+      if (e.button !== 0) return;
+      if (e.target.closest('button') || e.target.closest('.pedestal-rotation-dock') || e.target.closest('.modal-card')) {
+        return;
+      }
+      isDragging = true;
+      startX = e.clientX - this.panX;
+      startY = e.clientY - this.panY;
+      canvasWrap.style.cursor = 'grabbing';
+    });
+
+    window.addEventListener('mousemove', (e) => {
+      if (!isDragging) return;
+      this.panX = e.clientX - startX;
+      this.panY = e.clientY - startY;
+      const container = this.container.querySelector('#m4b-image-container');
+      if (container) {
+        container.style.transform = `translate(${this.panX}px, ${this.panY}px) scale(${this.currentZoom})`;
+      }
+    });
+
+    window.addEventListener('mouseup', () => {
+      if (isDragging) {
+        isDragging = false;
+        if (canvasWrap) canvasWrap.style.cursor = 'grab';
+      }
+    });
+
+    // Apply default zoom 140%
+    this.applyZoom(1.4);
   }
 
   applyZoom(val) {
@@ -360,7 +396,15 @@ export class Modul4bView extends BaseModuleView {
     const zoomText = this.container.querySelector('#zoom-level-text');
 
     if (container) {
-      container.style.transform = `scale(${this.currentZoom})`;
+      if (this.currentZoom === 1.4 && this.panX === 0 && this.panY === 0) {
+        container.style.transformOrigin = 'center center';
+        container.style.transform = 'scale(1.4)';
+      } else {
+        if (!this.currentHotspotId) {
+          container.style.transformOrigin = 'center center';
+        }
+        container.style.transform = `translate(${this.panX}px, ${this.panY}px) scale(${this.currentZoom})`;
+      }
     }
 
     const counterScale = (1 / this.currentZoom).toFixed(4);
@@ -378,6 +422,8 @@ export class Modul4bView extends BaseModuleView {
 
   zoomToZone(hs, zoomLevel = 2.0) {
     this.currentZoom = zoomLevel;
+    this.panX = 0;
+    this.panY = 0;
     const container = this.container.querySelector('#m4b-image-container');
     const zoomText = this.container.querySelector('#zoom-level-text');
 
@@ -402,22 +448,25 @@ export class Modul4bView extends BaseModuleView {
   }
 
   resetCameraZoom() {
-    this.currentZoom = 1.0;
+    this.currentZoom = 1.4;
+    this.panX = 0;
+    this.panY = 0;
     const container = this.container.querySelector('#m4b-image-container');
     const zoomText = this.container.querySelector('#zoom-level-text');
 
+    const counterScale = (1 / 1.4).toFixed(4);
     if (container) {
       container.style.transformOrigin = 'center center';
-      container.style.transform = 'scale(1.0)';
-      container.style.setProperty('--body-zoom', 1.0);
-      container.style.setProperty('--tooltip-counter-scale', 1.0);
+      container.style.transform = 'scale(1.4)';
+      container.style.setProperty('--body-zoom', 1.4);
+      container.style.setProperty('--tooltip-counter-scale', counterScale);
     }
 
-    document.documentElement.style.setProperty('--body-zoom', 1.0);
-    document.documentElement.style.setProperty('--tooltip-counter-scale', 1.0);
+    document.documentElement.style.setProperty('--body-zoom', 1.4);
+    document.documentElement.style.setProperty('--tooltip-counter-scale', counterScale);
 
     if (zoomText) {
-      zoomText.textContent = '100%';
+      zoomText.textContent = '140%';
     }
 
     this.updateDockPills(null);
@@ -504,34 +553,46 @@ export class Modul4bView extends BaseModuleView {
       const badge = callout.badge || anchor;
       const lineEnd = callout.lineEnd || elbow;
 
-      // SVG Line
+      // SVG Line (1px Gold Callout Line)
       const polyline = document.createElementNS(svgNS, 'polyline');
       polyline.setAttribute('class', `m4b-callout-line ${isCurrentActive ? 'active' : ''}`);
-      polyline.setAttribute('points', `${anchor.x},${anchor.y} ${elbow.x},${elbow.y} ${lineEnd.x},${elbow.y}`);
+      polyline.setAttribute('points', `${anchor.x},${anchor.y} ${elbow.x},${badge.y} ${badge.x},${badge.y}`);
+      polyline.setAttribute('stroke', '#D9B45B');
+      polyline.setAttribute('stroke-width', '1');
+      polyline.setAttribute('stroke-linecap', 'round');
+      polyline.setAttribute('stroke-linejoin', 'round');
       polyline.setAttribute('data-id', hs.id);
       svg.appendChild(polyline);
 
-      // HTML Anchor Dot button at ship coordinate
+      // HTML Anchor Dot button at ship coordinate (titik hotspot)
       const anchorBtn = document.createElement('button');
       anchorBtn.className = `m4b-callout-anchor ${isCurrentActive ? 'active' : ''} ${isVisited ? 'visited' : ''}`;
       anchorBtn.style.left = `${anchor.x}%`;
       anchorBtn.style.top = `${anchor.y}%`;
+      anchorBtn.style.setProperty('--pulse-index', idx);
       anchorBtn.setAttribute('data-id', hs.id);
-      anchorBtn.setAttribute('title', `${displayNum} ${title}`);
-      anchorBtn.setAttribute('aria-label', `${displayNum} ${title}`);
-      anchorBtn.innerHTML = `<span class="m4b-callout-anchor-dot"></span>`;
+      anchorBtn.setAttribute('title', `Titik Hotspot ${displayNum}: ${title}`);
+      anchorBtn.setAttribute('aria-label', `Titik Hotspot ${displayNum}: ${title}`);
+      anchorBtn.innerHTML = `
+        <span class="m4b-callout-anchor-pulse"></span>
+        <span class="m4b-callout-anchor-dot"></span>
+      `;
 
       // HTML Callout Pill (badge + label text)
       const pill = document.createElement('div');
       pill.className = `m4b-callout-item ${isCurrentActive ? 'active' : ''} ${isVisited ? 'visited' : ''}`;
       pill.style.left = `${badge.x}%`;
       pill.style.top = `${badge.y}%`;
+      pill.style.setProperty('--pulse-index', idx);
       pill.setAttribute('data-id', hs.id);
       pill.setAttribute('role', 'button');
       pill.setAttribute('tabindex', '0');
       pill.setAttribute('title', `${displayNum} ${title}`);
       pill.innerHTML = `
-        <div class="m4b-callout-badge">${displayNum}</div>
+        <div class="m4b-callout-badge" aria-label="Zona ${displayNum}">
+          <span class="m4b-callout-badge-pulse"></span>
+          <span class="m4b-callout-badge-num">${displayNum}</span>
+        </div>
         <span class="m4b-callout-text">${title}</span>
       `;
 

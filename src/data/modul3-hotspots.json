@@ -1,185 +1,447 @@
 {
   "moduleId": "modul3",
   "moduleTitle": "Modul 3: Penyelundupan Melalui Barang Kiriman (Postal & Courier Cargo)",
-  "description": "Inspeksi paket barang kiriman impor Pos & PJT: Kardus Corrugated, Makanan Kaleng (Liquid Meth), Komponen Kendaraan, Elektronik, Mainan, Wadah Cairan, Kemasan Produk, & False Concealment.",
+  "moduleSubtitle": "STASIUN PEMINDAIAN BARANG KIRIMAN IMPOR • PMK-188/2021 & S-39/BC/2023",
+  "description": "Inspeksi komprehensif paket kiriman kargo pos & PJT menggunakan simulator Dual-Energy X-Ray Scanner. Kenali anomali citra X-Ray pada pouch makanan ringan, shockbreaker kendaraan, bohlam lampu, unit UPS, mainan anak berongga, botol minuman kemasan, dan dinding karton bergelombang (corrugated).",
   "supportsRotation": false,
   "centralImages": {
-    "cutaway": {
-      "url": "assets/images/central/m3_parcel_cutaway.png",
-      "label": "Tampak Irisan Dalam (Cutaway View)"
-    },
     "normal": {
-      "url": "assets/images/central/m3_parcel_normal.png",
-      "label": "Tampak Luar Kemasan Pos/PJT"
+      "url": "assets/images/central/m3_parcel_normal.jpeg",
+      "label": "Tampak Luar Paket Kargo (Normal View)"
+    },
+    "xray": {
+      "url": "assets/images/central/m3_parcel_xray.jpeg",
+      "label": "Tampak Pemindai X-Ray Kargo (Dual-Energy X-Ray)"
     }
   },
   "filterCategories": [
-    { "id": "all", "label": "Semua Titik" },
-    { "id": "kardus_makanan", "label": "Kardus & Makanan" },
-    { "id": "komponen_elektronik", "label": "Komponen & Elektronik" },
-    { "id": "mainan_cairan", "label": "Mainan & Wadah Cairan" },
-    { "id": "kemasan_false", "label": "Kemasan & False Concealment" }
+    {
+      "id": "all",
+      "label": "Semua Titik (7)"
+    },
+    {
+      "id": "makanan_minuman",
+      "label": "Makanan & Minuman (2)"
+    },
+    {
+      "id": "mekanikal_mainan",
+      "label": "Suspensi & Mainan (2)"
+    },
+    {
+      "id": "komponen_elektronik",
+      "label": "Elektronik & Bohlam (2)"
+    },
+    {
+      "id": "dinding_karton",
+      "label": "Dinding Box Karton (1)"
+    }
   ],
   "hotspots": [
     {
-      "id": "hs-m3-kardus",
-      "category": "kardus_makanan",
-      "view": "cutaway",
-      "position": { "x": 35.0, "y": 45.0 },
-      "label": "Kardus: Dinding Kardus Corrugated (Double-Wall Sheet)",
-      "badge": "CORRUGATED",
-      "badgeType": "warning",
-      "mainImage": "assets/images/hotspots/hs_sardine_can_false.png",
-      "galleryImages": ["assets/images/hotspots/hs_sardine_can_false.png"],
-      "description": "Narkotika cair diresapkan ke dalam selipan corrugated kardus kemasan paket luar.",
-      "riskIndicators": [
-        "Kardus kaku dan berbau kimia tajam.",
-        "Respon positif K-9 Pelacak Bea Cukai."
-      ],
-      "inspectionActions": [
-        "Iris tipis lapisan selipan kardus.",
-        "Uji ekstraksi laboratorium."
-      ]
-    },
-    {
-      "id": "hs-m3-makanan",
-      "category": "kardus_makanan",
-      "view": "cutaway",
-      "position": { "x": 62.0, "y": 52.0 },
-      "label": "Makanan: Kaleng Makanan Cair Palsu (Liquid Meth)",
-      "badge": "LIQUID METH",
+      "id": "hs-m3-makanan-pouch",
+      "num": 1,
+      "badgeNum": "01",
+      "category": "makanan_minuman",
+      "categoryId": "makanan_minuman",
+      "categoryLabel": "Makanan & Minuman",
+      "position": {
+        "x": 35.5,
+        "y": 48.0
+      },
+      "coordsByView": {
+        "lens": {
+          "x": 35.5,
+          "y": 48.0
+        },
+        "xray": {
+          "x": 35.5,
+          "y": 48.0
+        },
+        "normal": {
+          "x": 35.5,
+          "y": 48.0
+        }
+      },
+      "label": "1. Makanan dalam Kemasan (Pouch)",
+      "shortName": "Makanan Kemasan (Pouch)",
+      "badge": "POUCH SNACK",
       "badgeType": "danger",
-      "mainImage": "assets/images/hotspots/hs_sardine_can_false.png",
-      "galleryImages": ["assets/images/hotspots/hs_sardine_can_false.png"],
-      "description": "Kaleng sarden/buah diisi Narkotika cair yang disegel ulang menyerupai olahan pabrik.",
+      "tag": "Cover Cargo / Mismatch",
+      "bodyLocation": "Kompartemen Kiri Paket Kiriman",
+      "drugTypes": "Narkotika Sintetis / Bahan Berbahaya",
+      "packagingTechnique": "Kemasan Pouch Foil / Flexible Packaging",
+      "mainIllustration": "assets/images/hotspots/module_3/01.jpeg",
+      "mainImage": "assets/images/hotspots/module_3/01.jpeg",
+      "galleryImages": [
+        "assets/images/hotspots/module_3/01.jpeg"
+      ],
+      "description": "Makanan dalam kemasan pouch fleksibel digunakan sebagai cover cargo yang tampak wajar dalam deklarasi, namun terdapat anomali densitas organik di dalamnya.",
+      "modusDetail": "Penyelundup menyamarkan zat terlarang di dalam kemasan makanan ringan komersial (pouch bersegel) untuk mengelabui pemeriksaan visual awal. Pada pemindaian X-Ray Dual-Energy, terdeteksi ketidaksesuaian pola sebaran material dan densitas organik berlebih yang tidak konsisten dengan makanan ringan biasa.",
+      "inspectionNote": "Fokus pemeriksa bukan mencari narkotika berdasarkan bentuk tertentu, melainkan menemukan ketidaksesuaian yang dapat diverifikasi antara deklarasi, kemasan, berat, dan citra X-ray.",
       "riskIndicators": [
-        "Densitas cairan X-Ray tidak homogen.",
-        "Berat kaleng tidak sesuai netto label."
+        "Pola sebaran material pada citra X-Ray tidak konsisten dengan karakteristik makanan ringan.",
+        "Distribusi densitas organik padat/pekat di bagian tengah pouch yang seharusnya homogen.",
+        "Perbedaan bobot nyata kemasan dibandingkan berat standar produk pada label deklarasi.",
+        "Kondisi heat-seal kemasan menunjukkan bekas rekondisi/penyegelan ulang secara manual."
       ],
       "inspectionActions": [
-        "Buka penutup kaleng dengan alat steril.",
-        "Uji cairan dengan Reagen Marquis."
-      ]
+        "Review Declaration: Periksa kesesuaian deskripsi manifes (CN23/AWB) dan berat total barang.",
+        "Observe Packaging: Amati fisik kemasan luar, kondisi seal pabrik vs seal manual, dan cetakan label.",
+        "X-Ray Interpretation: Bandingkan citra radiologis dengan baseline kemasan makanan standar.",
+        "Physical Verification: Lakukan pencacahan fisik di meja periksa steril jika terdapat anomali radiologis.",
+        "Document Findings: Catat deviasi dan ambil sampel sesuai prosedur penindakan DJBC."
+      ],
+      "riskScore": 88,
+      "riskLevel": "TINGGI",
+      "medicalRisk": "PERINGATAN BAHAYA: Waspadai kemungkinan bahan kimia aktif, bubuk tak dikenal, atau zat sintetis berbahaya. Wajib gunakan sarung tangan nitril dan masker saat pembukaan fisik."
     },
     {
-      "id": "hs-m3-komponen",
+      "id": "hs-m3-tabung-suspensi",
+      "num": 2,
+      "badgeNum": "02",
+      "category": "mekanikal_mainan",
+      "categoryId": "mekanikal_mainan",
+      "categoryLabel": "Suspensi & Mainan",
+      "position": {
+        "x": 48.0,
+        "y": 53.0
+      },
+      "coordsByView": {
+        "lens": {
+          "x": 48.0,
+          "y": 53.0
+        },
+        "xray": {
+          "x": 48.0,
+          "y": 53.0
+        },
+        "normal": {
+          "x": 48.0,
+          "y": 53.0
+        }
+      },
+      "label": "2. Tabung Suspensi (Shockbreaker) Kendaraan",
+      "shortName": "Shockbreaker Kendaraan",
+      "badge": "SPAREPART LOGAM",
+      "badgeType": "danger",
+      "tag": "Mechanical Cover Cargo",
+      "bodyLocation": "Rongga Tabung Silinder Suspensi",
+      "drugTypes": "Metamfetamin / Heroin / Zat Terlarang",
+      "packagingTechnique": "Penyisipan Silinder dalam Tabung Logam",
+      "mainIllustration": "assets/images/hotspots/module_3/02.jpeg",
+      "mainImage": "assets/images/hotspots/module_3/02.jpeg",
+      "galleryImages": [
+        "assets/images/hotspots/module_3/02.jpeg"
+      ],
+      "description": "Komponen shockbreaker kendaraan berbahan logam tebal dimanfaatkan sebagai cover cargo dengan menyelipkan material organik ke dalam tabung silinder.",
+      "modusDetail": "Pelaku memanfaatkan rongga internal peredam kejut (shock absorber) otomotif yang berdinding logam tebal. Penyelundup berasumsi densitas logam (warna biru pada pemindai X-Ray) akan menutupi keberadaan zat organik. Namun pemindai Dual-Energy menembus silinder dan menampilkan saturasi oranye mencolok di dalam tabung.",
+      "inspectionNote": "Pengetahuan tentang struktur normal komponen otomotif adalah kunci utama dalam mengenali deviasi atau objek asing pada citra radiologis X-Ray.",
+      "riskIndicators": [
+        "Citra X-Ray menampakkan material organik (warna oranye) di dalam tabung silinder yang seharusnya hanya berisi oli/gas dan pegas mekanis.",
+        "Perbedaan struktur internal yang signifikan antara dua unit shockbreaker yang seharusnya identik.",
+        "Terdapat bekas pengelasan ulang, cat baru yang tidak merata, atau goresan mekanis pada tutup silinder.",
+        "Deskripsi manifes barang hanya mencantumkan keterangan generik seperti Automotive Spareparts."
+      ],
+      "inspectionActions": [
+        "Identify Component: Pastikan spesifikasi pabrikan dan tipe shockbreaker.",
+        "Compare Baseline: Bandingkan citra radiologis dengan anatomi mekanis shockbreaker standar.",
+        "Density Analysis: Periksa anomali material organik (oranye) di area rongga silinder cairan hidrolik.",
+        "Mechanical Verification: Periksa mounting points dan indikasi modifikasi/alat penutup tabung.",
+        "Safety Inspection: Hindari pemotongan langsung tabung bertekanan tinggi tanpa peralatan pengaman."
+      ],
+      "riskScore": 94,
+      "riskLevel": "KRITIS",
+      "medicalRisk": "BAHAYA TEKANAN & TOKSISITAS: Tabung suspensi dapat memiliki gas/oli bertekanan tinggi. Jangan membongkar secara paksa. Kenakan APD lengkap terhadap zat kimia tersembunyi."
+    },
+    {
+      "id": "hs-m3-bohlam-lampu",
+      "num": 3,
+      "badgeNum": "03",
       "category": "komponen_elektronik",
-      "view": "cutaway",
-      "position": { "x": 48.0, "y": 70.0 },
-      "label": "Komponen Kendaraan: Shock Absorber & Sparepart",
-      "badge": "SPAREPART",
+      "categoryId": "komponen_elektronik",
+      "categoryLabel": "Elektronik & Bohlam",
+      "position": {
+        "x": 44.0,
+        "y": 72.0
+      },
+      "coordsByView": {
+        "lens": {
+          "x": 44.0,
+          "y": 72.0
+        },
+        "xray": {
+          "x": 44.0,
+          "y": 72.0
+        },
+        "normal": {
+          "x": 44.0,
+          "y": 72.0
+        }
+      },
+      "label": "3. Bohlam Lampu",
+      "shortName": "Bohlam Lampu",
+      "badge": "BOHLAM LED / KACA",
       "badgeType": "danger",
-      "mainImage": "assets/images/hotspots/hs_sardine_can_false.png",
-      "galleryImages": ["assets/images/hotspots/hs_sardine_can_false.png"],
-      "description": "Rongga dalam tabung shock absorber / silinder mesin kendaraan diisi bungkus sabu padat.",
+      "tag": "Cover Object / Bulb Cavity",
+      "bodyLocation": "Rongga Kubah Bohlam Lampu",
+      "drugTypes": "Narkotika Padat / Kristal Metamfetamin",
+      "packagingTechnique": "Paket Padat dalam Kubah Kaca/Plastik",
+      "mainIllustration": "assets/images/hotspots/module_3/03.jpeg",
+      "mainImage": "assets/images/hotspots/module_3/03.jpeg",
+      "galleryImages": [
+        "assets/images/hotspots/module_3/03.jpeg"
+      ],
+      "description": "Bohlam lampu penerangan dimanfaatkan sebagai cover object dengan memasukkan paket padat ke dalam kubah bohlam di atas rangkaian sirkuit driver.",
+      "modusDetail": "Kubah bohlam lampu yang normalnya berisi ruang hampa udara atau gas inert diisi paket padatan organik berbentuk balok/kubus. Pelaku menyatukan kembali kubah dengan ulir logam menggunakan perekat khusus. Citra X-Ray menampakkan massa oranye berdensitas tinggi tepat di atas sirkuit elektronik fitting bohlam.",
+      "inspectionNote": "Gunakan unit pembanding jika tersedia (compare like with like) untuk memverifikasi apakah struktur kubah bohlam bersih dari materi asing.",
       "riskIndicators": [
-        "X-Ray menembus rongga sparepart yang harusnya kosong.",
-        "Baut penutup sparepart menunjukkan bekas dibuka."
+        "Penampakan massa padat berwarna oranye pekat di dalam ruang kubah lampu pada citra X-Ray.",
+        "Bobot satu bohlam terasa jauh lebih berat daripada bohlam lampu identik lainnya.",
+        "Terdapat residu perekat atau celah tidak rapi antara kubah difuser dan base ulir logam.",
+        "Karakteristik X-ray driver/filamen lampu terhalang oleh material organik asing."
       ],
       "inspectionActions": [
-        "Gunakan gerinda potong untuk membuka silinder sparepart.",
-        "Sita paket sabu dari dalam rongga besi."
-      ]
+        "Visual Check: Amati kondisi sambungan antara rumah plastik/kaca dengan ulir logam (fitting E27).",
+        "Comparative X-Ray: Bandingkan struktur radiologis dengan bohlam normal pembanding.",
+        "Weight Test: Timbang masing-masing unit bohlam untuk mendeteksi deviasi gramatur.",
+        "Safe Disassembly: Lakukan pelepasan difuser lampu secara hati-hati di meja inspeksi.",
+        "Sample Testing: Uji zat yang ditemukan menggunakan uji reaksi reagen kimia narkotika."
+      ],
+      "riskScore": 89,
+      "riskLevel": "TINGGI",
+      "medicalRisk": "BAHAYA PECAHAN KACA & SERBUK: Waspadai risiko pecahan kaca bohlam dan debu kimia aktif. Gunakan pelindung mata dan sarung tangan tahan gores."
     },
     {
-      "id": "hs-m3-elektronik",
+      "id": "hs-m3-ups-powersupply",
+      "num": 4,
+      "badgeNum": "04",
       "category": "komponen_elektronik",
-      "view": "cutaway",
-      "position": { "x": 75.0, "y": 42.0 },
-      "label": "Elektronik: Powerbank, Speaker, & Amplifier",
-      "badge": "ELEKTRONIK",
-      "badgeType": "warning",
-      "mainImage": "assets/images/hotspots/hs_sardine_can_false.png",
-      "galleryImages": ["assets/images/hotspots/hs_sardine_can_false.png"],
-      "description": "Komponen baterai powerbank / speaker dibongkar dan diganti dengan paket ekstasi.",
-      "riskIndicators": [
-        "Perangkat elektronik tidak dapat menyala.",
-        "Citra X-Ray menunjukkan susunan komponen tidak wajar."
-      ],
-      "inspectionActions": [
-        "Buka sekrup casing perangkat elektronik.",
-        "Keluarkan bungkusan barang bukti."
-      ]
-    },
-    {
-      "id": "hs-m3-mainan",
-      "category": "mainan_cairan",
-      "view": "normal",
-      "position": { "x": 28.0, "y": 62.0 },
-      "label": "Mainan: Boneka & Mainan Plastik Berongga",
-      "badge": "MAINAN ANAK",
-      "badgeType": "info",
-      "mainImage": "assets/images/hotspots/hs_sardine_can_false.png",
-      "galleryImages": ["assets/images/hotspots/hs_sardine_can_false.png"],
-      "description": "Busa isian boneka / rongga dalam mainan plastik diisi kantong sabu.",
-      "riskIndicators": [
-        "Jahitan boneka bekas dijahit ulang secara kasar.",
-        "Suara derak saat mainan digoyangkan."
-      ],
-      "inspectionActions": [
-        "Buka jahitan boneka dengan gunting.",
-        "Keluarkan kantong barang bukti."
-      ]
-    },
-    {
-      "id": "hs-m3-cairan",
-      "category": "mainan_cairan",
-      "view": "normal",
-      "position": { "x": 82.0, "y": 68.0 },
-      "label": "Wadah Cairan: Botol Sampo & Oli Pelumas",
-      "badge": "WADAH CAIRAN",
-      "badgeType": "warning",
-      "mainImage": "assets/images/hotspots/hs_sardine_can_false.png",
-      "galleryImages": ["assets/images/hotspots/hs_sardine_can_false.png"],
-      "description": "Liquid Meth diselipkan dalam kantong plastik tebal yang dimasukkan ke dalam botol oli pelumas.",
-      "riskIndicators": [
-        "Endapan cairan tampak memisah di dasar botol.",
-        "Segel leher botol bekas dipanaskan ulang."
-      ],
-      "inspectionActions": [
-        "Tuang sebagian sampel cairan.",
-        "Uji reaksi kimia dengan Fast Blue B."
-      ]
-    },
-    {
-      "id": "hs-m3-kemasan",
-      "category": "kemasan_false",
-      "view": "normal",
-      "position": { "x": 40.0, "y": 28.0 },
-      "label": "Kemasan Produk: Kemasan Teh Cina / Herbal",
-      "badge": "GUANYINWANG",
+      "categoryId": "komponen_elektronik",
+      "categoryLabel": "Elektronik & Bohlam",
+      "position": {
+        "x": 54.0,
+        "y": 70.0
+      },
+      "coordsByView": {
+        "lens": {
+          "x": 54.0,
+          "y": 70.0
+        },
+        "xray": {
+          "x": 54.0,
+          "y": 70.0
+        },
+        "normal": {
+          "x": 54.0,
+          "y": 70.0
+        }
+      },
+      "label": "4. UPS atau Power Supply Unit",
+      "shortName": "UPS / Power Supply",
+      "badge": "ELEKTRONIK DAYA",
       "badgeType": "danger",
-      "mainImage": "assets/images/hotspots/hs_sardine_can_false.png",
-      "galleryImages": ["assets/images/hotspots/hs_sardine_can_false.png"],
-      "description": "Modus klasik bungkus teh Cina (Guanyinwang) foil keemasan bermerk teh impor diisi sabu kristal.",
+      "tag": "Electronic Enclosure Concealment",
+      "bodyLocation": "Kompartemen Internal Casing UPS",
+      "drugTypes": "Metamfetamin / Kokain / MDMA",
+      "packagingTechnique": "Balok Vakum di Kompartemen Baterai/Trafo",
+      "mainIllustration": "assets/images/hotspots/module_3/04.jpeg",
+      "mainImage": "assets/images/hotspots/module_3/04.jpeg",
+      "galleryImages": [
+        "assets/images/hotspots/module_3/04.jpeg"
+      ],
+      "description": "Perangkat elektronik UPS / adaptor daya berkapasitas besar dimodifikasi dengan menyisipkan balok bungkusan narkotika di antara komponen transformator dan sirkuit.",
+      "modusDetail": "Pelaku memanfaatkan kerumitan internal perangkat elektronik dan casing logam tebal sebagai tameng visual. Sebagian baterai atau ruang kosong di dalam UPS dikeluarkan dan digantikan dengan balok narkotika yang dibungkus rapi. Pemindai Dual-Energy menampakkan blok oranye tebal di tengah kerangka sirkuit elektronik hijau dan trafo logam biru.",
+      "inspectionNote": "Kompleksitas elektronik normal tidak boleh langsung dianggap sebagai anomali. Pemeriksa membutuhkan pemahaman baseline struktur komponen kelistrikan standar.",
       "riskIndicators": [
-        "Segel press aluminium foil tidak rapi.",
-        "Tekstur bungkusan keras berbentuk kristal padat."
+        "Blok organik oranye tebal berdensitas seragam di area yang seharusnya menjadi ruang ventilasi atau baterai.",
+        "Sekrup casing menunjukkan goresan aus akibat pernah dibuka dan ditutup kembali secara manual.",
+        "Bobot unit tidak proporsional dengan spesifikasi daya dan model perangkat pada label identitas.",
+        "Deklarasi dokumen kargo sangat umum (misalnya hanya bertuliskan Electronic Accessories)."
       ],
       "inspectionActions": [
-        "Gunting ujung bungkus teh keemasan.",
-        "Timbang berat dan uji sampel sabu."
-      ]
+        "Device Identification: Periksa label pabrikan, nomor model, dan spesifikasi daya pada casing.",
+        "Circuit Radiography: Analisis citra X-Ray untuk membedakan PCB, kabel, trafo logam, dan blok anomali.",
+        "Screw & Seal Check: Periksa apakah segel garansi pabrik rusak atau baut penutup casing cacat.",
+        "Electrical Safety Check: Pastikan perangkat dimatikan dan kapasitor/baterai tidak bermuatan aktif sebelum dibuka.",
+        "Forensic Opening: Buka cover casing di bawah pengawasan tim pengawas dan dokumentasikan isinya."
+      ],
+      "riskScore": 92,
+      "riskLevel": "KRITIS",
+      "medicalRisk": "BAHAYA TEGANGAN TINGGI & BATERAI: UPS menyimpan energi listrik residual berbahaya dan sel baterai lithium/asam timbal. Pastikan prosedur keselamatan kelistrikan dipatuhi."
     },
     {
-      "id": "hs-m3-false-other",
-      "category": "kemasan_false",
-      "view": "normal",
-      "position": { "x": 58.0, "y": 30.0 },
-      "label": "False Concealment Lainnya: Bingkai Foto & Patung Hiasan",
-      "badge": "PATUNG / BINGKAI",
-      "badgeType": "info",
-      "mainImage": "assets/images/hotspots/hs_sardine_can_false.png",
-      "galleryImages": ["assets/images/hotspots/hs_sardine_can_false.png"],
-      "description": "Patung semen / kayu hiasan dibuat berongga di bagian tengah untuk menyimpan ketamin/ekstasi.",
+      "id": "hs-m3-mainan-berongga",
+      "num": 5,
+      "badgeNum": "05",
+      "category": "mekanikal_mainan",
+      "categoryId": "mekanikal_mainan",
+      "categoryLabel": "Suspensi & Mainan",
+      "position": {
+        "x": 59.0,
+        "y": 60.5
+      },
+      "coordsByView": {
+        "lens": {
+          "x": 59.0,
+          "y": 60.5
+        },
+        "xray": {
+          "x": 59.0,
+          "y": 60.5
+        },
+        "normal": {
+          "x": 59.0,
+          "y": 60.5
+        }
+      },
+      "label": "5. Mainan Anak yang Memiliki Rongga",
+      "shortName": "Mainan Anak Berongga",
+      "badge": "MAINAN PLASTIK",
+      "badgeType": "danger",
+      "tag": "Hollow Toy Cavity",
+      "bodyLocation": "Rongga Internal Bola / Mainan Plastik",
+      "drugTypes": "Ekstasi / Sabu / Ketamin",
+      "packagingTechnique": "Bungkusan Organik di Ruang Hampa Mainan",
+      "mainIllustration": "assets/images/hotspots/module_3/05.jpeg",
+      "mainImage": "assets/images/hotspots/module_3/05.jpeg",
+      "galleryImages": [
+        "assets/images/hotspots/module_3/05.jpeg"
+      ],
+      "description": "Mainan anak berbahan plastik dengan rongga internal yang biasanya kosong digunakan untuk menyimpan bungkusan materi organik terlarang.",
+      "modusDetail": "Sebagian mainan anak secara normal memang memiliki rongga udara internal demi efisiensi material cetak atau fungsi gerak. Pelaku memanfaatkan rongga ini dengan menyelipkan paket narkotika, kemudian menyatukan kembali belahan plastik menggunakan lem/pemanas. Pada citra X-Ray, ruang yang seharusnya gelap/transparan terisi massa berwarna oranye kemerahan.",
+      "inspectionNote": "Rongga bukan indikator otomatis penyelundupan. Yang krusial adalah apakah rongga tersebut bersih sesuai desain asli atau justru memuat massa asing yang tidak wajar.",
       "riskIndicators": [
-        "Patung memiliki rongga saat dideteksi X-Ray.",
-        "Suara gema saat dinding patung diketuk."
+        "Terdapat massa padat oranye di dalam rongga mainan yang seharusnya hanya berisi udara kosong.",
+        "Garis sambungan cetakan plastik (molding seam) terlihat tidak rata atau memiliki bekas lem tambahan.",
+        "Titik berat mainan tidak seimbang atau menimbulkan bunyi bergeser saat digerakkan.",
+        "Pengiriman mainan anak tunggal tanpa kemasan ritel resmi dari negara sumber berisiko tinggi."
       ],
       "inspectionActions": [
-        "Pecahkan bagian alas patung.",
-        "Sita paket dari rongga patung."
-      ]
+        "Observe Exterior: Teliti sambungan ultrasonik plastik dan kerapian sambungan pabrik.",
+        "Shake & Sound Test: Goyang perlahan untuk mendeteksi pergeseran massa asing di dalam bodi mainan.",
+        "X-Ray Anatomy: Cermati apakah rongga internal bersih atau menampilkan gumpalan materi organik.",
+        "Compare Unit: Bandingkan bobot dan citra dengan unit mainan identik bila tersedia.",
+        "Invasive Check: Lakukan pembelahan di area seam jika citra radiologis mengonfirmasi massa padat tak wajar."
+      ],
+      "riskScore": 86,
+      "riskLevel": "TINGGI",
+      "medicalRisk": "PROTOKOL STERILISASI: Hindari kontaminasi serbuk pada lingkungan sekitar. Wajib memakai sarung tangan nitril sekali pakai dan masker FFP2/N95."
+    },
+    {
+      "id": "hs-m3-minuman-kemasan",
+      "num": 6,
+      "badgeNum": "06",
+      "category": "makanan_minuman",
+      "categoryId": "makanan_minuman",
+      "categoryLabel": "Makanan & Minuman",
+      "position": {
+        "x": 67.5,
+        "y": 52.0
+      },
+      "coordsByView": {
+        "lens": {
+          "x": 67.5,
+          "y": 52.0
+        },
+        "xray": {
+          "x": 67.5,
+          "y": 52.0
+        },
+        "normal": {
+          "x": 67.5,
+          "y": 52.0
+        }
+      },
+      "label": "6. Minuman dalam Kemasan",
+      "shortName": "Minuman dalam Kemasan",
+      "badge": "BOTOL MINUMAN",
+      "badgeType": "danger",
+      "tag": "Liquid / Submerged Concealment",
+      "bodyLocation": "Bagian Dalam Botol Minuman Cair",
+      "drugTypes": "Liquid Methamphetamine / Paket Terendam",
+      "packagingTechnique": "Sachet Kedap Air / Narkotika Cair Terlarut",
+      "mainIllustration": "assets/images/hotspots/module_3/06.png",
+      "mainImage": "assets/images/hotspots/module_3/06.png",
+      "galleryImages": [
+        "assets/images/hotspots/module_3/06.png"
+      ],
+      "description": "Botol minuman kemasan ritel dijadikan cover cargo dengan menyelamkan sachet bungkusan padat kedap air atau melarutkan narkotika cair ke dalam produk.",
+      "modusDetail": "Pelaku menyusupkan kantong sachet kedap air berisi zat terlarang ke dalam cairan minuman, atau mengganti cairan minuman dengan larutan sabu cair (liquid meth). Citra pemindai Dual-Energy memperlihatkan anomali batas densitas: kontur sachet oranye pekat mengapung di tengah cairan dengan spektrum warna yang berbeda dari cairan minuman biasa.",
+      "inspectionNote": "Jangan menentukan identitas zat hanya dari tampilan visual X-Ray; gunakan pemeriksaan berlapis, pengecekan seal botol, dan uji kimia konfirmasi.",
+      "riskIndicators": [
+        "Siluet kantong/sachet tersuspensi di dalam botol yang terlihat jelas pada pemindaian X-Ray.",
+        "Cincin segel tutup botol (tamper-evident ring) telah putus atau direkatkan kembali dengan lem bening.",
+        "Tingkat kejernihan, warna, atau viskositas cairan berbeda dari produk minuman komersial asli.",
+        "Berat jenis cairan berbeda saat ditimbang dengan takaran volume yang tertera pada botol."
+      ],
+      "inspectionActions": [
+        "Seal Inspection: Periksa integritas ring segel pengaman tutup botol apakah masih utuh orisinil.",
+        "X-Ray Density Scan: Analisis perbedaan densitas antara cairan dasar dan objek terendam di dalamnya.",
+        "Refractometer / Density: Ukur indeks bias atau berat jenis bila dicurigai larutan narkotika cair.",
+        "Chemical Field Test: Ambil sampel mikro cairan untuk pengujian cepat narkotika reagen khusus.",
+        "Secure Storage: Amankan botol dalam posisi tegak di wadah anti bocor tahan kimia."
+      ],
+      "riskScore": 95,
+      "riskLevel": "KRITIS",
+      "medicalRisk": "BAHAYA ABSORPSI KULIT & INHALASI: Narkotika cair dapat terserap melalui kontak kulit dan uap berbahaya. Dilarang mencium atau mencicipi cairan secara langsung."
+    },
+    {
+      "id": "hs-m3-dinding-karton",
+      "num": 7,
+      "badgeNum": "07",
+      "category": "dinding_karton",
+      "categoryId": "dinding_karton",
+      "categoryLabel": "Dinding Box Karton",
+      "position": {
+        "x": 48.0,
+        "y": 21.5
+      },
+      "coordsByView": {
+        "lens": {
+          "x": 48.0,
+          "y": 21.5
+        },
+        "xray": {
+          "x": 48.0,
+          "y": 21.5
+        },
+        "normal": {
+          "x": 48.0,
+          "y": 21.5
+        }
+      },
+      "label": "7. Barang di Dinding Box Karton (Corrugated)",
+      "shortName": "Dinding Box Karton",
+      "badge": "CORRUGATED WALL",
+      "badgeType": "danger",
+      "tag": "False Wall / Cardboard Fluting",
+      "bodyLocation": "Lapisan Dinding Bergelombang Kardus",
+      "drugTypes": "Kokain / Metamfetamin / Heroin Pres",
+      "packagingTechnique": "Lapisan Pres Tipis di Antara Lembar Karton",
+      "mainIllustration": "assets/images/hotspots/module_3/07.png",
+      "mainImage": "assets/images/hotspots/module_3/07.png",
+      "galleryImages": [
+        "assets/images/hotspots/module_3/07.png"
+      ],
+      "description": "Dinding kardus kemasan bergelombang (corrugated box) disisipi serbuk narkotika pres tipis di sela gelombang lapisan kertas karton ganda.",
+      "modusDetail": "Penyelundup membelah lapisan dalam dinding karton bergelombang, memasukkan serbuk narkotika yang dipres sangat tipis dan dilaminasi plastik lentur di sela fluting kardus, lalu merekatkannya kembali. Citra X-Ray menampakkan penebalan materi organik abnormal pada penampang dinding kardus yang seharusnya berongga udara tipis.",
+      "inspectionNote": "Memahami pola normal lapisan material corrugated kardus membantu pemeriksa membedakan antara perekat pabrik biasa dengan sisipan materi narkotika tersembunyi.",
+      "riskIndicators": [
+        "Garis dinding kardus pada citra X-Ray menampakkan saturasi oranye yang tidak merata atau terlampau padat.",
+        "Dinding karton terasa kaku, tebal berlebih, atau memiliki bobot kosong yang tidak wajar.",
+        "Aroma lem kimia baru atau lakban berlapis ganda pada tepi sambungan karton penutup.",
+        "Ketebalan dinding box melebihi spesifikasi standar corrugated box kelas industri (flute A/B/C)."
+      ],
+      "inspectionActions": [
+        "Tactile Check: Raba seluruh permukaan dinding box untuk mendeteksi area yang mengeras atau menebal.",
+        "Wall Profile X-Ray: Amati citra X-Ray pada sudut tepi dinding untuk melihat anomali di sela fluting.",
+        "Tare Weight Test: Timbang kardus kosong setelah seluruh isi dikeluarkan untuk memastikan kelebihan bobot.",
+        "Core Sampling: Lakukan penusukan mikro atau irisan tipis pada lapisan fluting yang dicurigai.",
+        "Reagent Verification: Uji serat dan serbuk hasil sayatan dinding dengan reagen kimia narkotika."
+      ],
+      "riskScore": 90,
+      "riskLevel": "KRITIS",
+      "medicalRisk": "BAHAYA PAPARAN SERBUK: Sayatan pada dinding karton dapat melepaskan partikel serbuk halus. Lakukan di ruangan berventilasi baik dengan masker pernapasan terstandar."
     }
   ]
 }

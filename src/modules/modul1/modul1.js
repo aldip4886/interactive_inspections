@@ -11,7 +11,7 @@ export class Modul1View extends BaseModuleView {
     this.visitedHotspots = new Set();
     this.currentActiveTab = 'tab-modus';
     this.currentAngle = 0; // 0, 90, 180, 270
-    this.currentZoom = 1.2;
+    this.currentZoom = 1.35;
     this.isModalOpen = false;
     this.isAutoPlaying = false;
     this.autoPlayTimer = null;
@@ -81,15 +81,6 @@ export class Modul1View extends BaseModuleView {
           <!-- Rotatable Body Stage -->
           <div class="rotatable-body-view">
 
-            <!-- Angle Header Bar -->
-            <div class="angle-header-bar">
-              <div class="current-angle-badge" id="current-angle-badge">
-                <span class="angle-deg font-code-tech" id="angle-deg-text">0°</span>
-                <span class="angle-sep">•</span>
-                <span class="angle-sub" id="angle-sub-text">(Organ Pencernaan & Dada)</span>
-              </div>
-            </div>
-
             <!-- Body Canvas Wrapper with Technical Forensic Grid & HUD Overlay -->
             <div class="body-canvas-wrapper" id="body-canvas-wrapper">
 
@@ -99,12 +90,18 @@ export class Modul1View extends BaseModuleView {
               <!-- HUD Telemetry Watermark Overlay -->
               <div class="forensic-hud-telemetry" aria-hidden="true">
                 <div class="forensic-hud-top-left font-code-tech">
-                  <div class="hud-line-title">STASIUN PEMINDAIAN ANATOMI DUAL-AXIS</div>
                   <div class="hud-line-sub">SUBJEK ID: SUSPECT-JKT-9921 / PRIA / 34 TH</div>
                 </div>
                 <div class="forensic-hud-top-right font-code-tech">
                   <div class="hud-line-azimuth" id="hud-azimuth-text">ROTASI AKTIF: AZIMUTH 000° | TILT +00.0°</div>
                   <div class="hud-line-status">SENSOR: FULL-BODY TRANSMISSION X-RAY</div>
+                </div>
+              </div>
+
+              <!-- Top Rotate Hint (Floating Above Central Image) -->
+              <div class="m1-top-rotate-dock" id="m1-top-rotate-dock">
+                <div class="pedestal-rotate-hint">
+                  <span>⟲ Drag atau usap pada tubuh untuk rotasi bebas 360° ⟳</span>
                 </div>
               </div>
 
@@ -117,6 +114,37 @@ export class Modul1View extends BaseModuleView {
 
               <!-- Stitch Floating HUD Segmented Pill Controls Dock (Center Bottom) -->
               <div class="pedestal-rotation-dock" id="pedestal-rotation-dock">
+                <!-- Bottom Curved Rotation Guide Illustration (Perspective Proportional) -->
+                <div class="m1-bottom-rotation-guide" aria-hidden="true" title="Tarik atau usap tubuh untuk rotasi bebas 360°">
+                  <svg class="m1-bottom-curve-svg" viewBox="0 0 280 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                      <linearGradient id="m1-bottom-arc-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stop-color="#00E5FF" stop-opacity="0.2" />
+                        <stop offset="25%" stop-color="#00E5FF" stop-opacity="0.95" />
+                        <stop offset="50%" stop-color="#D9B45B" stop-opacity="0.95" />
+                        <stop offset="75%" stop-color="#00E5FF" stop-opacity="0.95" />
+                        <stop offset="100%" stop-color="#00E5FF" stop-opacity="0.2" />
+                      </linearGradient>
+                      <filter id="m1-bottom-glow" x="-10%" y="-30%" width="120%" height="160%">
+                        <feGaussianBlur stdDeviation="2" result="blur" />
+                        <feMerge>
+                          <feMergeNode in="blur" />
+                          <feMergeNode in="SourceGraphic" />
+                        </feMerge>
+                      </filter>
+                    </defs>
+                    <!-- Background faint guide arc -->
+                    <path d="M 24 10 Q 140 34 256 10" stroke="rgba(0, 229, 255, 0.22)" stroke-width="3.5" stroke-linecap="round" />
+                    <!-- Primary Glowing Arc with Dashes -->
+                    <path class="m1-glow-path" d="M 24 10 Q 140 34 256 10" stroke="url(#m1-bottom-arc-grad)" stroke-width="2.2" stroke-linecap="round" stroke-dasharray="7 4" filter="url(#m1-bottom-glow)" />
+                    <!-- Left Arrow pointing leftwards/orbit direction -->
+                    <polygon points="18,7 30,5 25,16" fill="#00E5FF" filter="url(#m1-bottom-glow)" />
+                    <!-- Right Arrow pointing rightwards/orbit direction -->
+                    <polygon points="262,7 250,5 255,16" fill="#00E5FF" filter="url(#m1-bottom-glow)" />
+                  </svg>
+                  <span class="m4a-bottom-curve-text font-code-tech">PUTAR 360°</span>
+                </div>
+
                 <div class="pedestal-carousel-controls">
                   <!-- Putar Sudut Button with 360 icon -->
                   <button id="btn-rotate-angle" class="hud-pill-action-btn" title="Putar Sudut Anatomi (0°, 90°, 180°, 270°)">
@@ -140,16 +168,13 @@ export class Modul1View extends BaseModuleView {
                   <button id="btn-zoom-out" class="pedestal-ctrl-btn hud-zoom-btn" title="Perkecil (Zoom Out)" aria-label="Zoom Out">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line></svg>
                   </button>
-                  <span id="zoom-level-text" class="zoom-level-badge font-code-tech">120%</span>
+                  <span id="zoom-level-text" class="zoom-level-badge font-code-tech">135%</span>
                   <button id="btn-zoom-in" class="pedestal-ctrl-btn hud-zoom-btn" title="Perbesar (Zoom In)" aria-label="Zoom In">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
                   </button>
-                  <button id="btn-zoom-reset" class="pedestal-ctrl-btn hud-zoom-btn reset-btn" title="Reset Zoom (120%)" aria-label="Reset Zoom">
+                  <button id="btn-zoom-reset" class="pedestal-ctrl-btn hud-zoom-btn reset-btn" title="Reset Zoom (135%)" aria-label="Reset Zoom">
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><polyline points="3 3 3 8 8 8"></polyline></svg>
                   </button>
-                </div>
-                <div class="pedestal-rotate-hint">
-                  <span>⟲ Drag atau usap pada tubuh untuk rotasi bebas 360° ⟳</span>
                 </div>
               </div>
 
@@ -413,9 +438,9 @@ export class Modul1View extends BaseModuleView {
     this.setupZoomControls();
     this.setupDetailModal();
 
-    // Initial angle & zoom 120%
+    // Initial angle & zoom 135%
     this.setBodyAngle(0);
-    this.applyZoom(1.2);
+    this.applyZoom(1.35);
   }
 
   setupRotationControls() {
@@ -532,7 +557,7 @@ export class Modul1View extends BaseModuleView {
 
     btnIn?.addEventListener('click', () => this.applyZoom(this.currentZoom + 0.15));
     btnOut?.addEventListener('click', () => this.applyZoom(this.currentZoom - 0.15));
-    btnReset?.addEventListener('click', () => this.applyZoom(1.2));
+    btnReset?.addEventListener('click', () => this.applyZoom(1.35));
 
     canvasWrap?.addEventListener('wheel', (e) => {
       e.preventDefault();

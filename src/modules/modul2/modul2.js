@@ -12,6 +12,9 @@ export class Modul2View extends BaseModuleView {
     this.currentViewMode = 'xray'; // 'xray' or 'normal'
     this.activeFilter = 'all';
     this.isModalOpen = false;
+    this.currentZoom = 1.2;
+    this.panX = 0;
+    this.panY = 0;
     this.cardPages = [
       { id: 'tab-modus', num: 1, title: 'Modus Operandi' },
       { id: 'tab-photos', num: 2, title: 'Foto Gambar Real' },
@@ -85,7 +88,6 @@ export class Modul2View extends BaseModuleView {
               <!-- HUD Telemetry Watermark Overlay -->
               <div class="forensic-hud-telemetry" aria-hidden="true">
                 <div class="forensic-hud-top-left font-code-tech">
-                  <div class="hud-line-title">STASIUN PEMINDAIAN BARANG BAWAAN DUAL-ENERGY</div>
                   <div class="hud-line-sub">SUBJEK ID: SUSPECT-LUGGAGE-8812 / KOPER BAGASI</div>
                 </div>
                 <div class="forensic-hud-top-right font-code-tech">
@@ -94,18 +96,8 @@ export class Modul2View extends BaseModuleView {
                 </div>
               </div>
 
-              <!-- Central Active Luggage Image Container with Hotspots Layer -->
-              <div class="body-image-container" id="luggage-image-container" style="max-width:850px; aspect-ratio: auto; margin:0 auto;">
-                <img id="m2-central-image" src="assets/images/central/m2_luggage_xray.png" 
-                     alt="X-Ray Scanner Koper Bagasi Bawaan" 
-                     class="main-body-img"
-                     style="max-height: 68vh; filter: drop-shadow(0 12px 32px rgba(0, 37, 59, 0.16)); pointer-events:none;" />
-                <div class="body-pedestal-platform"></div>
-                <div id="m2-hotspots-layer" class="hotspots-layer"></div>
-              </div>
-
-              <!-- Floating HUD Segmented Pill Controls Dock (Center Bottom) -->
-              <div class="pedestal-rotation-dock" id="pedestal-rotation-dock">
+              <!-- Top Controls Dock (Floating Above Central Image) -->
+              <div class="m2-top-controls-dock" id="pedestal-rotation-dock">
                 <div class="pedestal-carousel-controls">
                   <!-- Mode Switcher Pill Buttons -->
                   <button id="btn-view-xray" class="hud-pill-action-btn active" title="Tampilan X-Ray Scanner">
@@ -115,6 +107,36 @@ export class Modul2View extends BaseModuleView {
                   <button id="btn-view-normal" class="hud-pill-action-btn mode-btn-secondary" title="Tampilan Tampak Normal">
                     <span class="hud-btn-icon">👜</span>
                     <span class="hud-btn-text">TAMPAK NORMAL</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Central Stage Area (Central Image + Vertical Zoom Slider Beside It) -->
+              <div class="m2-central-stage-area" id="m2-central-stage-area">
+                <!-- Central Active Luggage Image Container with Hotspots Layer -->
+                <div class="body-image-container" id="luggage-image-container" style="max-width:850px; aspect-ratio: auto; margin:0 auto;">
+                  <img id="m2-central-image" src="assets/images/central/m2_luggage_xray.png" 
+                       alt="X-Ray Scanner Koper Bagasi Bawaan" 
+                       class="main-body-img"
+                       style="max-height: 68vh; filter: drop-shadow(0 12px 32px rgba(0, 37, 59, 0.16)); pointer-events:none;" />
+                  <div class="body-pedestal-platform"></div>
+                  <div id="m2-hotspots-layer" class="hotspots-layer"></div>
+                </div>
+
+                <!-- Vertical Zoom Slider Dock (Beside Central Image) -->
+                <div class="m2-vertical-zoom-dock" id="m2-vertical-zoom-dock" title="Kontrol Zoom Gambar">
+                  <button id="btn-zoom-in" class="m2-vzoom-btn" title="Perbesar Gambar (Zoom In)" aria-label="Zoom In">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                  </button>
+                  <div class="m2-vzoom-slider-wrap">
+                    <span id="zoom-level-text" class="m2-vzoom-badge font-code-tech">120%</span>
+                    <input type="range" id="m2-zoom-slider" class="m2-vertical-slider" min="100" max="250" step="5" value="120" orient="vertical" aria-label="Tingkat Zoom Gambar" />
+                  </div>
+                  <button id="btn-zoom-out" class="m2-vzoom-btn" title="Perkecil Gambar (Zoom Out)" aria-label="Zoom Out">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                  </button>
+                  <button id="btn-zoom-reset" class="m2-vzoom-btn reset-btn" title="Reset Zoom (120%)" aria-label="Reset Zoom">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><polyline points="3 3 3 8 8 8"></polyline></svg>
                   </button>
                 </div>
               </div>
@@ -353,6 +375,136 @@ export class Modul2View extends BaseModuleView {
         this.renderHotspots();
       });
     }
+
+    this.setupZoomControls();
+  }
+
+  setupZoomControls() {
+    const slider = this.container.querySelector('#m2-zoom-slider');
+    const btnIn = this.container.querySelector('#btn-zoom-in');
+    const btnOut = this.container.querySelector('#btn-zoom-out');
+    const btnReset = this.container.querySelector('#btn-zoom-reset');
+    const container = this.container.querySelector('#luggage-image-container');
+    const canvasWrap = this.container.querySelector('#luggage-canvas-wrapper');
+
+    if (slider) {
+      slider.addEventListener('input', (e) => {
+        const val = parseFloat(e.target.value) / 100;
+        this.applyZoom(val);
+      });
+    }
+
+    if (btnIn) {
+      btnIn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        this.applyZoom(this.currentZoom + 0.15);
+      });
+    }
+
+    if (btnOut) {
+      btnOut.addEventListener('click', (e) => {
+        e.stopPropagation();
+        this.applyZoom(this.currentZoom - 0.15);
+      });
+    }
+
+    if (btnReset) {
+      btnReset.addEventListener('click', (e) => {
+        e.stopPropagation();
+        this.resetZoom();
+      });
+    }
+
+    // Mouse wheel zoom inside stage area
+    if (canvasWrap) {
+      canvasWrap.addEventListener('wheel', (e) => {
+        if (e.ctrlKey || e.metaKey || canvasWrap.matches(':hover')) {
+          e.preventDefault();
+          const delta = e.deltaY < 0 ? 0.1 : -0.1;
+          this.applyZoom(this.currentZoom + delta);
+        }
+      }, { passive: false });
+    }
+
+    // Drag to pan when zoomed in
+    let isDragging = false;
+    let startX = 0;
+    let startY = 0;
+    let initPanX = 0;
+    let initPanY = 0;
+
+    if (container) {
+      container.addEventListener('mousedown', (e) => {
+        if (e.target.closest('.body-hotspot-pin') || e.target.closest('button')) return;
+        if (this.currentZoom > 1.05) {
+          isDragging = true;
+          startX = e.clientX;
+          startY = e.clientY;
+          initPanX = this.panX;
+          initPanY = this.panY;
+          container.style.cursor = 'grab';
+          e.preventDefault();
+        }
+      });
+    }
+
+    window.addEventListener('mousemove', (e) => {
+      if (!isDragging) return;
+      const dx = e.clientX - startX;
+      const dy = e.clientY - startY;
+      const maxPan = (this.currentZoom - 1) * 350;
+      this.panX = Math.max(-maxPan, Math.min(maxPan, initPanX + dx));
+      this.panY = Math.max(-maxPan, Math.min(maxPan, initPanY + dy));
+      this.applyZoom(this.currentZoom);
+    });
+
+    window.addEventListener('mouseup', () => {
+      if (isDragging) {
+        isDragging = false;
+        if (container) container.style.cursor = 'default';
+      }
+    });
+
+    this.applyZoom(1.2);
+  }
+
+  applyZoom(val) {
+    this.currentZoom = Math.min(2.5, Math.max(1.0, parseFloat(val.toFixed(2))));
+    const container = this.container.querySelector('#luggage-image-container');
+    const zoomText = this.container.querySelector('#zoom-level-text');
+    const slider = this.container.querySelector('#m2-zoom-slider');
+
+    if (container) {
+      if (this.panX === 0 && this.panY === 0) {
+        container.style.transformOrigin = 'center center';
+        container.style.transform = `scale(${this.currentZoom})`;
+      } else {
+        container.style.transformOrigin = 'center center';
+        container.style.transform = `translate(${this.panX}px, ${this.panY}px) scale(${this.currentZoom})`;
+      }
+    }
+
+    const counterScale = (1 / this.currentZoom).toFixed(4);
+    if (container) {
+      container.style.setProperty('--body-zoom', this.currentZoom);
+      container.style.setProperty('--tooltip-counter-scale', counterScale);
+    }
+    document.documentElement.style.setProperty('--body-zoom', this.currentZoom);
+    document.documentElement.style.setProperty('--tooltip-counter-scale', counterScale);
+
+    const pct = Math.round(this.currentZoom * 100);
+    if (zoomText) {
+      zoomText.textContent = `${pct}%`;
+    }
+    if (slider && Number(slider.value) !== pct) {
+      slider.value = pct;
+    }
+  }
+
+  resetZoom() {
+    this.panX = 0;
+    this.panY = 0;
+    this.applyZoom(1.2);
   }
 
   renderHotspots() {

@@ -38,7 +38,7 @@ export class Modul4aView extends BaseModuleView {
       { angle: 270, label: 'Tampak Samping Kiri (270°)', src: 'assets/images/modul4a/samping_kiri.png' },
       { angle: 315, label: 'Tampak Depan Samping Kiri (315°)', src: 'assets/images/modul4a/depan_samping_2.png' }
     ];
-    this.currentAngleIndex = 0;
+    this.currentAngleIndex = 7; // Default 315°
     this.autoRotateTimer = null;
 
     // 3D Three.js objects
@@ -105,14 +105,10 @@ export class Modul4aView extends BaseModuleView {
             <!-- Angle / View Header Bar -->
             <div class="angle-header-bar">
               <div class="current-angle-badge" id="current-angle-badge">
-                <span class="angle-deg font-code-tech" id="view-mode-badge">0°</span>
+                <span class="angle-deg font-code-tech" id="view-mode-badge">315°</span>
                 <span class="angle-sep">•</span>
                 <span class="angle-name" id="view-mode-title">5-Seater SUV Car</span>
                 <!-- <span class="angle-sub" id="view-mode-sub">(Tampak Depan (0°))</span>    -->
-              </div>
-              <div class="angle-instruction-tag">
-                <span class="instruction-dot">●</span>
-                <span>Klik hotspot bernomor pada kendaraan untuk menganalisis modus operandi.</span>
               </div>
             </div>
 
@@ -125,23 +121,61 @@ export class Modul4aView extends BaseModuleView {
               <!-- HUD Telemetry Watermark Overlay -->
               <div class="forensic-hud-telemetry" aria-hidden="true">
                 <div class="forensic-hud-top-left font-code-tech">
-                  <div class="hud-line-title">STASIUN PEMINDAIAN KENDARAAN DARAT</div>
                   <div class="hud-line-sub">SUBJEK ID: VEHICLE-MPV-KC23</div>
                 </div>
                 <div class="forensic-hud-top-right font-code-tech">
-                  <div class="hud-line-azimuth" id="hud-azimuth-text">MODE AKTIF: 360° ROTATABLE IMAGE (0°)</div>
+                  <div class="hud-line-azimuth" id="hud-azimuth-text">MODE AKTIF: 360° ROTATABLE IMAGE (315°)</div>
                   <div class="hud-line-status">SENSOR: DUAL-ENERGY TRANSMISSION & MULTI-ANGLE INSPECTION</div>
+                </div>
+              </div>
+
+              <!-- Top Instruction Hint (Floating Above Central Image) -->
+              <div class="m4a-top-instruction-dock" id="m4a-top-instruction-dock">
+                <div class="angle-instruction-tag">
+                  <span class="instruction-dot">●</span>
+                  <span>Klik hotspot bernomor pada kendaraan untuk menganalisis modus operandi.</span>
                 </div>
               </div>
 
               <!-- Central Active 3D Vehicle Container with Hotspots Layer -->
               <div class="body-image-container" id="vehicle-image-container" style="max-width:100%; width:100%; aspect-ratio:auto; height:auto; margin:0 auto; position:relative;">
                 <div id="m4a-3d-canvas-wrapper" style="width:100%; height:65vh; min-height:440px; position:relative; display:flex; align-items:center; justify-content:center; cursor:grab; overflow:hidden;">
-                  <img id="m4a-central-image" src="assets/images/modul4a/depan.png" alt="KIA Carnival 2023" class="main-body-img" style="display:block; width:100%; height:100%; object-fit:contain; filter:drop-shadow(0 12px 32px rgba(0,37,59,0.16)); user-select:none; -webkit-user-drag:none;" />
+                  <img id="m4a-central-image" src="assets/images/modul4a/depan_samping_2.png" alt="KIA Carnival 2023" class="main-body-img" style="display:block; width:100%; height:100%; object-fit:contain; filter:drop-shadow(0 12px 32px rgba(0,37,59,0.16)); user-select:none; -webkit-user-drag:none;" />
                   <div id="three-canvas-container" style="width:100%; height:100%; position:absolute; inset:0; z-index:2; pointer-events:none;"></div>
                   <div id="m4a-hotspots-layer" class="hotspots-layer" style="position:absolute; inset:0; z-index:30; pointer-events:none;"></div>
                 </div>
                 <div class="body-pedestal-platform"></div>
+
+                <!-- Bottom Curved Rotation Guide Illustration -->
+                <div class="m4a-bottom-rotation-guide" aria-hidden="true" title="Tarik atau usap mobil untuk rotasi bebas 360°">
+                  <svg class="m4a-bottom-curve-svg" viewBox="0 0 600 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                      <linearGradient id="m4a-bottom-arc-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stop-color="#00E5FF" stop-opacity="0.2" />
+                        <stop offset="25%" stop-color="#00E5FF" stop-opacity="0.95" />
+                        <stop offset="50%" stop-color="#D9B45B" stop-opacity="0.95" />
+                        <stop offset="75%" stop-color="#00E5FF" stop-opacity="0.95" />
+                        <stop offset="100%" stop-color="#00E5FF" stop-opacity="0.2" />
+                      </linearGradient>
+                      <filter id="m4a-bottom-glow" x="-10%" y="-30%" width="120%" height="160%">
+                        <feGaussianBlur stdDeviation="2.5" result="blur" />
+                        <feMerge>
+                          <feMergeNode in="blur" />
+                          <feMergeNode in="SourceGraphic" />
+                        </feMerge>
+                      </filter>
+                    </defs>
+                    <!-- Background faint guide arc -->
+                    <path d="M 40 18 Q 300 62 560 18" stroke="rgba(0, 229, 255, 0.22)" stroke-width="4" stroke-linecap="round" />
+                    <!-- Primary Glowing Arc with Dashes -->
+                    <path class="m4a-glow-path" d="M 40 18 Q 300 62 560 18" stroke="url(#m4a-bottom-arc-grad)" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="8 5" filter="url(#m4a-bottom-glow)" />
+                    <!-- Left Arrow pointing leftwards/orbit direction -->
+                    <polygon points="34,14 48,12 42,24" fill="#00E5FF" filter="url(#m4a-bottom-glow)" />
+                    <!-- Right Arrow pointing rightwards/orbit direction -->
+                    <polygon points="566,14 552,12 558,24" fill="#00E5FF" filter="url(#m4a-bottom-glow)" />
+                  </svg>
+                  <span class="m4a-bottom-curve-text font-code-tech">PUTAR 360°</span>
+                </div>
               </div>
 
               <!-- Floating HUD Segmented Pill Controls Dock (Center Bottom) -->
@@ -797,6 +831,9 @@ export class Modul4aView extends BaseModuleView {
       this.currentZoomFactor = 1.0;
       this.updateZoomLevel();
     });
+
+    // Default angle 315°
+    this.setAngleIndex(7);
   }
 
   updateZoomLevel() {

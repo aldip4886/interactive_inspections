@@ -1,4 +1,4 @@
-﻿import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 import { scorm } from '../../core/scorm.js';
 import { courseProgress } from '../../core/progress.js';
 import { userProfile } from '../../core/user-profile.js';
@@ -10,7 +10,7 @@ export function AppProvider({ children }) {
   const [profile, setProfile] = useState(userProfile.getProfile() || userProfile.DEFAULT_PROFILE);
   const [overallProgress, setOverallProgress] = useState(courseProgress.getOverallProgress() || 0);
   const [currentRoute, setCurrentRoute] = useState(() => {
-    const hash = window.location.hash.replace(/^#\//, '');
+    const hash = window.location.hash.replace(/^#\/?/, '');
     return hash || scorm.getBookmark() || 'beranda';
   });
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
@@ -25,7 +25,7 @@ export function AppProvider({ children }) {
     setOverallProgress(courseProgress.getOverallProgress());
 
     const onHashChange = () => {
-      const route = window.location.hash.replace(/^#\//, '') || 'beranda';
+      const route = window.location.hash.replace(/^#\/?/, '') || 'beranda';
       setCurrentRoute(route);
       scorm.setBookmark(route);
       courseProgress.recordModuleVisit(route);

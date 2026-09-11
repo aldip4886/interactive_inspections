@@ -8,7 +8,7 @@ export function Modul1View() {
   const { refreshProgress } = useApp();
   const [moduleData] = useState(modul1Data);
   const [currentAngle, setCurrentAngle] = useState(0);
-  const [currentZoom, setCurrentZoom] = useState(1.2);
+  const [currentZoom, setCurrentZoom] = useState(1.35);
   const [isAutoPlaying, setIsAutoPlaying] = useState(false);
   const [selectedHotspot, setSelectedHotspot] = useState(null);
   const [activeTab, setActiveTab] = useState('tab-modus');
@@ -218,14 +218,6 @@ export function Modul1View() {
 
         {/* Rotatable Body Stage */}
         <div className="rotatable-body-view">
-          {/* Angle Header Bar */}
-          <div className="angle-header-bar">
-            <div className="current-angle-badge" id="current-angle-badge">
-              <span className="angle-deg font-code-tech" id="angle-deg-text">{currentAngle}°</span>
-              <span className="angle-sep">•</span>
-              <span className="angle-sub" id="angle-sub-text">({currentAngleInfo.sub})</span>
-            </div>
-          </div>
 
           {/* Body Canvas Wrapper with Forensic Grid & HUD Overlay */}
           <div
@@ -241,7 +233,6 @@ export function Modul1View() {
             {/* HUD Telemetry Watermark Overlay */}
             <div className="forensic-hud-telemetry" aria-hidden="true">
               <div className="forensic-hud-top-left font-code-tech">
-                <div className="hud-line-title">STASIUN PEMINDAIAN ANATOMI DUAL-AXIS</div>
                 <div className="hud-line-sub">SUBJEK ID: SUSPECT-JKT-9921 / PRIA / 34 TH</div>
               </div>
               <div className="forensic-hud-top-right font-code-tech">
@@ -371,8 +362,8 @@ export function Modul1View() {
                 <button
                   id="btn-zoom-reset"
                   className="pedestal-ctrl-btn hud-zoom-btn reset-btn"
-                  title="Reset Zoom (120%)"
-                  onClick={() => handleZoom(1.2)}
+                  title="Reset Zoom (135%)"
+                  onClick={() => handleZoom(1.35)}
                 >
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><polyline points="3 3 3 8 8 8"></polyline></svg>
                 </button>
