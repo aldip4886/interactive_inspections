@@ -476,28 +476,31 @@ export class Modul4bView extends BaseModuleView {
     const hotspots = this.moduleData.hotspots || [];
 
     hotspots.forEach((hs, idx) => {
-      const pin = document.createElement('button');
       const isCurrentActive = this.currentHotspotId === hs.id;
-      pin.className = `body-hotspot-pin ${hs.badgeType || 'warning'} ${isCurrentActive ? 'active-zone' : ''}`;
+      const isVisited = this.visitedHotspots.has(hs.id);
+      const isTopArea = hs.position.y < 28;
+
+      const pin = document.createElement('button');
+      pin.className = `body-hotspot-pin ${isCurrentActive ? 'active active-zone' : ''} ${isVisited ? 'visited' : ''} ${isTopArea ? 'tooltip-bottom' : ''}`;
       pin.style.left = `${hs.position.x}%`;
       pin.style.top = `${hs.position.y}%`;
       pin.setAttribute('data-id', hs.id);
       pin.setAttribute('aria-label', hs.label);
 
-      const isVisited = this.visitedHotspots.has(hs.id);
-      if (isVisited) pin.classList.add('visited');
-
       const displayNum = hs.code || (idx < 9 ? `0${idx + 1}` : `${idx + 1}`);
 
       pin.innerHTML = `
-        <div class="pin-marker-pulse"></div>
-        <div class="pin-marker-ring"></div>
-        <div class="pin-marker-dot font-code-tech">${displayNum}</div>
-        <div class="pin-tooltip font-tech">
+        <div class="pin-point">
+          <div class="pin-pulse-ring"></div>
+        </div>
+        <div class="pin-tooltip font-tech" role="tooltip">
           <span class="pin-tooltip-num">#${displayNum}</span>
           <span class="pin-tooltip-name">${hs.label}</span>
         </div>
       `;
+
+      pin.addEventListener('pointerenter', () => pin.classList.add('is-hovered'));
+      pin.addEventListener('pointerleave', () => pin.classList.remove('is-hovered'));
 
       pin.addEventListener('click', (e) => {
         e.stopPropagation();
