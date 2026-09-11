@@ -258,9 +258,6 @@ export class Modul4aView extends BaseModuleView {
                   <span class="photos-tab-hint">Klik gambar untuk melihat resolusi penuh & zoom</span>
                 </div>
                 <div class="findings-thumbnails-grid" id="findings-thumbnails-grid"></div>
-                <div class="gallery-case-note">
-                  <strong>Penting:</strong> Dokumentasi penindakan riil dan citra radiologis forensik resmi DJBC.
-                </div>
               </div>
 
               <!-- TAB 3: DETEKSI & SOP -->

@@ -52,6 +52,30 @@
     {
       "id": "all",
       "label": "Semua Titik"
+    },
+    {
+      "id": "interior",
+      "label": "Interior & Konsol"
+    },
+    {
+      "id": "bagasi",
+      "label": "Bagasi & Kargo"
+    },
+    {
+      "id": "ban",
+      "label": "Ban Cadangan"
+    },
+    {
+      "id": "tangki",
+      "label": "Tangki Bahan Bakar"
+    },
+    {
+      "id": "kompartemen",
+      "label": "Kompartemen Pintu"
+    },
+    {
+      "id": "struktur",
+      "label": "Ruang Mesin & Bumper"
     }
   ],
   "hotspots": [
@@ -96,6 +120,176 @@
         "Gunakan boroskop fleksibel untuk memeriksa rongga di balik head unit/dashboard dan saluran sirkulasi AC.",
         "Gunakan K-9 narkotika untuk pelacakan bau aktif di dalam kabin kendaraan.",
         "Bila ditemukan ketebalan anomali di bawah karpet dasar, lakukan pemeriksaan ketukan (density tap) atau pemindaian x-ray bergerak."
+      ]
+    },
+    {
+      "id": "hs-m4a-bagasi",
+      "num": 2,
+      "category": "bagasi",
+      "view": "cutaway",
+      "angleMin": 0,
+      "angleMax": 360,
+      "visibleAngles": [135, 180, 225],
+      "position": {
+        "x": 50.0,
+        "y": 45.0
+      },
+      "positionsByAngle": {
+        "135": { "x": 74.0, "y": 43.0 },
+        "180": { "x": 50.0, "y": 45.0 },
+        "225": { "x": 25.0, "y": 45.0 }
+      },
+      "worldPos": {
+        "x": 1.60,
+        "y": -0.10,
+        "z": 0.0
+      },
+      "label": "2. Bagasi & Tray Kargo Belakang",
+      "badge": "BAGASI & TRAY BARANG",
+      "badgeType": "danger",
+      "mainImage": "assets/images/hotspots/bagasi_barang.png",
+      "galleryImages": [
+        "assets/images/hotspots/bagasi_barang.png"
+      ],
+      "description": "Penyembunyian paket narkotika di atas dan di bawah alas baki bagasi (cargo tray), rongga dinding samping kargo belakang, kompartemen perkakas darurat, serta kompartemen ganda (false compartment) pada lantai bagasi mobil.",
+      "riskIndicators": [
+        "Ketebalan lantai bagasi terlihat tidak proporsional dan terdapat selisih tinggi lantai kargo dengan bibir pintu belakang.",
+        "Baut dan klip penahan karpet bagasi terdapat goresan baru akibat pembongkaran manual non-pabrikan.",
+        "Aroma bahan kimia penyamar bau (seperti kapur barus, kopi bubuk, atau parfum menyengat) di sekitar area bagasi.",
+        "K-9 pelacak narkotika memberikan respons duduk atau menggaruk (positif) pada sudut lantai kargo belakang."
+      ],
+      "inspectionActions": [
+        "Bongkar dan keluarkan seluruh muatan koper dan barang bawaan dari area kargo belakang.",
+        "Angkat cover tray bagasi dan periksa kompartemen penyimpanan perkakas serta dongkrak cadangan.",
+        "Gunakan teknik pengetukan akustik (tap test) pada seluruh permukaan lantai bagasi guna mendeteksi rongga palsu (false compartment).",
+        "Periksa sela-sela panel plastik dinding samping kargo menggunakan boroskop kamera fleksibel."
+      ]
+    },
+    {
+      "id": "hs-m4a-ban-cadangan",
+      "num": 3,
+      "category": "ban",
+      "view": "cutaway",
+      "angleMin": 0,
+      "angleMax": 360,
+      "visibleAngles": [135, 180, 225],
+      "position": {
+        "x": 50.0,
+        "y": 58.0
+      },
+      "positionsByAngle": {
+        "135": { "x": 75.0, "y": 57.0 },
+        "180": { "x": 50.0, "y": 58.0 },
+        "225": { "x": 24.0, "y": 59.0 }
+      },
+      "worldPos": {
+        "x": 1.80,
+        "y": -0.50,
+        "z": 0.0
+      },
+      "label": "3. Ban Cadangan (Spare Tyre)",
+      "badge": "BAN CADANGAN & KOLONG",
+      "badgeType": "danger",
+      "mainImage": "assets/images/hotspots/ban_cadangan.png",
+      "galleryImages": [
+        "assets/images/hotspots/ban_cadangan.png"
+      ],
+      "description": "Penyelundupan narkotika dengan memasukkan bungkusan padat sabu atau pil ekstasi yang dibalut lakban dan pelumas ke dalam rongga ban cadangan (spare tyre), kemudian ban dipompa kembali pada tekanan standar guna mengelabui pemeriksaan visual.",
+      "riskIndicators": [
+        "Ban serep terasa memiliki bobot yang tidak seimbang dan berat berlebih saat diangkat atau diguncangkan.",
+        "Terdengar suara benturan benda padat tumpul di bagian dalam ban saat ban cadangan dipukul atau dijatuhkan memantul.",
+        "Terdapat jejak cungkilan besi ban atau sisa kompon pelumas baru pada bibir velg dan dinding samping karet ban.",
+        "Nilai pembacaan tekanan angin ban tidak wajar atau bau udara ban yang dikeluarkan beraroma zat kimia pelarut."
+      ],
+      "inspectionActions": [
+        "Lepaskan ban cadangan dari bracket penahan di kolong bagasi kendaraan.",
+        "Lakukan pengujian pantul (bounce test) dan goyangkan ban untuk mendeteksi massa padat di dalam rongga.",
+        "Tekan katup pentil ban sedikit untuk memeriksa uap aroma gas menggunakan alat deteksi narkotika (Narcotics Vapor Detector).",
+        "Lakukan pemindaian sinar-X bergerak (mobile X-ray) atau buka ban dari velg dengan alat tire changer di bengkel rekanan."
+      ]
+    },
+    {
+      "id": "hs-m4a-tangki",
+      "num": 4,
+      "category": "tangki",
+      "view": "cutaway",
+      "angleMin": 0,
+      "angleMax": 360,
+      "visibleAngles": [90, 225],
+      "position": {
+        "x": 50.0,
+        "y": 50.0
+      },
+      "positionsByAngle": {
+        "90": { "x": 36.0, "y": 58.0 },
+        "225": { "x": 50.5, "y": 46.5 }
+      },
+      "worldPos": {
+        "x": 0.20,
+        "y": -0.60,
+        "z": 0.0
+      },
+      "label": "4. Tangki Bahan Bakar (Fuel Tank)",
+      "badge": "TANGKI BAHAN BAKAR",
+      "badgeType": "danger",
+      "mainImage": "assets/images/hotspots/tangki_bahan_bakar.png",
+      "galleryImages": [
+        "assets/images/hotspots/tangki_bahan_bakar.png"
+      ],
+      "description": "Modifikasi internal tangki bahan bakar kendaraan dengan membuat sekat palsu khusus (compartmentalized fuel tank), memasukkan bungkusan paket kedap bensin yang diikat pada pelampung pompa, atau melarutkan metamfetamin cair (liquid meth) langsung ke dalam tangki bahan bakar.",
+      "riskIndicators": [
+        "Terdapat bekas las tambahan, sambungan perekat silikon hitam, atau cat baru pada dinding luar tangki bensin di bagian kolong.",
+        "Jarum indikator bahan bakar di dashboard menunjukkan posisi penuh namun volume bensin yang dikonsumsi tidak proporsional dengan jarak tempuh.",
+        "Klem selang pengisian bahan bakar (fuel filler pipe) terlihat baru atau kendor bekas dibongkar pasang.",
+        "K-9 mendeteksi aroma positif narkotika di sekitar tutup tangki bensin kendaraan."
+      ],
+      "inspectionActions": [
+        "Periksa bagian kolong bodi kendaraan untuk melihat integritas fisik tangki bahan bakar dan mencari bekas modifikasi las sambungan.",
+        "Masukkan kamera boroskop tahan ledakan (explosion-proof / ATEX certified) melalui leher lubang pengisian bensin (filler neck).",
+        "Ambil sampel cairan bahan bakar menggunakan pipet kaca dan lakukan uji cepat narkotika cair menggunakan reagen tes kit DJBC.",
+        "Bila ditemukan indikasi partisi ganda, bawa kendaraan ke fasilitas workshop DJBC untuk pengosongan dan penurunan tangki bensin secara aman."
+      ]
+    },
+    {
+      "id": "hs-m4a-pintu",
+      "num": 5,
+      "category": "kompartemen",
+      "view": "cutaway",
+      "angleMin": 0,
+      "angleMax": 360,
+      "visibleAngles": [135, 225],
+      "position": {
+        "x": 50.0,
+        "y": 50.0
+      },
+      "positionsByAngle": {
+        "135": { "x": 20.0, "y": 51.0 },
+        "225": { "x": 80.0, "y": 53.0 }
+      },
+      "worldPos": {
+        "x": -0.60,
+        "y": -0.10,
+        "z": 0.0
+      },
+      "label": "5. Kompartemen & Panel Pintu Kendaraan",
+      "badge": "KOMPARTEMEN PINTU MOBIL",
+      "badgeType": "danger",
+      "mainImage": "assets/images/hotspots/kompartemen_pintu.png",
+      "galleryImages": [
+        "assets/images/hotspots/kompartemen_pintu.png"
+      ],
+      "description": "Pemanfaatan rongga kosong di dalam pintu kendaraan dengan membongkar panel interior pintu (door trim), menyelipkan lempengan paket sabu atau pil ekstasi di balik mekanisme motor penggerak jendela (power window) dan rangka speaker audio.",
+      "riskIndicators": [
+        "Panel trim interior pintu terlihat renggang, tidak presisi, atau terdapat klip plastik pengunci yang hilang atau patah.",
+        "Jendela pintu depan mengalami hambatan mekanis saat dinaik-turunkan (bergerak lambat atau macet).",
+        "Suara pintu saat ditutup terdengar tumpul dan berbobot berat (dull heavy sound), tidak berbunyi nyaring layaknya rongga kosong pintu standar.",
+        "Baut penahan gagang pintu dan sakelar switch power window memiliki goresan obeng manual."
+      ],
+      "inspectionActions": [
+        "Operasikan tombol switch power window pada kedua pintu depan untuk mendeteksi suara motor listrik yang terbebani.",
+        "Lakukan ketukan resonansi (acoustic tap) pada seluruh sisi panel pintu luar dan dalam untuk membandingkan densitas.",
+        "Gunakan alat boroskop fleksibel tipis yang diselipkan melalui celah karet kaca jendela bagian bawah (weatherstrip).",
+        "Bila ditemukan benda anomali, buka panel pintu (door trim) secara hati-hati menggunakan alat pembuka plastik (trim removal tool)."
       ]
     },
     {
