@@ -571,9 +571,30 @@ export class Modul2View extends BaseModuleView {
     const btnCloseHelp = this.container.querySelector('#btn-close-help');
     const btnOkHelp = this.container.querySelector('#btn-help-ok');
 
+    const storageKey = 'tutorial_seen_modul2';
+
+    const markSeen = () => {
+      try {
+        localStorage.setItem(storageKey, 'true');
+      } catch (e) {}
+      helpOverlay?.classList.add('hidden');
+    };
+
     btnHelp?.addEventListener('click', () => helpOverlay?.classList.remove('hidden'));
-    btnCloseHelp?.addEventListener('click', () => helpOverlay?.classList.add('hidden'));
-    btnOkHelp?.addEventListener('click', () => helpOverlay?.classList.add('hidden'));
+    btnCloseHelp?.addEventListener('click', markSeen);
+    btnOkHelp?.addEventListener('click', markSeen);
+    helpOverlay?.addEventListener('click', (e) => {
+      if (e.target === helpOverlay) markSeen();
+    });
+
+    // Auto-show tutorial on first visit
+    try {
+      if (!localStorage.getItem(storageKey)) {
+        setTimeout(() => {
+          helpOverlay?.classList.remove('hidden');
+        }, 400);
+      }
+    } catch (e) {}
 
     const overlay = this.container.querySelector('#hotspot-card-modal-overlay');
     const closeBtn = this.container.querySelector('#btn-close-detail-modal');
