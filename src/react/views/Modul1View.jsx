@@ -193,6 +193,11 @@ export function Modul1View() {
               </div>
             </div>
 
+            <div className="angle-instruction-tag">
+              <span className="instruction-dot">●</span>
+              <span>Klik hotspot bernomor untuk menganalisis modus operandi & bukti forensik</span>
+            </div>
+
             <button
               className="quiz-nav-pill-btn"
               id="btn-open-quiz"
@@ -218,12 +223,7 @@ export function Modul1View() {
             <div className="current-angle-badge" id="current-angle-badge">
               <span className="angle-deg font-code-tech" id="angle-deg-text">{currentAngle}°</span>
               <span className="angle-sep">•</span>
-              <span className="angle-name" id="angle-name-text">{currentAngleInfo.label}</span>
               <span className="angle-sub" id="angle-sub-text">({currentAngleInfo.sub})</span>
-            </div>
-            <div className="angle-instruction-tag">
-              <span className="instruction-dot">●</span>
-              <span>Klik hotspot bernomor untuk menganalisis modus operandi & bukti forensik</span>
             </div>
           </div>
 

@@ -61,6 +61,12 @@ export class Modul1View extends BaseModuleView {
             </div>
 
             <div class="nav-right">
+              <!-- Angle Instruction Tag (pindah ke sebelah kiri tombol panduan) -->
+              <div class="angle-instruction-tag">
+                <span class="instruction-dot">●</span>
+                <span>Klik hotspot bernomor untuk menganalisis modus operandi & bukti forensik</span>
+              </div>
+
               <!-- Help Button -->
               <button id="btn-help-modal" class="icon-btn circle-btn" title="Panduan Penggunaan">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
@@ -80,12 +86,7 @@ export class Modul1View extends BaseModuleView {
               <div class="current-angle-badge" id="current-angle-badge">
                 <span class="angle-deg font-code-tech" id="angle-deg-text">0°</span>
                 <span class="angle-sep">•</span>
-                <span class="angle-name" id="angle-name-text">Tampak Depan</span>
                 <span class="angle-sub" id="angle-sub-text">(Organ Pencernaan & Dada)</span>
-              </div>
-              <div class="angle-instruction-tag">
-                <span class="instruction-dot">●</span>
-                <span>Klik hotspot bernomor untuk menganalisis modus operandi & bukti forensik</span>
               </div>
             </div>
 
