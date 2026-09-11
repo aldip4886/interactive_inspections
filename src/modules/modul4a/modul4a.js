@@ -367,7 +367,6 @@ export class Modul4aView extends BaseModuleView {
             </div>
             <div class="m4a-img-popup-caption">
               <span id="m4a-popup-img-title">Dokumentasi Penindakan DJBC</span>
-              <span id="m4a-popup-img-sub" class="m4a-img-popup-sub">Foto Real Forensik</span>
             </div>
           </div>
         </div>
@@ -1197,18 +1196,16 @@ export class Modul4aView extends BaseModuleView {
     });
   }
 
-  openImagePopup(src, title, subtitle = 'Foto Real Penindakan DJBC') {
+  openImagePopup(src, title) {
     const popup = this.container.querySelector('#m4a-image-popup-modal');
     const imgEl = this.container.querySelector('#m4a-popup-img-el');
     const titleEl = this.container.querySelector('#m4a-popup-img-title');
-    const subEl = this.container.querySelector('#m4a-popup-img-sub');
 
     if (!popup || !imgEl) return;
 
     imgEl.src = src;
     imgEl.alt = title || 'Foto Forensik';
     if (titleEl) titleEl.textContent = title || 'Dokumentasi Penindakan DJBC';
-    if (subEl) subEl.textContent = subtitle;
 
     popup.classList.remove('hidden');
   }

@@ -53,10 +53,19 @@
       "categoryId": "koper_tas",
       "categoryLabel": "Koper & Tas Bawaan",
       "color": "#E53E3E",
-      "position": { "x": 34.0, "y": 30.0 },
+      "position": {
+        "x": 34.0,
+        "y": 30.0
+      },
       "coordsByView": {
-        "xray": { "x": 34.0, "y": 30.0 },
-        "normal": { "x": 34.0, "y": 30.0 }
+        "xray": {
+          "x": 34.0,
+          "y": 30.0
+        },
+        "normal": {
+          "x": 34.0,
+          "y": 30.0
+        }
       },
       "riskLevel": "critical",
       "riskScore": 90,
@@ -106,10 +115,19 @@
       "categoryId": "personal_items",
       "categoryLabel": "Pouch Personal Items",
       "color": "#1890FF",
-      "position": { "x": 65.0, "y": 25.0 },
+      "position": {
+        "x": 60.0,
+        "y": 30.0
+      },
       "coordsByView": {
-        "xray": { "x": 65.0, "y": 25.0 },
-        "normal": { "x": 65.0, "y": 30.0 }
+        "xray": {
+          "x": 60.0,
+          "y": 30.0
+        },
+        "normal": {
+          "x": 60.0,
+          "y": 30.0
+        }
       },
       "riskLevel": "high",
       "riskScore": 85,
@@ -158,10 +176,19 @@
       "categoryId": "buku_dokumen",
       "categoryLabel": "Buku & Kitab",
       "color": "#38A169",
-      "position": { "x": 36.0, "y": 50.0 },
+      "position": {
+        "x": 42.0,
+        "y": 55.0
+      },
       "coordsByView": {
-        "xray": { "x": 36.0, "y": 50.0 },
-        "normal": { "x": 38.0, "y": 48.0 }
+        "xray": {
+          "x": 42.0,
+          "y": 55.0
+        },
+        "normal": {
+          "x": 42.0,
+          "y": 55.0
+        }
       },
       "riskLevel": "high",
       "riskScore": 80,
@@ -210,10 +237,19 @@
       "categoryId": "makanan_snack",
       "categoryLabel": "Makanan & Snack",
       "color": "#F5A623",
-      "position": { "x": 62.0, "y": 52.0 },
+      "position": {
+        "x": 62.0,
+        "y": 52.0
+      },
       "coordsByView": {
-        "xray": { "x": 62.0, "y": 52.0 },
-        "normal": { "x": 63.0, "y": 56.0 }
+        "xray": {
+          "x": 62.0,
+          "y": 52.0
+        },
+        "normal": {
+          "x": 63.0,
+          "y": 56.0
+        }
       },
       "riskLevel": "warning",
       "riskScore": 75,
@@ -262,10 +298,19 @@
       "categoryId": "sepatu_footwear",
       "categoryLabel": "Sepatu & Footwear",
       "color": "#E53E3E",
-      "position": { "x": 43.0, "y": 74.0 },
+      "position": {
+        "x": 43.0,
+        "y": 74.0
+      },
       "coordsByView": {
-        "xray": { "x": 43.0, "y": 74.0 },
-        "normal": { "x": 37.0, "y": 66.0 }
+        "xray": {
+          "x": 43.0,
+          "y": 74.0
+        },
+        "normal": {
+          "x": 37.0,
+          "y": 66.0
+        }
       },
       "riskLevel": "critical",
       "riskScore": 88,

@@ -2165,9 +2165,5 @@ model-viewer .body-hotspot-pin {
 }
 
 .m4a-img-popup-sub {
-  color: #FDBB24 !important;
-  font-size: 11px !important;
-  font-weight: 700 !important;
-  text-transform: uppercase !important;
-  letter-spacing: 0.5px !important;
+  display: none !important;
 }

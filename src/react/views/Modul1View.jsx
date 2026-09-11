@@ -20,6 +20,7 @@ export function Modul1View() {
   const [quizScore, setQuizScore] = useState(0);
   const [selectedOption, setSelectedOption] = useState(null);
   const [showResult, setShowResult] = useState(false);
+  const [previewImage, setPreviewImage] = useState(null);
 
   const ANGLES = [0, 90, 180, 270];
   const autoPlayRef = useRef(null);
@@ -475,7 +476,15 @@ export function Modul1View() {
                     {activeTab === 'tab-modus' && (
                       <div className="tab-pane active">
                         <div className="detail-media-row">
-                          <div className="detail-illustration-box">
+                          <div
+                            className="detail-illustration-box"
+                            style={{ cursor: 'pointer' }}
+                            title="Klik untuk melihat gambar ukuran penuh"
+                            onClick={() => {
+                              const src = selectedHotspot.mainIllustration || selectedHotspot.illustrationImage || selectedHotspot.thumb || 'assets/mockup/card_digestive_main.png';
+                              setPreviewImage({ src, title: selectedHotspot.label });
+                            }}
+                          >
                             <img
                               src={selectedHotspot.mainIllustration || selectedHotspot.illustrationImage || selectedHotspot.thumb || 'assets/mockup/card_digestive_main.png'}
                               alt="Visual"
@@ -524,11 +533,23 @@ export function Modul1View() {
                       <div className="tab-pane active">
                         <div className="photos-tab-header">
                           <span className="photos-tab-title">Barang Bukti Sitaan & Citra Forensik:</span>
+                          <span className="photos-tab-hint" style={{ fontSize: '11px', color: '#FDBB24', marginLeft: '8px' }}>Klik gambar untuk melihat resolusi penuh</span>
                         </div>
                         <div className="findings-thumbnails-grid">
                           {(selectedHotspot.findings && selectedHotspot.findings.length > 0) ? (
                             selectedHotspot.findings.map((f, i) => (
-                              <div key={i} className="evidence-card" style={{ background: '#F8FAFC', border: '1px solid #E2E8F0', borderRadius: '8px', padding: '10px' }}>
+                              <div
+                                key={i}
+                                className="evidence-card"
+                                style={{ background: '#072238', border: '1px solid rgba(253, 187, 36, 0.4)', borderRadius: '8px', padding: '10px', cursor: 'pointer' }}
+                                title={`Klik untuk memperbesar: ${f.caption || f.title || 'Bukti'}`}
+                                onClick={() => {
+                                  setPreviewImage({
+                                    src: f.full || f.image || f.thumb || 'assets/mockup/finding_capsules.jpg',
+                                    title: `${f.caption || f.title || selectedHotspot.label} — [${f.tag || 'Barang Bukti'}]`
+                                  });
+                                }}
+                              >
                                 <img
                                   src={f.thumb || f.full || f.image || 'assets/mockup/finding_capsules.jpg'}
                                   alt={f.caption || f.title || 'Bukti'}
@@ -537,10 +558,10 @@ export function Modul1View() {
                                     e.currentTarget.src = 'assets/mockup/finding_capsules.jpg';
                                   }}
                                 />
-                                <span style={{ fontSize: '11px', fontWeight: '700', color: 'var(--color-primary-navy)', display: 'block', marginTop: '6px' }}>
+                                <span style={{ fontSize: '11px', fontWeight: '700', color: '#FDBB24', display: 'block', marginTop: '6px' }}>
                                   {f.tag || f.title || 'Barang Bukti Sitaan'}
                                 </span>
-                                <p style={{ fontSize: '10px', color: '#64748B', margin: 0 }}>{f.caption || 'Dokumentasi penindakan'}</p>
+                                <p style={{ fontSize: '10px', color: '#CBD5E1', margin: 0 }}>{f.caption || 'Dokumentasi penindakan'}</p>
                               </div>
                             ))
                           ) : (
@@ -742,6 +763,33 @@ export function Modul1View() {
                 </button>
               </div>
             )}
+          </div>
+        </div>
+      )}
+
+      {/* High-Res Forensic Photo Lightbox Modal Popup */}
+      {previewImage && (
+        <div
+          className="m4a-image-popup-overlay"
+          role="dialog"
+          aria-modal="true"
+          onClick={() => setPreviewImage(null)}
+        >
+          <div className="m4a-image-popup-content" onClick={(e) => e.stopPropagation()}>
+            <button
+              className="m4a-img-popup-close"
+              aria-label="Tutup Preview"
+              title="Tutup Preview (Esc)"
+              onClick={() => setPreviewImage(null)}
+            >
+              ✕
+            </button>
+            <div className="m4a-img-popup-frame">
+              <img src={previewImage.src} alt={previewImage.title || 'Foto Forensik'} />
+            </div>
+            <div className="m4a-img-popup-caption">
+              <span>{previewImage.title || 'Dokumentasi Penindakan DJBC'}</span>
+            </div>
           </div>
         </div>
       )}

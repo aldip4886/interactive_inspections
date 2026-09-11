@@ -330,6 +330,19 @@ export class Modul2View extends BaseModuleView {
           </div>
         </div>
       </div>
+
+      <!-- High-Res Forensic Photo Lightbox Modal Popup -->
+      <div id="m2-image-popup-modal" class="m4a-image-popup-overlay hidden" role="dialog" aria-modal="true">
+        <div class="m4a-image-popup-content">
+          <button id="btn-close-img-popup" class="m4a-img-popup-close" aria-label="Tutup Preview" title="Tutup Preview (Esc)">✕</button>
+          <div class="m4a-img-popup-frame">
+            <img id="m2-popup-img-el" src="" alt="Bukti Foto Real" />
+          </div>
+          <div class="m4a-img-popup-caption">
+            <span id="m2-popup-img-title">Dokumentasi Penindakan DJBC</span>
+          </div>
+        </div>
+      </div>
     `;
   }
 
@@ -494,6 +507,22 @@ export class Modul2View extends BaseModuleView {
       mainImg.src = hs.mainIllustration || hs.mainImage || hs.thumb || 'assets/mockup/image_placeholder.svg';
       mainImg.alt = hs.label;
     }
+
+    // Klik gambar utama pada Modus Operandi untuk memperbesar ke mode popup
+    const illustrationBox = this.container.querySelector('.detail-illustration-box');
+    if (illustrationBox) {
+      illustrationBox.style.cursor = 'pointer';
+      illustrationBox.title = 'Klik untuk melihat gambar ukuran penuh';
+      illustrationBox.onclick = () => {
+        const curImg = this.container.querySelector('#detail-main-img');
+        const curTitle = this.container.querySelector('#detail-title');
+        this.openImagePopup(
+          curImg ? curImg.src : (hs.mainIllustration || hs.mainImage || hs.thumb || 'assets/images/hotspots/hs_sardine_can_false.png'),
+          curTitle ? curTitle.textContent : hs.label
+        );
+      };
+    }
+
     if (desc) desc.textContent = hs.description;
     if (concealmentMethod) concealmentMethod.textContent = hs.tag || hs.categoryLabel || 'False Concealment';
     if (bodyLocation) bodyLocation.textContent = hs.bodyLocation || 'Bagasi Koper';
@@ -502,44 +531,40 @@ export class Modul2View extends BaseModuleView {
     if (narrative) narrative.textContent = hs.modusDetail || hs.description;
     if (note) note.textContent = hs.inspectionNote || 'SOP DJBC';
 
-    // TAB 2: Foto Real
+    // TAB 2: Foto Real dengan Fitur Popup Gambar
     const findingsGrid = this.container.querySelector('#findings-thumbnails-grid');
     if (findingsGrid) {
       findingsGrid.innerHTML = '';
-      const findingsList = (hs.findings && hs.findings.length > 0) ? hs.findings : [
-        {
-          full: 'assets/mockup/image_placeholder.svg',
-          thumb: 'assets/mockup/image_placeholder.svg',
-          caption: 'Dokumentasi Barang Bukti (Placeholder)',
-          tag: 'PLACEHOLDER'
-        }
-      ];
+      const findingsList = (hs.findings && hs.findings.length > 0)
+        ? hs.findings
+        : (hs.galleryImages && hs.galleryImages.length > 0)
+          ? hs.galleryImages.map(img => ({ full: img, thumb: img, caption: hs.label, tag: hs.badge || 'Barang Bukti' }))
+          : [{ full: hs.mainImage || 'assets/images/hotspots/hs_sardine_can_false.png', thumb: hs.mainImage || 'assets/images/hotspots/hs_sardine_can_false.png', caption: hs.label, tag: hs.badge || 'Barang Bukti' }];
 
       findingsList.forEach(f => {
-        const a = document.createElement('a');
-        a.href = f.full || f.thumb;
-        a.className = 'finding-thumb-item glightbox';
-        a.setAttribute('data-gallery', `findings-gallery-${hs.id}`);
-        a.setAttribute('data-title', `${f.caption} — [${f.tag || 'Barang Bukti'}]`);
-        a.innerHTML = `
-          <img src="${f.thumb || f.full}" alt="${f.caption}" onerror="this.src='assets/mockup/image_placeholder.svg'" />
+        const item = document.createElement('div');
+        item.className = 'finding-thumb-item';
+        item.setAttribute('role', 'button');
+        item.setAttribute('tabindex', '0');
+        item.setAttribute('title', `Klik untuk memperbesar: ${f.caption}`);
+        item.style.cursor = 'pointer';
+        item.innerHTML = `
+          <img src="${f.thumb || f.full}" alt="${f.caption}" onerror="this.src='assets/images/hotspots/hs_sardine_can_false.png'" />
           <span class="finding-thumb-label">${f.tag || 'Barang Bukti'}</span>
         `;
-        findingsGrid.appendChild(a);
+        item.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          this.openImagePopup(f.full || f.thumb, `${f.caption} — [${f.tag || 'Barang Bukti'}]`);
+        });
+        item.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            this.openImagePopup(f.full || f.thumb, `${f.caption} — [${f.tag || 'Barang Bukti'}]`);
+          }
+        });
+        findingsGrid.appendChild(item);
       });
-
-      try {
-        if (typeof window.GLightbox !== 'undefined') {
-          if (this.glightboxInstance) this.glightboxInstance.destroy();
-          this.glightboxInstance = window.GLightbox({
-            selector: '.glightbox',
-            touchNavigation: true,
-            loop: true
-          });
-        }
-      } catch (gErr) {
-        console.warn('GLightbox warning:', gErr);
-      }
     }
 
     // TAB 3: Detection & SOP
@@ -668,6 +693,55 @@ export class Modul2View extends BaseModuleView {
 
     // Make modal card draggable
     this.initCardDraggable();
+
+    // Popup Foto Real / Preview Gambar Resolusi Penuh
+    const imgPopupModal = this.container.querySelector('#m2-image-popup-modal');
+    const btnCloseImgPopup = this.container.querySelector('#btn-close-img-popup');
+
+    if (btnCloseImgPopup) {
+      btnCloseImgPopup.addEventListener('click', (e) => {
+        e.stopPropagation();
+        this.closeImagePopup();
+      });
+    }
+
+    if (imgPopupModal) {
+      imgPopupModal.addEventListener('click', (e) => {
+        if (e.target === imgPopupModal) {
+          this.closeImagePopup();
+        }
+      });
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        const popup = this.container?.querySelector('#m2-image-popup-modal');
+        if (popup && !popup.classList.contains('hidden')) {
+          this.closeImagePopup();
+        }
+      }
+    });
+  }
+
+  openImagePopup(src, title) {
+    const popup = this.container.querySelector('#m2-image-popup-modal');
+    const imgEl = this.container.querySelector('#m2-popup-img-el');
+    const titleEl = this.container.querySelector('#m2-popup-img-title');
+
+    if (!popup || !imgEl) return;
+
+    imgEl.src = src;
+    imgEl.alt = title || 'Foto Forensik';
+    if (titleEl) titleEl.textContent = title || 'Dokumentasi Penindakan DJBC';
+
+    popup.classList.remove('hidden');
+  }
+
+  closeImagePopup() {
+    const popup = this.container.querySelector('#m2-image-popup-modal');
+    if (popup) {
+      popup.classList.add('hidden');
+    }
   }
 
   switchCardPage(pageIndex) {
