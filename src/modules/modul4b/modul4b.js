@@ -32,6 +32,16 @@ export class Modul4bView extends BaseModuleView {
   }
 
   getTemplateHTML() {
+    const meta = this.moduleData?.meta || {};
+    const telemetry = this.moduleData?.telemetry || {};
+    const guide = this.moduleData?.guide || {};
+    const codeBadge = meta.codeBadge || 'MODUL 04B';
+    const courseTitle = meta.title || 'Pemeriksaan Kapal Laut Cargo (Marine Bulk Carrier)';
+    const legalRef = meta.legalRef || 'PMK-188/2021 & S-39/BC/2023';
+    const instructionTag = meta.instructionTag || 'Klik zona 01–10 untuk zoom kamera & analisis bukti pemeriksaan';
+    const subjectId = telemetry.subjectId || 'SUBJEK ID: VESSEL-KM-SAMUDRA-09 / CONTAINER CARGO SHIP';
+    const sensor = telemetry.sensor || 'METODE: RISK-BASED INSPECTION & CAMERA ZOOM FOCUS';
+
     return `
       <div id="modul4b-app-root">
         <!-- ─── MAIN VIEWPORT ─── -->
@@ -41,18 +51,18 @@ export class Modul4bView extends BaseModuleView {
           <div id="modul4b-top-bar" class="modul1-top-bar">
             <div class="nav-left">
               <div class="header-breadcrumb">
-                <span class="modul-code-badge font-code-tech">MODUL 04B</span>
-                <span class="course-main-title">Pemeriksaan Sarana Pengangkut Laut (Cargo Ship & Container)</span>
+                <span class="modul-code-badge font-code-tech">${codeBadge}</span>
+                <span class="course-main-title">${courseTitle}</span>
                 <span class="breadcrumb-separator">•</span>
-                <span class="modul-ref-tag font-code-tech">UU 17/2006 & PER-8/BC/2024</span>
+                <span class="modul-ref-tag font-code-tech">${legalRef}</span>
               </div>
             </div>
 
             <div class="nav-right">
-              <!-- Angle Instruction Tag (di sebelah kiri tombol panduan) -->
+              <!-- Angle Instruction Tag -->
               <div class="angle-instruction-tag">
                 <span class="instruction-dot">●</span>
-                <span>Klik zona 01–10 untuk zoom kamera & analisis bukti pemeriksaan</span>
+                <span>${instructionTag}</span>
               </div>
 
               <!-- Help Button -->
@@ -78,11 +88,11 @@ export class Modul4bView extends BaseModuleView {
               <!-- HUD Telemetry Watermark Overlay -->
               <div class="forensic-hud-telemetry" aria-hidden="true">
                 <div class="forensic-hud-top-left font-code-tech">
-                  <div class="hud-line-sub">SUBJEK ID: VESSEL-KM-SAMUDRA-09 / CONTAINER CARGO SHIP</div>
+                  <div class="hud-line-sub">${subjectId}</div>
                 </div>
                 <div class="forensic-hud-top-right font-code-tech">
                   <div class="hud-line-azimuth" id="hud-azimuth-text">MODE AKTIF: INTERACTIVE INSPECTION MAP // 10 ZONES</div>
-                  <div class="hud-line-status">METODE: RISK-BASED INSPECTION & CAMERA ZOOM FOCUS</div>
+                  <div class="hud-line-status">${sensor}</div>
                 </div>
               </div>
 
@@ -288,29 +298,32 @@ export class Modul4bView extends BaseModuleView {
           </div>
         </div>
 
-        <!-- Help Guide Overlay Modal -->
+        <!-- ─── HELP MODAL ─── -->
         <div id="help-overlay" class="modal-overlay hidden" role="dialog" aria-modal="true">
-          <div class="modal-card help-modal-card">
+          <div class="modal-card help-box">
             <div class="modal-header">
-              <h3>Panduan Interactive Inspection Map Kapal Kargo (Modul 04B)</h3>
-              <button id="btn-close-help" class="modal-close-btn" aria-label="Tutup Panduan">✕</button>
+              <h2 class="modal-heading">${guide.title || 'Panduan Penggunaan Modul Kapal Kargo'}</h2>
+              <button id="btn-close-help" class="modal-close-btn" aria-label="Tutup Panduan">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="18" y1="6" x2="6" y2="18"></line>
+                  <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+              </button>
             </div>
             <div class="modal-body help-content">
-              <div class="help-item">
-                <strong>1. 10 Inspection Zones:</strong> Kapal kargo dibagi ke dalam 10 Inspection Zones sistematis (01–10) berbasis risiko pabean sesuai PER-8/BC/2024 dan PER-11/BC/2024.
-              </div>
-              <div class="help-item">
-                <strong>2. Fitur Zoom Kamera Cerdas:</strong> Klik nomor zona 01–10 pada badan kapal atau dock kontrol bawah. Kamera akan secara otomatis melakukan <em>animated zoom focus</em> langsung ke area kompartemen terpilih.
-              </div>
-              <div class="help-item">
-                <strong>3. Floating Inspection Card:</strong> Kartu inspeksi melayang memuat 4 tab terpadu: Modus Operandi & Prosedur, Foto Real Bukti Sitaan, Indikator Anomali & SOP, serta Indikator Risiko & Keselamatan Kerja. Kartu dapat digeser (draggable) agar tidak menutupi visual kapal.
-              </div>
-              <div class="help-item">
-                <strong>4. Navigasi Cepat & Reset:</strong> Gunakan tombol panah ← / → pada kartu untuk menjelajahi zona berikutnya dengan pergerakan kamera dinamis, atau klik tombol <em>CUTAWAY KAPAL (RESET)</em> untuk kembali ke tampilan kapal utuh (100%).
-              </div>
+              ${(guide.items || [
+                { num: 1, title: '10 Inspection Zones', text: 'Kapal kargo dibagi ke dalam 10 Inspection Zones sistematis (01–10) berbasis risiko pabean sesuai PER-8/BC/2024 dan PER-11/BC/2024.' },
+                { num: 2, title: 'Fitur Zoom Kamera Cerdas', text: 'Klik nomor zona 01–10 pada badan kapal atau dock kontrol bawah. Kamera akan secara otomatis melakukan <em>animated zoom focus</em> langsung ke area kompartemen terpilih.' },
+                { num: 3, title: 'Floating Inspection Card', text: 'Kartu inspeksi melayang memuat 4 tab terpadu: Modus Operandi & Prosedur, Foto Real Bukti Sitaan, Indikator Anomali & SOP, serta Indikator Risiko & Keselamatan Kerja.' },
+                { num: 4, title: 'Navigasi Cepat & Reset', text: 'Gunakan tombol panah ← / → pada kartu untuk menjelajahi zona berikutnya dengan pergerakan kamera dinamis, atau klik tombol <em>CUTAWAY KAPAL (RESET)</em> untuk kembali ke tampilan kapal utuh (100%).' }
+              ]).map(item => `
+                <div class="help-item">
+                  <strong>${item.num}. ${item.title}:</strong> ${item.text}
+                </div>
+              `).join('')}
             </div>
             <div class="modal-footer">
-              <button id="btn-help-ok" class="btn btn-primary">Mengerti & Mulai Simulasi</button>
+              <button id="btn-help-ok" class="btn-primary-action">Mengerti</button>
             </div>
           </div>
         </div>
@@ -763,7 +776,7 @@ export class Modul4bView extends BaseModuleView {
     const markSeen = () => {
       try {
         localStorage.setItem(storageKey, 'true');
-      } catch (e) {}
+      } catch (e) { }
       helpOverlay?.classList.add('hidden');
     };
 
@@ -781,7 +794,7 @@ export class Modul4bView extends BaseModuleView {
           helpOverlay?.classList.remove('hidden');
         }, 400);
       }
-    } catch (e) {}
+    } catch (e) { }
 
     // Hotspot Callout Modal
     const overlay = this.container.querySelector('#hotspot-card-modal-overlay');

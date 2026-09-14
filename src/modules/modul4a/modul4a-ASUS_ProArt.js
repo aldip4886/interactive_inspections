@@ -94,6 +94,10 @@ export class Modul4aView extends BaseModuleView {
                 <span class="angle-name" id="view-mode-title">KIA Carnival 2023</span>
                 <span class="angle-sub" id="view-mode-sub">(Inspeksi 3D Interaktif 360°)</span>
               </div>
+              <div class="angle-instruction-tag">
+                <span class="instruction-dot">●</span>
+                <span>Klik hotspot bernomor pada kendaraan untuk menganalisis modus operandi & bukti forensik</span>
+              </div>
             </div>
 
             <!-- Vehicle Canvas Wrapper with Technical Forensic Grid & HUD Overlay -->
@@ -105,19 +109,12 @@ export class Modul4aView extends BaseModuleView {
               <!-- HUD Telemetry Watermark Overlay -->
               <div class="forensic-hud-telemetry" aria-hidden="true">
                 <div class="forensic-hud-top-left font-code-tech">
+                  <div class="hud-line-title">STASIUN PEMINDAIAN KENDARAAN DARAT 3D</div>
                   <div class="hud-line-sub">SUBJEK ID: VEHICLE-MPV-KC23 / KIA CARNIVAL 2023</div>
                 </div>
                 <div class="forensic-hud-top-right font-code-tech">
                   <div class="hud-line-azimuth" id="hud-azimuth-text">MODE AKTIF: 3D INTERACTIVE INSPECTION</div>
                   <div class="hud-line-status">SENSOR: DUAL-ENERGY TRANSMISSION & 3D WEBGL</div>
-                </div>
-              </div>
-
-              <!-- Top Instruction Hint (Floating Above Central Image) -->
-              <div class="m4a-top-instruction-dock" id="m4a-top-instruction-dock">
-                <div class="angle-instruction-tag">
-                  <span class="instruction-dot">●</span>
-                  <span>Klik hotspot bernomor pada kendaraan untuk menganalisis modus operandi & bukti forensik</span>
                 </div>
               </div>
 
@@ -169,6 +166,7 @@ export class Modul4aView extends BaseModuleView {
                 <div class="detail-badge-row">
                   <span class="floating-card-drag-indicator" title="Geser posisi kartu">⋮⋮</span>
                   <span id="detail-tag-badge" class="detail-tag-badge">MODUS #01</span>
+                  <span id="detail-cat-badge" class="detail-cat-badge">INTERIOR MOBIL</span>
                 </div>
                 <h3 id="detail-title" class="detail-title">1. Interior: Dashboard & Rongga Jok</h3>
               </div>
@@ -855,10 +853,12 @@ export class Modul4aView extends BaseModuleView {
     const total = hotspots.length;
 
     const tagBadge = this.container.querySelector('#detail-tag-badge');
+    const catBadge = this.container.querySelector('#detail-cat-badge');
     const title = this.container.querySelector('#detail-title');
     const navCounter = this.container.querySelector('#card-nav-counter');
 
     if (tagBadge) tagBadge.textContent = `MODUS #${hs.badgeNum || hs.num || (idx + 1)}`;
+    if (catBadge) catBadge.textContent = (hs.badge || hs.category || 'KENDARAAN DARAT').toUpperCase();
     if (title) title.textContent = hs.label;
     if (navCounter) navCounter.textContent = `${idx + 1} / ${total}`;
 

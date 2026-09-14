@@ -115,7 +115,21 @@ export class CourseProgressManager {
     this.saveState();
   }
 
+  setModuleProgress(moduleId, pct) {
+    if (!this.state.moduleManualProgress) {
+      this.state.moduleManualProgress = {};
+    }
+    this.state.moduleManualProgress[moduleId] = Math.max(
+      this.state.moduleManualProgress[moduleId] || 0,
+      Math.min(100, Math.round(pct))
+    );
+    this.saveState();
+  }
+
   getModuleProgress(moduleId) {
+    if (this.state.moduleManualProgress && typeof this.state.moduleManualProgress[moduleId] === 'number') {
+      return this.state.moduleManualProgress[moduleId];
+    }
     const total = this.moduleTotals[moduleId] || 6;
     const visited = (this.state.visitedHotspots[moduleId] || []).length;
     return Math.min(100, Math.round((visited / total) * 100));

@@ -8,7 +8,7 @@ export function Modul1View() {
   const { refreshProgress } = useApp();
   const [moduleData] = useState(modul1Data);
   const [currentAngle, setCurrentAngle] = useState(0);
-  const [currentZoom, setCurrentZoom] = useState(1.35);
+  const [currentZoom, setCurrentZoom] = useState(1.5);
   const [isAutoPlaying, setIsAutoPlaying] = useState(false);
   const [selectedHotspot, setSelectedHotspot] = useState(null);
   const [activeTab, setActiveTab] = useState('tab-modus');
@@ -20,7 +20,6 @@ export function Modul1View() {
   const [quizScore, setQuizScore] = useState(0);
   const [selectedOption, setSelectedOption] = useState(null);
   const [showResult, setShowResult] = useState(false);
-  const [previewImage, setPreviewImage] = useState(null);
 
   const ANGLES = [0, 90, 180, 270];
   const autoPlayRef = useRef(null);
@@ -193,11 +192,6 @@ export function Modul1View() {
               </div>
             </div>
 
-            <div className="angle-instruction-tag">
-              <span className="instruction-dot">●</span>
-              <span>Klik hotspot bernomor untuk menganalisis modus operandi & bukti forensik</span>
-            </div>
-
             <button
               className="quiz-nav-pill-btn"
               id="btn-open-quiz"
@@ -218,6 +212,19 @@ export function Modul1View() {
 
         {/* Rotatable Body Stage */}
         <div className="rotatable-body-view">
+          {/* Angle Header Bar */}
+          <div className="angle-header-bar">
+            <div className="current-angle-badge" id="current-angle-badge">
+              <span className="angle-deg font-code-tech" id="angle-deg-text">{currentAngle}°</span>
+              <span className="angle-sep">•</span>
+              <span className="angle-name" id="angle-name-text">{currentAngleInfo.label}</span>
+              <span className="angle-sub" id="angle-sub-text">({currentAngleInfo.sub})</span>
+            </div>
+            <div className="angle-instruction-tag">
+              <span className="instruction-dot">●</span>
+              <span>Klik hotspot bernomor untuk menganalisis modus operandi & bukti forensik</span>
+            </div>
+          </div>
 
           {/* Body Canvas Wrapper with Forensic Grid & HUD Overlay */}
           <div
@@ -233,6 +240,7 @@ export function Modul1View() {
             {/* HUD Telemetry Watermark Overlay */}
             <div className="forensic-hud-telemetry" aria-hidden="true">
               <div className="forensic-hud-top-left font-code-tech">
+                <div className="hud-line-title">STASIUN PEMINDAIAN ANATOMI DUAL-AXIS</div>
                 <div className="hud-line-sub">SUBJEK ID: SUSPECT-JKT-9921 / PRIA / 34 TH</div>
               </div>
               <div className="forensic-hud-top-right font-code-tech">
@@ -250,9 +258,7 @@ export function Modul1View() {
               style={{
                 transform: `scale(${currentZoom})`,
                 transformOrigin: 'center center',
-                transition: 'transform 0.15s ease',
-                '--body-zoom': currentZoom,
-                '--tooltip-counter-scale': (1 / currentZoom).toFixed(4)
+                transition: 'transform 0.15s ease'
               }}
             >
               <img
@@ -271,11 +277,10 @@ export function Modul1View() {
                   const isActive = selectedHotspot?.id === hs.id;
                   const cleanName = (hs.label || '').replace(/^\d+\.\s*/, '');
 
-                  const isTopArea = coords.y < 18;
                   return (
                     <div
                       key={hs.id}
-                      className={`body-hotspot-pin ${isActive ? 'active' : ''} ${isVisited ? 'visited' : ''} ${isTopArea ? 'tooltip-bottom' : ''}`}
+                      className={`body-hotspot-pin ${isActive ? 'active' : ''} ${isVisited ? 'visited' : ''}`}
                       style={{ left: `${coords.x}%`, top: `${coords.y}%` }}
                       onPointerDown={(e) => e.stopPropagation()}
                       onClick={(e) => {
@@ -362,8 +367,8 @@ export function Modul1View() {
                 <button
                   id="btn-zoom-reset"
                   className="pedestal-ctrl-btn hud-zoom-btn reset-btn"
-                  title="Reset Zoom (135%)"
-                  onClick={() => handleZoom(1.35)}
+                  title="Reset Zoom (150%)"
+                  onClick={() => handleZoom(1.5)}
                 >
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><polyline points="3 3 3 8 8 8"></polyline></svg>
                 </button>
@@ -397,6 +402,9 @@ export function Modul1View() {
                 <div className="detail-badge-row">
                   <span className="floating-card-drag-indicator" title="Geser posisi kartu">⋮⋮</span>
                   <span className="detail-tag-badge font-code-tech">MODUS #{String(selectedHotspot.badgeNum).padStart(2, '0')}</span>
+                  <span className={`detail-cat-badge font-code-tech cat-${selectedHotspot.categoryId}`}>
+                    {(selectedHotspot.categoryLabel || selectedHotspot.tag || 'MODUS').toUpperCase()}
+                  </span>
                 </div>
                 <h3 className="detail-title">{selectedHotspot.label}</h3>
                 <p className="detail-subtitle">{selectedHotspot.tag || selectedHotspot.shortName || selectedHotspot.label}</p>
@@ -418,7 +426,7 @@ export function Modul1View() {
                     ←
                   </button>
                   <span id="card-nav-counter" className="card-nav-counter font-code-tech">
-                    {selectedHotspot.badgeNum || ((moduleData?.hotspots || []).findIndex(h => h.id === selectedHotspot.id) + 1)} / {moduleData?.hotspots?.length || 6}
+                    {selectedHotspot.badgeNum || ((moduleData?.hotspots || []).findIndex(h => h.id === selectedHotspot.id) + 1)} / {moduleData?.hotspots?.length || 8}
                   </span>
                   <button
                     id="btn-next-hotspot"
@@ -469,15 +477,7 @@ export function Modul1View() {
                     {activeTab === 'tab-modus' && (
                       <div className="tab-pane active">
                         <div className="detail-media-row">
-                          <div
-                            className="detail-illustration-box"
-                            style={{ cursor: 'pointer' }}
-                            title="Klik untuk melihat gambar ukuran penuh"
-                            onClick={() => {
-                              const src = selectedHotspot.mainIllustration || selectedHotspot.illustrationImage || selectedHotspot.thumb || 'assets/mockup/card_digestive_main.png';
-                              setPreviewImage({ src, title: selectedHotspot.label });
-                            }}
-                          >
+                          <div className="detail-illustration-box">
                             <img
                               src={selectedHotspot.mainIllustration || selectedHotspot.illustrationImage || selectedHotspot.thumb || 'assets/mockup/card_digestive_main.png'}
                               alt="Visual"
@@ -526,23 +526,11 @@ export function Modul1View() {
                       <div className="tab-pane active">
                         <div className="photos-tab-header">
                           <span className="photos-tab-title">Barang Bukti Sitaan & Citra Forensik:</span>
-                          <span className="photos-tab-hint" style={{ fontSize: '11px', color: '#FDBB24', marginLeft: '8px' }}>Klik gambar untuk melihat resolusi penuh</span>
                         </div>
                         <div className="findings-thumbnails-grid">
                           {(selectedHotspot.findings && selectedHotspot.findings.length > 0) ? (
                             selectedHotspot.findings.map((f, i) => (
-                              <div
-                                key={i}
-                                className="evidence-card"
-                                style={{ background: '#072238', border: '1px solid rgba(253, 187, 36, 0.4)', borderRadius: '8px', padding: '10px', cursor: 'pointer' }}
-                                title={`Klik untuk memperbesar: ${f.caption || f.title || 'Bukti'}`}
-                                onClick={() => {
-                                  setPreviewImage({
-                                    src: f.full || f.image || f.thumb || 'assets/mockup/finding_capsules.jpg',
-                                    title: `${f.caption || f.title || selectedHotspot.label} — [${f.tag || 'Barang Bukti'}]`
-                                  });
-                                }}
-                              >
+                              <div key={i} className="evidence-card" style={{ background: '#F8FAFC', border: '1px solid #E2E8F0', borderRadius: '8px', padding: '10px' }}>
                                 <img
                                   src={f.thumb || f.full || f.image || 'assets/mockup/finding_capsules.jpg'}
                                   alt={f.caption || f.title || 'Bukti'}
@@ -551,10 +539,10 @@ export function Modul1View() {
                                     e.currentTarget.src = 'assets/mockup/finding_capsules.jpg';
                                   }}
                                 />
-                                <span style={{ fontSize: '11px', fontWeight: '700', color: '#FDBB24', display: 'block', marginTop: '6px' }}>
+                                <span style={{ fontSize: '11px', fontWeight: '700', color: 'var(--color-primary-navy)', display: 'block', marginTop: '6px' }}>
                                   {f.tag || f.title || 'Barang Bukti Sitaan'}
                                 </span>
-                                <p style={{ fontSize: '10px', color: '#CBD5E1', margin: 0 }}>{f.caption || 'Dokumentasi penindakan'}</p>
+                                <p style={{ fontSize: '10px', color: '#64748B', margin: 0 }}>{f.caption || 'Dokumentasi penindakan'}</p>
                               </div>
                             ))
                           ) : (
@@ -756,33 +744,6 @@ export function Modul1View() {
                 </button>
               </div>
             )}
-          </div>
-        </div>
-      )}
-
-      {/* High-Res Forensic Photo Lightbox Modal Popup */}
-      {previewImage && (
-        <div
-          className="m4a-image-popup-overlay"
-          role="dialog"
-          aria-modal="true"
-          onClick={() => setPreviewImage(null)}
-        >
-          <div className="m4a-image-popup-content" onClick={(e) => e.stopPropagation()}>
-            <button
-              className="m4a-img-popup-close"
-              aria-label="Tutup Preview"
-              title="Tutup Preview (Esc)"
-              onClick={() => setPreviewImage(null)}
-            >
-              ✕
-            </button>
-            <div className="m4a-img-popup-frame">
-              <img src={previewImage.src} alt={previewImage.title || 'Foto Forensik'} />
-            </div>
-            <div className="m4a-img-popup-caption">
-              <span>{previewImage.title || 'Dokumentasi Penindakan DJBC'}</span>
-            </div>
           </div>
         </div>
       )}

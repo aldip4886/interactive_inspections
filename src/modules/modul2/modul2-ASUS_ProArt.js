@@ -12,9 +12,6 @@ export class Modul2View extends BaseModuleView {
     this.currentViewMode = 'xray'; // 'xray' or 'normal'
     this.activeFilter = 'all';
     this.isModalOpen = false;
-    this.currentZoom = 1.2;
-    this.panX = 0;
-    this.panY = 0;
     this.cardPages = [
       { id: 'tab-modus', num: 1, title: 'Modus Operandi' },
       { id: 'tab-photos', num: 2, title: 'Foto Gambar Real' },
@@ -40,16 +37,8 @@ export class Modul2View extends BaseModuleView {
   }
 
   getTemplateHTML() {
-    const meta = this.moduleData?.meta || {};
-    const telemetry = this.moduleData?.telemetry || {};
-    const guide = this.moduleData?.guide || {};
-    const codeBadge = meta.codeBadge || 'MODUL 02';
-    const courseTitle = meta.title || 'Pemeriksaan Barang Bawaan (Luggage Concealment)';
-    const legalRef = meta.legalRef || 'PMK-188/2021 & S-39/BC/2023';
-    const instructionTag = meta.instructionTag || 'Klik hotspot bernomor untuk menganalisis modus operandi & bukti forensik';
-    const subjectId = telemetry.subjectId || 'SUBJEK ID: SUSPECT-LUGGAGE-8812 / KOPER BAGASI';
-    const activeModeText = telemetry.activeModeText || 'MODE AKTIF: SCANNER X-RAY HI-PENETRATION';
-    const sensor = telemetry.sensor || 'SENSOR: DUAL-ENERGY TRANSMISSION X-RAY';
+    const modPct = courseProgress.getModuleProgress('modul2');
+    const categories = this.moduleData.categories || [];
 
     return `
       <div id="modul2-app-root">
@@ -60,20 +49,14 @@ export class Modul2View extends BaseModuleView {
           <div id="modul2-top-bar" class="modul1-top-bar">
             <div class="nav-left">
               <div class="header-breadcrumb">
-                <span class="modul-code-badge font-code-tech">${codeBadge}</span>
-                <span class="course-main-title">${courseTitle}</span>
+                <span class="modul-code-badge font-code-tech">MODUL 02</span>
+                <span class="course-main-title">Pemeriksaan Barang Bawaan (Luggage Concealment)</span>
                 <span class="breadcrumb-separator">•</span>
-                <span class="modul-ref-tag font-code-tech">${legalRef}</span>
+                <span class="modul-ref-tag font-code-tech">PMK-188/2021 & S-39/BC/2023</span>
               </div>
             </div>
 
             <div class="nav-right">
-              <!-- Angle Instruction Tag -->
-              <div class="angle-instruction-tag">
-                <span class="instruction-dot">●</span>
-                <span>${instructionTag}</span>
-              </div>
-
               <!-- Help Button -->
               <button id="btn-help-modal" class="icon-btn circle-btn" title="Panduan Penggunaan">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
@@ -88,6 +71,20 @@ export class Modul2View extends BaseModuleView {
           <!-- Inspection View Stage -->
           <div class="rotatable-body-view">
 
+            <!-- Angle / View Header Bar -->
+            <div class="angle-header-bar">
+              <div class="current-angle-badge" id="current-angle-badge">
+                <span class="angle-deg font-code-tech" id="view-mode-badge">X-RAY SCANNER</span>
+                <span class="angle-sep">•</span>
+                <span class="angle-name" id="view-mode-title">Pemeriksaan Koper Bagasi (X-Ray)</span>
+                <span class="angle-sub" id="view-mode-sub">(Koper Trolley & Barang Bawaan)</span>
+              </div>
+              <div class="angle-instruction-tag">
+                <span class="instruction-dot">●</span>
+                <span>Klik hotspot bernomor untuk menganalisis modus operandi & bukti forensik</span>
+              </div>
+            </div>
+
             <!-- Luggage Canvas Wrapper with Technical Forensic Grid & HUD Overlay -->
             <div class="body-canvas-wrapper" id="luggage-canvas-wrapper">
 
@@ -97,16 +94,27 @@ export class Modul2View extends BaseModuleView {
               <!-- HUD Telemetry Watermark Overlay -->
               <div class="forensic-hud-telemetry" aria-hidden="true">
                 <div class="forensic-hud-top-left font-code-tech">
-                  <div class="hud-line-sub">${subjectId}</div>
+                  <div class="hud-line-title">STASIUN PEMINDAIAN BARANG BAWAAN DUAL-ENERGY</div>
+                  <div class="hud-line-sub">SUBJEK ID: SUSPECT-LUGGAGE-8812 / KOPER BAGASI</div>
                 </div>
                 <div class="forensic-hud-top-right font-code-tech">
-                  <div class="hud-line-azimuth" id="hud-azimuth-text">${activeModeText}</div>
-                  <div class="hud-line-status">${sensor}</div>
+                  <div class="hud-line-azimuth" id="hud-azimuth-text">MODE AKTIF: SCANNER X-RAY HI-PENETRATION</div>
+                  <div class="hud-line-status">SENSOR: DUAL-ENERGY TRANSMISSION X-RAY</div>
                 </div>
               </div>
 
-              <!-- Top Controls Dock (Floating Above Central Image) -->
-              <div class="m2-top-controls-dock" id="pedestal-rotation-dock">
+              <!-- Central Active Luggage Image Container with Hotspots Layer -->
+              <div class="body-image-container" id="luggage-image-container" style="max-width:850px; aspect-ratio: auto; margin:0 auto;">
+                <img id="m2-central-image" src="assets/images/central/m2_luggage_xray.png" 
+                     alt="X-Ray Scanner Koper Bagasi Bawaan" 
+                     class="main-body-img"
+                     style="max-height: 68vh; filter: drop-shadow(0 12px 32px rgba(0, 37, 59, 0.16)); pointer-events:none;" />
+                <div class="body-pedestal-platform"></div>
+                <div id="m2-hotspots-layer" class="hotspots-layer"></div>
+              </div>
+
+              <!-- Floating HUD Segmented Pill Controls Dock (Center Bottom) -->
+              <div class="pedestal-rotation-dock" id="pedestal-rotation-dock">
                 <div class="pedestal-carousel-controls">
                   <!-- Mode Switcher Pill Buttons -->
                   <button id="btn-view-xray" class="hud-pill-action-btn active" title="Tampilan X-Ray Scanner">
@@ -117,36 +125,15 @@ export class Modul2View extends BaseModuleView {
                     <span class="hud-btn-icon">👜</span>
                     <span class="hud-btn-text">TAMPAK NORMAL</span>
                   </button>
-                </div>
-              </div>
 
-              <!-- Central Stage Area (Central Image + Vertical Zoom Slider Beside It) -->
-              <div class="m2-central-stage-area" id="m2-central-stage-area">
-                <!-- Central Active Luggage Image Container with Hotspots Layer -->
-                <div class="body-image-container" id="luggage-image-container" style="max-width:850px; aspect-ratio: auto; margin:0 auto;">
-                  <img id="m2-central-image" src="assets/images/central/m2_luggage_xray.png" 
-                       alt="X-Ray Scanner Koper Bagasi Bawaan" 
-                       class="main-body-img"
-                       style="max-height: 68vh; filter: drop-shadow(0 12px 32px rgba(0, 37, 59, 0.16)); pointer-events:none;" />
-                  <div class="body-pedestal-platform"></div>
-                  <div id="m2-hotspots-layer" class="hotspots-layer"></div>
-                </div>
+                  <div class="hud-pill-divider"></div>
 
-                <!-- Vertical Zoom Slider Dock (Beside Central Image) -->
-                <div class="m2-vertical-zoom-dock" id="m2-vertical-zoom-dock" title="Kontrol Zoom Gambar">
-                  <button id="btn-zoom-in" class="m2-vzoom-btn" title="Perbesar Gambar (Zoom In)" aria-label="Zoom In">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-                  </button>
-                  <div class="m2-vzoom-slider-wrap">
-                    <span id="zoom-level-text" class="m2-vzoom-badge font-code-tech">120%</span>
-                    <input type="range" id="m2-zoom-slider" class="m2-vertical-slider" min="100" max="250" step="5" value="120" orient="vertical" aria-label="Tingkat Zoom Gambar" />
-                  </div>
-                  <button id="btn-zoom-out" class="m2-vzoom-btn" title="Perkecil Gambar (Zoom Out)" aria-label="Zoom Out">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-                  </button>
-                  <button id="btn-zoom-reset" class="m2-vzoom-btn reset-btn" title="Reset Zoom (120%)" aria-label="Reset Zoom">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><polyline points="3 3 3 8 8 8"></polyline></svg>
-                  </button>
+                  <!-- Category Filter Buttons -->
+                  ${categories.map(cat => `
+                    <button class="filter-btn m2-dock-filter-btn ${cat.id === 'all' ? 'active' : ''}" data-filter="${cat.id}" title="${cat.label}">
+                      ${cat.icon || ''} <span>${cat.label}</span>
+                    </button>
+                  `).join('')}
                 </div>
               </div>
 
@@ -164,6 +151,7 @@ export class Modul2View extends BaseModuleView {
                 <div class="detail-badge-row">
                   <span class="floating-card-drag-indicator" title="Geser posisi kartu">⋮⋮</span>
                   <span id="detail-tag-badge" class="detail-tag-badge">MODUS #01</span>
+                  <span id="detail-cat-badge" class="detail-cat-badge">KOPER & TAS BAWAAN</span>
                 </div>
                 <h3 id="detail-title" class="detail-title">1. Sisi Koper & Tas Bawaan</h3>
               </div>
@@ -320,41 +308,26 @@ export class Modul2View extends BaseModuleView {
         <div id="help-overlay" class="modal-overlay hidden" role="dialog" aria-modal="true">
           <div class="modal-card help-box">
             <div class="modal-header">
-              <h2 class="modal-heading">${guide.title || 'Panduan Penggunaan Modul Barang Bawaan'}</h2>
-              <button id="btn-close-help" class="modal-close-btn" aria-label="Tutup Panduan">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                  <line x1="18" y1="6" x2="6" y2="18"></line>
-                  <line x1="6" y1="6" x2="18" y2="18"></line>
-                </svg>
-              </button>
+              <h2 class="modal-heading">Panduan Penggunaan Modul Barang Bawaan</h2>
+              <button id="btn-close-help" class="modal-close-btn">✕</button>
             </div>
             <div class="modal-body help-content">
-              ${(guide.items || [
-                { num: 1, title: 'Switcher Mode Tampilan', text: 'Gunakan tombol <strong>🔍 X-Ray Scanner</strong> dan <strong>👜 Tampak Normal</strong> pada dock bawah untuk berpindah citra radiologi atau visual fisik barang bawaan.' },
-                { num: 2, title: 'Titik Hotspot Interaktif', text: 'Klik callout bernomor pada koper untuk menginspeksi modus penyembunyian & barang bukti.' },
-                { num: 3, title: 'Format Tabbed Card', text: 'Pelajari rincian lengkap melalui 4 tab: <em>Modus Operandi</em>, <em>Foto Gambar Real</em>, <em>Ciri Pelaku & SOP</em>, dan <em>Indikator Risiko</em>.' }
-              ]).map(item => `
-                <div class="help-item">
-                  <strong>${item.num}. ${item.title}:</strong> ${item.text}
-                </div>
-              `).join('')}
+              <div class="help-item">
+                <strong>1. Switcher Mode Tampilan:</strong> Gunakan tombol <strong>🔍 X-Ray Scanner</strong> dan <strong>hb Tampak Normal</strong> pada dock bawah untuk berpindah citra radiologi atau visual fisik barang bawaan.
+              </div>
+              <div class="help-item">
+                <strong>2. Filter Kategori Modus:</strong> Filter titik-titik hotspot berdasarkan jenis koper, personal items, buku, makanan, atau sepatu melalui tombol kategori pada dock bawah.
+              </div>
+              <div class="help-item">
+                <strong>3. Titik Hotspot Interaktif:</strong> Klik nomor callout bernomor pada koper untuk menginspeksi modus penyembunyian & barang bukti.
+              </div>
+              <div class="help-item">
+                <strong>4. Format Tabbed Card:</strong> Pelajari rincian lengkap melalui 4 tab: <em>Modus Operandi</em>, <em>Foto Gambar Real</em>, <em>Ciri Pelaku & SOP</em>, dan <em>Indikator Risiko</em>.
+              </div>
             </div>
             <div class="modal-footer">
               <button id="btn-help-ok" class="btn-primary-action">Mengerti</button>
             </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- High-Res Forensic Photo Lightbox Modal Popup -->
-      <div id="m2-image-popup-modal" class="m4a-image-popup-overlay hidden" role="dialog" aria-modal="true">
-        <div class="m4a-image-popup-content">
-          <button id="btn-close-img-popup" class="m4a-img-popup-close" aria-label="Tutup Preview" title="Tutup Preview (Esc)">✕</button>
-          <div class="m4a-img-popup-frame">
-            <img id="m2-popup-img-el" src="" alt="Bukti Foto Real" />
-          </div>
-          <div class="m4a-img-popup-caption">
-            <span id="m2-popup-img-title">Dokumentasi Penindakan DJBC</span>
           </div>
         </div>
       </div>
@@ -364,10 +337,23 @@ export class Modul2View extends BaseModuleView {
   initInteractiveViewer() {
     this.renderHotspots();
 
+    // Setup Category Filter Buttons (HUD Dock Pills)
+    const filterBtns = this.container.querySelectorAll('.m2-dock-filter-btn, .filter-btn');
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        e.currentTarget.classList.add('active');
+        this.activeFilter = e.currentTarget.dataset.filter;
+        this.renderHotspots();
+      });
+    });
+
     // View Mode Toggle (X-Ray vs Normal)
     const btnXray = this.container.querySelector('#btn-view-xray');
     const btnNormal = this.container.querySelector('#btn-view-normal');
     const centralImg = this.container.querySelector('#m2-central-image');
+    const viewBadge = this.container.querySelector('#view-mode-badge');
+    const viewTitle = this.container.querySelector('#view-mode-title');
     const azimuthText = this.container.querySelector('#hud-azimuth-text');
 
     if (btnXray && btnNormal && centralImg) {
@@ -376,6 +362,8 @@ export class Modul2View extends BaseModuleView {
         btnNormal.classList.remove('active');
         this.currentViewMode = 'xray';
         centralImg.src = 'assets/images/central/m2_luggage_xray.png';
+        if (viewBadge) viewBadge.textContent = 'X-RAY SCANNER';
+        if (viewTitle) viewTitle.textContent = 'Pemeriksaan Koper Bagasi (X-Ray)';
         if (azimuthText) azimuthText.textContent = 'MODE AKTIF: SCANNER X-RAY HI-PENETRATION';
         this.renderHotspots();
       });
@@ -385,140 +373,12 @@ export class Modul2View extends BaseModuleView {
         btnXray.classList.remove('active');
         this.currentViewMode = 'normal';
         centralImg.src = 'assets/images/central/m2_luggage_normal.png';
+        if (viewBadge) viewBadge.textContent = 'TAMPAK NORMAL';
+        if (viewTitle) viewTitle.textContent = 'Pemeriksaan Koper Bagasi (Fisik)';
         if (azimuthText) azimuthText.textContent = 'MODE AKTIF: INSPEKSI FISIK TAMPAK NORMAL';
         this.renderHotspots();
       });
     }
-
-    this.setupZoomControls();
-  }
-
-  setupZoomControls() {
-    const slider = this.container.querySelector('#m2-zoom-slider');
-    const btnIn = this.container.querySelector('#btn-zoom-in');
-    const btnOut = this.container.querySelector('#btn-zoom-out');
-    const btnReset = this.container.querySelector('#btn-zoom-reset');
-    const container = this.container.querySelector('#luggage-image-container');
-    const canvasWrap = this.container.querySelector('#luggage-canvas-wrapper');
-
-    if (slider) {
-      slider.addEventListener('input', (e) => {
-        const val = parseFloat(e.target.value) / 100;
-        this.applyZoom(val);
-      });
-    }
-
-    if (btnIn) {
-      btnIn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        this.applyZoom(this.currentZoom + 0.15);
-      });
-    }
-
-    if (btnOut) {
-      btnOut.addEventListener('click', (e) => {
-        e.stopPropagation();
-        this.applyZoom(this.currentZoom - 0.15);
-      });
-    }
-
-    if (btnReset) {
-      btnReset.addEventListener('click', (e) => {
-        e.stopPropagation();
-        this.resetZoom();
-      });
-    }
-
-    // Mouse wheel zoom inside stage area
-    if (canvasWrap) {
-      canvasWrap.addEventListener('wheel', (e) => {
-        if (e.ctrlKey || e.metaKey || canvasWrap.matches(':hover')) {
-          e.preventDefault();
-          const delta = e.deltaY < 0 ? 0.1 : -0.1;
-          this.applyZoom(this.currentZoom + delta);
-        }
-      }, { passive: false });
-    }
-
-    // Drag to pan when zoomed in
-    let isDragging = false;
-    let startX = 0;
-    let startY = 0;
-    let initPanX = 0;
-    let initPanY = 0;
-
-    if (container) {
-      container.addEventListener('mousedown', (e) => {
-        if (e.target.closest('.body-hotspot-pin') || e.target.closest('button')) return;
-        if (this.currentZoom > 1.05) {
-          isDragging = true;
-          startX = e.clientX;
-          startY = e.clientY;
-          initPanX = this.panX;
-          initPanY = this.panY;
-          container.style.cursor = 'grab';
-          e.preventDefault();
-        }
-      });
-    }
-
-    window.addEventListener('mousemove', (e) => {
-      if (!isDragging) return;
-      const dx = e.clientX - startX;
-      const dy = e.clientY - startY;
-      const maxPan = (this.currentZoom - 1) * 350;
-      this.panX = Math.max(-maxPan, Math.min(maxPan, initPanX + dx));
-      this.panY = Math.max(-maxPan, Math.min(maxPan, initPanY + dy));
-      this.applyZoom(this.currentZoom);
-    });
-
-    window.addEventListener('mouseup', () => {
-      if (isDragging) {
-        isDragging = false;
-        if (container) container.style.cursor = 'default';
-      }
-    });
-
-    this.applyZoom(1.2);
-  }
-
-  applyZoom(val) {
-    this.currentZoom = Math.min(2.5, Math.max(1.0, parseFloat(val.toFixed(2))));
-    const container = this.container.querySelector('#luggage-image-container');
-    const zoomText = this.container.querySelector('#zoom-level-text');
-    const slider = this.container.querySelector('#m2-zoom-slider');
-
-    if (container) {
-      if (this.panX === 0 && this.panY === 0) {
-        container.style.transformOrigin = 'center center';
-        container.style.transform = `scale(${this.currentZoom})`;
-      } else {
-        container.style.transformOrigin = 'center center';
-        container.style.transform = `translate(${this.panX}px, ${this.panY}px) scale(${this.currentZoom})`;
-      }
-    }
-
-    const counterScale = (1 / this.currentZoom).toFixed(4);
-    if (container) {
-      container.style.setProperty('--body-zoom', this.currentZoom);
-      container.style.setProperty('--tooltip-counter-scale', counterScale);
-    }
-    document.documentElement.style.setProperty('--body-zoom', this.currentZoom);
-    document.documentElement.style.setProperty('--tooltip-counter-scale', counterScale);
-
-    const pct = Math.round(this.currentZoom * 100);
-    if (zoomText) {
-      zoomText.textContent = `${pct}%`;
-    }
-    if (slider && Number(slider.value) !== pct) {
-      slider.value = pct;
-    }
-  }
-
-  resetZoom() {
-    this.panX = 0;
-    this.panY = 0;
-    this.applyZoom(1.2);
   }
 
   renderHotspots() {
@@ -609,12 +469,17 @@ export class Modul2View extends BaseModuleView {
 
     const badgeRow = this.container.querySelector('.detail-badge-row');
     const tagBadge = this.container.querySelector('#detail-tag-badge');
+    const catBadge = this.container.querySelector('#detail-cat-badge');
     const title = this.container.querySelector('#detail-title');
 
     if (badgeRow) badgeRow.className = `detail-badge-row cat-${hs.categoryId || hs.category}`;
     if (tagBadge) {
       tagBadge.textContent = `MODUS #${hs.num || String(idx + 1).padStart(2, '0')}`;
       tagBadge.className = `detail-tag-badge cat-${hs.categoryId || hs.category}`;
+    }
+    if (catBadge) {
+      catBadge.textContent = (hs.categoryLabel || hs.tag || 'BARANG BAWAAN').toUpperCase();
+      catBadge.className = `detail-cat-badge cat-${hs.categoryId || hs.category}`;
     }
     if (title) title.textContent = hs.label;
 
@@ -635,22 +500,6 @@ export class Modul2View extends BaseModuleView {
       mainImg.src = hs.mainIllustration || hs.mainImage || hs.thumb || 'assets/mockup/image_placeholder.svg';
       mainImg.alt = hs.label;
     }
-
-    // Klik gambar utama pada Modus Operandi untuk memperbesar ke mode popup
-    const illustrationBox = this.container.querySelector('.detail-illustration-box');
-    if (illustrationBox) {
-      illustrationBox.style.cursor = 'pointer';
-      illustrationBox.title = 'Klik untuk melihat gambar ukuran penuh';
-      illustrationBox.onclick = () => {
-        const curImg = this.container.querySelector('#detail-main-img');
-        const curTitle = this.container.querySelector('#detail-title');
-        this.openImagePopup(
-          curImg ? curImg.src : (hs.mainIllustration || hs.mainImage || hs.thumb || 'assets/images/hotspots/hs_sardine_can_false.png'),
-          curTitle ? curTitle.textContent : hs.label
-        );
-      };
-    }
-
     if (desc) desc.textContent = hs.description;
     if (concealmentMethod) concealmentMethod.textContent = hs.tag || hs.categoryLabel || 'False Concealment';
     if (bodyLocation) bodyLocation.textContent = hs.bodyLocation || 'Bagasi Koper';
@@ -659,40 +508,44 @@ export class Modul2View extends BaseModuleView {
     if (narrative) narrative.textContent = hs.modusDetail || hs.description;
     if (note) note.textContent = hs.inspectionNote || 'SOP DJBC';
 
-    // TAB 2: Foto Real dengan Fitur Popup Gambar
+    // TAB 2: Foto Real
     const findingsGrid = this.container.querySelector('#findings-thumbnails-grid');
     if (findingsGrid) {
       findingsGrid.innerHTML = '';
-      const findingsList = (hs.findings && hs.findings.length > 0)
-        ? hs.findings
-        : (hs.galleryImages && hs.galleryImages.length > 0)
-          ? hs.galleryImages.map(img => ({ full: img, thumb: img, caption: hs.label, tag: hs.badge || 'Barang Bukti' }))
-          : [{ full: hs.mainImage || 'assets/images/hotspots/hs_sardine_can_false.png', thumb: hs.mainImage || 'assets/images/hotspots/hs_sardine_can_false.png', caption: hs.label, tag: hs.badge || 'Barang Bukti' }];
+      const findingsList = (hs.findings && hs.findings.length > 0) ? hs.findings : [
+        {
+          full: 'assets/mockup/image_placeholder.svg',
+          thumb: 'assets/mockup/image_placeholder.svg',
+          caption: 'Dokumentasi Barang Bukti (Placeholder)',
+          tag: 'PLACEHOLDER'
+        }
+      ];
 
       findingsList.forEach(f => {
-        const item = document.createElement('div');
-        item.className = 'finding-thumb-item';
-        item.setAttribute('role', 'button');
-        item.setAttribute('tabindex', '0');
-        item.setAttribute('title', `Klik untuk memperbesar: ${f.caption}`);
-        item.style.cursor = 'pointer';
-        item.innerHTML = `
-          <img src="${f.thumb || f.full}" alt="${f.caption}" onerror="this.src='assets/images/hotspots/hs_sardine_can_false.png'" />
+        const a = document.createElement('a');
+        a.href = f.full || f.thumb;
+        a.className = 'finding-thumb-item glightbox';
+        a.setAttribute('data-gallery', `findings-gallery-${hs.id}`);
+        a.setAttribute('data-title', `${f.caption} — [${f.tag || 'Barang Bukti'}]`);
+        a.innerHTML = `
+          <img src="${f.thumb || f.full}" alt="${f.caption}" onerror="this.src='assets/mockup/image_placeholder.svg'" />
           <span class="finding-thumb-label">${f.tag || 'Barang Bukti'}</span>
         `;
-        item.addEventListener('click', (e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          this.openImagePopup(f.full || f.thumb, `${f.caption} — [${f.tag || 'Barang Bukti'}]`);
-        });
-        item.addEventListener('keydown', (e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            this.openImagePopup(f.full || f.thumb, `${f.caption} — [${f.tag || 'Barang Bukti'}]`);
-          }
-        });
-        findingsGrid.appendChild(item);
+        findingsGrid.appendChild(a);
       });
+
+      try {
+        if (typeof window.GLightbox !== 'undefined') {
+          if (this.glightboxInstance) this.glightboxInstance.destroy();
+          this.glightboxInstance = window.GLightbox({
+            selector: '.glightbox',
+            touchNavigation: true,
+            loop: true
+          });
+        }
+      } catch (gErr) {
+        console.warn('GLightbox warning:', gErr);
+      }
     }
 
     // TAB 3: Detection & SOP
@@ -737,30 +590,9 @@ export class Modul2View extends BaseModuleView {
     const btnCloseHelp = this.container.querySelector('#btn-close-help');
     const btnOkHelp = this.container.querySelector('#btn-help-ok');
 
-    const storageKey = 'tutorial_seen_modul2';
-
-    const markSeen = () => {
-      try {
-        localStorage.setItem(storageKey, 'true');
-      } catch (e) {}
-      helpOverlay?.classList.add('hidden');
-    };
-
     btnHelp?.addEventListener('click', () => helpOverlay?.classList.remove('hidden'));
-    btnCloseHelp?.addEventListener('click', markSeen);
-    btnOkHelp?.addEventListener('click', markSeen);
-    helpOverlay?.addEventListener('click', (e) => {
-      if (e.target === helpOverlay) markSeen();
-    });
-
-    // Auto-show tutorial on first visit
-    try {
-      if (!localStorage.getItem(storageKey)) {
-        setTimeout(() => {
-          helpOverlay?.classList.remove('hidden');
-        }, 400);
-      }
-    } catch (e) {}
+    btnCloseHelp?.addEventListener('click', () => helpOverlay?.classList.add('hidden'));
+    btnOkHelp?.addEventListener('click', () => helpOverlay?.classList.add('hidden'));
 
     const overlay = this.container.querySelector('#hotspot-card-modal-overlay');
     const closeBtn = this.container.querySelector('#btn-close-detail-modal');
@@ -842,55 +674,6 @@ export class Modul2View extends BaseModuleView {
 
     // Make modal card draggable
     this.initCardDraggable();
-
-    // Popup Foto Real / Preview Gambar Resolusi Penuh
-    const imgPopupModal = this.container.querySelector('#m2-image-popup-modal');
-    const btnCloseImgPopup = this.container.querySelector('#btn-close-img-popup');
-
-    if (btnCloseImgPopup) {
-      btnCloseImgPopup.addEventListener('click', (e) => {
-        e.stopPropagation();
-        this.closeImagePopup();
-      });
-    }
-
-    if (imgPopupModal) {
-      imgPopupModal.addEventListener('click', (e) => {
-        if (e.target === imgPopupModal) {
-          this.closeImagePopup();
-        }
-      });
-    }
-
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        const popup = this.container?.querySelector('#m2-image-popup-modal');
-        if (popup && !popup.classList.contains('hidden')) {
-          this.closeImagePopup();
-        }
-      }
-    });
-  }
-
-  openImagePopup(src, title) {
-    const popup = this.container.querySelector('#m2-image-popup-modal');
-    const imgEl = this.container.querySelector('#m2-popup-img-el');
-    const titleEl = this.container.querySelector('#m2-popup-img-title');
-
-    if (!popup || !imgEl) return;
-
-    imgEl.src = src;
-    imgEl.alt = title || 'Foto Forensik';
-    if (titleEl) titleEl.textContent = title || 'Dokumentasi Penindakan DJBC';
-
-    popup.classList.remove('hidden');
-  }
-
-  closeImagePopup() {
-    const popup = this.container.querySelector('#m2-image-popup-modal');
-    if (popup) {
-      popup.classList.add('hidden');
-    }
   }
 
   switchCardPage(pageIndex) {

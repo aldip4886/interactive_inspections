@@ -38,7 +38,7 @@ export class Modul4aView extends BaseModuleView {
       { angle: 270, label: 'Tampak Samping Kiri (270°)', src: 'assets/images/modul4a/samping_kiri.png' },
       { angle: 315, label: 'Tampak Depan Samping Kiri (315°)', src: 'assets/images/modul4a/depan_samping_2.png' }
     ];
-    this.currentAngleIndex = 7; // Default 315°
+    this.currentAngleIndex = 0;
     this.autoRotateTimer = null;
 
     // 3D Three.js objects
@@ -70,13 +70,6 @@ export class Modul4aView extends BaseModuleView {
   getTemplateHTML() {
     const modPct = courseProgress.getModuleProgress('modul4a');
     const categories = this.moduleData.filterCategories || [];
-    const meta = this.moduleData?.meta || {};
-    const telemetry = this.moduleData?.telemetry || {};
-    const guide = this.moduleData?.guide || {};
-    const codeBadge = meta.codeBadge || 'MODUL 04A';
-    const courseTitle = meta.title || 'Pemeriksaan Kendaraan Darat (SUV / Passenger Vehicle)';
-    const legalRef = meta.legalRef || 'PMK-188/2021 & S-39/BC/2023';
-    const instructionTag = meta.instructionTag || 'Klik hotspot bernomor untuk menganalisis modus operandi & bukti forensik';
 
     return `
       <div id="modul4a-app-root">
@@ -87,10 +80,10 @@ export class Modul4aView extends BaseModuleView {
           <div id="modul4a-top-bar" class="modul1-top-bar">
             <div class="nav-left">
               <div class="header-breadcrumb">
-                <span class="modul-code-badge font-code-tech">${codeBadge}</span>
-                <span class="course-main-title">${courseTitle}</span>
+                <span class="modul-code-badge font-code-tech">MODUL 04A</span>
+                <span class="course-main-title">Pemeriksaan Kendaraan Darat (SUV / Passenger Vehicle)</span>
                 <span class="breadcrumb-separator">•</span>
-                <span class="modul-ref-tag font-code-tech">${legalRef}</span>
+                <span class="modul-ref-tag font-code-tech">PMK-188/2021 & S-39/BC/2023</span>
               </div>
             </div>
 
@@ -112,10 +105,14 @@ export class Modul4aView extends BaseModuleView {
             <!-- Angle / View Header Bar -->
             <div class="angle-header-bar">
               <div class="current-angle-badge" id="current-angle-badge">
-                <span class="angle-deg font-code-tech" id="view-mode-badge">315°</span>
+                <span class="angle-deg font-code-tech" id="view-mode-badge">0°</span>
                 <span class="angle-sep">•</span>
                 <span class="angle-name" id="view-mode-title">5-Seater SUV Car</span>
                 <!-- <span class="angle-sub" id="view-mode-sub">(Tampak Depan (0°))</span>    -->
+              </div>
+              <div class="angle-instruction-tag">
+                <span class="instruction-dot">●</span>
+                <span>Klik hotspot bernomor pada kendaraan untuk menganalisis modus operandi.</span>
               </div>
             </div>
 
@@ -128,61 +125,23 @@ export class Modul4aView extends BaseModuleView {
               <!-- HUD Telemetry Watermark Overlay -->
               <div class="forensic-hud-telemetry" aria-hidden="true">
                 <div class="forensic-hud-top-left font-code-tech">
+                  <div class="hud-line-title">STASIUN PEMINDAIAN KENDARAAN DARAT</div>
                   <div class="hud-line-sub">SUBJEK ID: VEHICLE-MPV-KC23</div>
                 </div>
                 <div class="forensic-hud-top-right font-code-tech">
-                  <div class="hud-line-azimuth" id="hud-azimuth-text">MODE AKTIF: 360° ROTATABLE IMAGE (315°)</div>
+                  <div class="hud-line-azimuth" id="hud-azimuth-text">MODE AKTIF: 360° ROTATABLE IMAGE (0°)</div>
                   <div class="hud-line-status">SENSOR: DUAL-ENERGY TRANSMISSION & MULTI-ANGLE INSPECTION</div>
-                </div>
-              </div>
-
-              <!-- Top Instruction Hint (Floating Above Central Image) -->
-              <div class="m4a-top-instruction-dock" id="m4a-top-instruction-dock">
-                <div class="angle-instruction-tag">
-                  <span class="instruction-dot">●</span>
-                  <span>Klik hotspot bernomor pada kendaraan untuk menganalisis modus operandi.</span>
                 </div>
               </div>
 
               <!-- Central Active 3D Vehicle Container with Hotspots Layer -->
               <div class="body-image-container" id="vehicle-image-container" style="max-width:100%; width:100%; aspect-ratio:auto; height:auto; margin:0 auto; position:relative;">
                 <div id="m4a-3d-canvas-wrapper" style="width:100%; height:65vh; min-height:440px; position:relative; display:flex; align-items:center; justify-content:center; cursor:grab; overflow:hidden;">
-                  <img id="m4a-central-image" src="assets/images/modul4a/depan_samping_2.png" alt="KIA Carnival 2023" class="main-body-img" style="display:block; width:100%; height:100%; object-fit:contain; filter:drop-shadow(0 12px 32px rgba(0,37,59,0.16)); user-select:none; -webkit-user-drag:none;" />
+                  <img id="m4a-central-image" src="assets/images/modul4a/depan.png" alt="KIA Carnival 2023" class="main-body-img" style="display:block; width:100%; height:100%; object-fit:contain; filter:drop-shadow(0 12px 32px rgba(0,37,59,0.16)); user-select:none; -webkit-user-drag:none;" />
                   <div id="three-canvas-container" style="width:100%; height:100%; position:absolute; inset:0; z-index:2; pointer-events:none;"></div>
                   <div id="m4a-hotspots-layer" class="hotspots-layer" style="position:absolute; inset:0; z-index:30; pointer-events:none;"></div>
                 </div>
                 <div class="body-pedestal-platform"></div>
-
-                <!-- Bottom Curved Rotation Guide Illustration -->
-                <div class="m4a-bottom-rotation-guide" aria-hidden="true" title="Tarik atau usap mobil untuk rotasi bebas 360°">
-                  <svg class="m4a-bottom-curve-svg" viewBox="0 0 600 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                      <linearGradient id="m4a-bottom-arc-grad" x1="0%" y1="0%" x2="100%" y2="0%">
-                        <stop offset="0%" stop-color="#00E5FF" stop-opacity="0.2" />
-                        <stop offset="25%" stop-color="#00E5FF" stop-opacity="0.95" />
-                        <stop offset="50%" stop-color="#D9B45B" stop-opacity="0.95" />
-                        <stop offset="75%" stop-color="#00E5FF" stop-opacity="0.95" />
-                        <stop offset="100%" stop-color="#00E5FF" stop-opacity="0.2" />
-                      </linearGradient>
-                      <filter id="m4a-bottom-glow" x="-10%" y="-30%" width="120%" height="160%">
-                        <feGaussianBlur stdDeviation="2.5" result="blur" />
-                        <feMerge>
-                          <feMergeNode in="blur" />
-                          <feMergeNode in="SourceGraphic" />
-                        </feMerge>
-                      </filter>
-                    </defs>
-                    <!-- Background faint guide arc -->
-                    <path d="M 40 18 Q 300 62 560 18" stroke="rgba(0, 229, 255, 0.22)" stroke-width="4" stroke-linecap="round" />
-                    <!-- Primary Glowing Arc with Dashes -->
-                    <path class="m4a-glow-path" d="M 40 18 Q 300 62 560 18" stroke="url(#m4a-bottom-arc-grad)" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="8 5" filter="url(#m4a-bottom-glow)" />
-                    <!-- Left Arrow pointing leftwards/orbit direction -->
-                    <polygon points="34,14 48,12 42,24" fill="#00E5FF" filter="url(#m4a-bottom-glow)" />
-                    <!-- Right Arrow pointing rightwards/orbit direction -->
-                    <polygon points="566,14 552,12 558,24" fill="#00E5FF" filter="url(#m4a-bottom-glow)" />
-                  </svg>
-                  <span class="m4a-bottom-curve-text font-code-tech">PUTAR 360°</span>
-                </div>
               </div>
 
               <!-- Floating HUD Segmented Pill Controls Dock (Center Bottom) -->
@@ -223,6 +182,7 @@ export class Modul4aView extends BaseModuleView {
                 <div class="detail-badge-row">
                   <span class="floating-card-drag-indicator" title="Geser posisi kartu">⋮⋮</span>
                   <span id="detail-tag-badge" class="detail-tag-badge">MODUS #01</span>
+                  <span id="detail-cat-badge" class="detail-cat-badge">INTERIOR & KONSOL MOBIL</span>
                 </div>
                 <h3 id="detail-title" class="detail-title">1. Interior & Konsol Tengah Kendaraan</h3>
               </div>
@@ -376,25 +336,22 @@ export class Modul4aView extends BaseModuleView {
         <div id="help-overlay" class="modal-overlay hidden" role="dialog" aria-modal="true">
           <div class="modal-card help-box">
             <div class="modal-header">
-              <h2 class="modal-heading">${guide.title || 'Panduan Penggunaan Modul Kendaraan Darat'}</h2>
-              <button id="btn-close-help" class="modal-close-btn" aria-label="Tutup Panduan">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                  <line x1="18" y1="6" x2="6" y2="18"></line>
-                  <line x1="6" y1="6" x2="18" y2="18"></line>
-                </svg>
-              </button>
+              <h2 class="modal-heading">Panduan Penggunaan Modul Kendaraan Darat</h2>
+              <button id="btn-close-help" class="modal-close-btn">✕</button>
             </div>
             <div class="modal-body help-content">
-              ${(guide.items || [
-                { num: 1, title: 'Navigasi 3D Kendaraan', text: 'Usap/drag pada kendaraan 3D untuk memutar sudut pandang 360°, scroll mouse untuk zoom in/out.' },
-                { num: 2, title: 'Filter Kategori Modus', text: 'Filter titik-titik hotspot berdasarkan Interior, Bagasi, Kolong, Kompartemen, atau Struktur melalui dock bawah.' },
-                { num: 3, title: 'Titik Hotspot Interaktif', text: 'Klik nomor callout pada kendaraan untuk menginspeksi rincian modus penyembunyian & barang bukti.' },
-                { num: 4, title: 'Format Tabbed Card', text: 'Pelajari rincian lengkap melalui 4 tab: <em>Modus Operandi</em>, <em>Foto Gambar Real</em>, <em>Ciri Pelaku & SOP</em>, dan <em>Indikator Risiko</em>.' }
-              ]).map(item => `
-                <div class="help-item">
-                  <strong>${item.num}. ${item.title}:</strong> ${item.text}
-                </div>
-              `).join('')}
+              <div class="help-item">
+                <strong>1. Navigasi 3D Kendaraan:</strong> Usap/drag pada kendaraan 3D untuk memutar sudut pandang 360°, scroll mouse untuk zoom in/out.
+              </div>
+              <div class="help-item">
+                <strong>2. Filter Kategori Modus:</strong> Filter titik-titik hotspot berdasarkan Interior, Bagasi, Kolong, Kompartemen, atau Struktur melalui dock bawah.
+              </div>
+              <div class="help-item">
+                <strong>3. Titik Hotspot Interaktif:</strong> Klik nomor callout pada kendaraan untuk menginspeksi rincian modus penyembunyian & barang bukti.
+              </div>
+              <div class="help-item">
+                <strong>4. Format Tabbed Card:</strong> Pelajari rincian lengkap melalui 4 tab: <em>Modus Operandi</em>, <em>Foto Gambar Real</em>, <em>Ciri Pelaku & SOP</em>, dan <em>Indikator Risiko</em>.
+              </div>
             </div>
             <div class="modal-footer">
               <button id="btn-help-ok" class="btn-primary-action">Mengerti</button>
@@ -411,6 +368,7 @@ export class Modul4aView extends BaseModuleView {
             </div>
             <div class="m4a-img-popup-caption">
               <span id="m4a-popup-img-title">Dokumentasi Penindakan DJBC</span>
+              <span id="m4a-popup-img-sub" class="m4a-img-popup-sub">Foto Real Forensik</span>
             </div>
           </div>
         </div>
@@ -447,18 +405,15 @@ export class Modul4aView extends BaseModuleView {
       this.threeControls.dampingFactor = 0.05;
       this.threeControls.maxPolarAngle = Math.PI / 2 + 0.05;
       this.threeControls.enableZoom = true;
-      this.threeControls.minDistance = 7.1 / this.maxZoomFactor; // Max zoom (200%)
-      this.threeControls.maxDistance = 7.1 / this.minZoomFactor; // Min zoom (50%)
+      this.threeControls.minDistance = 1.775; // Max 400% zoom (7.1 / 4.0)
+      this.threeControls.maxDistance = 7.1;   // Min 100% zoom (7.1 / 1.0)
 
       this.threeControls.addEventListener('change', () => {
-        const centralImg = this.container?.querySelector('#m4a-central-image');
-        if (centralImg && centralImg.style.display !== 'none') return;
-
         if (!this.threeControls || !this.threeCamera) return;
         const distance = this.threeCamera.position.distanceTo(this.threeControls.target);
         if (distance > 0) {
           const factor = 7.1 / distance;
-          this.currentZoomFactor = Math.min(this.maxZoomFactor, Math.max(this.minZoomFactor, factor));
+          this.currentZoomFactor = Math.min(4.0, Math.max(1.0, factor));
           const zoomResetBtn = this.container.querySelector('#btn-zoom-reset');
           if (zoomResetBtn) {
             zoomResetBtn.textContent = `${Math.round(this.currentZoomFactor * 100)}%`;
@@ -841,9 +796,6 @@ export class Modul4aView extends BaseModuleView {
       this.currentZoomFactor = 1.0;
       this.updateZoomLevel();
     });
-
-    // Default angle 315°
-    this.setAngleIndex(7);
   }
 
   updateZoomLevel() {
@@ -852,7 +804,6 @@ export class Modul4aView extends BaseModuleView {
     // --- Zoom untuk mode 2D Gambar Rotasi ---
     const centralImg = this.container?.querySelector('#m4a-central-image');
     const canvasWrapper = this.container?.querySelector('#m4a-3d-canvas-wrapper');
-    const layerEl = this.container?.querySelector('#m4a-hotspots-layer');
 
     if (centralImg && centralImg.style.display !== 'none') {
       // Terapkan zoom CSS scale ke gambar sentral
@@ -863,21 +814,6 @@ export class Modul4aView extends BaseModuleView {
       // Pastikan overflow hidden pada wrapper agar gambar tidak keluar batas
       if (canvasWrapper) {
         canvasWrapper.style.overflow = 'hidden';
-      }
-
-      // Update posisi setiap pin hotspot sesuai level zoom (acuan 100% / factor = 1.0)
-      if (layerEl) {
-        const pins = layerEl.querySelectorAll('.body-hotspot-pin');
-        pins.forEach(pin => {
-          const baseX = parseFloat(pin.dataset.baseX);
-          const baseY = parseFloat(pin.dataset.baseY);
-          if (!isNaN(baseX) && !isNaN(baseY)) {
-            const leftPct = 50 + (baseX - 50) * factor;
-            const topPct = 50 + (baseY - 50) * factor;
-            pin.style.left = `${leftPct}%`;
-            pin.style.top = `${topPct}%`;
-          }
-        });
       }
 
       // Update label indikator zoom
@@ -945,17 +881,8 @@ export class Modul4aView extends BaseModuleView {
         coords = hs.positionsByAngle[currentAngle];
       }
 
-      // Simpan koordinat dasar (acuan zoom 100%)
-      pin.dataset.baseX = coords.x;
-      pin.dataset.baseY = coords.y;
-
-      // Hitung posisi visual sesuai faktor zoom saat ini
-      const factor = this.currentZoomFactor || 1.0;
-      const leftPct = 50 + (coords.x - 50) * factor;
-      const topPct = 50 + (coords.y - 50) * factor;
-
-      pin.style.left = `${leftPct}%`;
-      pin.style.top = `${topPct}%`;
+      pin.style.left = `${coords.x}%`;
+      pin.style.top = `${coords.y}%`;
       pin.style.position = 'absolute';
       pin.style.transform = 'translate(-50%, -50%)';
 
@@ -1023,10 +950,12 @@ export class Modul4aView extends BaseModuleView {
     const total = hotspots.length;
 
     const tagBadge = this.container.querySelector('#detail-tag-badge');
+    const catBadge = this.container.querySelector('#detail-cat-badge');
     const title = this.container.querySelector('#detail-title');
     const navCounter = this.container.querySelector('#card-nav-counter');
 
     if (tagBadge) tagBadge.textContent = `MODUS #${hs.badgeNum || hs.num || (idx + 1)}`;
+    if (catBadge) catBadge.textContent = (hs.badge || hs.category || 'KENDARAAN DARAT').toUpperCase();
     if (title) title.textContent = hs.label;
     if (navCounter) navCounter.textContent = `${idx + 1} / ${total}`;
 
@@ -1051,10 +980,11 @@ export class Modul4aView extends BaseModuleView {
       illustrationBox.onclick = () => {
         const curImg = this.container.querySelector('#detail-main-img');
         const curTitle = this.container.querySelector('#detail-title');
+        const curCat = this.container.querySelector('#detail-cat-badge');
         this.openImagePopup(
           curImg ? curImg.src : (hs.mainImage || 'assets/images/hotspots/bumper_ruang_mesin.png'),
           curTitle ? curTitle.textContent : hs.label,
-          hs.badge || hs.category || 'Modus Operandi Kendaraan'
+          curCat ? curCat.textContent : 'Modus Operandi Kendaraan'
         );
       };
     }
@@ -1135,30 +1065,9 @@ export class Modul4aView extends BaseModuleView {
     const btnCloseHelp = this.container.querySelector('#btn-close-help');
     const btnOkHelp = this.container.querySelector('#btn-help-ok');
 
-    const storageKey = 'tutorial_seen_modul4a';
-
-    const markSeen = () => {
-      try {
-        localStorage.setItem(storageKey, 'true');
-      } catch (e) {}
-      helpOverlay?.classList.add('hidden');
-    };
-
     btnHelp?.addEventListener('click', () => helpOverlay?.classList.remove('hidden'));
-    btnCloseHelp?.addEventListener('click', markSeen);
-    btnOkHelp?.addEventListener('click', markSeen);
-    helpOverlay?.addEventListener('click', (e) => {
-      if (e.target === helpOverlay) markSeen();
-    });
-
-    // Auto-show tutorial on first visit
-    try {
-      if (!localStorage.getItem(storageKey)) {
-        setTimeout(() => {
-          helpOverlay?.classList.remove('hidden');
-        }, 400);
-      }
-    } catch (e) {}
+    btnCloseHelp?.addEventListener('click', () => helpOverlay?.classList.add('hidden'));
+    btnOkHelp?.addEventListener('click', () => helpOverlay?.classList.add('hidden'));
 
     const overlay = this.container.querySelector('#hotspot-card-modal-overlay');
     const closeBtn = this.container.querySelector('#btn-close-detail-modal');
@@ -1264,16 +1173,18 @@ export class Modul4aView extends BaseModuleView {
     });
   }
 
-  openImagePopup(src, title) {
+  openImagePopup(src, title, subtitle = 'Foto Real Penindakan DJBC') {
     const popup = this.container.querySelector('#m4a-image-popup-modal');
     const imgEl = this.container.querySelector('#m4a-popup-img-el');
     const titleEl = this.container.querySelector('#m4a-popup-img-title');
+    const subEl = this.container.querySelector('#m4a-popup-img-sub');
 
     if (!popup || !imgEl) return;
 
     imgEl.src = src;
     imgEl.alt = title || 'Foto Forensik';
     if (titleEl) titleEl.textContent = title || 'Dokumentasi Penindakan DJBC';
+    if (subEl) subEl.textContent = subtitle;
 
     popup.classList.remove('hidden');
   }

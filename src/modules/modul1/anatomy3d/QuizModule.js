@@ -62,8 +62,8 @@ const QUESTIONS = [
 ];
 
 export class QuizModule {
-  constructor({ onComplete }) {
-    this.questions  = QUESTIONS;
+  constructor({ onComplete, questions } = {}) {
+    this.questions  = (questions && questions.length > 0) ? questions : QUESTIONS;
     this.onComplete = onComplete || (() => {});
     this.current    = 0;
     this.answers    = [];

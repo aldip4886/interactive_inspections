@@ -59,6 +59,22 @@ export class Modul3View extends BaseModuleView {
   }
 
   getTemplateHTML() {
+    const meta = this.moduleData?.meta || {};
+    const telemetry = this.moduleData?.telemetry || {};
+    const guide = this.moduleData?.guide || {};
+    const densityLegend = this.moduleData?.densityLegend || [
+      { id: 'organic', colorClass: 'orange', name: 'Organik / Narkotika', label: 'Oranye / Cokelat' },
+      { id: 'inorganic', colorClass: 'green', name: 'Campuran / Anorganik', label: 'Hijau' },
+      { id: 'heavy', colorClass: 'blue', name: 'Logam Tebal', label: 'Biru / Hitam' }
+    ];
+    const codeBadge = meta.codeBadge || 'MODUL 03';
+    const courseTitle = meta.title || 'Pemeriksaan Barang Kiriman (Postal & Courier Cargo)';
+    const legalRef = meta.legalRef || 'PMK-188/2021 & S-39/BC/2023';
+    const instructionTag = meta.instructionTag || 'Hover lensa kaca pembesar atau klik hotspot untuk menganalisis anomali kargo';
+    const subjectId = telemetry.subjectId || 'TARGET ID: PARCEL-EXP-9912 / KARTON POS & CARGO';
+    const activeModeText = telemetry.activeModeText || 'MODE: SCANNER DUAL-ENERGY';
+    const sensor = telemetry.sensor || 'DETEKTOR: TRANSMISSION X-RAY & SPECTRAL ANALYZER';
+
     return `
       <div id="modul3-app-root">
         <!-- ─── MAIN VIEWPORT ─── -->
@@ -68,10 +84,10 @@ export class Modul3View extends BaseModuleView {
           <div id="modul3-top-bar" class="modul1-top-bar">
             <div class="nav-left">
               <div class="header-breadcrumb">
-                <span class="modul-code-badge font-code-tech">MODUL 03</span>
-                <span class="course-main-title">Pemeriksaan Barang Kiriman (Postal & Courier Cargo)</span>
+                <span class="modul-code-badge font-code-tech">${codeBadge}</span>
+                <span class="course-main-title">${courseTitle}</span>
                 <span class="breadcrumb-separator">•</span>
-                <span class="modul-ref-tag font-code-tech">PMK-188/2021 & S-39/BC/2023</span>
+                <span class="modul-ref-tag font-code-tech">${legalRef}</span>
               </div>
             </div>
 
@@ -79,7 +95,7 @@ export class Modul3View extends BaseModuleView {
               <!-- Angle Instruction Tag -->
               <div class="angle-instruction-tag">
                 <span class="instruction-dot">●</span>
-                <span>Hover lensa kaca pembesar atau klik hotspot untuk menganalisis anomali kargo</span>
+                <span>${instructionTag}</span>
               </div>
 
               <!-- Help Button -->
@@ -105,11 +121,11 @@ export class Modul3View extends BaseModuleView {
               <!-- HUD Telemetry Watermark Overlay -->
               <div class="forensic-hud-telemetry" aria-hidden="true">
                 <div class="forensic-hud-top-left font-code-tech">
-                  <div class="hud-line-sub">TARGET ID: PARCEL-EXP-9912 / KARTON POS & CARGO</div>
+                  <div class="hud-line-sub">${subjectId}</div>
                 </div>
                 <div class="forensic-hud-top-right font-code-tech">
-                  <div class="hud-line-azimuth" id="hud-sensor-text">SENSOR: DUAL-ENERGY TRANSMISSION (160 kV)</div>
-                  <div class="hud-line-status" id="hud-coords-text">KOORDINAT: STANDBY | MODE: LENSA X-RAY</div>
+                  <div class="hud-line-azimuth" id="hud-sensor-text">${sensor}</div>
+                  <div class="hud-line-status" id="hud-coords-text">${activeModeText}</div>
                 </div>
               </div>
 
@@ -178,18 +194,12 @@ export class Modul3View extends BaseModuleView {
               <div class="m3-bottom-legend-dock" id="m3-bottom-legend-dock">
                 <div class="density-palette-strip" aria-label="Legenda Warna Densitas Material X-Ray">
                   <span class="density-title">DENSITAS MATERIAL:</span>
-                  <div class="density-palette-item">
-                    <span class="density-dot orange"></span>
-                    <span class="density-item-text">Oranye / Cokelat: <strong>Organik / Narkotika</strong></span>
-                  </div>
-                  <div class="density-palette-item">
-                    <span class="density-dot green"></span>
-                    <span class="density-item-text">Hijau: <strong>Campuran / Anorganik</strong></span>
-                  </div>
-                  <div class="density-palette-item">
-                    <span class="density-dot blue"></span>
-                    <span class="density-item-text">Biru / Hitam: <strong>Logam Tebal</strong></span>
-                  </div>
+                  ${densityLegend.map(item => `
+                    <div class="density-palette-item" title="${item.desc || ''}">
+                      <span class="density-dot ${item.id === 'organic' ? 'orange' : (item.id === 'inorganic' ? 'green' : 'blue')}"></span>
+                      <span class="density-item-text">${item.label || item.name}: <strong>${item.name}</strong></span>
+                    </div>
+                  `).join('')}
                 </div>
               </div>
 
@@ -220,71 +230,58 @@ export class Modul3View extends BaseModuleView {
               </div>
             </div>
 
-            <!-- Compact Segmented Tab Navigation -->
+            <!-- Tab Navigation Header (3 Tabs) -->
             <div class="card-tabs-nav" id="card-tabs-nav">
               <button class="tab-btn active" data-tab="tab-modus" title="Halaman 1: Modus Operandi">
+                <span class="tab-icon">📋</span>
                 <span class="tab-label">Modus Operandi</span>
               </button>
               <button class="tab-btn" data-tab="tab-detection" title="Halaman 2: Ciri Pelaku & SOP">
+                <span class="tab-icon">🛡️</span>
                 <span class="tab-label">Ciri Pelaku & SOP</span>
               </button>
               <button class="tab-btn" data-tab="tab-risk" title="Halaman 3: Indikator Risiko">
+                <span class="tab-icon">⚠️</span>
                 <span class="tab-label">Indikator Risiko</span>
               </button>
             </div>
 
-            <div class="tab-content-container" id="tab-content-container">
-              <!-- TAB 1: MODUS -->
+            <!-- Card Body Scrollable Viewport -->
+            <div class="tabbed-card-body" id="tabbed-card-body">
+              <!-- TAB 1: MODUS OPERANDI -->
               <div class="tab-pane active" id="tab-modus">
-                <div class="detail-media-row">
-                  <div class="detail-illustration-box">
-                    <img id="detail-main-img" src="assets/images/central/m3_parcel_xray.jpeg" alt="Visualisasi Modus Barang Kiriman" class="detail-main-img" />
+                <div class="pane-media-lead">
+                  <div class="lead-img-wrapper" id="lead-img-container" style="cursor:zoom-in;">
+                    <img id="detail-real-img" src="" alt="Bukti Forensik X-Ray" class="lead-forensic-img" />
+                    <div class="img-magnify-hint">🔍 Klik untuk Pembesaran</div>
                   </div>
-                  <div class="detail-desc-box">
-                    <p id="detail-desc" class="detail-desc-text"></p>
-                  </div>
+                  <p id="detail-desc" class="lead-caption-text"></p>
                 </div>
-                <div class="modus-params-grid">
-                  <div class="param-box">
-                    <span class="param-label">Metode:</span>
-                    <p id="detail-concealment-method" class="param-val"></p>
-                  </div>
-                  <div class="param-box">
-                    <span class="param-label">Lokasi:</span>
-                    <p id="detail-body-location" class="param-val"></p>
-                  </div>
-                  <div class="param-box">
-                    <span class="param-label">Narkotika:</span>
-                    <p id="detail-drug-types" class="param-val"></p>
-                  </div>
-                  <div class="param-box">
-                    <span class="param-label">Kemasan:</span>
-                    <p id="detail-packaging" class="param-val"></p>
-                  </div>
+                <div class="kv-details-grid">
+                  <div class="kv-item"><span class="kv-label">METODE:</span><span id="detail-method" class="kv-val"></span></div>
+                  <div class="kv-item"><span class="kv-label">LOKASI:</span><span id="detail-location" class="kv-val"></span></div>
+                  <div class="kv-item"><span class="kv-label">NARKOTIKA:</span><span id="detail-narcotics" class="kv-val highlight"></span></div>
+                  <div class="kv-item"><span class="kv-label">KEMASAN:</span><span id="detail-packaging" class="kv-val"></span></div>
                 </div>
-                <div class="deep-modus-note">
-                  <span class="note-label">Detail Teknis Modus:</span>
-                  <p id="detail-modus-narrative" class="note-text"></p>
-                </div>
-                <div class="inspection-guideline-box">
-                  <span class="guide-title">Catatan Penindakan DJBC:</span>
-                  <p id="detail-inspection-note" class="guide-text"></p>
+                <div class="modus-breakdown-box">
+                  <span class="box-title-label">Detail Teknis Modus:</span>
+                  <p id="detail-modus-detail" class="box-desc-text"></p>
                 </div>
               </div>
 
-              <!-- TAB 3: DETEKSI & SOP -->
+              <!-- TAB 2: CIRI PELAKU & SOP -->
               <div class="tab-pane" id="tab-detection">
-                <div class="detection-two-columns">
-                  <div class="info-block-col block-warning" id="block-indicators">
+                <div class="dual-info-blocks">
+                  <div class="info-block traits-block">
                     <div class="block-header">
-                      <span class="block-icon warning-icon">⚠️</span>
-                      <span class="block-title">Indikator Anomali & Red Flags X-Ray</span>
+                      <span class="block-icon traits-icon"></span>
+                      <span class="block-title">Indikator Anomali & Profil</span>
                     </div>
-                    <ul id="detail-indicators-list" class="block-list"></ul>
+                    <ul id="detail-traits-list" class="block-list"></ul>
                   </div>
-                  <div class="info-block-col block-procedure" id="block-detection">
+                  <div class="info-block procedure-block">
                     <div class="block-header">
-                      <span class="block-icon procedure-icon">📋</span>
+                      <span class="block-icon procedure-icon"></span>
                       <span class="block-title">Standar Prosedur Pemeriksaan (SOP)</span>
                     </div>
                     <ul id="detail-detection-list" class="block-list"></ul>
@@ -292,15 +289,15 @@ export class Modul3View extends BaseModuleView {
                 </div>
               </div>
 
-              <!-- TAB 4: INDIKATOR RISIKO -->
+              <!-- TAB 3: INDIKATOR RISIKO -->
               <div class="tab-pane" id="tab-risk">
                 <div class="risk-meter-widget">
                   <div class="risk-meter-header">
-                    <span class="risk-meter-title">Tingkat Bahaya Penyelundupan:</span>
-                    <span id="risk-score-val" class="risk-meter-score">KRITIS (95/100)</span>
+                    <span class="risk-meter-title">Tingkat Bahaya Kargo:</span>
+                    <span id="risk-score-val" class="risk-meter-score">KRITIS (100/100)</span>
                   </div>
                   <div class="risk-meter-bar-track">
-                    <div id="risk-meter-bar-fill" class="risk-meter-bar-fill" style="width: 95%;"></div>
+                    <div id="risk-meter-bar-fill" class="risk-meter-bar-fill" style="width: 100%;"></div>
                   </div>
                   <div class="risk-meter-scale">
                     <span>Rendah (0)</span>
@@ -309,14 +306,20 @@ export class Modul3View extends BaseModuleView {
                     <span>Kritis (100)</span>
                   </div>
                 </div>
-
-                <div class="danger-alerts-container">
-                  <div class="medical-risk-box">
-                    <div class="med-risk-header">
-                      <span class="med-risk-icon">⚠️</span>
-                      <span class="med-risk-title">Protokol Keselamatan Petugas Pemeriksa:</span>
-                    </div>
-                    <p id="detail-medical-risk" class="med-risk-text"></p>
+                <div class="hazard-alert-box hazard-medical">
+                  <div class="hazard-icon">🚨</div>
+                  <div class="hazard-content">
+                    <span class="hazard-title">Bahaya Kargo / Bahan Kimia:</span>
+                    <p id="detail-medical-risk" class="hazard-desc"></p>
+                  </div>
+                </div>
+                <div class="hazard-alert-box hazard-officer">
+                  <div class="hazard-icon">🛡️</div>
+                  <div class="hazard-content">
+                    <span class="hazard-title">Protokol Keselamatan Petugas:</span>
+                    <p class="hazard-desc">
+                      Gunakan sarung tangan nitril tebal & masker standar gas/partikel. Dilarang menghirup atau mencicipi serbuk secara langsung.
+                    </p>
                   </div>
                 </div>
               </div>
@@ -337,38 +340,32 @@ export class Modul3View extends BaseModuleView {
           </div>
         </div>
 
-        <!-- ─── HELP / PANDUAN MODAL ─── -->
+        <!-- ─── HELP MODAL ─── -->
         <div id="help-overlay" class="modal-overlay hidden" role="dialog" aria-modal="true">
-          <div class="modal-card help-modal-card">
+          <div class="modal-card help-box">
             <div class="modal-header">
-              <h3>Panduan Simulator Pemindai X-Ray Kargo Pos & PJT</h3>
-              <button id="btn-close-help" class="modal-close-btn" aria-label="Tutup Panduan">✕</button>
+              <h2 class="modal-heading">${guide.title || 'Panduan Penggunaan Modul Kargo Pos & PJT'}</h2>
+              <button id="btn-close-help" class="modal-close-btn" aria-label="Tutup Panduan">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="18" y1="6" x2="6" y2="18"></line>
+                  <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+              </button>
             </div>
-            <div class="modal-body help-modal-body">
-              <div class="help-step-item">
-                <div class="help-step-icon">🔍</div>
-                <div class="help-step-text">
-                  <h4>Lensa Kaca Pembesar X-Ray</h4>
-                  <p>Arahkan kursor mouse (atau sentuh dan geser jari pada tablet/ponsel) ke atas kardus kargo untuk memindai isi dalam paket.</p>
+            <div class="modal-body help-content">
+              ${(guide.items || [
+                { num: 1, title: 'Lensa Kaca Pembesar X-Ray', text: 'Arahkan kursor mouse (atau usap/drag jari pada tablet/ponsel) ke atas kardus kargo untuk memindai isi dalam paket secara interaktif.' },
+                { num: 2, title: 'Titik Hotspot Anomali', text: 'Klik titik hotspot bernomor untuk membuka kartu analisis modus operandi, bukti forensik, dan SOP penindakan Bea Cukai.' },
+                { num: 3, title: 'Mode Tampilan & Kontrol Pembesar', text: 'Gunakan tombol dok bawah untuk berpindah ke mode Full X-Ray atau sesuaikan radius lensa pembesar melalui slider vertikal.' },
+                { num: 4, title: 'Format Tabbed Card', text: 'Pelajari rincian lengkap melalui 3 tab: <em>Modus Operandi</em>, <em>Ciri Pelaku & SOP</em>, dan <em>Indikator Risiko</em>.' }
+              ]).map(item => `
+                <div class="help-item">
+                  <strong>${item.num}. ${item.title}:</strong> ${item.text}
                 </div>
-              </div>
-              <div class="help-step-item">
-                <div class="help-step-icon">🎯</div>
-                <div class="help-step-text">
-                  <h4>Klik Hotspot Anomali</h4>
-                  <p>Klik titik hotspot bernomor untuk membuka kartu analisis modus operandi, bukti forensik, dan SOP penindakan Bea Cukai.</p>
-                </div>
-              </div>
-              <div class="help-step-item">
-                <div class="help-step-icon">⚡</div>
-                <div class="help-step-text">
-                  <h4>Mode Tampilan & Slider Radius</h4>
-                  <p>Gunakan tombol dok bawah untuk berpindah ke mode Full X-Ray atau mengatur luas area lingkaran lensa pembesar.</p>
-                </div>
-              </div>
+              `).join('')}
             </div>
             <div class="modal-footer">
-              <button id="btn-help-ok" class="btn-primary" style="margin-left: auto;">Mengerti & Mulai Simulasi</button>
+              <button id="btn-help-ok" class="btn-primary-action">Mengerti</button>
             </div>
           </div>
         </div>
@@ -636,7 +633,7 @@ export class Modul3View extends BaseModuleView {
       gain.connect(this.audioCtx.destination);
       osc.start();
       osc.stop(this.audioCtx.currentTime + dur);
-    } catch (e) {}
+    } catch (e) { }
   }
 
   renderHotspots() {
@@ -661,7 +658,7 @@ export class Modul3View extends BaseModuleView {
       const pin = document.createElement('div');
       pin.className = `body-hotspot-pin ${isActive ? 'active' : ''} ${isVisited ? 'visited' : ''} ${isTopArea ? 'tooltip-bottom' : ''}`;
       pin.dataset.id = hs.id;
-      
+
       pin.style.left = `${coords.x}%`;
       pin.style.top = `${coords.y}%`;
       pin.style.position = 'absolute';
@@ -823,7 +820,7 @@ export class Modul3View extends BaseModuleView {
     const markSeen = () => {
       try {
         localStorage.setItem(storageKey, 'true');
-      } catch (e) {}
+      } catch (e) { }
       helpOverlay?.classList.add('hidden');
     };
 
@@ -841,7 +838,7 @@ export class Modul3View extends BaseModuleView {
           helpOverlay?.classList.remove('hidden');
         }, 400);
       }
-    } catch (e) {}
+    } catch (e) { }
 
     const overlay = this.container.querySelector('#hotspot-card-modal-overlay');
     const closeBtn = this.container.querySelector('#btn-close-detail-modal');

@@ -11,7 +11,7 @@ export class Modul1View extends BaseModuleView {
     this.visitedHotspots = new Set();
     this.currentActiveTab = 'tab-modus';
     this.currentAngle = 0; // 0, 90, 180, 270
-    this.currentZoom = 1.35;
+    this.currentZoom = 1.5;
     this.isModalOpen = false;
     this.isAutoPlaying = false;
     this.autoPlayTimer = null;
@@ -44,16 +44,6 @@ export class Modul1View extends BaseModuleView {
   }
 
   getTemplateHTML() {
-    const meta = this.moduleData?.meta || {};
-    const telemetry = this.moduleData?.telemetry || {};
-    const codeBadge = meta.codeBadge || 'MODUL 01';
-    const courseTitle = meta.title || 'Pemeriksaan Tubuh Kurir (Body Concealment)';
-    const legalRef = meta.legalRef || 'PMK-188/2021 & S-39/BC/2023';
-    const instructionTag = meta.instructionTag || 'Klik hotspot bernomor untuk menganalisis modus operandi & bukti forensik';
-    const subjectId = telemetry.subjectId || 'SUBJEK ID: SUSPECT-JKT-9921 / PRIA / 34 TH';
-    const sensor = telemetry.sensor || 'SENSOR: FULL-BODY TRANSMISSION X-RAY';
-    const rotateHint = telemetry.rotateHint || '⟲ Drag atau usap pada tubuh untuk rotasi bebas 360° ⟳';
-
     return `
       <div id="modul1-app-root">
         <!-- ─── MAIN VIEWPORT ─── -->
@@ -63,20 +53,14 @@ export class Modul1View extends BaseModuleView {
           <div id="modul1-top-bar" class="modul1-top-bar">
             <div class="nav-left">
               <div class="header-breadcrumb">
-                <span class="modul-code-badge font-code-tech">${codeBadge}</span>
-                <span class="course-main-title">${courseTitle}</span>
+                <span class="modul-code-badge font-code-tech">MODUL 01</span>
+                <span class="course-main-title">Pemeriksaan Tubuh Kurir (Body Concealment)</span>
                 <span class="breadcrumb-separator">•</span>
-                <span class="modul-ref-tag font-code-tech">${legalRef}</span>
+                <span class="modul-ref-tag font-code-tech">PMK-188/2021 & S-39/BC/2023</span>
               </div>
             </div>
 
             <div class="nav-right">
-              <!-- Angle Instruction Tag -->
-              <div class="angle-instruction-tag">
-                <span class="instruction-dot">●</span>
-                <span>${instructionTag}</span>
-              </div>
-
               <!-- Help Button -->
               <button id="btn-help-modal" class="icon-btn circle-btn" title="Panduan Penggunaan">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
@@ -91,6 +75,20 @@ export class Modul1View extends BaseModuleView {
           <!-- Rotatable Body Stage -->
           <div class="rotatable-body-view">
 
+            <!-- Angle Header Bar -->
+            <div class="angle-header-bar">
+              <div class="current-angle-badge" id="current-angle-badge">
+                <span class="angle-deg font-code-tech" id="angle-deg-text">0°</span>
+                <span class="angle-sep">•</span>
+                <span class="angle-name" id="angle-name-text">Tampak Depan</span>
+                <span class="angle-sub" id="angle-sub-text">(Organ Pencernaan & Dada)</span>
+              </div>
+              <div class="angle-instruction-tag">
+                <span class="instruction-dot">●</span>
+                <span>Klik hotspot bernomor untuk menganalisis modus operandi & bukti forensik</span>
+              </div>
+            </div>
+
             <!-- Body Canvas Wrapper with Technical Forensic Grid & HUD Overlay -->
             <div class="body-canvas-wrapper" id="body-canvas-wrapper">
 
@@ -100,18 +98,12 @@ export class Modul1View extends BaseModuleView {
               <!-- HUD Telemetry Watermark Overlay -->
               <div class="forensic-hud-telemetry" aria-hidden="true">
                 <div class="forensic-hud-top-left font-code-tech">
-                  <div class="hud-line-sub">${subjectId}</div>
+                  <div class="hud-line-title">STASIUN PEMINDAIAN ANATOMI DUAL-AXIS</div>
+                  <div class="hud-line-sub">SUBJEK ID: SUSPECT-JKT-9921 / PRIA / 34 TH</div>
                 </div>
                 <div class="forensic-hud-top-right font-code-tech">
                   <div class="hud-line-azimuth" id="hud-azimuth-text">ROTASI AKTIF: AZIMUTH 000° | TILT +00.0°</div>
-                  <div class="hud-line-status">${sensor}</div>
-                </div>
-              </div>
-
-              <!-- Top Rotate Hint (Floating Above Central Image) -->
-              <div class="m1-top-rotate-dock" id="m1-top-rotate-dock">
-                <div class="pedestal-rotate-hint">
-                  <span>${rotateHint}</span>
+                  <div class="hud-line-status">SENSOR: FULL-BODY TRANSMISSION X-RAY</div>
                 </div>
               </div>
 
@@ -124,37 +116,6 @@ export class Modul1View extends BaseModuleView {
 
               <!-- Stitch Floating HUD Segmented Pill Controls Dock (Center Bottom) -->
               <div class="pedestal-rotation-dock" id="pedestal-rotation-dock">
-                <!-- Bottom Curved Rotation Guide Illustration (Perspective Proportional) -->
-                <div class="m1-bottom-rotation-guide" aria-hidden="true" title="Tarik atau usap tubuh untuk rotasi bebas 360°">
-                  <svg class="m1-bottom-curve-svg" viewBox="0 0 280 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                      <linearGradient id="m1-bottom-arc-grad" x1="0%" y1="0%" x2="100%" y2="0%">
-                        <stop offset="0%" stop-color="#00E5FF" stop-opacity="0.2" />
-                        <stop offset="25%" stop-color="#00E5FF" stop-opacity="0.95" />
-                        <stop offset="50%" stop-color="#D9B45B" stop-opacity="0.95" />
-                        <stop offset="75%" stop-color="#00E5FF" stop-opacity="0.95" />
-                        <stop offset="100%" stop-color="#00E5FF" stop-opacity="0.2" />
-                      </linearGradient>
-                      <filter id="m1-bottom-glow" x="-10%" y="-30%" width="120%" height="160%">
-                        <feGaussianBlur stdDeviation="2" result="blur" />
-                        <feMerge>
-                          <feMergeNode in="blur" />
-                          <feMergeNode in="SourceGraphic" />
-                        </feMerge>
-                      </filter>
-                    </defs>
-                    <!-- Background faint guide arc -->
-                    <path d="M 24 10 Q 140 34 256 10" stroke="rgba(0, 229, 255, 0.22)" stroke-width="3.5" stroke-linecap="round" />
-                    <!-- Primary Glowing Arc with Dashes -->
-                    <path class="m1-glow-path" d="M 24 10 Q 140 34 256 10" stroke="url(#m1-bottom-arc-grad)" stroke-width="2.2" stroke-linecap="round" stroke-dasharray="7 4" filter="url(#m1-bottom-glow)" />
-                    <!-- Left Arrow pointing leftwards/orbit direction -->
-                    <polygon points="18,7 30,5 25,16" fill="#00E5FF" filter="url(#m1-bottom-glow)" />
-                    <!-- Right Arrow pointing rightwards/orbit direction -->
-                    <polygon points="262,7 250,5 255,16" fill="#00E5FF" filter="url(#m1-bottom-glow)" />
-                  </svg>
-                  <span class="m4a-bottom-curve-text font-code-tech">PUTAR 360°</span>
-                </div>
-
                 <div class="pedestal-carousel-controls">
                   <!-- Putar Sudut Button with 360 icon -->
                   <button id="btn-rotate-angle" class="hud-pill-action-btn" title="Putar Sudut Anatomi (0°, 90°, 180°, 270°)">
@@ -178,13 +139,16 @@ export class Modul1View extends BaseModuleView {
                   <button id="btn-zoom-out" class="pedestal-ctrl-btn hud-zoom-btn" title="Perkecil (Zoom Out)" aria-label="Zoom Out">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line></svg>
                   </button>
-                  <span id="zoom-level-text" class="zoom-level-badge font-code-tech">135%</span>
+                  <span id="zoom-level-text" class="zoom-level-badge font-code-tech">150%</span>
                   <button id="btn-zoom-in" class="pedestal-ctrl-btn hud-zoom-btn" title="Perbesar (Zoom In)" aria-label="Zoom In">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
                   </button>
-                  <button id="btn-zoom-reset" class="pedestal-ctrl-btn hud-zoom-btn reset-btn" title="Reset Zoom (135%)" aria-label="Reset Zoom">
+                  <button id="btn-zoom-reset" class="pedestal-ctrl-btn hud-zoom-btn reset-btn" title="Reset Zoom (150%)" aria-label="Reset Zoom">
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><polyline points="3 3 3 8 8 8"></polyline></svg>
                   </button>
+                </div>
+                <div class="pedestal-rotate-hint">
+                  <span>⟲ Drag atau usap pada tubuh untuk rotasi bebas 360° ⟳</span>
                 </div>
               </div>
 
@@ -203,13 +167,14 @@ export class Modul1View extends BaseModuleView {
               <div class="detail-badge-row">
                 <span class="floating-card-drag-indicator" title="Geser posisi kartu">⋮⋮</span>
                 <span id="detail-tag-badge" class="detail-tag-badge">MODUS #01</span>
+                <span id="detail-cat-badge" class="detail-cat-badge">METODE INGESTION</span>
               </div>
               <h3 id="detail-title" class="detail-title">1. Rongga Mulut</h3>
             </div>
             <div class="modal-header-right">
               <div class="card-quick-nav">
                 <button id="btn-prev-hotspot" class="card-nav-arrow-btn" title="Modus Sebelumnya">←</button>
-                <span id="card-nav-counter" class="card-nav-counter">1 / 6</span>
+                <span id="card-nav-counter" class="card-nav-counter">1 / 8</span>
                 <button id="btn-next-hotspot" class="card-nav-arrow-btn" title="Modus Berikutnya">→</button>
               </div>
               <button id="btn-close-detail-modal" class="modal-close-btn" aria-label="Tutup Kartu" title="Tutup Kartu">✕</button>
@@ -355,19 +320,6 @@ export class Modul1View extends BaseModuleView {
         </div>
       </div>
 
-      <!-- High-Res Forensic Photo Lightbox Modal Popup -->
-      <div id="m1-image-popup-modal" class="m4a-image-popup-overlay hidden" role="dialog" aria-modal="true">
-        <div class="m4a-image-popup-content">
-          <button id="btn-close-img-popup" class="m4a-img-popup-close" aria-label="Tutup Preview" title="Tutup Preview (Esc)">✕</button>
-          <div class="m4a-img-popup-frame">
-            <img id="m1-popup-img-el" src="" alt="Bukti Foto Real" />
-          </div>
-          <div class="m4a-img-popup-caption">
-            <span id="m1-popup-img-title">Dokumentasi Penindakan DJBC</span>
-          </div>
-        </div>
-      </div>
-
       <!-- ─── 4. QUIZ MODAL ─── -->
       <div id="quiz-overlay" class="modal-overlay hidden" role="dialog" aria-modal="true">
         <div id="quiz-card" class="modal-card">
@@ -411,97 +363,32 @@ export class Modul1View extends BaseModuleView {
         </div>
       </div>
 
-      <!-- ─── 6. WALKTHROUGH BEACON HELP OVERLAY ─── -->
-      <div id="help-overlay" class="m1-walkthrough-overlay hidden" role="dialog" aria-modal="true">
-        <!-- Spotlight cutout frame with glowing border & cyber reticle corners -->
-        <div id="m1-walkthrough-spotlight" class="m1-walkthrough-spotlight">
-          <div class="m1-spotlight-corner top-left"></div>
-          <div class="m1-spotlight-corner top-right"></div>
-          <div class="m1-spotlight-corner bottom-left"></div>
-          <div class="m1-spotlight-corner bottom-right"></div>
-        </div>
-
-        <!-- Beacons layer (anchored interactive pulse points) -->
-        <div id="m1-beacons-layer" class="m1-beacons-layer">
-          <!-- Step 1 Beacon: Rotasi 360° -->
-          <div class="m1-beacon-node active" data-step="0" id="m1-beacon-step-0" title="Langkah 1: Rotasi Tubuh 360°">
-            <div class="m1-beacon-ping"></div>
-            <div class="m1-beacon-ping-outer"></div>
-            <div class="m1-beacon-center">
-              <span class="m1-beacon-badge font-code-tech">1</span>
-            </div>
-            <span class="m1-beacon-tag font-code-tech">ROTASI 360°</span>
+      <!-- ─── 6. HELP MODAL ─── -->
+      <div id="help-overlay" class="modal-overlay hidden" role="dialog" aria-modal="true">
+        <div class="modal-card help-box">
+          <div class="modal-header">
+            <h2 class="modal-heading">Panduan Penggunaan Modul Interaktif</h2>
+            <button id="btn-close-help" class="modal-close-btn">✕</button>
           </div>
-
-          <!-- Step 2 Beacon: Titik Hotspot -->
-          <div class="m1-beacon-node" data-step="1" id="m1-beacon-step-1" title="Langkah 2: Titik Hotspot Pemeriksaan">
-            <div class="m1-beacon-ping"></div>
-            <div class="m1-beacon-ping-outer"></div>
-            <div class="m1-beacon-center">
-              <span class="m1-beacon-badge font-code-tech">2</span>
+          <div class="modal-body help-content">
+            <div class="help-item">
+              <strong>1. Rotasi Navigasi Tubuh:</strong> Gunakan tombol kontrol <strong>‹</strong>, <strong>▶</strong>, dan <strong>›</strong> di bawah model, atau usap/drag langsung pada model untuk memutar sudut peraga anatomi 360° (Depan 0°, Kanan 90°, Belakang 180°, Kiri 270°).
             </div>
-            <span class="m1-beacon-tag font-code-tech">HOTSPOT</span>
+            <div class="help-item">
+              <strong>2. Titik Hotspot Interaktif:</strong> Klik nomor callout pada tubuh untuk membuka kartu detail modus operandi.
+            </div>
+            <div class="help-item">
+              <strong>3. Format Tabbed Card:</strong> Jelajahi informasi lengkap melalui 4 tab: <em>Modus Operandi</em>, <em>Foto Gambar Real</em>, <em>Ciri Pelaku & SOP</em>, dan <em>Indikator Risiko</em>.
+            </div>
+            <div class="help-item">
+              <strong>4. Galeri Foto Barang Bukti:</strong> Klik thumbnail foto untuk membuka pratinjau resolusi tinggi dengan zoom.
+            </div>
+            <div class="help-item">
+              <strong>5. Kuis Penilaian:</strong> Kerjakan latihan soal kompetensi untuk menguji pemahaman Anda.
+            </div>
           </div>
-
-          <!-- Step 3 Beacon: Zoom 135% -->
-          <div class="m1-beacon-node" data-step="2" id="m1-beacon-step-2" title="Langkah 3: Kontrol Zoom Presisi">
-            <div class="m1-beacon-ping"></div>
-            <div class="m1-beacon-ping-outer"></div>
-            <div class="m1-beacon-center">
-              <span class="m1-beacon-badge font-code-tech">3</span>
-            </div>
-            <span class="m1-beacon-tag font-code-tech">ZOOM 135%</span>
-          </div>
-
-          <!-- Step 4 Beacon: Tab Modus & Foto Forensik -->
-          <div class="m1-beacon-node" data-step="3" id="m1-beacon-step-3" title="Langkah 4: Format Tabbed Card">
-            <div class="m1-beacon-ping"></div>
-            <div class="m1-beacon-ping-outer"></div>
-            <div class="m1-beacon-center">
-              <span class="m1-beacon-badge font-code-tech">4</span>
-            </div>
-            <span class="m1-beacon-tag font-code-tech">TAB MODUS</span>
-          </div>
-        </div>
-
-        <!-- Floating Walkthrough Card / Beacon Popover -->
-        <div id="m1-walkthrough-card" class="m1-walkthrough-card">
-          <div class="m1-wt-header">
-            <div class="m1-wt-badge-wrap">
-              <span class="m1-wt-pulsing-pip"></span>
-              <span id="m1-wt-step-label" class="m1-wt-step-label font-code-tech">LANGKAH 1 DARI 4</span>
-            </div>
-            <button id="btn-close-help" class="modal-close-btn" aria-label="Tutup Panduan" title="Tutup Panduan (Esc)">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="18" y1="6" x2="6" y2="18"></line>
-                <line x1="6" y1="6" x2="18" y2="18"></line>
-              </svg>
-            </button>
-          </div>
-
-          <div class="m1-wt-body">
-            <div class="m1-wt-icon-title-row">
-              <span id="m1-wt-icon" class="m1-wt-icon">🔄</span>
-              <h3 id="m1-wt-title" class="m1-wt-title">Rotasi Navigasi Tubuh 360°</h3>
-            </div>
-            <p id="m1-wt-desc" class="m1-wt-desc">
-              Usap / drag langsung pada tubuh peraga atau gunakan tombol kontrol di dock bawah untuk memutar sudut peraga anatomi 360° (Depan 0°, Kanan 90°, Belakang 180°, Kiri 270°).
-            </p>
-          </div>
-
-          <div class="m1-wt-footer">
-            <div id="m1-wt-dots" class="m1-wt-dots">
-              <span class="m1-wt-dot active" data-step="0"></span>
-              <span class="m1-wt-dot" data-step="1"></span>
-              <span class="m1-wt-dot" data-step="2"></span>
-              <span class="m1-wt-dot" data-step="3"></span>
-            </div>
-            <div class="m1-wt-actions">
-              <button id="m1-wt-btn-skip" class="m1-wt-btn-skip" type="button">Lewati</button>
-              <button id="m1-wt-btn-prev" class="m1-wt-btn-prev" type="button" disabled>‹ Sebelumnya</button>
-              <button id="m1-wt-btn-next" class="m1-wt-btn-next" type="button">Berikutnya ›</button>
-              <button id="btn-help-ok" class="btn-primary-action m1-wt-btn-finish hidden" type="button">Mulai Inspeksi ✓</button>
-            </div>
+          <div class="modal-footer">
+            <button id="btn-help-ok" class="btn-primary-action">Mengerti</button>
           </div>
         </div>
       </div>
@@ -513,9 +400,9 @@ export class Modul1View extends BaseModuleView {
     this.setupZoomControls();
     this.setupDetailModal();
 
-    // Initial angle & zoom 135%
+    // Initial angle & zoom 150%
     this.setBodyAngle(0);
-    this.applyZoom(1.35);
+    this.applyZoom(1.5);
   }
 
   setupRotationControls() {
@@ -632,7 +519,7 @@ export class Modul1View extends BaseModuleView {
 
     btnIn?.addEventListener('click', () => this.applyZoom(this.currentZoom + 0.15));
     btnOut?.addEventListener('click', () => this.applyZoom(this.currentZoom - 0.15));
-    btnReset?.addEventListener('click', () => this.applyZoom(1.35));
+    btnReset?.addEventListener('click', () => this.applyZoom(1.5));
 
     canvasWrap?.addEventListener('wheel', (e) => {
       e.preventDefault();
@@ -645,17 +532,14 @@ export class Modul1View extends BaseModuleView {
     this.currentZoom = Math.min(Math.max(val, 0.75), 2.2);
     const container = this.container.querySelector('#body-image-container');
     const badge = this.container.querySelector('#zoom-level-text');
-    const counterScale = (1 / this.currentZoom).toFixed(4);
 
     if (container) {
       container.style.transform = `scale(${this.currentZoom})`;
       container.style.transformOrigin = 'center center';
       container.style.transition = 'transform 0.15s ease';
       container.style.setProperty('--body-zoom', this.currentZoom);
-      container.style.setProperty('--tooltip-counter-scale', counterScale);
     }
     document.documentElement.style.setProperty('--body-zoom', this.currentZoom);
-    document.documentElement.style.setProperty('--tooltip-counter-scale', counterScale);
     if (badge) {
       badge.textContent = `${Math.round(this.currentZoom * 100)}%`;
     }
@@ -707,10 +591,9 @@ export class Modul1View extends BaseModuleView {
       const coords = hs.coordsByAngle[String(this.currentAngle)] || { x: 50, y: 50 };
       const isVisited = this.visitedHotspots.has(hs.id);
       const isActive = this.isModalOpen && hs.id === this.currentHotspotId;
-      const isTopArea = coords.y < 18;
 
       const pin = document.createElement('div');
-      pin.className = `body-hotspot-pin ${isActive ? 'active' : ''} ${isVisited ? 'visited' : ''} ${isTopArea ? 'tooltip-bottom' : ''}`;
+      pin.className = `body-hotspot-pin ${isActive ? 'active' : ''} ${isVisited ? 'visited' : ''}`;
       pin.setAttribute('data-id', hs.id);
       pin.style.left = `${coords.x}%`;
       pin.style.top = `${coords.y}%`;
@@ -807,55 +690,6 @@ export class Modul1View extends BaseModuleView {
     });
 
     this.initDraggableFloatingCard();
-
-    // Popup Foto Real / Preview Gambar Resolusi Penuh
-    const imgPopupModal = this.container.querySelector('#m1-image-popup-modal');
-    const btnCloseImgPopup = this.container.querySelector('#btn-close-img-popup');
-
-    if (btnCloseImgPopup) {
-      btnCloseImgPopup.addEventListener('click', (e) => {
-        e.stopPropagation();
-        this.closeImagePopup();
-      });
-    }
-
-    if (imgPopupModal) {
-      imgPopupModal.addEventListener('click', (e) => {
-        if (e.target === imgPopupModal) {
-          this.closeImagePopup();
-        }
-      });
-    }
-
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        const popup = this.container?.querySelector('#m1-image-popup-modal');
-        if (popup && !popup.classList.contains('hidden')) {
-          this.closeImagePopup();
-        }
-      }
-    });
-  }
-
-  openImagePopup(src, title) {
-    const popup = this.container.querySelector('#m1-image-popup-modal');
-    const imgEl = this.container.querySelector('#m1-popup-img-el');
-    const titleEl = this.container.querySelector('#m1-popup-img-title');
-
-    if (!popup || !imgEl) return;
-
-    imgEl.src = src;
-    imgEl.alt = title || 'Foto Forensik';
-    if (titleEl) titleEl.textContent = title || 'Dokumentasi Penindakan DJBC';
-
-    popup.classList.remove('hidden');
-  }
-
-  closeImagePopup() {
-    const popup = this.container.querySelector('#m1-image-popup-modal');
-    if (popup) {
-      popup.classList.add('hidden');
-    }
   }
 
   switchCardPage(pageIndex) {
@@ -998,6 +832,7 @@ export class Modul1View extends BaseModuleView {
 
     const badgeRow = this.container.querySelector('.detail-badge-row');
     const tagBadge = this.container.querySelector('#detail-tag-badge');
+    const catBadge = this.container.querySelector('#detail-cat-badge');
     const title = this.container.querySelector('#detail-title');
     const sub = this.container.querySelector('#detail-subtitle');
 
@@ -1005,6 +840,10 @@ export class Modul1View extends BaseModuleView {
     if (tagBadge) {
       tagBadge.textContent = `MODUS #${hs.num}`;
       tagBadge.className = `detail-tag-badge cat-${hs.categoryId}`;
+    }
+    if (catBadge) {
+      catBadge.textContent = (hs.categoryLabel || '').toUpperCase();
+      catBadge.className = `detail-cat-badge cat-${hs.categoryId}`;
     }
     if (title) title.textContent = hs.label;
     if (sub) sub.textContent = hs.tag;
@@ -1026,22 +865,6 @@ export class Modul1View extends BaseModuleView {
       mainImg.src = hs.mainIllustration || hs.thumb || 'assets/mockup/image_placeholder.svg';
       mainImg.alt = hs.label;
     }
-
-    // Klik gambar utama pada Modus Operandi untuk memperbesar ke mode popup
-    const illustrationBox = this.container.querySelector('.detail-illustration-box');
-    if (illustrationBox) {
-      illustrationBox.style.cursor = 'pointer';
-      illustrationBox.title = 'Klik untuk melihat gambar ukuran penuh';
-      illustrationBox.onclick = () => {
-        const curImg = this.container.querySelector('#detail-main-img');
-        const curTitle = this.container.querySelector('#detail-title');
-        this.openImagePopup(
-          curImg ? curImg.src : (hs.mainIllustration || hs.thumb || 'assets/mockup/card_digestive_main.png'),
-          curTitle ? curTitle.textContent : hs.label
-        );
-      };
-    }
-
     if (desc) desc.textContent = hs.description;
     if (concealmentMethod) concealmentMethod.textContent = hs.categoryLabel || 'Modus Penyembunyian Tubuh';
     if (bodyLocation) bodyLocation.textContent = hs.bodyLocation || `${hs.label} (Sudut Pandang Utama: ${hs.primaryAngle}°)`;
@@ -1050,43 +873,44 @@ export class Modul1View extends BaseModuleView {
     if (narrative) narrative.textContent = hs.modusDetail || hs.description;
     if (note) note.textContent = hs.inspectionNote || 'Wajib dilakukan pemeriksaan sesuai SOP resmi DJBC.';
 
-    // TAB 2: Foto Real dengan Fitur Popup Gambar
+    // TAB 2: Foto Real
     const findingsGrid = this.container.querySelector('#findings-thumbnails-grid');
     if (findingsGrid) {
       findingsGrid.innerHTML = '';
       const findingsList = (hs.findings && hs.findings.length > 0) ? hs.findings : [
         {
-          full: hs.mainIllustration || hs.thumb || 'assets/mockup/card_digestive_main.png',
-          thumb: hs.mainIllustration || hs.thumb || 'assets/mockup/card_digestive_main.png',
-          caption: hs.label || 'Dokumentasi Barang Bukti',
-          tag: hs.tag || 'Barang Bukti'
+          full: 'assets/mockup/image_placeholder.svg',
+          thumb: 'assets/mockup/image_placeholder.svg',
+          caption: 'Dokumentasi Barang Bukti (Placeholder)',
+          tag: 'PLACEHOLDER'
         }
       ];
 
       findingsList.forEach(f => {
-        const item = document.createElement('div');
-        item.className = 'finding-thumb-item';
-        item.setAttribute('role', 'button');
-        item.setAttribute('tabindex', '0');
-        item.setAttribute('title', `Klik untuk memperbesar: ${f.caption}`);
-        item.style.cursor = 'pointer';
-        item.innerHTML = `
-          <img src="${f.thumb || f.full}" alt="${f.caption}" onerror="this.src='assets/mockup/image_placeholder.svg'" />
-          <span class="finding-thumb-label">${f.tag || 'Barang Bukti'}</span>
+        const a = document.createElement('a');
+        a.href = f.full;
+        a.className = 'finding-thumb-item glightbox';
+        a.setAttribute('data-gallery', `findings-gallery-${hs.id}`);
+        a.setAttribute('data-title', `${f.caption} — [${f.tag}]`);
+        a.innerHTML = `
+          <img src="${f.thumb}" alt="${f.caption}" onerror="this.src='assets/mockup/image_placeholder.svg'" />
+          <span class="finding-thumb-label">${f.tag}</span>
         `;
-        item.addEventListener('click', (e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          this.openImagePopup(f.full, `${f.caption} — [${f.tag || 'Barang Bukti'}]`);
-        });
-        item.addEventListener('keydown', (e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            this.openImagePopup(f.full, `${f.caption} — [${f.tag || 'Barang Bukti'}]`);
-          }
-        });
-        findingsGrid.appendChild(item);
+        findingsGrid.appendChild(a);
       });
+
+      try {
+        if (typeof window.GLightbox !== 'undefined') {
+          if (this.glightboxInstance) this.glightboxInstance.destroy();
+          this.glightboxInstance = window.GLightbox({
+            selector: '.glightbox',
+            touchNavigation: true,
+            loop: true
+          });
+        }
+      } catch (gErr) {
+        console.warn('GLightbox warning:', gErr);
+      }
     }
 
     // TAB 3: Detection & SOP
@@ -1150,7 +974,6 @@ export class Modul1View extends BaseModuleView {
 
   initQuiz() {
     this.quiz = new QuizModule({
-      questions: this.moduleData?.quiz,
       onComplete: (score, answers) => {
         this.showResult(score);
         scorm.complete(score);
@@ -1164,7 +987,15 @@ export class Modul1View extends BaseModuleView {
   }
 
   initModals() {
-    this.initWalkthroughBeacon();
+    // Help modal
+    const btnHelp = this.container.querySelector('#btn-help-modal');
+    const helpOverlay = this.container.querySelector('#help-overlay');
+    const btnCloseHelp = this.container.querySelector('#btn-close-help');
+    const btnOkHelp = this.container.querySelector('#btn-help-ok');
+
+    btnHelp?.addEventListener('click', () => helpOverlay?.classList.remove('hidden'));
+    btnCloseHelp?.addEventListener('click', () => helpOverlay?.classList.add('hidden'));
+    btnOkHelp?.addEventListener('click', () => helpOverlay?.classList.add('hidden'));
 
     // Result modal
     const resultOverlay = this.container.querySelector('#result-overlay');
@@ -1179,278 +1010,6 @@ export class Modul1View extends BaseModuleView {
     btnReview?.addEventListener('click', () => {
       resultOverlay?.classList.add('hidden');
     });
-  }
-
-  initWalkthroughBeacon() {
-    const helpOverlay = this.container.querySelector('#help-overlay');
-    const spotlight = this.container.querySelector('#m1-walkthrough-spotlight');
-    const card = this.container.querySelector('#m1-walkthrough-card');
-    const stepLabel = this.container.querySelector('#m1-wt-step-label');
-    const iconEl = this.container.querySelector('#m1-wt-icon');
-    const titleEl = this.container.querySelector('#m1-wt-title');
-    const descEl = this.container.querySelector('#m1-wt-desc');
-    const dots = this.container.querySelectorAll('.m1-wt-dot');
-    const beaconNodes = this.container.querySelectorAll('.m1-beacon-node');
-    const btnPrev = this.container.querySelector('#m1-wt-btn-prev');
-    const btnNext = this.container.querySelector('#m1-wt-btn-next');
-    const btnSkip = this.container.querySelector('#m1-wt-btn-skip');
-    const btnCloseHelp = this.container.querySelector('#btn-close-help');
-    const btnOkHelp = this.container.querySelector('#btn-help-ok');
-    const btnHelp = this.container.querySelector('#btn-help-modal');
-
-    const storageKey = 'tutorial_seen_modul1';
-
-    const steps = [
-      {
-        icon: '🔄',
-        title: 'Rotasi Navigasi Tubuh 360°',
-        desc: 'Gunakan tombol kontrol <strong>‹</strong>, <strong>▶</strong>, dan <strong>›</strong> di dock bawah atau usap/drag langsung pada model untuk memutar sudut peraga anatomi 360° (Depan 0°, Kanan 90°, Belakang 180°, Kiri 270°).',
-        targetSelector: '#pedestal-rotation-dock',
-        beaconPos: (r) => ({ left: r.left + r.width / 2, top: r.top - 24 }),
-        cardPos: (r) => {
-          if (window.innerWidth <= 768) return { bottom: '20px', left: '50%', transform: 'translateX(-50%)' };
-          return {
-            bottom: `${Math.max(20, window.innerHeight - r.top + 48)}px`,
-            left: '50%',
-            transform: 'translateX(-50%)'
-          };
-        }
-      },
-      {
-        icon: '🎯',
-        title: 'Titik Hotspot Pemeriksaan',
-        desc: 'Klik nomor callout pada anatomi tubuh (seperti rongga mulut, perut, selangkangan, dan betis) untuk membuka kartu rincian modus operandi serta barang bukti sitaan.',
-        targetSelector: '#body-image-container',
-        beaconPos: (r) => ({ left: r.left + r.width / 2, top: r.top + r.height * 0.38 }),
-        cardPos: (r) => {
-          if (window.innerWidth <= 768) return { bottom: '20px', left: '50%', transform: 'translateX(-50%)' };
-          const cardLeft = Math.min(window.innerWidth - 420, r.right + 25);
-          return {
-            top: `${Math.max(80, r.top + 40)}px`,
-            left: `${cardLeft}px`,
-            transform: 'none'
-          };
-        }
-      },
-      {
-        icon: '🔍',
-        title: 'Kontrol Zoom Presisi (135%)',
-        desc: 'Atur tingkat pembesaran visual peraga dengan tombol <strong>(-)</strong> dan <strong>(+)</strong>. Klik tombol putar balik (<strong>↺</strong>) untuk mereset skala kembali ke default optimal <strong>135%</strong>.',
-        targetSelector: '#zoom-level-text',
-        beaconPos: (r) => ({ left: r.left + r.width / 2, top: r.top - 24 }),
-        cardPos: (r) => {
-          if (window.innerWidth <= 768) return { bottom: '20px', left: '50%', transform: 'translateX(-50%)' };
-          return {
-            bottom: `${Math.max(20, window.innerHeight - r.top + 48)}px`,
-            right: `${Math.max(24, window.innerWidth - r.right - 20)}px`,
-            left: 'auto',
-            transform: 'none'
-          };
-        }
-      },
-      {
-        icon: '📋',
-        title: '4 Tab Modus & Galeri Forensik',
-        desc: 'Setiap titik pemeriksaan dilengkapi 4 tab informasi mendalam: <em>Modus Operandi</em>, <em>Foto Gambar Real</em> (dapat diklik untuk foto resolusi tinggi), <em>Ciri Pelaku & SOP Petugas</em>, serta <em>Indikator Risiko</em>.',
-        targetSelector: '#card-tabs-nav',
-        beaconPos: (r) => ({ left: r.left + 65, top: r.top - 38 }),
-        cardPos: (r) => {
-          if (window.innerWidth <= 1024) return { bottom: '20px', left: '50%', transform: 'translateX(-50%)' };
-          const cardLeft = Math.max(20, r.left - 410);
-          return {
-            top: `${Math.max(60, r.top)}px`,
-            left: `${cardLeft}px`,
-            transform: 'none'
-          };
-        }
-      }
-    ];
-
-    // Load dynamic walkthrough texts from JSON if present
-    const jsonSteps = this.moduleData?.guide?.steps || [];
-    steps.forEach((step, idx) => {
-      if (jsonSteps[idx]) {
-        if (jsonSteps[idx].icon) step.icon = jsonSteps[idx].icon;
-        if (jsonSteps[idx].title) step.title = jsonSteps[idx].title;
-        if (jsonSteps[idx].desc) step.desc = jsonSteps[idx].desc;
-      }
-    });
-
-    let currentStep = 0;
-
-    const updateLayout = () => {
-      if (!helpOverlay || helpOverlay.classList.contains('hidden')) return;
-
-      // Position each beacon node
-      steps.forEach((st, idx) => {
-        const node = this.container.querySelector(`#m1-beacon-step-${idx}`);
-        if (!node) return;
-
-        // When on step 3 (hotspot modal card active), only show beacon 4
-        if (currentStep === 3 && idx !== 3) {
-          node.style.display = 'none';
-          node.style.opacity = '0';
-          return;
-        }
-
-        // Beacon 4 only appears when step 4 is active or hotspot modal is open
-        if (idx === 3 && currentStep !== 3) {
-          node.style.display = 'none';
-          node.style.opacity = '0';
-          return;
-        }
-
-        const el = this.container.querySelector(st.targetSelector);
-        if (el) {
-          const r = el.getBoundingClientRect();
-          if (r.width > 0 && r.height > 0) {
-            node.style.display = 'flex';
-            node.style.opacity = '1';
-            const pos = st.beaconPos(r);
-            node.style.left = `${pos.left}px`;
-            node.style.top = `${pos.top}px`;
-          }
-        }
-      });
-
-      // Update current step & spotlight
-      const stepData = steps[currentStep];
-      if (!stepData) return;
-
-      const targetEl = this.container.querySelector(stepData.targetSelector);
-      if (spotlight && targetEl) {
-        const r = targetEl.getBoundingClientRect();
-        if (r.width > 0 && r.height > 0) {
-          const pad = currentStep === 3 ? 5 : (currentStep === 1 ? 12 : 8);
-          spotlight.style.top = `${r.top - pad}px`;
-          spotlight.style.left = `${r.left - pad}px`;
-          spotlight.style.width = `${r.width + pad * 2}px`;
-          spotlight.style.height = `${r.height + pad * 2}px`;
-        }
-      }
-
-      if (card && targetEl) {
-        const r = targetEl.getBoundingClientRect();
-        if (r.width > 0 || currentStep === 3) {
-          const cPos = stepData.cardPos(r);
-          card.style.top = cPos.top || 'auto';
-          card.style.bottom = cPos.bottom || 'auto';
-          card.style.left = cPos.left || 'auto';
-          card.style.right = cPos.right || 'auto';
-          card.style.transform = cPos.transform || 'none';
-        }
-      }
-    };
-
-    const renderStep = (idx) => {
-      currentStep = Math.max(0, Math.min(idx, steps.length - 1));
-      const stepData = steps[currentStep];
-
-      // Tampilkan hotspot-modal-card saat Radar Beacons nomor 4 muncul
-      if (currentStep === 3) {
-        const firstHsId = this.moduleData?.hotspots?.[0]?.id || 'hs-01';
-        this.openHotspotModal(firstHsId, false);
-      } else {
-        if (this.isModalOpen) {
-          this.closeHotspotModal();
-        }
-      }
-
-      if (stepLabel) stepLabel.textContent = `LANGKAH ${currentStep + 1} DARI ${steps.length}`;
-      if (iconEl) iconEl.textContent = stepData.icon;
-      if (titleEl) titleEl.textContent = stepData.title;
-      if (descEl) descEl.innerHTML = stepData.desc;
-
-      // Active dots
-      dots.forEach((dot, dIdx) => {
-        dot.classList.toggle('active', dIdx === currentStep);
-      });
-
-      // Active beacons
-      beaconNodes.forEach((bNode, bIdx) => {
-        bNode.classList.toggle('active', bIdx === currentStep);
-      });
-
-      // Prev button
-      if (btnPrev) btnPrev.disabled = currentStep === 0;
-
-      // Next / Finish button
-      const isLast = currentStep === steps.length - 1;
-      if (btnNext) btnNext.classList.toggle('hidden', isLast);
-      if (btnOkHelp) btnOkHelp.classList.toggle('hidden', !isLast);
-
-      requestAnimationFrame(updateLayout);
-      if (currentStep === 3) {
-        setTimeout(updateLayout, 60);
-        setTimeout(updateLayout, 180);
-      }
-    };
-
-    const openWalkthrough = (startIdx = 0) => {
-      helpOverlay?.classList.remove('hidden');
-      renderStep(startIdx);
-      setTimeout(updateLayout, 50);
-      setTimeout(updateLayout, 200);
-    };
-
-    const closeWalkthrough = (keepModalOpen = false) => {
-      try {
-        localStorage.setItem(storageKey, 'true');
-      } catch (e) {}
-      helpOverlay?.classList.add('hidden');
-      if (!keepModalOpen && this.isModalOpen) {
-        this.closeHotspotModal();
-      }
-    };
-
-    // Button interactions
-    btnPrev?.addEventListener('click', () => renderStep(currentStep - 1));
-    btnNext?.addEventListener('click', () => renderStep(currentStep + 1));
-    btnSkip?.addEventListener('click', closeWalkthrough);
-    btnCloseHelp?.addEventListener('click', closeWalkthrough);
-    btnOkHelp?.addEventListener('click', closeWalkthrough);
-
-    // Beacons click
-    beaconNodes.forEach((node) => {
-      node.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const s = parseInt(node.getAttribute('data-step') || '0', 10);
-        renderStep(s);
-      });
-    });
-
-    // Dots click
-    dots.forEach((dot) => {
-      dot.addEventListener('click', () => {
-        const s = parseInt(dot.getAttribute('data-step') || '0', 10);
-        renderStep(s);
-      });
-    });
-
-    // Dismiss on backdrop click
-    helpOverlay?.addEventListener('click', (e) => {
-      if (e.target === helpOverlay) closeWalkthrough();
-    });
-
-    // Keyboard navigation
-    window.addEventListener('keydown', (e) => {
-      if (helpOverlay?.classList.contains('hidden')) return;
-      if (e.key === 'ArrowRight') renderStep(currentStep + 1);
-      else if (e.key === 'ArrowLeft') renderStep(currentStep - 1);
-      else if (e.key === 'Escape') closeWalkthrough();
-    });
-
-    window.addEventListener('resize', updateLayout);
-
-    // Trigger button
-    btnHelp?.addEventListener('click', () => openWalkthrough(0));
-
-    // Auto-show tutorial on first visit
-    try {
-      if (!localStorage.getItem(storageKey)) {
-        setTimeout(() => openWalkthrough(0), 400);
-      }
-    } catch (e) {}
   }
 
   showResult(score) {

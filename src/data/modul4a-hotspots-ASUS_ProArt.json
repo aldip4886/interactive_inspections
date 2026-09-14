@@ -88,26 +88,31 @@
       "angleMax": 360,
       "visibleAngles": [
         90,
-        270
+        270,
+        315
       ],
       "position": {
-        "x": 50,
-        "y": 42
+        "x": 50.0,
+        "y": 42.0
       },
       "positionsByAngle": {
         "90": {
-          "x": 56,
-          "y": 46
+          "x": 56.0,
+          "y": 46.0
         },
         "270": {
-          "x": 42,
-          "y": 48
+          "x": 42.0,
+          "y": 48.0
+        },
+        "315": {
+          "x": 55.0,
+          "y": 46.0
         }
       },
       "worldPos": {
-        "x": -1.2,
-        "y": -0.2,
-        "z": 0
+        "x": -1.20,
+        "y": -0.20,
+        "z": 0.0
       },
       "label": "1. Interior & Konsol Tengah Kendaraan",
       "badge": "INTERIOR & KONSOL MOBIL",
@@ -144,27 +149,27 @@
         225
       ],
       "position": {
-        "x": 50,
-        "y": 45
+        "x": 50.0,
+        "y": 45.0
       },
       "positionsByAngle": {
         "135": {
-          "x": 63,
-          "y": 43
+          "x": 63.0,
+          "y": 43.0
         },
         "180": {
-          "x": 50,
-          "y": 45
+          "x": 50.0,
+          "y": 45.0
         },
         "225": {
-          "x": 35,
-          "y": 45
+          "x": 35.0,
+          "y": 45.0
         }
       },
       "worldPos": {
-        "x": 1.6,
-        "y": -0.1,
-        "z": 0
+        "x": 1.60,
+        "y": -0.10,
+        "z": 0.0
       },
       "label": "2. Bagasi & Tray Kargo Belakang",
       "badge": "BAGASI & TRAY BARANG",
@@ -200,27 +205,27 @@
         225
       ],
       "position": {
-        "x": 50,
-        "y": 58
+        "x": 50.0,
+        "y": 58.0
       },
       "positionsByAngle": {
         "135": {
-          "x": 63,
-          "y": 57
+          "x": 63.0,
+          "y": 57.0
         },
         "180": {
-          "x": 50,
-          "y": 58
+          "x": 50.0,
+          "y": 58.0
         },
         "225": {
-          "x": 32,
-          "y": 59
+          "x": 32.0,
+          "y": 59.0
         }
       },
       "worldPos": {
-        "x": 1.8,
-        "y": -0.5,
-        "z": 0
+        "x": 1.80,
+        "y": -0.50,
+        "z": 0.0
       },
       "label": "3. Ban Cadangan (Spare Tyre)",
       "badge": "BAN CADANGAN & KOLONG",
@@ -251,52 +256,37 @@
       "angleMin": 0,
       "angleMax": 360,
       "visibleAngles": [
-        180,
         45,
         90,
-        135,
         225,
-        270,
         315
       ],
       "position": {
-        "x": 50,
-        "y": 20
+        "x": 50.0,
+        "y": 50.0
       },
       "positionsByAngle": {
         "45": {
-          "x": 76.5,
-          "y": 38
+          "x": 75.5,
+          "y": 66.0
         },
         "90": {
-          "x": 30,
-          "y": 40
-        },
-        "135": {
-          "x": 48,
-          "y": 40
-        },
-        "180": {
-          "x": 50,
-          "y": 72
+          "x": 30.0,
+          "y": 40.0
         },
         "225": {
           "x": 50.5,
           "y": 46.5
         },
-        "270": {
-          "x": 70.5,
-          "y": 40.5
-        },
         "315": {
-          "x": 25.5,
-          "y": 35
+          "x": 37.5,
+          "y": 66.0
         }
       },
       "worldPos": {
-        "x": 0.2,
-        "y": -0.6,
-        "z": 0
+        "x": 0.20,
+        "y": -0.60,
+        "z": 0.0
       },
       "label": "4. Tangki Bahan Bakar (Fuel Tank)",
       "badge": "TANGKI BAHAN BAKAR",
@@ -333,35 +323,35 @@
         315
       ],
       "position": {
-        "x": 50,
-        "y": 50
+        "x": 50.0,
+        "y": 50.0
       },
       "positionsByAngle": {
         "45": {
-          "x": 70,
-          "y": 40
+          "x": 67.0,
+          "y": 59.0
         },
         "135": {
-          "x": 31,
-          "y": 51
+          "x": 33.0,
+          "y": 51.0
         },
         "225": {
-          "x": 70,
-          "y": 53
+          "x": 66.0,
+          "y": 53.0
         },
         "270": {
-          "x": 68,
-          "y": 43
+          "x": 68.0,
+          "y": 43.0
         },
         "315": {
-          "x": 33.5,
-          "y": 47
+          "x": 47.5,
+          "y": 57.0
         }
       },
       "worldPos": {
-        "x": -0.6,
-        "y": -0.1,
-        "z": 0
+        "x": -0.60,
+        "y": -0.10,
+        "z": 0.0
       },
       "label": "5. Kompartemen & Panel Pintu Kendaraan",
       "badge": "KOMPARTEMEN PINTU MOBIL",
@@ -393,31 +383,26 @@
       "angleMax": 360,
       "visibleAngles": [
         0,
-        315,
         360
       ],
       "position": {
-        "x": 50,
-        "y": 58
+        "x": 50.0,
+        "y": 58.0
       },
       "positionsByAngle": {
         "0": {
-          "x": 50,
-          "y": 58
-        },
-        "315": {
-          "x": 70,
-          "y": 50
+          "x": 50.0,
+          "y": 58.0
         },
         "360": {
-          "x": 50,
-          "y": 58
+          "x": 50.0,
+          "y": 58.0
         }
       },
       "worldPos": {
-        "x": -2.2,
-        "y": -0.2,
-        "z": 0
+        "x": -2.20,
+        "y": -0.20,
+        "z": 0.0
       },
       "label": "6. Kap / Ruang Mesin & Bumper Depan",
       "badge": "KAP / RUANG MESIN",
@@ -438,52 +423,5 @@
         "Periksa klip plastik bumper depan dari bekas kelonggaran manual."
       ]
     }
-  ],
-  "meta": {
-    "codeBadge": "MODUL 04A",
-    "title": "Pemeriksaan Kendaraan Darat (KIA Carnival 2023)",
-    "legalRef": "PMK-188/2021 & S-39/BC/2023",
-    "instructionTag": "Klik hotspot bernomor untuk menganalisis modus operandi & bukti forensik",
-    "description": "Inspeksi titik-titik penyembunyian pada kendaraan darat (SUV / Passenger Vehicle)."
-  },
-  "telemetry": {
-    "subjectId": "SUBJEK ID: VEHICLE-SUV-7719 / KIA CARNIVAL 2023",
-    "sensor": "SENSOR: VISUAL & NII INSPECTION",
-    "activeAngleText": "SUDUT AKTIF: DEPAN (0°)"
-  },
-  "controlsConfig": {
-    "zoom": {
-      "default": 1,
-      "min": 0.5,
-      "max": 2,
-      "step": 0.1
-    },
-    "supportsRotation": true
-  },
-  "guide": {
-    "type": "help_modal",
-    "title": "Panduan Penggunaan Modul Kendaraan Darat",
-    "items": [
-      {
-        "num": 1,
-        "title": "Navigasi 3D Kendaraan",
-        "text": "Usap/drag pada kendaraan 3D untuk memutar sudut pandang 360°, scroll mouse untuk zoom in/out."
-      },
-      {
-        "num": 2,
-        "title": "Filter Kategori Modus",
-        "text": "Filter titik-titik hotspot berdasarkan Interior, Bagasi, Kolong, Kompartemen, atau Struktur melalui dock bawah."
-      },
-      {
-        "num": 3,
-        "title": "Titik Hotspot Interaktif",
-        "text": "Klik nomor callout pada kendaraan untuk menginspeksi rincian modus penyembunyian & barang bukti."
-      },
-      {
-        "num": 4,
-        "title": "Format Tabbed Card",
-        "text": "Pelajari rincian lengkap melalui 4 tab: Modus Operandi, Foto Gambar Real, Ciri Pelaku & SOP, dan Indikator Risiko."
-      }
-    ]
-  }
+  ]
 }
