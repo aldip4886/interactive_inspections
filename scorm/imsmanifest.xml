@@ -1,33 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <manifest identifier="MANIFEST-DJBC-NARCOTICS-INSPECTIONS" version="1.0"
-          xmlns="http://www.imsglobal.org/xsd/imscp_v1p1"
+          xmlns="http://www.imsproject.org/xsd/imscp_rootv1p1p2"
+          xmlns:adlcp="http://www.adlnet.org/xsd/adlcp_rootv1p2"
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-          xmlns:adlcp="http://www.adlnet.org/xsd/adlcp_v1p3"
-          xmlns:adlseq="http://www.adlnet.org/xsd/adlseq_v1p3"
-          xmlns:adlnav="http://www.adlnet.org/xsd/adlnav_v1p3"
-          xmlns:imsss="http://www.imsglobal.org/xsd/imsss"
-          xsi:schemaLocation="http://www.imsglobal.org/xsd/imscp_v1p1 imscp_v1p1.xsd
-                              http://www.adlnet.org/xsd/adlcp_v1p3 adlcp_v1p3.xsd
-                              http://www.adlnet.org/xsd/adlseq_v1p3 adlseq_v1p3.xsd
-                              http://www.adlnet.org/xsd/adlnav_v1p3 adlnav_v1p3.xsd
-                              http://www.imsglobal.org/xsd/imsss imsss_v1p0.xsd">
+          xsi:schemaLocation="http://www.imsproject.org/xsd/imscp_rootv1p1p2 imscp_rootv1p1p2.xsd
+                              http://www.adlnet.org/xsd/adlcp_rootv1p2 adlcp_rootv1p2.xsd">
   <metadata>
     <schema>ADL SCORM</schema>
-    <schemaversion>2004 4th Edition</schemaversion>
+    <schemaversion>1.2</schemaversion>
   </metadata>
   <organizations default="ORG-DJBC-NARCOTICS">
     <organization identifier="ORG-DJBC-NARCOTICS">
       <title>Modul Interaktif Inspeksi Modus Penyelundupan Narkotika - DJBC</title>
       <item identifier="ITEM-MAIN-SCO" identifierref="RES-MAIN-SCO">
         <title>Inspeksi Modus Penyelundupan Narkotika</title>
-        <imsss:sequencing>
-          <imsss:deliveryControls completionSetByContent="true" objectiveSetByContent="true"/>
-        </imsss:sequencing>
       </item>
     </organization>
   </organizations>
   <resources>
-    <resource identifier="RES-MAIN-SCO" type="webcontent" adlcp:scormType="sco" href="index.html">
+    <resource identifier="RES-MAIN-SCO" type="webcontent" adlcp:scormtype="sco" href="index.html">
       <file href="index.html"/>
     </resource>
   </resources>
