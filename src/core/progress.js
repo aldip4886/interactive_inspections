@@ -86,9 +86,32 @@ export class CourseProgressManager {
       }
     }
 
-    // Send xAPI statement to LRS whenever progress percentage updates
+    // Send xAPI statement for each module progress update & overall course progress
+    if (!this.lastModuleProgress) {
+      this.lastModuleProgress = {};
+    }
+
+    const modKeys = ['modul1', 'modul2', 'modul3', 'modul4a', 'modul4b', 'evaluasi'];
+    const currentModuleMap = {};
+
+    modKeys.forEach(m => {
+      const pct = this.getModuleProgress(m);
+      currentModuleMap[m] = pct;
+      const prevModPct = this.lastModuleProgress[m];
+
+      if (prevModPct === undefined) {
+        this.lastModuleProgress[m] = pct;
+      } else if (pct !== prevModPct) {
+        this.lastModuleProgress[m] = pct;
+        if (xapi && typeof xapi.trackModuleProgress === 'function') {
+          xapi.trackModuleProgress(m, pct);
+        }
+      }
+    });
+
+    // Send xAPI statement to LRS whenever total course progress percentage updates
     if (overallPct !== prevPct && xapi && typeof xapi.trackCourseProgress === 'function') {
-      xapi.trackCourseProgress(overallPct);
+      xapi.trackCourseProgress(overallPct, currentModuleMap);
     }
 
     this.updateDOM();

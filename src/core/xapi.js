@@ -153,16 +153,56 @@ export class XAPIEngine {
     this.sendStatement(stmt);
   }
 
-  trackCourseProgress(progressPct) {
-    const currentPct = progressPct !== undefined ? progressPct : (window.currentCourseProgressPct || 0);
+  trackModuleProgress(moduleId, modulePct) {
+    const moduleNames = {
+      modul1: 'Modul 1: Penyelundupan Melalui Tubuh Kurir',
+      modul2: 'Modul 2: Penyelundupan Melalui Barang Bawaan',
+      modul3: 'Modul 3: Penyelundupan Melalui Barang Kiriman',
+      modul4a: 'Modul 4A: Penyelundupan Melalui Kendaraan Darat (SUV)',
+      modul4b: 'Modul 4B: Penyelundupan Melalui Kapal Laut Cargo',
+      evaluasi: 'Ujian Evaluasi Modus Penyelundupan Narkotika'
+    };
+    const modTitle = moduleNames[moduleId] || `Modul ${moduleId}`;
+
+    const verb = modulePct >= 100
+      ? { id: 'http://adlnet.gov/expapi/verbs/completed', display: { 'id-ID': 'menyelesaikan', 'en-US': 'completed' } }
+      : { id: 'http://adlnet.gov/expapi/verbs/progressed', display: { 'id-ID': 'mengalami kemajuan', 'en-US': 'progressed' } };
+
     const stmt = this.buildStatement({
-      verb: {
-        id: 'http://adlnet.gov/expapi/verbs/progressed',
-        display: { 'id-ID': 'mengalami kemajuan', 'en-US': 'progressed' }
+      verb,
+      activityId: `progress/${moduleId}`,
+      activityName: `Progress ${modTitle}`,
+      activityDesc: `Kemajuan penyelesaian ${modTitle} mencapai ${modulePct}%`,
+      result: {
+        score: {
+          scaled: Number((modulePct / 100).toFixed(2)),
+          raw: modulePct,
+          min: 0,
+          max: 100
+        },
+        completion: modulePct >= 100
       },
+      contextExtensions: {
+        'http://klc2.kemenkeu.go.id/xapi/extensions/module-id': moduleId,
+        'http://klc2.kemenkeu.go.id/xapi/extensions/module-progress': modulePct
+      }
+    });
+
+    return this.sendStatement(stmt);
+  }
+
+  trackCourseProgress(progressPct, moduleProgressMap) {
+    const currentPct = progressPct !== undefined ? progressPct : (window.currentCourseProgressPct || 0);
+
+    const verb = currentPct >= 100
+      ? { id: 'http://adlnet.gov/expapi/verbs/completed', display: { 'id-ID': 'menyelesaikan', 'en-US': 'completed' } }
+      : { id: 'http://adlnet.gov/expapi/verbs/progressed', display: { 'id-ID': 'mengalami kemajuan', 'en-US': 'progressed' } };
+
+    const stmt = this.buildStatement({
+      verb,
       activityId: 'course-progress-tracker',
-      activityName: 'Progress Kursus Penyelundupan Narkotika DJBC',
-      activityDesc: `Kemajuan total kursus peserta mencapai ${currentPct}%`,
+      activityName: 'Progress Total Kursus Penyelundupan Narkotika DJBC',
+      activityDesc: `Kemajuan total seluruh modul kursus peserta mencapai ${currentPct}%`,
       result: {
         score: {
           scaled: Number((currentPct / 100).toFixed(2)),
@@ -173,7 +213,8 @@ export class XAPIEngine {
         completion: currentPct >= 100
       },
       contextExtensions: {
-        'http://klc2.kemenkeu.go.id/xapi/extensions/course-progress': currentPct
+        'http://klc2.kemenkeu.go.id/xapi/extensions/course-progress': currentPct,
+        ...(moduleProgressMap ? { 'http://klc2.kemenkeu.go.id/xapi/extensions/modules-progress': moduleProgressMap } : {})
       }
     });
     return this.sendStatement(stmt);
