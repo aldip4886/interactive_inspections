@@ -92,10 +92,10 @@ export class EvaluasiView {
           </div>
 
           <div class="evaluasi-intro-actions">
-            <a href="#/beranda" class="btn btn-ghost btn-lg">
+            <a href="#/beranda" class="btn btn-ghost">
               ← Kembali ke Beranda
             </a>
-            <button id="start-exam-btn" class="btn btn-primary btn-lg" style="background: linear-gradient(135deg, #2563EB, #1D4ED8); border: none; box-shadow: 0 4px 16px rgba(37, 99, 235, 0.4);">
+            <button id="start-exam-btn" class="btn btn-primary" style="background: linear-gradient(135deg, #2563EB, #1D4ED8); border: none; box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4); padding: 10px 22px;">
               🚀 Mulai Ujian Evaluasi
             </button>
           </div>
@@ -228,13 +228,13 @@ export class EvaluasiView {
               ← Sebelumnya
             </button>
 
-            <div style="display: flex; gap: 12px;">
+            <div style="display: flex; gap: 10px;">
               ${this.currentIndex < total - 1 ? `
-                <button id="next-question-btn" class="btn btn-secondary btn-lg">
+                <button id="next-question-btn" class="btn btn-secondary" style="padding: 10px 20px;">
                   Berikutnya →
                 </button>
               ` : `
-                <button id="submit-quiz-btn" class="btn btn-primary btn-lg" style="background: linear-gradient(135deg, #10B981, #059669); border: none; box-shadow: 0 4px 16px rgba(16, 185, 129, 0.4);">
+                <button id="submit-quiz-btn" class="btn btn-primary" style="background: linear-gradient(135deg, #10B981, #059669); border: none; box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4); padding: 10px 22px;">
                   Selesaikan Ujian ✅
                 </button>
               `}
