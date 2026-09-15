@@ -4,7 +4,7 @@
     "codeBadge": "MODUL 02",
     "title": "Pemeriksaan Barang Bawaan (Luggage Concealment)",
     "legalRef": "PMK-188/2021 & S-39/BC/2023",
-    "instructionTag": "Klik hotspot bernomor untuk menganalisis modus operandi & bukti forensik",
+    "instructionTag": "Klik tombol X-RAY SCANNER untuk menampilkan hasil pindaian X-RAY.",
     "description": "Inspeksi visual dan pemindaian X-Ray multi-angle pada kompartemen tersembunyi koper, tas ransel, dan rongga trolley bagasi penumpang."
   },
   "telemetry": {
@@ -61,7 +61,7 @@
   "categories": [
     {
       "id": "all",
-      "label": "Seluruh Modus (5 Hotspot)",
+      "label": "Seluruh Modus (6 Hotspot)",
       "icon": "🧳",
       "color": "#F5A623"
     },
@@ -99,6 +99,13 @@
       "sub": "5. False Sole",
       "icon": "👟",
       "color": "#E53E3E"
+    },
+    {
+      "id": "pakaian_tekstil",
+      "label": "Pakaian & Tekstil",
+      "sub": "6. Diresapkan / Kancing Pakaian",
+      "icon": "👔",
+      "color": "#8E44AD"
     }
   ],
   "hotspots": [
@@ -408,6 +415,68 @@
       "medicalRisk": "SEDANG: Risiko luka iris pada petugas saat memotong karet sol sepatu yang keras bila tidak menggunakan pisau bedah bermata khusus.",
       "inspectionNote": "SOP Resmi DJBC: Seluruh alas kaki/sepatu cadangan di dalam bagasi bawaan wajib dilepaskan insolenya dan diperiksa ketebalan sol bawahnya.",
       "bodyLocation": "Sol bawah sepatu kets, sepatu kulit, atau sandal tebal (false sole)."
+    },
+    {
+      "id": "hs-m2-pakaian",
+      "num": "06",
+      "badgeNum": 6,
+      "label": "6. Pakaian & Tekstil",
+      "shortName": "6. Pakaian",
+      "tag": "Diresapkan / Kancing Pakaian",
+      "categoryId": "pakaian_tekstil",
+      "categoryLabel": "Pakaian & Tekstil",
+      "color": "#8E44AD",
+      "position": {
+        "x": 72,
+        "y": 80
+      },
+      "coordsByView": {
+        "xray": {
+          "x": 72,
+          "y": 80
+        },
+        "normal": {
+          "x": 72,
+          "y": 80
+        }
+      },
+      "riskLevel": "critical",
+      "riskScore": 92,
+      "drugTypes": "Liquid Meth (Sabu Cair), Kokain Cair, Heroin murni, Ekstasi Serbuk",
+      "packagingTechnique": "Narkotika cair diresapkan ke serat kain pakaian/handuk/jaket tebal, atau kristal dipres ke dalam rongga kancing pakaian (hollow buttons) yang dirancang khusus.",
+      "mainIllustration": "assets/images/hotspots/module_2/pakaian.png",
+      "thumb": "assets/images/hotspots/module_2/pakaian.png",
+      "description": "Penyembunyian Narkotika cair dengan metode diresapkan pada serat pakaian atau diselipkan di dalam rongga kancing pakaian bawaan.",
+      "modusDetail": "Sindikat melarutkan kristal Methamphetamine/Cocaine ke dalam larutan khusus lalu merendam pakaian (seperti jaket tebal, jeans, atau handuk) hingga menyerap cairan narkotika. Pakaian lalu dikeringkan dan dilipat rapi di dalam koper. Selain itu, kristal murni juga kerap dimasukkan ke dalam rongga kancing kemeja/jas yang telah dibobok lalu dilapis ulang sintetis agar tidak tampak dari luar.",
+      "findings": [
+        {
+          "thumb": "assets/images/hotspots/module_2/pakaian.png",
+          "full": "assets/images/hotspots/module_2/pakaian.png",
+          "caption": "Pemeriksaan Lipatan Pakaian Diresapkan Larutan Narkotika Cair",
+          "tag": "Barang Bukti Sitaan"
+        },
+        {
+          "thumb": "assets/images/hotspots/module_2/kancing_pakaian.png",
+          "full": "assets/images/hotspots/module_2/kancing_pakaian.png",
+          "caption": "Modus Penyembunyian Kristal Narkotika di Dalam Rongga Kancing Pakaian",
+          "tag": "Modus Forensik"
+        }
+      ],
+      "indicators": [
+        "Pakaian terasa kaku, renyah, berbobot lebih berat daripada pakaian normal, dan meninggalkan bercak keruh/kristal halus saat ditekuk.",
+        "Tercium bau kimia obat tajam atau pelarut organik saat koper dibongkar.",
+        "Citra X-Ray memperlihatkan intensitas densitas berlebih pada lipatan baju dan anomali bulat pekat pada kancing-kancing pakaian.",
+        "Pakaian basah/lembab atau memiliki tekstur lengket saat disentuh."
+      ],
+      "detection": [
+        "Pemeriksaan fisik tekstur dan kelenturan lipatan pakaian di koper.",
+        "Pengujian ekstraksi dengan merendam potongan serat pakaian ke dalam air steril lalu dites Reagen Marquis/Mecke.",
+        "Pembongkaran sampel kancing pakaian menggunakan tang pemotong / cutter di ruang steril.",
+        "Pengujian spektrometer massa portable / Raman Spectrometer pada serat pakaian."
+      ],
+      "medicalRisk": "SANGAT BAHAYA: Cairan Narkotika murni yang diresapkan pada pakaian dapat terserap melalui kontak kulit (dermal absorption) petugas jika tidak menggunakan APD nitril steril.",
+      "inspectionNote": "SOP Resmi DJBC (PMK-188/2021): Petugas wajib mengenakan sarung tangan nitril dan masker medis saat memeriksa pakaian yang dicurigai. Potongan kain yang positif mengandung narkotika disita dan disegel dalam kantong pembungkus kedap udara untuk pengujian lab forensik.",
+      "bodyLocation": "Lipatan pakaian (jaket, jeans, handuk) dan rongga kancing pakaian penumpang."
     }
   ]
 }
