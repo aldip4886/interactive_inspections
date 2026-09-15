@@ -44,7 +44,7 @@ export function Header() {
       <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
         {/* Course Progress Bar Widget */}
         <div id="course-header-progress-widget" className="course-header-progress-widget">
-          <span className="progress-title">PROGRESS KURSUS:</span>
+          <span className="progress-title">PROGRESS</span>
           <span id="course-progress-pct" className="progress-value font-code-tech">{overallProgress}%</span>
           <div className="progress-track">
             <div id="course-progress-bar-fill" className="progress-fill" style={{ width: `${overallProgress}%` }}></div>
@@ -52,7 +52,7 @@ export function Header() {
         </div>
 
         {/* LRS Connection Config Button */}
-        <button
+        {/* <button
           id="lrs-config-btn"
           className="btn-icon"
           title="Pengaturan LRS / xAPI Analytics"
@@ -72,7 +72,7 @@ export function Header() {
               background: isLrsConfigured ? '#34C759' : '#64748B'
             }}
           ></span>
-        </button>
+        </button> */}
 
         {/* KLC User Profile Widget */}
         <div id="user-profile-widget">

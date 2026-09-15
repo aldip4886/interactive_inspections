@@ -1,0 +1,489 @@
+{
+  "moduleId": "modul2",
+  "meta": {
+    "codeBadge": "MODUL 02",
+    "title": "Pemeriksaan Barang Bawaan (Luggage Concealment)",
+    "legalRef": "PMK-188/2021 & S-39/BC/2023",
+    "instructionTag": "Klik tombol X-RAY SCANNER untuk menampilkan hasil pindaian X-RAY.",
+    "description": "Inspeksi visual dan pemindaian X-Ray multi-angle pada kompartemen tersembunyi koper, tas ransel, dan rongga trolley bagasi penumpang."
+  },
+  "telemetry": {
+    "subjectId": "SUBJEK ID: SUSPECT-LUGGAGE-8812 / KOPER BAGASI",
+    "sensor": "SENSOR: DUAL-ENERGY TRANSMISSION X-RAY",
+    "activeModeText": "MODE AKTIF: INSPEKSI FISIK TAMPAK NORMAL"
+  },
+  "controlsConfig": {
+    "zoom": {
+      "default": 1.2,
+      "min": 1,
+      "max": 2.5,
+      "step": 0.15
+    },
+    "modes": [
+      {
+        "id": "xray",
+        "label": "X-RAY SCANNER",
+        "icon": "🔍"
+      },
+      {
+        "id": "normal",
+        "label": "TAMPAK NORMAL",
+        "icon": "👜"
+      }
+    ]
+  },
+  "guide": {
+    "type": "help_modal",
+    "title": "Panduan Penggunaan Modul Barang Bawaan",
+    "items": [
+      {
+        "num": 1,
+        "title": "Switcher Mode Tampilan",
+        "text": "Gunakan tombol 🔍 X-Ray Scanner dan 👜 Tampak Normal pada dock bawah untuk berpindah citra radiologi atau visual fisik barang bawaan."
+      },
+      {
+        "num": 2,
+        "title": "Titik Hotspot Interaktif",
+        "text": "Klik callout bernomor pada koper untuk menginspeksi modus penyembunyian & barang bukti."
+      },
+      {
+        "num": 3,
+        "title": "Format Tabbed Card",
+        "text": "Pelajari rincian lengkap melalui 4 tab: Modus Operandi, Foto Gambar Real, Ciri Pelaku & SOP, dan Indikator Risiko."
+      },
+      {
+        "num": 4,
+        "title": "Kontrol Zoom Presisi",
+        "text": "Gunakan slider atau tombol zoom di samping gambar peraga koper untuk pembesaran hingga 250%."
+      }
+    ]
+  },
+  "categories": [
+    {
+      "id": "all",
+      "label": "Seluruh Modus (6 Hotspot)",
+      "icon": "🧳",
+      "color": "#F5A623"
+    },
+    {
+      "id": "koper_tas",
+      "label": "Koper & Tas Bawaan",
+      "sub": "1. Handbag / False Wall",
+      "icon": "👜",
+      "color": "#E53E3E"
+    },
+    {
+      "id": "personal_items",
+      "label": "Pouch Personal Items",
+      "sub": "2. Kosmetik & Toiletries",
+      "icon": "🧴",
+      "color": "#1890FF"
+    },
+    {
+      "id": "buku_dokumen",
+      "label": "Buku & Kitab",
+      "sub": "3. Hollow Book",
+      "icon": "📚",
+      "color": "#38A169"
+    },
+    {
+      "id": "makanan_snack",
+      "label": "Makanan & Snack",
+      "sub": "4. Makanan & Snack",
+      "icon": "🍿",
+      "color": "#F5A623"
+    },
+    {
+      "id": "sepatu_footwear",
+      "label": "Sepatu & Footwear",
+      "sub": "5. False Sole",
+      "icon": "👟",
+      "color": "#E53E3E"
+    },
+    {
+      "id": "pakaian_tekstil",
+      "label": "Pakaian & Tekstil",
+      "sub": "6. Diresapkan / Kancing Pakaian",
+      "icon": "👔",
+      "color": "#8E44AD"
+    }
+  ],
+  "hotspots": [
+    {
+      "id": "hs-m2-koper-tas",
+      "num": "01",
+      "badgeNum": 1,
+      "label": "1. Sisi Koper & Tas Bawaan",
+      "shortName": "1. Sisi Koper & Tas",
+      "tag": "False Wall / False Bottom",
+      "categoryId": "koper_tas",
+      "categoryLabel": "Koper & Tas Bawaan",
+      "color": "#E53E3E",
+      "position": {
+        "x": 34,
+        "y": 30
+      },
+      "coordsByView": {
+        "xray": {
+          "x": 34,
+          "y": 30
+        },
+        "normal": {
+          "x": 34,
+          "y": 30
+        }
+      },
+      "riskLevel": "critical",
+      "riskScore": 90,
+      "drugTypes": "Sabu (Methamphetamine), Heroin lempengan, Kokain murni, Ketamine",
+      "packagingTechnique": "Lempengan Narkotika dipres pipih vakum aluminium foil kedap bau, diselipkan di balik furing/dinding ganda tas tangan (handbag) atau alas koper",
+      "mainIllustration": "assets/images/hotspots/module_2/1_dinding_koper.png",
+      "thumb": "assets/images/hotspots/module_2/1_dinding_koper.png",
+      "description": "Penyembunyian Narkotika pada dinding ganda atau alas rahasia tas bawaan (handbag/koper).",
+      "modusDetail": "Pelaku memanfaatkan ruang antara struktur kulit luar tas dan kain furing dalam. Lempengan Sabu/Heroin (500g-2kg) dipres menggunakan mesin hidrolik lalu dijahit rapi di dalam dinding tas sehingga tampak seperti tas kulit tebal biasa saat pemeriksaan kasat mata.",
+      "findings": [
+        {
+          "thumb": "assets/images/hotspots/module_2/1_dinding_koper.png",
+          "full": "assets/images/hotspots/module_2/1_dinding_koper.png",
+          "caption": "Pembongkaran Dinding Ganda Koper & Tas Terisi Paket Narkotika",
+          "tag": "Barang Bukti Sitaan"
+        },
+        {
+          "thumb": "assets/images/central/m2_luggage_xray.png",
+          "full": "assets/images/central/m2_luggage_xray.png",
+          "caption": "Citra X-Ray Scanner Menampakkan Anomali Densitas Organik di Dinding Koper",
+          "tag": "Pencitraan X-Ray"
+        }
+      ],
+      "indicators": [
+        "Citra X-Ray memperlihatkan bayangan oranye pekat (materi organik) tebal berlebih pada dinding tas",
+        "Dinding atau alas tas terasa kaku, tebal tidak wajar, dan tidak lentur saat ditekuk",
+        "Bobot tas tangan terasa berat tidak seimbang meskipun dalam keadaan kosong",
+        "Jahitan furing dalam tas terlihat ada bekas jahitan ulang manual yang tidak simetris"
+      ],
+      "detection": [
+        "Pemeriksaan ketebalan dinding tas menggunakan pengukur kedalaman interior",
+        "Pengujian pemindaian X-Ray dual-energy scanner untuk membedakan materi sintetis vs organik",
+        "Pengirisan jahitan furing di ruang penggeledahan steril dengan pisau bedah/cutter",
+        "Pengujian reaksi warna sampel serbuk kristal menggunakan Reagen Marquis & Mecke"
+      ],
+      "medicalRisk": "BAHAYA BAHAN KIMIA: Paparan kontak langsung dengan serbuk Narkotika murni dosis tinggi dapat memicu iritasi kulit/mata dan bahaya inhalasi bagi petugas.",
+      "inspectionNote": "SOP Resmi DJBC: Lakukan pengirisan furing tas secara hati-hati di ruang penggeledahan khusus agar tidak merusak barang bukti dan selalu gunakan sarung tangan nitril serta masker medis.",
+      "bodyLocation": "Dinding ganda / furing tas tangan (handbag) dan alas koper."
+    },
+    {
+      "id": "hs-m2-pouch",
+      "num": "02",
+      "badgeNum": 2,
+      "label": "2. Pouch Personal Items & Kosmetik",
+      "shortName": "2. Pouch Personal Items",
+      "tag": "False Container",
+      "categoryId": "personal_items",
+      "categoryLabel": "Pouch Personal Items",
+      "color": "#1890FF",
+      "position": {
+        "x": 60,
+        "y": 30
+      },
+      "coordsByView": {
+        "xray": {
+          "x": 60,
+          "y": 30
+        },
+        "normal": {
+          "x": 60,
+          "y": 30
+        }
+      },
+      "riskLevel": "high",
+      "riskScore": 85,
+      "drugTypes": "Liquid Meth (Sabu Cair), Ketamine cair, GHB, Ekstasi cair",
+      "packagingTechnique": "Cairan Sabu dimasukkan ke dalam botol pembersih muka, botol sampo, tube krim kosmetik, atau wadah aerosol yang dimodifikasi segel pabriknya",
+      "mainIllustration": "assets/images/hotspots/module_2/2_cosmetic_pouch.png",
+      "thumb": "assets/images/hotspots/module_2/2_cosmetic_pouch.png",
+      "description": "Penyamaran Narkotika cair (Liquid Meth) di dalam botol/tube perlengkapan pribadi.",
+      "modusDetail": "Sindikat melarutkan kristal Methamphetamine ke dalam pelarut kimia khusus membentuk cairan bening (Liquid Meth). Cairan ini diisikan ke dalam botol sampo, serum wajah, atau tube krim (100-500ml) lalu direkatkan kembali segel kemasannya agar tampak seperti produk kosmetik pabrikan baru.",
+      "findings": [
+        {
+          "thumb": "assets/images/hotspots/module_2/2_cosmetic_pouch.png",
+          "full": "assets/images/hotspots/module_2/2_cosmetic_pouch.png",
+          "caption": "Pemeriksaan Pouch Kosmetik & Botol Perlengkapan Pribadi Berisi Narkotika Cair",
+          "tag": "Barang Bukti Sitaan"
+        },
+        {
+          "thumb": "assets/images/central/m2_luggage_xray.png",
+          "full": "assets/images/central/m2_luggage_xray.png",
+          "caption": "Citra X-Ray Pemindaian Botol Kosmetik Berisi Cairan Sintetis Narkotika",
+          "tag": "Pencitraan X-Ray"
+        }
+      ],
+      "indicators": [
+        "X-Ray Scanner memperlihatkan warna kontras cairan yang tidak seragam (anomali densitas organik)",
+        "Segel plastik pada tutup botol kosmetik terlihat pernah dipanaskan ulang atau ada bekas lem tambahan",
+        "Cairan di dalam botol terasa kental tidak wajar atau mengendap kristal putih saat dikocok",
+        "Tercium aroma solvent/alkohol kimia tajam ketika tutup botol dibuka"
+      ],
+      "detection": [
+        "Pengujian sampel cairan menggunakan Ion Mobility Spectrometer (IMS) atau Raman Spectrometer",
+        "Pemeriksaan laboratorium lapangan dengan meneteskan sampel ke strip Narcotic Test Kit",
+        "Pengentalan/kristalisasi ulang sampel cairan di piringan uji laboratorium forensik DJBC"
+      ],
+      "medicalRisk": "BAHAYA RACUN KIMIA: Cairan Sabu pekat bersifat korosif dan berbahaya bila terkena kulit atau terhirupu uap kimianya.",
+      "inspectionNote": "SOP Resmi DJBC: Setiap kemasan produk cairan/krim berlebih di dalam pouch bawaan wajib diuji dengan alat IMS atau Reagen Uji Cepat Narkotika.",
+      "bodyLocation": "Botol kosmetik, lotion, sampo, dan tube krim di pouch perlengkapan pribadi."
+    },
+    {
+      "id": "hs-m2-buku",
+      "num": "03",
+      "badgeNum": 3,
+      "label": "3. Buku & Kitab (Hollow Book)",
+      "shortName": "3. Buku & Kitab",
+      "tag": "Hollow Book Concealment",
+      "categoryId": "buku_dokumen",
+      "categoryLabel": "Buku & Kitab",
+      "color": "#38A169",
+      "position": {
+        "x": 42,
+        "y": 55
+      },
+      "coordsByView": {
+        "xray": {
+          "x": 42,
+          "y": 55
+        },
+        "normal": {
+          "x": 42,
+          "y": 55
+        }
+      },
+      "riskLevel": "high",
+      "riskScore": 80,
+      "drugTypes": "Sabu kristal, Heroin, Kertas Dewa (Paper Drug / LSD blotter), Cocaine",
+      "packagingTechnique": "Lembaran kertas buku tebal dipotong persegi di bagian tengah membentuk rongga tersembunyi, dilapisi plastik klip presisi dan diikat sampul keras",
+      "mainIllustration": "assets/images/hotspots/module_2/3_buku.png",
+      "thumb": "assets/images/hotspots/module_2/3_buku.png",
+      "description": "Penyembunyian paket Narkotika di dalam rongga rahasia potongan halaman buku tebal.",
+      "modusDetail": "Kurir membawa tumpukan buku tebal (kamus, kitab, atau buku naskah). Bagian dalam ratusan halaman dipotong rapi menggunakan cutter mesin presisi membentuk kotak berongga kedap udara. Di dalam rongga diselipkan paket Narkotika berbobot 200-800 gram.",
+      "findings": [
+        {
+          "thumb": "assets/images/hotspots/module_2/3_buku.png",
+          "full": "assets/images/hotspots/module_2/3_buku.png",
+          "caption": "Penyitaan Buku/Kitab Tebal yang Dibobok Tengahnya untuk Menyimpan Kristal Sabu",
+          "tag": "Barang Bukti Sitaan"
+        },
+        {
+          "thumb": "assets/images/central/m2_luggage_xray.png",
+          "full": "assets/images/central/m2_luggage_xray.png",
+          "caption": "Hasil Citra Radiologi X-Ray Memperlihatkan Rongga Gelap di Dalam Sampul Buku",
+          "tag": "Pencitraan X-Ray"
+        }
+      ],
+      "indicators": [
+        "X-Ray Scanner memperlihatkan persegi bayangan berongga di tengah tumpukan halaman buku",
+        "Buku terasa sangat berat dan kaku di bagian tengah saat dipegang",
+        "Halaman buku tidak dapat dibuka secara alami atau tepi lembaran tampak dilem rapat",
+        "Indikasi endusan positif dari K-9 Narkotika DJBC pada celah tumpukan buku"
+      ],
+      "detection": [
+        "Pemeriksaan lembar demi lembar buku secara manual (page-flipping inspection)",
+        "Pemindaian X-Ray sudut miring untuk melihat struktur rongga internal",
+        "Pengangkatan paket dari rongga buku dan pengujian sampel dengan Reagen Marquis"
+      ],
+      "medicalRisk": "SEDANG: Bahaya iritasi pernapasan bila serbuk Narkotika halus beterbangan saat rongga buku dibuka.",
+      "inspectionNote": "SOP Resmi DJBC: Periksa seluruh tumpukan buku tebal, kamus, dan majalah yang dibawa penumpang dalam bagasi dengan membalikkan lembaran dari depan ke belakang.",
+      "bodyLocation": "Rongga bagian dalam halaman buku tebal (hardcover book)."
+    },
+    {
+      "id": "hs-m2-snack",
+      "num": "04",
+      "badgeNum": 4,
+      "label": "4. Kemasan Makanan & Snack",
+      "shortName": "4. Makanan & Snack",
+      "tag": "Kamuflase Makanan & Snack",
+      "categoryId": "makanan_snack",
+      "categoryLabel": "Makanan & Snack",
+      "color": "#F5A623",
+      "position": {
+        "x": 62,
+        "y": 52
+      },
+      "coordsByView": {
+        "xray": {
+          "x": 62,
+          "y": 52
+        },
+        "normal": {
+          "x": 63,
+          "y": 56
+        }
+      },
+      "riskLevel": "warning",
+      "riskScore": 82,
+      "drugTypes": "Liquid Meth (Sabu Cair), Pil Ekstasi (MDMA), Sabu kristal, Fentanyl, Happy Five (H5)",
+      "packagingTechnique": "Narkotika cair atau kristal diisikan ke dalam kaleng makanan/sarden pabrikan yang disegel ulang rapi, atau diselipkan di dalam kantong plastik snack aluminium foil dan sachet olahan",
+      "mainIllustration": "assets/images/hotspots/module_2/4_makanan_kaleng.png",
+      "thumb": "assets/images/hotspots/module_2/4_makanan_kaleng.png",
+      "description": "Penyamaran Narkotika cair (Liquid Meth) atau padatan kristal di dalam kaleng makanan pabrikan (sardine can) dan kantong makanan ringan aluminium foil.",
+      "modusDetail": "Sindikat mengosongkan isi kaleng makanan pabrikan (seperti sarden atau korned) kemudian memasukkan kantong berisi Sabu cair (Liquid Meth) atau kristal murni. Tutup kaleng dipasang dan dipres kembali menggunakan mesin canning portable agar tampak seperti produk pabrikan baru yang belum pernah dibuka.",
+      "findings": [
+        {
+          "thumb": "assets/images/hotspots/module_2/4_makanan_kaleng.png",
+          "full": "assets/images/hotspots/module_2/4_makanan_kaleng.png",
+          "caption": "Modus Penyembunyian Narkotika Cair / Kristal di Dalam Kaleng Makanan & Sarden Pabrikan",
+          "tag": "Barang Bukti Kaleng Makanan"
+        },
+        {
+          "thumb": "assets/images/hotspots/module_2/4_makanan_ringan.png",
+          "full": "assets/images/hotspots/module_2/4_makanan_ringan.png",
+          "caption": "Sitaan Narkotika di Dalam Kantong Makanan Ringan / Snack Aluminium Foil Hampa Udara",
+          "tag": "Barang Bukti Kemasan Snack"
+        },
+        {
+          "thumb": "assets/images/hotspots/module_2/4_makanan_ringan_2.png",
+          "full": "assets/images/hotspots/module_2/4_makanan_ringan_2.png",
+          "caption": "Hasil Pemindaian Radiografi X-Ray & Pengujian Sampel Kimia Produk Makanan Olahan",
+          "tag": "Analisis Radiografi & Uji Lab"
+        }
+      ],
+      "indicators": [
+        "Citra X-Ray Scanner memperlihatkan bayangan kontras bergelombang atau materi bermassa padat tidak homogen di dalam kaleng sarden/snack",
+        "Bobot kaleng makanan terasa berat atau lebih ringan tidak seimbang bila dibandingkan dengan spesifikasi berat bersih netto pada label",
+        "Terdapat kerutan bekas press kelim (crimping mark) tambahan pada lingkaran lipatan kaleng bagian bawah",
+        "Bunyi benturan di dalam kaleng saat diguncang terasa padat kaku dan tidak menimbulkan suara cairan makanan segar"
+      ],
+      "detection": [
+        "Penimbangan berat kotor bruto kaleng makanan dan perbandingan dengan spesifikasi label pabrik",
+        "Pengujian pemindaian X-Ray dual-energy scanner untuk mendeteksi batas anomali cairan vs padatan",
+        "Pembukaan kelim tutup kaleng di bilik penggeledahan steril dengan alat pembuka kaleng medis",
+        "Pengujian Reagen Marquis & Uji Sampel Cairan dengan Ion Mobility Spectrometer (IMS)"
+      ],
+      "medicalRisk": "BAHAYA RACUN & BAHAYA FISIK: Kebocoran bahan kimia Sabu cair berpotensi merusak organ pencernaan bila tertelan dan menimbulkan bahaya luka potong dari seng kaleng.",
+      "inspectionNote": "SOP Resmi DJBC: Setiap kaleng makanan pabrikan atau kemasan snack yang memiliki indikasi anomali X-Ray atau berat tidak seimbang wajib dibuka sampelnya di ruang penggeledahan khusus.",
+      "bodyLocation": "Kaleng makanan pabrikan, kantong snack foil, dan dus olahan makanan di dalam koper."
+    },
+    {
+      "id": "hs-m2-sepatu",
+      "num": "05",
+      "badgeNum": 5,
+      "label": "5. Sepatu & Footwear (False Sole)",
+      "shortName": "5. Sepatu & Footwear",
+      "tag": "False Sole Concealment",
+      "categoryId": "sepatu_footwear",
+      "categoryLabel": "Sepatu & Footwear",
+      "color": "#E53E3E",
+      "position": {
+        "x": 43,
+        "y": 74
+      },
+      "coordsByView": {
+        "xray": {
+          "x": 43,
+          "y": 74
+        },
+        "normal": {
+          "x": 37,
+          "y": 66
+        }
+      },
+      "riskLevel": "critical",
+      "riskScore": 88,
+      "drugTypes": "Sabu kristal, Heroin lempengan, Pil Ekstasi, Ketamine",
+      "packagingTechnique": "Sol karet bagian bawah sepatu dikikis/dibor membentuk kompartemen rahasia, diisi lempengan Sabu/Ekstasi (200-500g per sepatu), lalu ditutup insole palsu",
+      "mainIllustration": "assets/images/hotspots/module_2/5_sepatu.png",
+      "thumb": "assets/images/hotspots/module_2/5_sepatu.png",
+      "description": "Kompartemen rahasia sol sepatu berongga (False Sole) berisi paket Narkotika.",
+      "modusDetail": "Sol luar sepatu olahraga atau sepatu kulit dikikis menggunakan mesin bubut hingga membentuk ruang berongga. Lempengan Sabu dipres tipis dimasukkan ke dalam sol kanan dan kiri (total muatan 400-1000 gram), kemudian dilapisi lem sintetis tebal dan dilapisi insole baru.",
+      "findings": [
+        {
+          "thumb": "assets/images/hotspots/module_2/5_sepatu.png",
+          "full": "assets/images/hotspots/module_2/5_sepatu.png",
+          "caption": "Pembongkaran Sol Bawah Sepatu Terisi Lempengan Narkotika Dipres Pipih",
+          "tag": "Barang Bukti Sitaan"
+        },
+        {
+          "thumb": "assets/images/central/m2_luggage_xray.png",
+          "full": "assets/images/central/m2_luggage_xray.png",
+          "caption": "Tampilan X-Ray Menampakkan Rongga Udara & Bahan Sintetis di Sol Sepatu",
+          "tag": "Pencitraan X-Ray"
+        }
+      ],
+      "indicators": [
+        "X-Ray Scanner memperlihatkan bayangan materi organik pekat (oranye/hijau) di bagian sol sepatu yang seharusnya transparan",
+        "Sol sepatu terasa sangat kaku, tidak lentur saat ditekuk, dan berbobot berat tidak simetris",
+        "Insole bagian dalam sepatu terlihat baru dipasang atau ada bekas lem di sepanjang pinggiran sol",
+        "Endusan indikasi positif dari Unit K-9 Narkotika DJBC pada sepatu bawaan"
+      ],
+      "detection": [
+        "Pelepasan insole sepatu dan pengamatan visual permukaan bagian dalam sol",
+        "Pemeriksaan X-Ray mesin bagasi kabin dengan penetrasi sinar-X maksimum",
+        "Pengirisan lapisan karet sol luar menggunakan pisau bedah/cutter di ruang pemeriksaan khusus",
+        "Penimbangan berat bruto/netto barang bukti Sabu dari kedua sol sepatu"
+      ],
+      "medicalRisk": "SEDANG: Risiko luka iris pada petugas saat memotong karet sol sepatu yang keras bila tidak menggunakan pisau bedah bermata khusus.",
+      "inspectionNote": "SOP Resmi DJBC: Seluruh alas kaki/sepatu cadangan di dalam bagasi bawaan wajib dilepaskan insolenya dan diperiksa ketebalan sol bawahnya.",
+      "bodyLocation": "Sol bawah sepatu kets, sepatu kulit, atau sandal tebal (false sole)."
+    },
+    {
+      "id": "hs-m2-pakaian",
+      "num": "06",
+      "badgeNum": 6,
+      "label": "6. Pakaian & Tekstil",
+      "shortName": "6. Pakaian",
+      "tag": "Diresapkan / Kancing Pakaian",
+      "categoryId": "pakaian_tekstil",
+      "categoryLabel": "Pakaian & Tekstil",
+      "color": "#8E44AD",
+      "position": {
+        "x": 72,
+        "y": 80
+      },
+      "coordsByView": {
+        "xray": {
+          "x": 60,
+          "y": 80
+        },
+        "normal": {
+          "x": 60,
+          "y": 80
+        }
+      },
+      "riskLevel": "critical",
+      "riskScore": 92,
+      "drugTypes": "Liquid Meth (Sabu Cair), Kokain Cair, Heroin murni, Ekstasi Serbuk",
+      "packagingTechnique": "Narkotika cair diresapkan ke serat kain pakaian/handuk/jaket tebal, atau kristal dipres ke dalam rongga kancing pakaian (hollow buttons) yang dirancang khusus.",
+      "mainIllustration": "assets/images/hotspots/module_2/6_pakaian.png",
+      "thumb": "assets/images/hotspots/module_2/6_pakaian.png",
+      "description": "Penyembunyian Narkotika cair dengan metode diresapkan pada serat pakaian atau diselipkan di dalam rongga kancing pakaian bawaan.",
+      "modusDetail": "Sindikat melarutkan kristal Methamphetamine/Cocaine ke dalam larutan khusus lalu merendam pakaian (seperti jaket tebal, jeans, atau handuk) hingga menyerap cairan narkotika. Pakaian lalu dikeringkan dan dilipat rapi di dalam koper. Selain itu, kristal murni juga kerap dimasukkan ke dalam rongga kancing kemeja/jas yang telah dibobok lalu dilapis ulang sintetis agar tidak tampak dari luar.",
+      "findings": [
+        {
+          "thumb": "assets/images/hotspots/module_2/6_pakaian.png",
+          "full": "assets/images/hotspots/module_2/6_pakaian.png",
+          "caption": "Pemeriksaan Lipatan Pakaian Diresapkan Larutan Narkotika Cair",
+          "tag": "Barang Bukti Sitaan"
+        },
+        {
+          "thumb": "assets/images/hotspots/module_2/6_kancing_pakaian.png",
+          "full": "assets/images/hotspots/module_2/6_kancing_pakaian.png",
+          "caption": "Modus Penyembunyian Kristal Narkotika di Dalam Rongga Kancing Pakaian",
+          "tag": "Modus Forensik"
+        }
+      ],
+      "indicators": [
+        "Pakaian terasa kaku, renyah, berbobot lebih berat daripada pakaian normal, dan meninggalkan bercak keruh/kristal halus saat ditekuk.",
+        "Tercium bau kimia obat tajam atau pelarut organik saat koper dibongkar.",
+        "Citra X-Ray memperlihatkan intensitas densitas berlebih pada lipatan baju dan anomali bulat pekat pada kancing-kancing pakaian.",
+        "Pakaian basah/lembab atau memiliki tekstur lengket saat disentuh."
+      ],
+      "detection": [
+        "Pemeriksaan fisik tekstur dan kelenturan lipatan pakaian di koper.",
+        "Pengujian ekstraksi dengan merendam potongan serat pakaian ke dalam air steril lalu dites Reagen Marquis/Mecke.",
+        "Pembongkaran sampel kancing pakaian menggunakan tang pemotong / cutter di ruang steril.",
+        "Pengujian spektrometer massa portable / Raman Spectrometer pada serat pakaian."
+      ],
+      "medicalRisk": "SANGAT BAHAYA: Cairan Narkotika murni yang diresapkan pada pakaian dapat terserap melalui kontak kulit (dermal absorption) petugas jika tidak menggunakan APD nitril steril.",
+      "inspectionNote": "SOP Resmi DJBC (PMK-188/2021): Petugas wajib mengenakan sarung tangan nitril dan masker medis saat memeriksa pakaian yang dicurigai. Potongan kain yang positif mengandung narkotika disita dan disegel dalam kantong pembungkus kedap udara untuk pengujian lab forensik.",
+      "bodyLocation": "Lipatan pakaian (jaket, jeans, handuk) dan rongga kancing pakaian penumpang."
+    }
+  ]
+}

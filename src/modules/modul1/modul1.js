@@ -1,7 +1,6 @@
 import { BaseModuleView } from '../../core/base-module.js';
 import { scorm } from '../../core/scorm.js';
 import { xapi } from '../../core/xapi.js';
-import { QuizModule } from './anatomy3d/QuizModule.js';
 import { courseProgress } from '../../core/progress.js';
 
 export class Modul1View extends BaseModuleView {
@@ -38,7 +37,6 @@ export class Modul1View extends BaseModuleView {
     // Setup subcomponents & interactivity
     this.initInteractiveViewer();
     this.initModals();
-    this.initQuiz();
     this.updateProgressUI();
 
     // Track xAPI module view

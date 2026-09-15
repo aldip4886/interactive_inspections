@@ -1,0 +1,202 @@
+{
+  "quizTitle": "Ujian Evaluasi Modus Penyelundupan Narkotika — DJBC",
+  "passingScorePercent": 70,
+  "timeLimitMinutes": 10,
+  "questions": [
+    {
+      "id": "q1",
+      "category": "Tubuh Kurir",
+      "question": "Petugas mendapati seorang penumpang pria penerbangan internasional dari Bangkok berjalan dengan kaku dan menolak tawaran makanan/minuman selama 6 jam penerbangan. Hasil pemeriksaan Body Scanner memperlihatkan gambaran opak bulat berderet pada saluran cerna. Apakah jenis modus penyembunyian ini?",
+      "options": [
+        "Body Strapping",
+        "Body Packing / Swallowing",
+        "Insertion Rongga Bawah",
+        "False Luggage Bottom"
+      ],
+      "correctIndex": 1,
+      "explanation": "Pola bayangan opak bulat berderet di saluran cerna dan penolakan konsumsi makanan merupakan ciri khas metode Body Packing (swallowing pellets)."
+    },
+    {
+      "id": "q2",
+      "category": "Barang Bawaan",
+      "question": "Saat koper penumpang melewati X-Ray Baggage Scanner, layar menampilkan warna oranye tebal merata pada bagian alas koper, namun saat dibuka fisik kedalaman alas koper tampak 5 cm lebih dangkal. Langkah pemeriksaan fisik awal yang paling tepat adalah...",
+      "options": [
+        "Langsung mengembalikan koper ke belt bagasi",
+        "Memotong gagang trolley koper",
+        "Mengukur selisih dimensi luar dan dalam serta melakukan pemeriksaan kompartemen dasar palsu (False Bottom)",
+        "Menyemprotkan disinfektan pada koper"
+      ],
+      "correctIndex": 2,
+      "explanation": "Perbedaan kedalaman alas dan warna oranye pekat pada X-Ray menandakan adanya kompartemen False Bottom yang harus diverifikasi dimensinya."
+    },
+    {
+      "id": "q3",
+      "category": "Barang Kiriman",
+      "question": "Modus penyembunyian pada paket barang kiriman berupa kaleng makanan pabrikan yang diisi Narkotika cair atau sabu yang direndam dinamakan...",
+      "options": [
+        "Corrugated Box Impregnation",
+        "False Food/Sardine Can",
+        "Reefer Insulation Packing",
+        "Trolley Tube Concealment"
+      ],
+      "correctIndex": 1,
+      "explanation": "False Food/Sardine Can adalah modus menyegel kembali kaleng makanan yang diisi Narkotika cair (Liquid Meth) atau kristal."
+    },
+    {
+      "id": "q4",
+      "category": "Kendaraan Darat",
+      "question": "Seorang petugas Bea Cukai di pos lintas batas darat mengetuk panel pintu mobil SUV dan mendapati suara ketukan terdengar soliter/padat serta klip trim pintu berjejak bekas garitan obeng. Modus penyembunyian yang teridentifikasi adalah...",
+      "options": [
+        "Penyembunyian di Kompartemen Pintu Mobil (Door Panel Cavity)",
+        "Modus Tangki Air Balas",
+        "Penempelan di Ketiak",
+        "Penyembunyian di Busa Helm"
+      ],
+      "correctIndex": 0,
+      "explanation": "Suara ketukan padat dan bekas garitan perkakas pada trim pintu merupakan indikasi kuat penyembunyian di balik Kompartemen Pintu Mobil."
+    },
+    {
+      "id": "q5",
+      "category": "Sarana Laut",
+      "question": "Peralatan Hi-Tech apakah yang digunakan untuk memindai kerapatan dinding kontainer pendingin (reefer container) di pelabuhan tanpa harus merusak fisik kontainer?",
+      "options": [
+        "Body Scanner",
+        "Ion Mobility Spectrometer (IMS)",
+        "Gamma-Ray / Container Scanner Pelabuhan",
+        "Boroskop Serat Optik"
+      ],
+      "correctIndex": 2,
+      "explanation": "Container Scanner (Gamma-Ray / X-Ray Pelabuhan) mampu menembus dinding baja kontainer dan mendeteksi anomali insulasi pendingin reefer."
+    },
+    {
+      "id": "q6",
+      "category": "Tubuh Kurir",
+      "question": "Seorang penumpang terdeteksi memiliki tonjolan tidak wajar di area perut dan paha saat melewati Walk-Through Metal Detector (WTMD). Saat dilakukan penggeledahan badan (body search) di ruang khusus, ditemukan paket berisi serbuk putih dililit rapat dengan lakban di sekeliling perut. Apakah nama modus penyembunyian ini?",
+      "options": [
+        "Body Packing",
+        "Body Strapping",
+        "False Bottom Luggage",
+        "Insertion Anomali"
+      ],
+      "correctIndex": 1,
+      "explanation": "Modus Body Strapping adalah metode menempelkan paket narkotika pada anggota tubuh (seperti perut, paha, atau betis) menggunakan lakban, korset, atau perban khusus."
+    },
+    {
+      "id": "q7",
+      "category": "Barang Bawaan",
+      "question": "Petugas memindai koper pakaian penumpang menggunakan X-Ray. Pakaian di dalam koper tampak biasa, namun saat diperiksa fisik, kain jaket dan celana terasa sangat kaku, memiliki bau kimia tajam, serta bertambah berat secara tidak wajar. Modus apakah ini?",
+      "options": [
+        "False Trolley Tube",
+        "Pakaian Diresapi Narkotika (Impregnated Clothing)",
+        "Double Wall Suitcase",
+        "Sardine Can Concealment"
+      ],
+      "correctIndex": 1,
+      "explanation": "Impregnated Clothing adalah modus melarutkan narkotika (seperti kokain atau sabu) kemudian meresapkannya ke dalam serat kain pakaian atau handuk, yang nantinya akan diekstraksi kembali melalui proses kimia."
+    },
+    {
+      "id": "q8",
+      "category": "Barang Kiriman",
+      "question": "Pada pemeriksaan paket barang kiriman berupa kardus bekas, X-Ray menunjukkan adanya lapisan bayangan gelap berbentuk kisi-kisi seragam pada seluruh selipan gelombang (corrugated) lembaran karton kardus. Apa modus penyembunyian yang dilakukan pelaku?",
+      "options": [
+        "Penyembunyian di Dinding/Gelombang Kardus (Corrugated Box Concealment)",
+        "UPS Power Supply Concealment",
+        "False Bottom Luggage",
+        "Reefer Insulation Packing"
+      ],
+      "correctIndex": 0,
+      "explanation": "Modus Dinding Karton (Corrugated Box Concealment) memanfaatkan rongga gelombang lapisan kardus kemasan untuk menyelipkan sabu/narkotika tipis atau meresapkannya ke lapisan kertas kardus."
+    },
+    {
+      "id": "q9",
+      "category": "Kendaraan Darat",
+      "question": "Saat menginspeksi mobil minibus di pos pemeriksaan perbatasan, petugas mencurigai ban cadangan (ban serep) yang terpasang di kolong belakang mobil. Saat ditekan, tekanan angin ban terasa keras namun ketika dipukul mengeluarkan suara dengung yang redup/berat dan putaran roda tidak seimbang. Modus penyembunyian apakah ini?",
+      "options": [
+        "Ban Serep Kustom / Spare Tire Concealment",
+        "Tangki Bahan Bakar Ganda",
+        "Rongga Dashboard Mobil",
+        "Body Strapping"
+      ],
+      "correctIndex": 0,
+      "explanation": "Ban serep sering dimodifikasi dengan memasukkan bungkus-bungkus narkotika di sekitar pelek dalam ban lalu diisi angin kembali sehingga menyembunyikan muatan ilegal dari pandangan luar."
+    },
+    {
+      "id": "q10",
+      "category": "Sarana Laut",
+      "question": "Tim penindakan pelabuhan memeriksa kontainer pendingin (reefer container) muatan buah-buahan. Pemindaian Gamma-Ray menunjukkan ketebalan dinding bagian depan (ruang mesin pendingin) 15 cm lebih tebal dibandingkan standar spesifikasi pabrik kontainer. Lokasi rawan penyembunyian pada kontainer ini adalah...",
+      "options": [
+        "Dinding Insulasi Polyurethane / Ruang Mesin Pendingin Reefer",
+        "Lantai Kayu Kontainer Standar",
+        "Pintu Belakang Kontainer",
+        "Kotak Perkakas Kapal"
+      ],
+      "correctIndex": 0,
+      "explanation": "Dinding insulasi reefer container memiliki rongga busa polyurethane tebal yang sering dikupas atau dipotong oleh pelaku untuk menyelipkan ratusan bungkus narkotika sebelum ditutup kembali secara rapi."
+    },
+    {
+      "id": "q11",
+      "category": "Tubuh Kurir",
+      "question": "Pada pemeriksaan fisik mendalam terhadap penumpang yang mencurigakan di bandara internasional, petugas mencurigai adanya benda asing yang disembunyikan di dalam rongga tubuh bagian bawah (anorektal/vaginal). Metode penyembunyian narkotika jenis ini dikategorikan sebagai...",
+      "options": [
+        "Body Strapping",
+        "Ingestion/Swallowing",
+        "Insertion (Rongga Tubuh)",
+        "Impregnation Pakaian"
+      ],
+      "correctIndex": 2,
+      "explanation": "Insertion adalah modus memasukkan tabung/kondom berisi narkotika ke dalam rongga tubuh alami (seperti anal atau vaginal) untuk menghindari deteksi luar."
+    },
+    {
+      "id": "q12",
+      "category": "Barang Bawaan",
+      "question": "Saat koper diperiksa dengan X-Ray, tampak garis hitam pekat silindris berketebalan tidak merata di sepanjang pipa besi gagang tarik (trolley handle) koper. Setelah pembongkaran teknis, ditemukan kristal methamphetamine di dalam pipa besi tersebut. Modus ini dikenal dengan istilah...",
+      "options": [
+        "False Luggage Base",
+        "Trolley Frame Concealment",
+        "Body Strapping",
+        "Corrugated Carton Impregnation"
+      ],
+      "correctIndex": 1,
+      "explanation": "Trolley Frame Concealment memanfaatkan rongga kosong pada pipa besi/aluminium rangka dan gagang tarik koper untuk menyimpan narkotika berbentuk kristal atau bubuk."
+    },
+    {
+      "id": "q13",
+      "category": "Barang Kiriman",
+      "question": "Sebuah paket kiriman berisi peranti elektronik adaptor power supply (UPS) dari luar negeri terdeteksi memiliki berat yang tidak seimbang. X-Ray menunjukkan komponen trafo di dalam trafo telah diganti dengan selongsong logam padat tanpa kawat kumparan. Prosedur penindakan awal yang tepat adalah...",
+      "options": [
+        "Langsung menyerahkan paket ke penerima",
+        "Melakukan pengujian swab/trace detector (IMS) pada celah ventilasi alat elektronik dan pemeriksaan fisik terukur",
+        "Merendam alat elektronik dalam air",
+        "Mengembalikan barang ke negara asal tanpa dokumen"
+      ],
+      "correctIndex": 1,
+      "explanation": "Pengujian dengan Ion Mobility Spectrometer (IMS) atau K9 swab pada celah ventilasi komponen elektronik membantu memverifikasi adanya partikel narkotika sebelum dilakukan pembongkaran fisik."
+    },
+    {
+      "id": "q14",
+      "category": "Kendaraan Darat",
+      "question": "Petugas menggunakan alat periskop/boroskop dan alat pengukur kedalaman tangki untuk memeriksa tangki bensin mobil pelintas batas. Ditemukan adanya sekat buatan pelat besi di dalam tangki yang memisahkan ruang bensin murni dengan ruang kedap cairan berisi sabu cair (liquid meth). Modus ini dinamakan...",
+      "options": [
+        "Modified Fuel Tank Concealment",
+        "Door Panel Cavity",
+        "Engine Block Packing",
+        "Reefer Container False Wall"
+      ],
+      "correctIndex": 0,
+      "explanation": "Modifikasi tangki bahan bakar (Modified Fuel Tank) melibatkan pembuatan sekat rahasia sehingga tangki tetap bisa menampung sedikit bahan bakar untuk menjalankan mesin sekaligus menyembunyikan narkotika cair atau bungkus kedap air."
+    },
+    {
+      "id": "q15",
+      "category": "Sarana Laut",
+      "question": "Pada pemeriksaan kapal kargo samudera di area labuh jangkar, tim penyelam (underwater inspection team) Bea Cukai menemukan kotak besi tambahan yang dilas pada kisi-kisi saluran masuk air laut kapal (Sea Chest) di bawah garis air (waterline). Teknik penyembunyian ini termasuk dalam modus...",
+      "options": [
+        "Underwater Parasite / Sea Chest Concealment",
+        "Deck Cargo Concealment",
+        "Anchor Chain Locker Stash",
+        "Lifeboat Canopy Concealment"
+      ],
+      "correctIndex": 0,
+      "explanation": "Sea Chest Concealment (modus parasit bawah air) dilakukan dengan melas tabung/kotak kedap air di bawah lunas kapal atau di dalam kisi-kisi saluran sea chest yang hanya dapat dijangkau oleh penyelam profesional."
+    }
+  ]
+}

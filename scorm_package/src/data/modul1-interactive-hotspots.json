@@ -1,0 +1,556 @@
+{
+  "moduleId": "modul1",
+  "meta": {
+    "codeBadge": "MODUL 01",
+    "title": "Pemeriksaan Tubuh Kurir (Body Concealment)",
+    "legalRef": "PMK-188/2021 & S-39/BC/2023",
+    "instructionTag": "Klik hotspot bernomor untuk menganalisis modus operandi & bukti forensik",
+    "description": "Inspeksi titik-titik penyembunyian pada tubuh kurir berdasarkan pedoman resmi DJBC: Ingestion (Rongga Mulut & Lambung), Insertion (Anus & Kemaluan), dan Body Strapping (Paha, Betis & Perut)."
+  },
+  "telemetry": {
+    "subjectId": "SUBJEK ID: SUSPECT-JKT-9921 / PRIA / 34 TH",
+    "sensor": "SENSOR: FULL-BODY TRANSMISSION X-RAY",
+    "activeAnglePrefix": "ROTASI AKTIF: AZIMUTH",
+    "rotateHint": "⟲ Drag atau usap pada tubuh untuk rotasi bebas 360° ⟳"
+  },
+  "controlsConfig": {
+    "zoom": {
+      "default": 1.35,
+      "min": 0.75,
+      "max": 2.2,
+      "step": 0.15
+    },
+    "rotation": {
+      "enabled": true,
+      "angles": [
+        0,
+        90,
+        180,
+        270
+      ],
+      "intervalMs": 1600
+    }
+  },
+  "guide": {
+    "type": "walkthrough",
+    "title": "Panduan Interaktif Pemeriksaan Tubuh Kurir",
+    "storageKey": "tutorial_seen_modul1",
+    "steps": [
+      {
+        "step": 0,
+        "icon": "🔄",
+        "title": "Rotasi Navigasi Tubuh 360°",
+        "badgeTag": "ROTASI 360°",
+        "desc": "Gunakan tombol kontrol ◂, ▶, dan ▸ di dock bawah atau usap/drag langsung pada model untuk memutar sudut peraga anatomi 360° (Depan 0°, Kanan 90°, Belakang 180°, Kiri 270°).",
+        "targetSelector": "#pedestal-rotation-dock"
+      },
+      {
+        "step": 1,
+        "icon": "📍",
+        "title": "Titik Hotspot Pemeriksaan",
+        "badgeTag": "HOTSPOT",
+        "desc": "Klik nomor callout interaktif pada anatomi tubuh (mulut, lambung, anal, paha, betis, perut) untuk membuka analisis modus operandi, temuan foto forensik, dan SOP penindakan.",
+        "targetSelector": "#body-image-container"
+      },
+      {
+        "step": 2,
+        "icon": "🔍",
+        "title": "Kontrol Zoom Presisi (135%)",
+        "badgeTag": "ZOOM 135%",
+        "desc": "Gunakan tombol (-) dan (+) untuk memperbesar detail citra radiografi. Tekan tombol putar balik (↺) untuk mereset skala zoom ke default optimal 135%.",
+        "targetSelector": ".canvas-zoom-toolbar"
+      },
+      {
+        "step": 3,
+        "icon": "📋",
+        "title": "4 Tab Modus & Galeri Forensik",
+        "badgeTag": "TAB MODUS",
+        "desc": "Setiap titik pemeriksaan dilengkapi 4 tab informasi mendalam: <em>Modus Operandi</em>, <em>Foto Gambar Real</em> (dapat diklik untuk foto resolusi tinggi), <em>Ciri Pelaku & SOP Petugas</em>, serta <em>Indikator Risiko</em>.",
+        "targetSelector": "#card-tabs-nav"
+      }
+    ]
+  },
+  "categories": [
+    {
+      "id": "all",
+      "label": "Seluruh Modus (6 Hotspot)",
+      "icon": "✨",
+      "color": "#F5A623"
+    },
+    {
+      "id": "ingestion",
+      "label": "Metode Ingestion",
+      "sub": "1. Rongga Mulut & 2. Lambung",
+      "icon": "👄",
+      "color": "#F5A623"
+    },
+    {
+      "id": "insertion",
+      "label": "Metode Insertion",
+      "sub": "3. Anus & Kemaluan",
+      "icon": "📥",
+      "color": "#E53E3E"
+    },
+    {
+      "id": "body-strapping",
+      "label": "Metode Body Strapping",
+      "sub": "4. Paha, 5. Betis & 6. Perut",
+      "icon": "📦",
+      "color": "#38A169"
+    }
+  ],
+  "viewAngles": [
+    {
+      "angle": 0,
+      "label": "Tampak Depan",
+      "sub": "Mulut, Lambung & Perut (0°)",
+      "image": "assets/body_views/body_view_0_front.png"
+    },
+    {
+      "angle": 90,
+      "label": "Tampak Samping Kanan",
+      "sub": "Betis & Tulang Kering (90°)",
+      "image": "assets/body_views/body_view_1_right.png"
+    },
+    {
+      "angle": 180,
+      "label": "Tampak Belakang",
+      "sub": "Anus & Kemaluan (180°)",
+      "image": "assets/body_views/body_view_2_back.png"
+    },
+    {
+      "angle": 270,
+      "label": "Tampak Samping Kiri",
+      "sub": "Paha & Tungkai (270°)",
+      "image": "assets/body_views/body_view_3_left.png"
+    }
+  ],
+  "hotspots": [
+    {
+      "id": "rongga-mulut",
+      "num": "01",
+      "badgeNum": 1,
+      "label": "1. Rongga Mulut & Orofaring",
+      "shortName": "1. Rongga Mulut",
+      "tag": "Metode Ingestion",
+      "hidePhotosTab": true,
+      "categoryId": "ingestion",
+      "categoryLabel": "Metode Ingestion",
+      "color": "#F5A623",
+      "primaryAngle": 0,
+      "visibleAngles": [
+        0
+      ],
+      "coordsByAngle": {
+        "0": {
+          "x": 50.8,
+          "y": 19.0
+        },
+        "90": null,
+        "180": null,
+        "270": null
+      },
+      "riskLevel": "high",
+      "riskScore": 80,
+      "drugTypes": "Sabu (Methamphetamine), Kokain kristal, Pil Ekstasi, Fentanyl",
+      "packagingTechnique": "Balon lateks tipis, plastik klip ganda kedap air, atau kondom mini terikat benang gigi (dental floss)",
+      "mainIllustration": "assets/images/hotspots/module_1/1_mulut.png",
+      "thumb": "assets/images/hotspots/module_1/1_mulut.png",
+      "description": "Paket kecil sabu/kokain dibungkus balon tipis atau plastik permen disembunyikan di rongga mulut.",
+      "modusDetail": "Metode ini lazim dilakukan oleh kurir jarak pendek atau kurir transit yang membawa muatan 10-50 gram. Bungkusan kerap diikatkan ke gigi geraham menggunakan benang nilon/dental floss agar mudah ditarik kembali atau ditelan kilat (orofaring) saat ada penindakan razia petugas.",
+      "findings": [
+        {
+          "thumb": "assets/images/hotspots/module_1/1_mulut.png",
+          "full": "assets/images/hotspots/module_1/1_mulut.png",
+          "caption": "Pemeriksaan Visual Rongga Mulut & Temuan Paket Narkotika",
+          "tag": "Barang Bukti Sitaan"
+        }
+      ],
+      "indicators": [
+        "Berbicara pelo, terbata-bata, atau enggan menjawab pertanyaan panjang petugas",
+        "Gerakan menelan ludah berulang kali secara abnormal disertai kegelisahan ekstrem",
+        "Bau napas beraroma karet lateks, perekat kimia, atau aroma tajam pembungkus plastik",
+        "Keringat dingin membasahi pelipis dan dahi saat dilakukan wawancara pendahuluan"
+      ],
+      "detection": [
+        "Pemeriksaan visual rongga mulut menggunakan senter medis resmi DJBC",
+        "Instruksikan subjek untuk menjulurkan lidah keluar dan mengangkat lidah ke langit-langit mulut",
+        "Instruksikan subjek batuk pelan untuk mendeteksi benda asing yang tersangkut di orofaring",
+        "Gunakan sarung tangan nitril medis jika perlu melakukan pemeriksaan palpasi pipi luar"
+      ],
+      "medicalRisk": "SANGAT TINGGI: Bahaya ruptur (pecah pembungkus) menyebabkan penyerapan transmukosa yang sangat cepat ke aliran darah otak, memicu kejang tonik-klonik akut, aritmia jantung fatal, dan koma dalam hitungan menit.",
+      "inspectionNote": "SOP Resmi DJBC (PMK-188/2021): Petugas dilarang memaksa memasukkan jari ke mulut tersangka untuk mencegah gigitan refleks dan bahaya tertusuk benda tajam / ruptur kapsul. Bawa segera ke fasilitas medis rujukan bila dicurigai terjadi ruptur.",
+      "bodyLocation": "Rongga mulut (sublingual, kantung bukal pipi, orofaring / penelanan kilat saat razia)."
+    },
+    {
+      "id": "lambung",
+      "num": "02",
+      "badgeNum": 2,
+      "label": "2. Lambung & Saluran Cerna",
+      "shortName": "2. Lambung",
+      "tag": "Metode Ingestion",
+      "categoryId": "ingestion",
+      "categoryLabel": "Metode Ingestion",
+      "color": "#F5A623",
+      "primaryAngle": 0,
+      "visibleAngles": [
+        0
+      ],
+      "coordsByAngle": {
+        "0": {
+          "x": 50.8,
+          "y": 38.0
+        },
+        "90": null,
+        "180": null,
+        "270": null
+      },
+      "riskLevel": "critical",
+      "riskScore": 100,
+      "drugTypes": "Kokain murni kadar > 85%, Heroin kristal, Pil Ekstasi berdensitas tinggi",
+      "packagingTechnique": "Kondom lateks multilayer (3-7 lapis) dipres mesin hidrolik bertekanan tinggi, dilapis lilin parafin dan selotip medis tahan asam lambung",
+      "mainIllustration": "assets/images/hotspots/module_1/2_lambung.png",
+      "thumb": "assets/images/hotspots/module_1/2_lambung.png",
+      "description": "Body packing puluhan hingga ratusan kapsul lateks berbobot 500g hingga 1.5-2 kg di lambung dan usus.",
+      "modusDetail": "Subjek dipersiapkan 24-48 jam sebelum keberangkatan dengan meminum obat anti-motilitas usus (Loperamide/Imodium). Setiap kapsul berbobot 8-12 gram dengan muatan total mencapai 500 gram hingga 1.5-2 kilogram narkotika murni bernilai miliaran rupiah.",
+      "findings": [
+        {
+          "thumb": "assets/images/hotspots/module_1/2_lambung.png",
+          "full": "assets/images/hotspots/module_1/2_lambung.png",
+          "caption": "Kapsul Lateks Multilayer Hasil Body Packing Lambung",
+          "tag": "Barang Bukti Sitaan"
+        },
+        {
+          "thumb": "assets/images/hotspots/module_1/2_lambung_2.png",
+          "full": "assets/images/hotspots/module_1/2_lambung_2.png",
+          "caption": "Citra Radiologis Body Scanner Abdomen (Rosette Sign & Radiopaque)",
+          "tag": "Pencitraan Medis"
+        },
+        {
+          "thumb": "assets/images/hotspots/module_1/2_lambung_3.png",
+          "full": "assets/images/hotspots/module_1/2_lambung_3.png",
+          "caption": "Pemeriksaan & Uji Identifikasi Laboratorium Kapsul Sitaan",
+          "tag": "Uji Identifikasi Lab"
+        }
+      ],
+      "indicators": [
+        "Menolak mengonsumsi makanan atau minuman selama penerbangan rute panjang",
+        "Gaya duduk kaku dan membungkuk menahan rasa penuh di rongga perut",
+        "Membawa obat antidiare (Loperamide) dalam jumlah tidak wajar di saku pakaian",
+        "Hasil X-Ray Body Scanner / CT Scan Abdomen memperlihatkan bayangan radiopaque bulat berderet (Rosette Sign) di usus"
+      ],
+      "detection": [
+        "Analisis profil manifes penumpang dan kesesuaian negara asal berisiko tinggi (high-risk origin)",
+        "Pemindaian sinar-X abdomen / CT-Scan di rumah sakit rujukan resmi DJBC",
+        "Isolasi di ruangan observasi medis khusus dengan toilet khusus penyaring barang bukti hingga seluruh kapsul keluar secara alami",
+        "Pengawasan ketat dokter spesialis radiologi dan forensik kepabeanan"
+      ],
+      "medicalRisk": "KRITIS (100/100): Pecahnya 1 kapsul saja melepaskan dosis mematikan (lethal dose) ke dalam sirkulasi darah, menyebabkan henti jantung dalam waktu kurang dari 15 menit. DILARANG MEMBERI OBAT PENCAHAR STIMULAN PAKSA!",
+      "inspectionNote": "SOP Resmi DJBC: Wajib dirujuk ke Rumah Sakit Rujukan DJBC (RS Bhayangkara). DILARANG MEMBERI OBAT PENCAHAR STIMULAN PAKSA! Petugas tidak diperkenankan melakukan intervensi medis invasif mandiri.",
+      "bodyLocation": "Saluran gastrointestinal / lambung."
+    },
+    {
+      "id": "anal-anus",
+      "num": "03",
+      "badgeNum": 3,
+      "label": "3. Anus, Kemaluan & Selangkangan",
+      "shortName": "3. Anus & Kemaluan",
+      "tag": "Metode Insertion",
+      "categoryId": "insertion",
+      "categoryLabel": "Metode Insertion",
+      "color": "#E53E3E",
+      "primaryAngle": 180,
+      "visibleAngles": [
+        180
+      ],
+      "coordsByAngle": {
+        "0": null,
+        "90": null,
+        "180": {
+          "x": 50.3,
+          "y": 55.5
+        },
+        "270": null
+      },
+      "riskLevel": "critical",
+      "riskScore": 90,
+      "drugTypes": "Heroin kualitas tinggi, Sabu (Methamphetamine), Ketamine, Kokain pasta",
+      "packagingTechnique": "Bentuk silinder atau torpedo padat dibungkus kondom tebal berlapis 4-6 lapis, dilumuri gel silikon/vaselin, dan diikat tali benang bedah pengaman",
+      "mainIllustration": "assets/images/hotspots/module_1/3_vagina.png",
+      "thumb": "assets/images/hotspots/module_1/3_vagina.png",
+      "description": "Paket silinder besar berpelumas silikon disembunyikan di rongga anal/rektum atau vagina (body pushing).",
+      "modusDetail": "Paket silinder umumnya berdiameter 2-4 cm dan panjang 10-15 cm dengan bobot 100-500 gram. Kurir menahan paket berpelumas silikon ini di rongga rektum atau vagina selama perjalanan penerbangan atau penyeberangan feri.",
+      "findings": [
+        {
+          "thumb": "assets/images/hotspots/module_1/3_vagina.png",
+          "full": "assets/images/hotspots/module_1/3_vagina.png",
+          "caption": "Paket Insertion Torpedo Berpelumas dari Cavity Subjek",
+          "tag": "Barang Bukti Sitaan"
+        },
+        {
+          "thumb": "assets/images/hotspots/module_1/3_vagina_2.png",
+          "full": "assets/images/hotspots/module_1/3_vagina_2.png",
+          "caption": "Hasil Pemindaian Radiologi Pelvis Menampakkan Massa Rektal/Vaginal",
+          "tag": "Pencitraan Medis"
+        },
+        {
+          "thumb": "assets/images/hotspots/module_1/3_vagina_3.png",
+          "full": "assets/images/hotspots/module_1/3_vagina_3.png",
+          "caption": "Dokumentasi Pengeluaran & Identifikasi Bahan Narkotika Cavity",
+          "tag": "Dokumentasi Penindakan"
+        }
+      ],
+      "indicators": [
+        "Gaya berjalan tidak wajar, kaku, dan lambat (waddling gait) dengan langkah melebar",
+        "Sering menggeliat dan enggan duduk di kursi ruang tunggu atau ruang wawancara",
+        "Keringat berlebihan di area panggul dan pinggang, sering memegang bagian belakang celana",
+        "Ditemukan pelumas (lubricant tube) atau tisu basah di dalam tas jinjing kurir"
+      ],
+      "detection": [
+        "Pemindaian Whole Body Scanner (Millimeter Wave) mendeteksi anomali massa di area panggul",
+        "Pemeriksaan fisik luar oleh petugas sesama jenis di ruang pemeriksaan khusus DJBC",
+        "Rujukan pemeriksaan radiologi foto polos pelvis dan rektal oleh dokter berwenang",
+        "Proses evakuasi medis di bawah supervisi tenaga kesehatan rumah sakit rujukan"
+      ],
+      "medicalRisk": "KRITIS: Risiko perforasi usus besar / rektum yang berujung peritonitis dan syok sepsis berat. Keracunan sistemik masif bila dinding pembungkus bocor di area vaskular rektum yang kaya pembuluh darah.",
+      "inspectionNote": "SOP Resmi DJBC: Pemeriksaan rektal (colok dubur) HANYA BOLEH DILAKUKAN OLEH TENAGA MEDIS RESMI (DOKTER) di fasilitas kesehatan rujukan, bukan oleh petugas bea cukai di lapangan.",
+      "bodyLocation": "Saluran anal, rektum, atau vagina (body pushing)."
+    },
+    {
+      "id": "strapping-paha",
+      "num": "04",
+      "badgeNum": 4,
+      "label": "4. Paha & Tungkai Atas",
+      "shortName": "4. Pada Paha",
+      "tag": "Metode Body Strapping (Dililit Tape / Lakban)",
+      "categoryId": "body-strapping",
+      "categoryLabel": "Metode Body Strapping",
+      "color": "#38A169",
+      "primaryAngle": 270,
+      "visibleAngles": [
+        270
+      ],
+      "coordsByAngle": {
+        "0": null,
+        "90": null,
+        "180": null,
+        "270": {
+          "x": 54.5,
+          "y": 62.0
+        }
+      },
+      "riskLevel": "high",
+      "riskScore": 75,
+      "drugTypes": "Sabu (Crystal Meth), Heroin lempeng, Ketamine, Pil Ekstasi berbungkus pipih",
+      "packagingTechnique": "Lempengan pipih dibungkus aluminium foil vakum kedap bau, dilapis busa tipis, dan dililit berlapis menggunakan lakban perekat tebal melingkari paha dan selangkangan",
+      "mainIllustration": "assets/images/hotspots/module_1/4_paha_selangkangan.png",
+      "thumb": "assets/images/hotspots/module_1/4_paha_selangkangan.png",
+      "description": "Lempengan sabu/heroin dipres pipih dililitkan mengelilingi paha dan selangkangan dengan lakban cokelat / isolasi elastis.",
+      "modusDetail": "Kurir dapat membawa 500 gram hingga 2 kilogram sabu/heroin di kedua paha dalam dan selangkangan. Pelaku biasanya mengenakan celana dalam ganda (boxer ganda) atau korset penahan untuk menyamarkan kontur tonjolan paket dari luar.",
+      "findings": [
+        {
+          "thumb": "assets/images/hotspots/module_1/4_paha_selangkangan.png",
+          "full": "assets/images/hotspots/module_1/4_paha_selangkangan.png",
+          "caption": "Lilitan Lakban Paket Sabu pada Paha & Selangkangan Tersangka",
+          "tag": "Dokumentasi Penindakan"
+        }
+      ],
+      "indicators": [
+        "Kontur paha dan selangkangan tampak tidak simetris atau menggembung kaku di bawah celana",
+        "Gaya berjalan kaku tanpa ayunan tungkai yang lentur, menghindari gerakan jongkok",
+        "Menolak atau cemas ketika petugas hendak meraba area paha dan selangkangan",
+        "Mengenakan celana longgar berlapis-lapis padahal cuaca bandara cukup hangat"
+      ],
+      "detection": [
+        "Pemeriksaan raba tubuh (pat-down frisking) secara sistematis dari pinggang hingga pergelangan kaki di bilik tertutup",
+        "Pemeriksaan Whole Body Scanner (AIT) yang memperlihatkan anomali permukaan tubuh",
+        "Penggeledahan badan menyeluruh (strip search) sesuai Peraturan Direktur Jenderal Bea dan Cukai"
+      ],
+      "medicalRisk": "SEDANG - TINGGI: Iskemia lokal akibat lilitan lakban yang terlalu kuat memotong aliran darah vena/arteri femoralis, dermatitis kontak iritan hebat, dan lecet epidermis luas saat lakban dicabut paksa.",
+      "inspectionNote": "SOP Resmi DJBC: Petugas wajib melakukan pemeriksaan oleh personel berjenis kelamin sama di ruang tertutup dengan pencahayaan cukup dan disaksikan minimal 2 petugas. Buka peratan lakban menggunakan gunting perban berujung tumpul.",
+      "bodyLocation": "Paha kiri dan kanan."
+    },
+    {
+      "id": "strapping-betis",
+      "num": "05",
+      "badgeNum": 5,
+      "label": "5. Betis & Tulang Kering",
+      "shortName": "5. Betis",
+      "tag": "Metode Body Strapping (Dililit Tape / Lakban)",
+      "categoryId": "body-strapping",
+      "categoryLabel": "Metode Body Strapping",
+      "color": "#38A169",
+      "primaryAngle": 90,
+      "visibleAngles": [
+        90
+      ],
+      "coordsByAngle": {
+        "0": null,
+        "90": {
+          "x": 44.0,
+          "y": 75.0
+        },
+        "180": null,
+        "270": null
+      },
+      "riskLevel": "medium",
+      "riskScore": 65,
+      "drugTypes": "Sabu kristal, Daun Ganja padat dipres, Bubuk Ketamine kemasan strip",
+      "packagingTechnique": "Bungkusan pipih memanjang menyerupai pelat pelindung tulang kering, direkatkan dengan isolasi plastik elastis atau lakban hitam melingkari otot betis",
+      "mainIllustration": "assets/images/hotspots/module_1/5_betis_tulang_kering_2.png",
+      "thumb": "assets/images/hotspots/module_1/5_betis_tulang_kering_2.png",
+      "description": "Paket strip memanjang dilakban rapat tertutup kaus kaki tebal dan sepatu bot / pakaian luar.",
+      "modusDetail": "Metode ini memanfaatkan ruang antara tulang kering dan kain celana yang longgar. Kurir biasanya memasang paket mulai dari bawah lutut hingga tepat di atas mata kaki, berbobot 250 - 500 gram per kaki.",
+      "findings": [
+        {
+          "thumb": "assets/images/hotspots/module_1/5_betis_tulang_kering_2.png",
+          "full": "assets/images/hotspots/module_1/5_betis_tulang_kering_2.png",
+          "caption": "Paket Strip Memanjang Terikat Lakban di Otot Betis & Tulang Kering",
+          "tag": "Dokumentasi Penindakan"
+        }
+      ],
+      "indicators": [
+        "Gerakan pergelangan kaki kaku saat melangkah, enggan menekuk lutut",
+        "Memakai kaos kaki tebal dobel dan celana pipa lebar tidak sesuai musim",
+        "Suara gemerisik perekat / plastik ketika subjek menggerakkan kaki",
+        "Ujung celana sering ditarik ke bawah untuk menutupi bagian mata kaki"
+      ],
+      "detection": [
+        "Instruksikan tersangka menaikkan ujung celana hingga ke atas lutut di ruang pemeriksaan",
+        "Pemeriksaan raba (pat-down) di sepanjang tulang kering dan betis belakang",
+        "Pemeriksaan sepatu bot dan kaus kaki secara terpisah melalui X-Ray mesin bagasi kabin"
+      ],
+      "medicalRisk": "SEDANG: Edema perifer tungkai bawah dan risiko parestesia sementara akibat kompresi nervus peroneus bila lakban dililit terlalu kencang.",
+      "inspectionNote": "SOP Resmi DJBC: Waspadai kurir menyembunyikan silet atau benda tajam di balik perban lakban sebagai upaya melukai diri atau menyerang petugas saat lakban dibuka.",
+      "bodyLocation": "Otot betis dan tulang kering tungkai bawah."
+    },
+    {
+      "id": "strapping-perut",
+      "num": "06",
+      "badgeNum": 6,
+      "label": "6. Perut & Torso",
+      "shortName": "6. Perut",
+      "tag": "Metode Body Strapping (Dililit Tape / Lakban)",
+      "categoryId": "body-strapping",
+      "categoryLabel": "Metode Body Strapping",
+      "color": "#38A169",
+      "primaryAngle": 0,
+      "visibleAngles": [
+        0
+      ],
+      "coordsByAngle": {
+        "0": {
+          "x": 50.7,
+          "y": 44.0
+        },
+        "90": null,
+        "180": null,
+        "270": null
+      },
+      "riskLevel": "high",
+      "riskScore": 85,
+      "drugTypes": "Sabu kemasan besar (1-3 kg), Heroin lempengan, Kokain padat, Pil Ekstasi ribuan butir",
+      "packagingTechnique": "Rompi modifikasi atau puluhan paket pipih disusun bertingkat melingkari torso/abdomen, kemudian dibalut putaran penuh lakban duct-tape tebal",
+      "mainIllustration": "assets/images/hotspots/module_1/6_perut_dan_torso.png",
+      "thumb": "assets/images/hotspots/module_1/6_perut_dan_torso.png",
+      "description": "Rompi korset atau lempengan berat 1-3 kg dililit rapat dengan lakban bertingkat.",
+      "modusDetail": "Metode ini mampu membawa muatan paling banyak pada tubuh kurir (hingga 1-3 kg). Pelaku memakai rompi modifikasi atau balutan duct tape bertingkat serta jaket tebal berukuran besar (oversized) untuk menyembunyikan siluet perut yang kaku.",
+      "findings": [
+        {
+          "thumb": "assets/images/hotspots/module_1/6_perut_dan_torso.png",
+          "full": "assets/images/hotspots/module_1/6_perut_dan_torso.png",
+          "caption": "Balutan Lakban & Rompi Paket Narkotika Melingkari Perut Subjek",
+          "tag": "Dokumentasi Penindakan"
+        },
+        {
+          "thumb": "assets/images/hotspots/module_1/6_perut_dan_torso_2.png",
+          "full": "assets/images/hotspots/module_1/6_perut_dan_torso_2.png",
+          "caption": "Hasil Pemindaian Whole Body Scanner & Sitaan Paket Lempengan Perut",
+          "tag": "Barang Bukti Sitaan"
+        }
+      ],
+      "indicators": [
+        "Postur tubuh sangat tegak, enggan membungkuk saat mengambil barang atau duduk",
+        "Perut tampak buncit tidak wajar dengan kontur kotak-kotak keras bila disentuh",
+        "Keringat mengucur deras di punggung dan dada karena torso tertutup lakban kedap udara",
+        "Memakai pakaian tebal berlebih (jaket musim dingin) di terminal kedatangan tropis"
+      ],
+      "detection": [
+        "Pengamatan visual proporsi torso saat bergerak dari samping",
+        "Pemeriksaan raba (pat-down) di sisi lateral pinggang dan dinding perut depan",
+        "Penggunaan Body Scanner bandara yang mendeteksi ketebalan material non-organik di permukaan kulit"
+      ],
+      "medicalRisk": "TINGGI: Restriksi pernapasan diafragma yang dapat memicu hiperventilasi, dehidrasi parah akibat penumpukan keringat di balik lakban, dan kerusakan kulit saat pelepasan.",
+      "inspectionNote": "SOP Resmi DJBC: Buka balutan lakban menggunakan gunting medis berujung tumpul (bandage scissors) agar tidak melukai kulit tersangka dan tidak merobek kemasan barang bukti.",
+      "bodyLocation": "Dinding abdomen dan perut depan."
+    }
+  ],
+  "quiz": [
+    {
+      "q": "Seorang penumpang terlihat menolak makan dan minum sepanjang penerbangan, serta berkeringat dingin. Modus penyembunyian narkotika yang paling patut dicurigai adalah...",
+      "opts": [
+        "Body Strapping di dada",
+        "Body Packing (Telan) melalui saluran cerna",
+        "Narkotika diresapkan ke pakaian",
+        "Penyembunyian di dalam rambut"
+      ],
+      "ans": 1,
+      "explain": "Penolakan makan/minum dilakukan oleh kurir body packer agar transit paket dalam saluran GI tidak terpicu untuk keluar atau rusak sebelum tiba di tujuan. Keringat dingin merupakan tanda awal kecemasan ekstrem atau kebocoran paket."
+    },
+    {
+      "q": "Pada pemeriksaan X-Ray abdomen, tampak bayangan radio-opaque bulat/oval berlapis dengan pola khas. Temuan radiologis ini dikenal sebagai...",
+      "opts": [
+        "Shadow Sign",
+        "Rosette Sign",
+        "Halo Effect",
+        "Mule Pattern"
+      ],
+      "ans": 1,
+      "explain": "'Rosette Sign' adalah temuan patognomonik pada rontgen abdomen body packer — kontur udara yang terperangkap pada lipatan simpul kondom/lateks berlapis."
+    },
+    {
+      "q": "Pemeriksaan area tubuh sensitif (pemeriksaan badan mendalam / penggeledahan fisik) pada subjek wanita WAJIB dilakukan oleh...",
+      "opts": [
+        "Petugas laki-laki senior",
+        "Petugas wanita terlatih di ruang pemeriksaan tertutup",
+        "Dokter laki-laki yang bertugas",
+        "Petugas mana pun yang pertama menemukan indikasi"
+      ],
+      "ans": 1,
+      "explain": "SOP DJBC dan regulasi perlindungan HAM mewajibkan pemeriksaan fisik badan dilakukan oleh petugas dengan jenis kelamin yang sama di ruangan tertutup dan didampingi saksi."
+    },
+    {
+      "q": "Narkotika yang disamarkan dengan metode strapping di paha atau betis paling sering menimbulkan indikator fisik berupa...",
+      "opts": [
+        "Pola tidur berlebihan di pesawat",
+        "Gaya berjalan kaku, pincang, atau langkah diseret (tidak wajar)",
+        "Wajah kemerahan dan demam tinggi",
+        "Suara serak saat menjawab pertanyaan"
+      ],
+      "ans": 1,
+      "explain": "Bungkusan padat yang dililitkan ketat di paha atau betis membatasi pergerakan sendi lutut dan tungkai, menyebabkan gaya berjalan kaku atau langkah diseret."
+    },
+    {
+      "q": "Tindakan pertama yang paling tepat jika dicurigai adanya penyembunyian paket narkotika di rongga mulut (oral concealment) adalah...",
+      "opts": [
+        "Memasukkan jari petugas ke dalam mulut subjek untuk mengambil bungkusan",
+        "Meminta subjek membuka mulut lebar, menjulurkan lidah, dan memeriksa dengan penlight steril",
+        "Memberikan air minum agar subjek menelannya",
+        "Memaksa subjek batuk keras"
+      ],
+      "ans": 1,
+      "explain": "Gunakan penlight dan tongue depressor. Petugas TIDAK BOLEH memasukkan jari ke dalam mulut subjek guna mencegah risiko gigitan atau memicu subjek menelan paket secara fatal."
+    },
+    {
+      "q": "Risiko medis paling fatal bagi kurir dengan modus body packing jika salah satu paket pembungkus pecah (ruptur) adalah...",
+      "opts": [
+        "Dehidrasi ringan",
+        "Overdosis masif fatal dan henti jantung dalam hitungan menit",
+        "Sembelit berkepanjangan",
+        "Iritasi kulit ringan"
+      ],
+      "ans": 1,
+      "explain": "Satu paket body packing dapat berisi 8-12 gram zat murni dengan konsentrasi tinggi. Ruptur satu paket melepaskan dosis mematikan ke aliran darah yang menyebabkan kematian kilat."
+    }
+  ]
+}

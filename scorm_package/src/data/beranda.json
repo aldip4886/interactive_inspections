@@ -1,0 +1,146 @@
+{
+  "pageTitle": "Beranda & Panduan Inspeksi",
+  "hero": {
+    "pretitle": "e-Learning Narkotika dan Pengawasannya",
+    "title": "Interactive Narcotics Inspection Simulator",
+    "actions": {
+      "primary": {
+        "label": "Mulai Inspeksi Modul 1",
+        "route": "modul1"
+      },
+      "secondary": {
+        "label": "Kuis & Evaluasi Kompetensi",
+        "route": "evaluasi"
+      }
+    }
+  },
+  "aboutMedia": {
+    "badge": "TENTANG MEDIA PEMBELAJARAN",
+    "title": "Simulasi Interaktif Inspeksi & Interdiksi Narkotika",
+    "lead": "Media pembelajaran ini dirancang khusus bagi pegawai Direktorat Jenderal Bea dan Cukai (DJBC) untuk mengasah keterampilan teknis, kepekaan visual, dan pemahaman mendalam terhadap berbagai modus operandi penyelundupan Narkotika, Psikotropika, dan Prekursor (NPP).",
+    "features": [
+      {
+        "icon": "🔍",
+        "title": "Simulasi 3D & Visual Radiografi X-Ray",
+        "desc": "Menyajikan pemindaian objek 360° dan layer X-Ray realistis pada 5 area inspeksi kritis (tubuh kurir, bagasi, barang kiriman pos, kendaraan darat, dan kapal kargo)."
+      },
+      {
+        "icon": "🎯",
+        "title": "Skenario Riil & Indikator Risiko (Red Flags)",
+        "desc": "Setiap hotspot memuat studi kasus nyata penindakan Bea Cukai, analisis citra anomali, SOP penggeledahan, dan indikator risiko lapangan."
+      },
+      {
+        "icon": "📊",
+        "title": "Pelacakan Kemajuan & Standardisasi SCORM",
+        "desc": "Progress pembelajaran dihitung secara real-time berdasarkan 38 titik interaksi hotspot dan evaluasi kompetensi tersinkronisasi ke SCORM LMS & LRS xAPI."
+      }
+    ]
+  },
+  "progressCard": {
+    "badge": "PROGRES LATIHAN & COMPLIANCE",
+    "title": "Progres Pembelajaran Kursus Anda"
+  },
+  "disclaimer": {
+    "title": "Disclaimer Resmi Kemenkeu & DJBC:",
+    "desc": "Simulasi inspeksi ini dikembangkan khusus untuk tujuan pembelajaran mandiri dan peningkatan ketajaman teknis pegawai Direktorat Jenderal Bea dan Cukai. Tindakan interdiksi resmi di lapangan wajib mematuhi SOP dan petunjuk teknis DJBC yang berlaku."
+  },
+  "objectives": {
+    "badge": "KOMPETENSI UTAMA",
+    "title": "Tujuan Pembelajaran Mandiri",
+    "items": [
+      {
+        "num": "01",
+        "title": "Identifikasi Modus Operandi",
+        "desc": "Memahami pemetaan metode concealment pada tubuh kurir, barang bawaan bagasi, barang kiriman pos/PJT, serta sarana pengangkut darat dan laut."
+      },
+      {
+        "num": "02",
+        "title": "Penguasaan Alat Pemindai (NII)",
+        "desc": "Menganalisis radiografi X-Ray bagasi, kargo dual-energy, dan pemindai kendaraan untuk mendeteksi anomali densitas organik tersembunyi."
+      },
+      {
+        "num": "03",
+        "title": "Kepatuhan SOP & Keselamatan",
+        "desc": "Menerapkan protokol pemeriksaan fisik yang aman, perlindungan HAM, penanganan barang bukti, dan mitigasi bahaya paparan zat beracun (fentanyl)."
+      }
+    ]
+  },
+  "modules": [
+    {
+      "id": "modul1",
+      "code": "MODUL 01",
+      "title": "Pemeriksaan Tubuh Kurir (Body Concealment)",
+      "subtitle": "Metode Ingestion, Insertion & Body Strapping",
+      "desc": "Simulasi 3D rotasi 360° interaktif untuk mengidentifikasi 8 titik rawan penyembunyian pada tubuh tersangka kurir dengan pemindaian radiografi.",
+      "route": "modul1",
+      "duration": "15 Menit",
+      "badge": "360° View"
+    },
+    {
+      "id": "modul2",
+      "code": "MODUL 02",
+      "title": "Pemeriksaan Barang Bawaan (Luggage)",
+      "subtitle": "Koper Bagasi, False Bottom & Modifikasi Dinding",
+      "desc": "Inspeksi visual dan pemindaian X-Ray multi-angle pada kompartemen tersembunyi koper, tas ransel, dan rongga trolley bagasi penumpang.",
+      "route": "modul2",
+      "duration": "20 Menit",
+      "badge": "Dual View"
+    },
+    {
+      "id": "modul3",
+      "code": "MODUL 03",
+      "title": "Pemeriksaan Barang Kiriman (Cargo/Pos)",
+      "subtitle": "Dual-Energy X-Ray & Densitas Material Organik",
+      "desc": "Analisis densitas zat narkotika pada paket kiriman internasional pos/PJT menggunakan filter spektrum warna radiografi dual-energy.",
+      "route": "modul3",
+      "duration": "25 Menit",
+      "badge": "X-Ray Lens"
+    },
+    {
+      "id": "modul4a",
+      "code": "MODUL 04A",
+      "title": "Pemeriksaan Kendaraan Darat (SUV)",
+      "subtitle": "Kompartemen Rahasia & Modifikasi Rangka Mobil",
+      "desc": "Eksplorasi titik-titik modifikasi rongga tersembunyi pada kendaraan SUV (dashboard, door trim, tangki bahan bakar, dan sasis bawah).",
+      "route": "modul4a",
+      "duration": "25 Menit",
+      "badge": "3D Vehicle"
+    },
+    {
+      "id": "modul4b",
+      "code": "MODUL 04B",
+      "title": "Pemeriksaan Kapal Laut Cargo (Marine)",
+      "subtitle": "Palka, Lambung Bawah Air & Ruang Mesin Kapal",
+      "desc": "Pemeriksaan zona kritis kapal kargo bulk carrier termasuk kotak kemudi, kotak laut (sea chest), tangki ballast, dan dasar lambung.",
+      "route": "modul4b",
+      "duration": "30 Menit",
+      "badge": "Marine Zones"
+    }
+  ],
+  "simulationGuide": {
+    "badge": "PETUNJUK SIMULASI",
+    "title": "Alur Pemeriksaan Interaktif",
+    "steps": [
+      {
+        "step": "1",
+        "title": "Pilih Skenario Modul",
+        "desc": "Buka modul pembelajaran sesuai target pengawasan yang ingin Anda dalami dari menu navigasi."
+      },
+      {
+        "step": "2",
+        "title": "Eksplorasi Titik Hotspot",
+        "desc": "Putar objek peraga atau arahkan pemindai, lalu klik titik hotspot bernomor untuk membuka analisis forensik."
+      },
+      {
+        "step": "3",
+        "title": "Pelajari 4 Tab Forensik",
+        "desc": "Pelajari Modus Operandi, Foto Gambar Real resolusi tinggi, Ciri Pelaku & SOP, serta Indikator Risiko."
+      },
+      {
+        "step": "4",
+        "title": "Uji Evaluasi Akhir",
+        "desc": "Selesaikan ujian skenario kasus pada menu Evaluasi untuk merekam nilai kompetensi dan status kelulusan ke LMS KLC."
+      }
+    ]
+  }
+}

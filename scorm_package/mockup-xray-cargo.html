@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mockup Simulator Pemindai X-Ray Kargo — DJBC</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ==========================================================================
+       DJBC CARGO X-RAY INSPECTION SIMULATOR - STYLES
+       ========================================================================== */
+    :root {
+      --djbc-navy-dark: #041E3A;
+      --djbc-navy-deep: #062B52;
+      --djbc-navy-main: #0B3A6F;
+      --djbc-gold: #D9B45B;
+      --djbc-gold-hover: #C9A34E;
+      --djbc-cyan-scanner: #00E5FF;
+      --djbc-cyan-glow: rgba(0, 229, 255, 0.45);
+      --color-organic-orange: #FF7700;
+      --color-metal-blue: #0077FF;
+      --color-inorganic-green: #00D26A;
+
+      --bg-dark-base: #030C16;
+      --bg-panel: #07192C;
+      --bg-panel-sub: #0C253F;
+      --border-hud: rgba(0, 229, 255, 0.22);
+      --border-sub: rgba(217, 180, 91, 0.25);
+
+      --lens-radius: 120px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-dark-base);
+      color: #E2E8F0;
+      min-height: 100vh;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ─── TOP FORENSIC HEADER ─── */
+    .top-scanner-header {
+      background: linear-gradient(180deg, #062038 0%, #031322 100%);
+      border-bottom: 1px solid var(--border-hud);
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+      z-index: 50;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .djbc-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 12px;
+      background: rgba(217, 180, 91, 0.12);
+      border: 1px solid var(--djbc-gold);
+      border-radius: 6px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--djbc-gold);
+      letter-spacing: 0.5px;
+    }
+
+    .header-title-group h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: #FFFFFF;
+      letter-spacing: 0.3px;
+    }
+
+    .header-title-group p {
+      font-size: 11px;
+      color: #94A3B8;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .telemetry-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      padding: 4px 10px;
+      background: rgba(0, 229, 255, 0.08);
+      border: 1px solid rgba(0, 229, 255, 0.3);
+      border-radius: 4px;
+      color: var(--djbc-cyan-scanner);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .telemetry-dot {
+      width: 7px;
+      height: 7px;
+      background: var(--djbc-cyan-scanner);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--djbc-cyan-scanner);
+      animation: pulseBlink 1.5s infinite;
+    }
+
+    @keyframes pulseBlink {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
+    }
+
+    /* ─── MAIN SIMULATOR STAGE ─── */
+    .simulator-viewport {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      position: relative;
+      background: radial-gradient(circle at center, #071E36 0%, #030C16 80%);
+    }
+
+    /* Forensic Grid Backdrop */
+    .forensic-grid {
+      position: absolute;
+      inset: 0;
+      background-image: 
+        linear-gradient(to right, rgba(0, 229, 255, 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0, 229, 255, 0.04) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+    }
+
+    /* Inspection Stage Box */
+    .stage-container {
+      position: relative;
+      width: 100%;
+      max-width: 1080px;
+      aspect-ratio: 16 / 9;
+      background: #020810;
+      border: 1px solid var(--border-hud);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.7), 0 0 30px rgba(0, 229, 255, 0.12);
+      cursor: crosshair;
+    }
+
+    /* Stage Header Overlay HUD */
+    .stage-hud-overlay {
+      position: absolute;
+      top: 14px;
+      left: 18px;
+      right: 18px;
+      display: flex;
+      justify-content: space-between;
+      pointer-events: none;
+      z-index: 15;
+    }
+
+    .hud-box {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.7);
+      background: rgba(3, 15, 28, 0.75);
+      backdrop-filter: blur(4px);
+      padding: 6px 12px;
+      border: 1px solid rgba(0, 229, 255, 0.25);
+      border-radius: 4px;
+    }
+
+    .hud-box strong {
+      color: var(--djbc-cyan-scanner);
+    }
+
+    /* Image Layers */
+    .image-layer-wrapper {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    .image-layer {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .layer-normal {
+      z-index: 1;
+    }
+
+    .layer-xray {
+      z-index: 2;
+      /* Dynamic clip-path applied via JS */
+      clip-path: circle(0px at 50% 50%);
+      will-change: clip-path;
+    }
+
+    /* ─── MAGNIFYING GLASS LENS RETICLE ─── */
+    .xray-magnifier-lens {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: calc(var(--lens-radius) * 2);
+      height: calc(var(--lens-radius) * 2);
+      transform: translate(-50%, -50%);
+      border: 2.5px solid var(--djbc-cyan-scanner);
+      border-radius: 50%;
+      box-shadow: 
+        0 0 25px var(--djbc-cyan-glow),
+        inset 0 0 20px rgba(0, 229, 255, 0.25),
+        0 0 0 1px rgba(255, 255, 255, 0.3);
+      pointer-events: none;
+      z-index: 20;
+      opacity: 0;
+      transition: opacity 0.2s ease, width 0.15s ease, height 0.15s ease;
+      will-change: transform, left, top;
+    }
+
+    .xray-magnifier-lens.active {
+      opacity: 1;
+    }
+
+    /* Crosshair in Lens */
+    .lens-crosshair {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+    }
+
+    .lens-crosshair::before,
+    .lens-crosshair::after {
+      content: '';
+      position: absolute;
+      background: rgba(0, 229, 255, 0.6);
+    }
+
+    .lens-crosshair::before {
+      top: 50%;
+      left: 10%;
+      right: 10%;
+      height: 1px;
+      transform: translateY(-50%);
+    }
+
+    .lens-crosshair::after {
+      left: 50%;
+      top: 10%;
+      bottom: 10%;
+      width: 1px;
+      transform: translateX(-50%);
+    }
+
+    .lens-center-ring {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 18px;
+      height: 18px;
+      transform: translate(-50%, -50%);
+      border: 1px dashed var(--djbc-cyan-scanner);
+      border-radius: 50%;
+    }
+
+    .lens-label-badge {
+      position: absolute;
+      bottom: -28px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(4, 30, 58, 0.95);
+      border: 1px solid var(--djbc-cyan-scanner);
+      color: #FFFFFF;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      padding: 2px 8px;
+      border-radius: 3px;
+      white-space: nowrap;
+      text-transform: uppercase;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+    }
+
+    /* ─── HOTSPOT LAYER & MARKERS ─── */
+    .hotspots-layer {
+      position: absolute;
+      inset: 0;
+      z-index: 10;
+      pointer-events: auto;
+    }
+
+    .hotspot-pin {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      width: 34px;
+      height: 34px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 12;
+      transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .hotspot-pin:hover {
+      transform: translate(-50%, -50%) scale(1.2);
+    }
+
+    .pin-radar {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      border: 2px solid var(--color-organic-orange);
+      opacity: 0.8;
+      animation: pinRadarPulse 2s infinite cubic-bezier(0.215, 0.61, 0.355, 1);
+    }
+
+    @keyframes pinRadarPulse {
+      0% { transform: scale(0.5); opacity: 1; }
+      100% { transform: scale(2.2); opacity: 0; }
+    }
+
+    .pin-core {
+      width: 24px;
+      height: 24px;
+      background: linear-gradient(135deg, #FF9900 0%, #D95300 100%);
+      border: 2px solid #FFFFFF;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      color: #FFFFFF;
+      box-shadow: 0 0 12px rgba(255, 119, 0, 0.7);
+    }
+
+    .pin-tooltip {
+      position: absolute;
+      bottom: 120%;
+      left: 50%;
+      transform: translateX(-50%) translateY(4px);
+      background: rgba(4, 25, 48, 0.95);
+      border: 1px solid var(--djbc-gold);
+      color: #FFFFFF;
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 600;
+      white-space: nowrap;
+      pointer-events: none;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.5);
+    }
+
+    .pin-tooltip::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border-width: 5px;
+      border-style: solid;
+      border-color: var(--djbc-gold) transparent transparent transparent;
+    }
+
+    .hotspot-pin:hover .pin-tooltip {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .hotspot-pin.visited .pin-core {
+      background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+      box-shadow: 0 0 10px rgba(16, 185, 129, 0.6);
+    }
+    .hotspot-pin.visited .pin-radar {
+      border-color: #10B981;
+    }
+
+    /* ─── BOTTOM CONTROL DOCK ─── */
+    .controls-dock {
+      margin-top: 16px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      background: rgba(6, 32, 56, 0.85);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--border-hud);
+      padding: 10px 24px;
+      border-radius: 50px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+      z-index: 30;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .dock-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .dock-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: #94A3B8;
+      text-transform: uppercase;
+    }
+
+    .btn-pill {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #FFFFFF;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+
+    .btn-pill:hover {
+      background: rgba(0, 229, 255, 0.15);
+      border-color: var(--djbc-cyan-scanner);
+      color: var(--djbc-cyan-scanner);
+    }
+
+    .btn-pill.active {
+      background: var(--djbc-navy-main);
+      border-color: var(--djbc-gold);
+      color: var(--djbc-gold);
+      box-shadow: 0 0 12px rgba(217, 180, 91, 0.35);
+    }
+
+    .slider-container {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .slider-container input[type="range"] {
+      width: 90px;
+      accent-color: var(--djbc-cyan-scanner);
+      cursor: pointer;
+    }
+
+    /* ─── DENSITY COLOR PALETTE LEGEND ─── */
+    .density-legend {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-top: 10px;
+      padding: 6px 16px;
+      background: rgba(3, 15, 28, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 8px;
+      font-size: 11px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    /* ─── MODAL CALLOUT CARD (DETAIL INSPEKSI) ─── */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(2, 8, 16, 0.75);
+      backdrop-filter: blur(6px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.25s ease;
+    }
+
+    .modal-backdrop.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-card {
+      background: #081D33;
+      border: 1px solid var(--djbc-gold);
+      border-radius: 14px;
+      width: 92%;
+      max-width: 640px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(217, 180, 91, 0.2);
+      overflow: hidden;
+      transform: translateY(20px) scale(0.96);
+      transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .modal-backdrop.open .modal-card {
+      transform: translateY(0) scale(1);
+    }
+
+    .modal-header {
+      background: linear-gradient(135deg, #0A294A 0%, #061A30 100%);
+      padding: 16px 20px;
+      border-bottom: 1px solid rgba(217, 180, 91, 0.3);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .modal-header-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .modal-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 4px;
+      background: var(--color-organic-orange);
+      color: #FFFFFF;
+      text-transform: uppercase;
+    }
+
+    .modal-header h3 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: #FFFFFF;
+    }
+
+    .modal-close-btn {
+      background: rgba(255, 255, 255, 0.1);
+      border: none;
+      color: #FFF;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      transition: background 0.2s;
+    }
+
+    .modal-close-btn:hover {
+      background: rgba(239, 68, 68, 0.8);
+    }
+
+    /* Tabs */
+    .modal-tabs {
+      display: flex;
+      background: rgba(4, 18, 33, 0.95);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .tab-btn {
+      flex: 1;
+      padding: 10px 12px;
+      background: transparent;
+      border: none;
+      border-bottom: 2px solid transparent;
+      color: #94A3B8;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .tab-btn:hover {
+      color: #FFF;
+    }
+
+    .tab-btn.active {
+      color: var(--djbc-gold);
+      border-bottom-color: var(--djbc-gold);
+      background: rgba(217, 180, 91, 0.08);
+    }
+
+    .modal-body {
+      padding: 20px;
+      max-height: 55vh;
+      overflow-y: auto;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .tab-panel {
+      display: none;
+    }
+
+    .tab-panel.active {
+      display: block;
+      animation: fadeIn 0.2s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .info-item {
+      margin-bottom: 12px;
+      background: rgba(255, 255, 255, 0.03);
+      padding: 10px 14px;
+      border-left: 3px solid var(--djbc-gold);
+      border-radius: 0 6px 6px 0;
+    }
+
+    .info-item strong {
+      display: block;
+      color: var(--djbc-gold);
+      font-size: 11px;
+      font-family: 'JetBrains Mono', monospace;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+    }
+
+    .modal-footer {
+      padding: 12px 20px;
+      background: rgba(4, 18, 33, 0.95);
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-btn {
+      padding: 6px 14px;
+      font-size: 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.06);
+      color: #FFF;
+      transition: all 0.2s;
+    }
+
+    .footer-btn:hover {
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .top-scanner-header { padding: 10px 14px; flex-direction: column; gap: 8px; align-items: flex-start; }
+      .header-right { align-self: flex-end; }
+      .controls-dock { border-radius: 12px; padding: 10px 14px; gap: 10px; }
+      .density-legend { flex-wrap: wrap; font-size: 10px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP SCANNER HEADER HUD -->
+  <header class="top-scanner-header">
+    <div class="header-left">
+      <div class="djbc-badge">DJBC FORENSIC</div>
+      <div class="header-title-group">
+        <h1>Simulator Pemindai X-Ray Kargo & Paket Pos (Modul 3)</h1>
+        <p>STASIUN PEMINDAIAN BARANG KIRIMAN IMPOR • PMK-188/2021 & S-39/BC/2023</p>
+      </div>
+    </div>
+    <div class="header-right">
+      <div class="telemetry-tag">
+        <div class="telemetry-dot"></div>
+        <span>DUAL-ENERGY ACTIVE: 160 kV</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN INSPECTION STAGE VIEWPORT -->
+  <main class="simulator-viewport">
+    <div class="forensic-grid"></div>
+
+    <!-- The Interactive Stage Container -->
+    <div class="stage-container" id="stageContainer">
+      <!-- HUD Overlay Top Corner -->
+      <div class="stage-hud-overlay">
+        <div class="hud-box">
+          KODE TARGET: <strong>PARCEL-EXP-9912 / KARTON POS & CARGO</strong>
+        </div>
+        <div class="hud-box" id="hudCoords">
+          X: <strong>00.0%</strong> | Y: <strong>00.0%</strong> | SENSOR: <strong>STANDBY</strong>
+        </div>
+      </div>
+
+      <!-- Image Layers (Normal & X-Ray) -->
+      <div class="image-layer-wrapper">
+        <!-- Base Layer: Normal Photo -->
+        <img src="public/assets/images/central/m3_parcel_normal.jpeg" 
+             alt="Tampak Luar Paket Kargo" 
+             class="image-layer layer-normal" 
+             id="normalImage" 
+             onerror="this.src='assets/images/central/m3_parcel_normal.jpeg'">
+
+        <!-- Revealed Top Layer: X-Ray Scanner (Masked by clip-path) -->
+        <img src="public/assets/images/central/m3_parcel_xray.jpeg" 
+             alt="Tampak X-Ray Paket Kargo" 
+             class="image-layer layer-xray" 
+             id="xrayImage" 
+             onerror="this.src='assets/images/central/m3_parcel_xray.jpeg'">
+      </div>
+
+      <!-- Interactive Hotspot Pins -->
+      <div class="hotspots-layer" id="hotspotsLayer">
+        <!-- Generated by JavaScript -->
+      </div>
+
+      <!-- Magnifier Glass Cursor Lens Reticle -->
+      <div class="xray-magnifier-lens" id="magnifierLens">
+        <div class="lens-crosshair"></div>
+        <div class="lens-center-ring"></div>
+        <div class="lens-label-badge" id="lensBadge">X-RAY LENS</div>
+      </div>
+    </div>
+
+    <!-- Controls Dock -->
+    <div class="controls-dock">
+      <div class="dock-group">
+        <span class="dock-label">Mode:</span>
+        <button class="btn-pill active" id="btnModeLens" onclick="setMode('lens')">🔍 Lensa Pembesar</button>
+        <button class="btn-pill" id="btnModeXray" onclick="setMode('xray')">⚡ Full X-Ray</button>
+        <button class="btn-pill" id="btnModeNormal" onclick="setMode('normal')">📦 Tampak Luar</button>
+      </div>
+
+      <div class="dock-group">
+        <span class="dock-label">Ukuran Lensa:</span>
+        <div class="slider-container">
+          <input type="range" id="lensRadiusSlider" min="70" max="220" value="120">
+          <span id="radiusVal" style="font-family:'JetBrains Mono'; font-size:11px; min-width:34px;">120px</span>
+        </div>
+      </div>
+
+      <div class="dock-group">
+        <button class="btn-pill" id="btnAudioToggle" onclick="toggleAudioFeedback()">🔊 Suara Bip Scan</button>
+      </div>
+    </div>
+
+    <!-- Material Density Legend -->
+    <div class="density-legend">
+      <span>KODE WARNA DENSITAS MATERIAL:</span>
+      <div class="legend-item">
+        <div class="legend-dot" style="background: #FF7700;"></div>
+        <span>Oranye / Cokelat: <strong>Organik / Narkotika</strong></span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background: #00D26A;"></div>
+        <span>Hijau: <strong>Campuran / Anorganik</strong></span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background: #0077FF;"></div>
+        <span>Biru / Hitam: <strong>Logam Tebal / Pelindung</strong></span>
+      </div>
+    </div>
+  </main>
+
+  <!-- MODAL DETAIL CALLOUT CARD -->
+  <div class="modal-backdrop" id="detailModal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="modal-header-info">
+          <span class="modal-tag" id="modalTag">TEMUAN ANOMALI</span>
+          <h3 id="modalTitle">Judul Hotspot</h3>
+        </div>
+        <button class="modal-close-btn" onclick="closeModal()">✕</button>
+      </div>
+
+      <div class="modal-tabs">
+        <button class="tab-btn active" onclick="switchTab('tab-modus', this)">Modus Operandi</button>
+        <button class="tab-btn" onclick="switchTab('tab-detection', this)">Ciri & SOP DJBC</button>
+        <button class="tab-btn" onclick="switchTab('tab-risk', this)">Indikator Risiko</button>
+      </div>
+
+      <div class="modal-body">
+        <div class="tab-panel active" id="tab-modus">
+          <div class="info-item">
+            <strong>Deskripsi Modus Penyelundupan</strong>
+            <p id="modalDesc">Deskripsi akan ditampilkan di sini.</p>
+          </div>
+          <div class="info-item">
+            <strong>Karakteristik Citra Pemindai X-Ray</strong>
+            <p id="modalXrayNote">Citra densitas oranye terang menunjukkan paket organik yang diselipkan dalam kompartemen tersembunyi.</p>
+          </div>
+        </div>
+
+        <div class="tab-panel" id="tab-detection">
+          <div class="info-item">
+            <strong>SOP Tindakan Petugas Bea Cukai</strong>
+            <ul id="modalActions" style="padding-left: 18px; margin-top: 4px;">
+              <li>Pemeriksaan fisik mendalam.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="tab-panel" id="tab-risk">
+          <div class="info-item">
+            <strong>Red Flags / Indikator Risiko Anomali</strong>
+            <ul id="modalRisks" style="padding-left: 18px; margin-top: 4px; color: #FBBF24;">
+              <li>Anomali berat paket kiriman.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="footer-btn" onclick="navigateHotspot(-1)">← Titik Sebelumnya</button>
+        <span style="font-family:'JetBrains Mono'; font-size:11px; color:#94A3B8;" id="modalCounter">1 / 5</span>
+        <button class="footer-btn" onclick="navigateHotspot(1)">Titik Berikutnya →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT LOGIC -->
+  <script>
+    // DATA HOTSPOT ANOMALI KARGO POS (MODUL 3)
+    const HOTSPOTS_DATA = [
+      {
+        id: "hs-kardus",
+        label: "Dinding Kardus Corrugated (Double-Wall Sheet)",
+        badge: "KARDUS CORRUGATED",
+        tagColor: "#FF7700",
+        position: { x: 30.5, y: 46.0 },
+        desc: "Metamfetamin cair diresapkan ke dalam selipan lembaran karton bergelombang (corrugated flute) sebelum paket disegel pita perekat.",
+        xrayNote: "Citra X-Ray menampakkan garis oranye pekat homogen pada dinding kardus di mana seharusnya densitas udara/kosong.",
+        risks: [
+          "Dinding kardus kaku tidak wajar dan memiliki aroma pelarut kimia khas.",
+          "Anjing pelacak K-9 memberikan respon duduk aktif pada tepi kardus.",
+          "Berat kardus kosong lebih berat dibanding standar pabrik."
+        ],
+        actions: [
+          "Lakukan pengirisan tipis pada penampang melintang karton.",
+          "Ambil sampel serat karton dan uji reaksi Reagen Marquis.",
+          "Kirim spesimen ke Balai Laboratorium Bea Cukai (BLBC)."
+        ]
+      },
+      {
+        id: "hs-makanan-kaleng",
+        label: "Kaleng Makanan Cair (Liquid Meth Concealment)",
+        badge: "KALENG MAKANAN",
+        tagColor: "#FF7700",
+        position: { x: 62.8, y: 52.5 },
+        desc: "Kaleng buah/sarden dibuka pada sambungan bawah, diisi sabu cair berkonsentrasi tinggi, lalu dipatri ulang dengan presisi tinggi.",
+        xrayNote: "Logam luar kaleng berwarna biru pekat, sedangkan cairan di dalamnya menunjukkan densitas oranye tinggi tanpa ada potongan padat buah.",
+        risks: [
+          "Permukaan kaleng memiliki bekas solder halus di bibir lipatan bawah.",
+          "Terdapat perbedaan berat netto aktual sebesar +180 gram dibanding label kemasan.",
+          "Saat dikocok, viskositas cairan terasa lebih kental dari air sirup buah standar."
+        ],
+        actions: [
+          "Gunakan alat pelubang kaleng inspeksi di ruang berventilasi asam.",
+          "Uji keasaman (pH) dan teteskan Reagen Fast Blue B / Marquis.",
+          "Amankan kaleng sebagai barang bukti tindak pidana narkotika."
+        ]
+      },
+      {
+        id: "hs-sparepart-shock",
+        label: "Tabung Shock Absorber Kendaraan (Rongga Silinder)",
+        badge: "SPAREPART MOBIL",
+        tagColor: "#0077FF",
+        position: { x: 48.5, y: 71.0 },
+        desc: "Rongga hidrolik tabung suspensi shock absorber dikosongkan dan dimasukkan gulungan bungkusan sabu kristal mampat.",
+        xrayNote: "Dinding silinder baja berwarna biru tua, dengan bayangan isi oranye-cokelat padat di tengah tabung yang semestinya kosong.",
+        risks: [
+          "Baut penutup ulir menunjukkan goresan kunci pas baru.",
+          "Pengirim tercatat bengkel umum di luar negeri tanpa nomor part OEM resmi.",
+          "Citra X-Ray menampakkan kontras material berlapis di dalam tabung."
+        ],
+        actions: [
+          "Pindahkan komponen ke ruang workshop penindakan.",
+          "Bongkar penutup silinder atau potong dengan alat gerinda pendingin.",
+          "Ekstraksi paket serbuk kristal untuk ditimbang dan disita."
+        ]
+      },
+      {
+        id: "hs-botol-cairan",
+        label: "Wadah Sampo & Sabun (Botol Cairan Bertabung Palsu)",
+        badge: "PRODUK CAIRAN",
+        tagColor: "#00D26A",
+        position: { x: 79.5, y: 62.0 },
+        desc: "Di dalam botol sampo dimasukkan kondom tebal atau tabung plastik kedap yang berisi kokain cair atau kristal sabu.",
+        xrayNote: "Plastik botol tampak hijau muda. Di bagian tengah cairan terlihat batas lapisan anomali berbentuk kapsul berwarna oranye gelap.",
+        risks: [
+          "Segel plastik shrink-wrap pada leher botol bekas dipanaskan ulang.",
+          "Terlihat endapan atau batas cairan yang memisah saat botol dibalik.",
+          "Warna cairan sampo sedikit keruh dibanding spesimen asli pabrik."
+        ],
+        actions: [
+          "Buka tutup pompa botol dan gunakan pipet ukur.",
+          "Uji sampel cairan menggunakan Reagen Scott (khusus kokain) atau Marquis.",
+          "Lakukan inventarisasi seluruh isi paket kiriman."
+        ]
+      },
+      {
+        id: "hs-mainan-anak",
+        label: "Mainan Boneka & Robot Plastik (False Cavity)",
+        badge: "MAINAN ANAK",
+        tagColor: "#FF7700",
+        position: { x: 23.5, y: 65.0 },
+        desc: "Busa dakron pada boneka diganti paket pil ekstasi yang dibungkus karbon pelindung dan plastik perekat berlapis.",
+        xrayNote: "Rangkaian pil padat berbentuk tablet kecil berdensitas oranye terlihat berkumpul di bagian perut mainan.",
+        risks: [
+          "Jahitan kain pada bagian punggung boneka dikerjakan secara manual (tidak rapi).",
+          "Terdengar bunyi derak butiran saat mainan ditekan atau digoyang.",
+          "Berat boneka tidak seimbang, condong berat ke sisi bawah."
+        ],
+        actions: [
+          "Lepaskan jahitan dengan gunting benang steril.",
+          "Keluarkan bungkusan barang bukti tanpa merusak butiran pil.",
+          "Hitung butir pil dan lakukan uji pereaksi narkotika."
+        ]
+      }
+    ];
+
+    // STATE
+    let currentMode = 'lens'; // 'lens', 'xray', 'normal'
+    let lensRadius = 120;
+    let activeHotspotIndex = 0;
+    let audioFeedback = false;
+    let audioCtx = null;
+
+    // DOM ELEMENTS
+    const stage = document.getElementById('stageContainer');
+    const xrayImg = document.getElementById('xrayImage');
+    const normalImg = document.getElementById('normalImage');
+    const lens = document.getElementById('magnifierLens');
+    const lensBadge = document.getElementById('lensBadge');
+    const hudCoords = document.getElementById('hudCoords');
+    const hotspotsLayer = document.getElementById('hotspotsLayer');
+    const radiusSlider = document.getElementById('lensRadiusSlider');
+    const radiusVal = document.getElementById('radiusVal');
+
+    // Web Audio Sound Synth
+    function playBeep(freq = 880, dur = 0.05) {
+      if (!audioFeedback) return;
+      try {
+        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        gain.gain.setValueAtTime(0.04, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + dur);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + dur);
+      } catch (e) {}
+    }
+
+    function toggleAudioFeedback() {
+      audioFeedback = !audioFeedback;
+      const btn = document.getElementById('btnAudioToggle');
+      if (audioFeedback) {
+        btn.classList.add('active');
+        playBeep(1200, 0.1);
+      } else {
+        btn.classList.remove('active');
+      }
+    }
+
+    // RENDER HOTSPOTS
+    function renderHotspots() {
+      hotspotsLayer.innerHTML = HOTSPOTS_DATA.map((h, idx) => `
+        <div class="hotspot-pin" 
+             style="left: ${h.position.x}%; top: ${h.position.y}%;" 
+             onclick="openHotspotModal(${idx})" 
+             title="${h.label}">
+          <div class="pin-radar"></div>
+          <div class="pin-core">${idx + 1}</div>
+          <div class="pin-tooltip">${h.label}</div>
+        </div>
+      `).join('');
+    }
+
+    // UPDATE LENS & CLIPPING
+    function updateLensPosition(clientX, clientY) {
+      if (currentMode !== 'lens') return;
+
+      const rect = stage.getBoundingClientRect();
+      const x = clientX - rect.left;
+      const y = clientY - rect.top;
+
+      // Ensure bounds
+      if (x < 0 || x > rect.width || y < 0 || y > rect.height) {
+        lens.classList.remove('active');
+        xrayImg.style.clipPath = `circle(0px at 50% 50%)`;
+        return;
+      }
+
+      lens.classList.add('active');
+      lens.style.left = `${x}px`;
+      lens.style.top = `${y}px`;
+
+      // Apply CSS Clip-Path to revealed X-Ray image
+      xrayImg.style.clipPath = `circle(${lensRadius}px at ${x}px ${y}px)`;
+
+      // Telemetry HUD Update
+      const pctX = ((x / rect.width) * 100).toFixed(1);
+      const pctY = ((y / rect.height) * 100).toFixed(1);
+      hudCoords.innerHTML = `X: <strong>${pctX}%</strong> | Y: <strong>${pctY}%</strong> | SCAN: <strong>ACTIVE</strong>`;
+
+      // Check proximity to any hotspot to pulse beep
+      checkHotspotProximity(pctX, pctY);
+    }
+
+    let lastBeepTime = 0;
+    function checkHotspotProximity(pctX, pctY) {
+      const now = Date.now();
+      if (now - lastBeepTime < 350) return;
+
+      for (const h of HOTSPOTS_DATA) {
+        const dx = h.position.x - pctX;
+        const dy = h.position.y - pctY;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 8) {
+          playBeep(1400, 0.08);
+          lastBeepTime = now;
+          break;
+        }
+      }
+    }
+
+    // EVENT LISTENERS FOR MOUSE & TOUCH
+    stage.addEventListener('mousemove', (e) => {
+      updateLensPosition(e.clientX, e.clientY);
+    });
+
+    stage.addEventListener('mouseleave', () => {
+      if (currentMode === 'lens') {
+        lens.classList.remove('active');
+        xrayImg.style.clipPath = `circle(0px at 50% 50%)`;
+        hudCoords.innerHTML = `X: <strong>00.0%</strong> | Y: <strong>00.0%</strong> | SENSOR: <strong>STANDBY</strong>`;
+      }
+    });
+
+    // Touch Support for Mobile / Tablet
+    stage.addEventListener('touchmove', (e) => {
+      e.preventDefault();
+      if (e.touches.length > 0) {
+        updateLensPosition(e.touches[0].clientX, e.touches[0].clientY);
+      }
+    }, { passive: false });
+
+    stage.addEventListener('touchend', () => {
+      if (currentMode === 'lens') {
+        lens.classList.remove('active');
+        xrayImg.style.clipPath = `circle(0px at 50% 50%)`;
+      }
+    });
+
+    // SLIDER LENS RADIUS
+    radiusSlider.addEventListener('input', (e) => {
+      lensRadius = parseInt(e.target.value, 10);
+      radiusVal.textContent = `${lensRadius}px`;
+      document.documentElement.style.setProperty('--lens-radius', `${lensRadius}px`);
+    });
+
+    // MODE SWITCHER
+    function setMode(mode) {
+      currentMode = mode;
+      document.querySelectorAll('.controls-dock .btn-pill').forEach(b => b.classList.remove('active'));
+
+      if (mode === 'lens') {
+        document.getElementById('btnModeLens').classList.add('active');
+        normalImg.style.opacity = '1';
+        xrayImg.style.opacity = '1';
+        xrayImg.style.clipPath = 'circle(0px at 50% 50%)';
+        lensBadge.textContent = 'X-RAY LENS';
+      } else if (mode === 'xray') {
+        document.getElementById('btnModeXray').classList.add('active');
+        lens.classList.remove('active');
+        normalImg.style.opacity = '0';
+        xrayImg.style.opacity = '1';
+        xrayImg.style.clipPath = 'circle(150% at 50% 50%)';
+      } else if (mode === 'normal') {
+        document.getElementById('btnModeNormal').classList.add('active');
+        lens.classList.remove('active');
+        normalImg.style.opacity = '1';
+        xrayImg.style.opacity = '0';
+        xrayImg.style.clipPath = 'circle(0px at 50% 50%)';
+      }
+      playBeep(950, 0.06);
+    }
+
+    // MODAL DETAIL LOGIC
+    function openHotspotModal(index) {
+      activeHotspotIndex = index;
+      const data = HOTSPOTS_DATA[index];
+      if (!data) return;
+
+      // Mark visited
+      const pins = document.querySelectorAll('.hotspot-pin');
+      if (pins[index]) pins[index].classList.add('visited');
+
+      document.getElementById('modalTitle').textContent = data.label;
+      document.getElementById('modalTag').textContent = data.badge;
+      document.getElementById('modalTag').style.background = data.tagColor;
+      document.getElementById('modalDesc').textContent = data.desc;
+      document.getElementById('modalXrayNote').textContent = data.xrayNote;
+
+      document.getElementById('modalActions').innerHTML = data.actions.map(a => `<li>${a}</li>`).join('');
+      document.getElementById('modalRisks').innerHTML = data.risks.map(r => `<li>${r}</li>`).join('');
+      document.getElementById('modalCounter').textContent = `${index + 1} / ${HOTSPOTS_DATA.length}`;
+
+      switchTab('tab-modus', document.querySelector('.modal-tabs .tab-btn'));
+      document.getElementById('detailModal').classList.add('open');
+      playBeep(1100, 0.08);
+    }
+
+    function closeModal() {
+      document.getElementById('detailModal').classList.remove('open');
+    }
+
+    function navigateHotspot(step) {
+      let newIdx = activeHotspotIndex + step;
+      if (newIdx < 0) newIdx = HOTSPOTS_DATA.length - 1;
+      if (newIdx >= HOTSPOTS_DATA.length) newIdx = 0;
+      openHotspotModal(newIdx);
+    }
+
+    function switchTab(tabId, el) {
+      document.querySelectorAll('.modal-tabs .tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+
+      if (el) el.classList.add('active');
+      const targetPanel = document.getElementById(tabId);
+      if (targetPanel) targetPanel.classList.add('active');
+    }
+
+    // Close modal on backdrop click
+    document.getElementById('detailModal').addEventListener('click', (e) => {
+      if (e.target.id === 'detailModal') closeModal();
+    });
+
+    // Close on Escape key
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeModal();
+    });
+
+    // INITIAL RENDER
+    renderHotspots();
+  </script>
+</body>
+</html>
