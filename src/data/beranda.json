@@ -14,6 +14,28 @@
       }
     }
   },
+  "aboutMedia": {
+    "badge": "TENTANG MEDIA PEMBELAJARAN",
+    "title": "Simulasi Interaktif Inspeksi & Interdiksi Narkotika",
+    "lead": "Media pembelajaran ini dirancang khusus bagi pegawai Direktorat Jenderal Bea dan Cukai (DJBC) untuk mengasah keterampilan teknis, kepekaan visual, dan pemahaman mendalam terhadap berbagai modus operandi penyelundupan Narkotika, Psikotropika, dan Prekursor (NPP).",
+    "features": [
+      {
+        "icon": "🔍",
+        "title": "Simulasi 3D & Visual Radiografi X-Ray",
+        "desc": "Menyajikan pemindaian objek 360° dan layer X-Ray realistis pada 5 area inspeksi kritis (tubuh kurir, bagasi, barang kiriman pos, kendaraan darat, dan kapal kargo)."
+      },
+      {
+        "icon": "🎯",
+        "title": "Skenario Riil & Indikator Risiko (Red Flags)",
+        "desc": "Setiap hotspot memuat studi kasus nyata penindakan Bea Cukai, analisis citra anomali, SOP penggeledahan, dan indikator risiko lapangan."
+      },
+      {
+        "icon": "📊",
+        "title": "Pelacakan Kemajuan & Standardisasi SCORM",
+        "desc": "Progress pembelajaran dihitung secara real-time berdasarkan 38 titik interaksi hotspot dan evaluasi kompetensi tersinkronisasi ke SCORM LMS & LRS xAPI."
+      }
+    ]
+  },
   "progressCard": {
     "badge": "PROGRES LATIHAN & COMPLIANCE",
     "title": "Progres Pembelajaran Kursus Anda"

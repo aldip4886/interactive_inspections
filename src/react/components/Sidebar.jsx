@@ -1,8 +1,59 @@
-﻿import React from 'react';
+import React from 'react';
 import { useApp } from '../context/AppContext';
+import { courseProgress } from '../../core/progress.js';
 
 export function Sidebar() {
-  const { currentRoute, sidebarCollapsed, navigate } = useApp();
+  const { currentRoute, sidebarCollapsed, navigate, overallProgress } = useApp();
+
+  const renderModuleProgressBadge = (moduleId) => {
+    if (!moduleId || moduleId === 'beranda') return null;
+    const pct = courseProgress.getModuleProgress(moduleId) || 0;
+
+    const radius = 8;
+    const circumference = 2 * Math.PI * radius; // ~50.26
+    const strokeDashoffset = circumference - (pct / 100) * circumference;
+
+    if (pct >= 100) {
+      return (
+        <div className="sidebar-progress-badge completed" title="Modul Selesai (100%)">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round">
+            <polyline points="20 6 9 17 4 12" />
+          </svg>
+        </div>
+      );
+    }
+
+    if (pct > 0) {
+      return (
+        <div className="sidebar-progress-badge in-progress" title={`Progres: ${pct}%`}>
+          <svg width="20" height="20" viewBox="0 0 20 20">
+            <circle cx="10" cy="10" r={radius} fill="none" stroke="rgba(255, 255, 255, 0.15)" strokeWidth="2.5" />
+            <circle
+              cx="10"
+              cy="10"
+              r={radius}
+              fill="none"
+              stroke="var(--color-gold, #D9B45B)"
+              strokeWidth="2.5"
+              strokeDasharray={circumference}
+              strokeDashoffset={strokeDashoffset}
+              strokeLinecap="round"
+              transform="rotate(-90 10 10)"
+              style={{ transition: 'stroke-dashoffset 0.3s ease' }}
+            />
+          </svg>
+        </div>
+      );
+    }
+
+    return (
+      <div className="sidebar-progress-badge empty" title="Belum Dipelajari (0%)">
+        <svg width="20" height="20" viewBox="0 0 20 20">
+          <circle cx="10" cy="10" r={radius} fill="none" stroke="rgba(255, 255, 255, 0.15)" strokeWidth="2" />
+        </svg>
+      </div>
+    );
+  };
 
   const navItems = [
     {
@@ -117,6 +168,7 @@ export function Sidebar() {
             >
               {item.icon}
               <span className="nav-label">{item.label}</span>
+              {renderModuleProgressBadge(item.id)}
             </a>
           );
         })}

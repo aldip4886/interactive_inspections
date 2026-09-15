@@ -78,6 +78,37 @@ export function BerandaView() {
         </div>
       </section>
 
+      {/* ─── ABOUT MEDIA PEMBELAJARAN CARD ─── */}
+      <div className="beranda-about-card">
+        <div className="about-card-header">
+          <div className="about-card-badge-wrap">
+            <span className="about-card-icon">🎓</span>
+            <div>
+              <span className="about-card-tag font-code-tech">
+                {berandaData.aboutMedia?.badge || 'TENTANG MEDIA PEMBELAJARAN'}
+              </span>
+              <h2 className="about-card-title">
+                {berandaData.aboutMedia?.title || 'Simulasi Interaktif Inspeksi & Interdiksi Narkotika'}
+              </h2>
+            </div>
+          </div>
+        </div>
+        <div className="about-card-body">
+          <p className="about-card-lead">{berandaData.aboutMedia?.lead}</p>
+          <div className="about-features-grid">
+            {(berandaData.aboutMedia?.features || []).map((feat, idx) => (
+              <div className="about-feature-item" key={idx}>
+                <div className="about-feat-icon">{feat.icon}</div>
+                <div className="about-feat-content">
+                  <h4>{feat.title}</h4>
+                  <p>{feat.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
       {/* ─── COURSE PROGRESS CARD ─── */}
       <div className="beranda-progress-summary-card">
         <div className="progress-summary-header">

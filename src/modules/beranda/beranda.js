@@ -70,6 +70,18 @@ export class BerandaView {
       </a>
     `).join('');
 
+    const aboutMedia = data.aboutMedia || {};
+
+    const aboutFeaturesHtml = (aboutMedia.features || []).map(feat => `
+      <div class="about-feature-item">
+        <div class="about-feat-icon">${feat.icon}</div>
+        <div class="about-feat-content">
+          <h4>${feat.title}</h4>
+          <p>${feat.desc}</p>
+        </div>
+      </div>
+    `).join('');
+
     const html = `
       <div class="beranda-container">
         <!-- ─── 1. HERO BANNER SECTION ─── -->
@@ -92,6 +104,25 @@ export class BerandaView {
             </div>
           </div>
         </section>
+
+        <!-- ─── 1.5. ABOUT MEDIA PEMBELAJARAN CARD ─── -->
+        <div class="beranda-about-card">
+          <div class="about-card-header">
+            <div class="about-card-badge-wrap">
+              <span class="about-card-icon">🎓</span>
+              <div>
+                <span class="about-card-tag font-code-tech">${aboutMedia.badge || 'TENTANG MEDIA PEMBELAJARAN'}</span>
+                <h2 class="about-card-title">${aboutMedia.title || 'Simulasi Interaktif Inspeksi & Interdiksi Narkotika'}</h2>
+              </div>
+            </div>
+          </div>
+          <div class="about-card-body">
+            <p class="about-card-lead">${aboutMedia.lead || ''}</p>
+            <div class="about-features-grid">
+              ${aboutFeaturesHtml}
+            </div>
+          </div>
+        </div>
 
         <!-- ─── COURSE PROGRESS CARD ─── -->
         <div class="beranda-progress-summary-card">
