@@ -137,21 +137,21 @@
       "riskScore": 90,
       "drugTypes": "Sabu (Methamphetamine), Heroin lempengan, Kokain murni, Ketamine",
       "packagingTechnique": "Lempengan Narkotika dipres pipih vakum aluminium foil kedap bau, diselipkan di balik furing/dinding ganda tas tangan (handbag) atau alas koper",
-      "mainIllustration": "assets/images/hotspots/hs_sardine_can_false.png",
-      "thumb": "assets/images/hotspots/hs_sardine_can_false.png",
+      "mainIllustration": "assets/images/hotspots/module_2/1_dinding_koper.png",
+      "thumb": "assets/images/hotspots/module_2/1_dinding_koper.png",
       "description": "Penyembunyian Narkotika pada dinding ganda atau alas rahasia tas bawaan (handbag/koper).",
       "modusDetail": "Pelaku memanfaatkan ruang antara struktur kulit luar tas dan kain furing dalam. Lempengan Sabu/Heroin (500g-2kg) dipres menggunakan mesin hidrolik lalu dijahit rapi di dalam dinding tas sehingga tampak seperti tas kulit tebal biasa saat pemeriksaan kasat mata.",
       "findings": [
         {
-          "thumb": "assets/images/hotspots/hs_sardine_can_false.png",
-          "full": "assets/images/hotspots/hs_sardine_can_false.png",
-          "caption": "Pembongkaran Dinding Ganda Tas Tangan Terisi Sabu",
-          "tag": "Dokumentasi Penindakan"
+          "thumb": "assets/images/hotspots/module_2/1_dinding_koper.png",
+          "full": "assets/images/hotspots/module_2/1_dinding_koper.png",
+          "caption": "Pembongkaran Dinding Ganda Koper & Tas Terisi Paket Narkotika",
+          "tag": "Barang Bukti Sitaan"
         },
         {
           "thumb": "assets/images/central/m2_luggage_xray.png",
           "full": "assets/images/central/m2_luggage_xray.png",
-          "caption": "Citra X-Ray Scanner Menampakkan Anomali Densitas Organik di Dinding Tas",
+          "caption": "Citra X-Ray Scanner Menampakkan Anomali Densitas Organik di Dinding Koper",
           "tag": "Pencitraan X-Ray"
         }
       ],
@@ -199,21 +199,21 @@
       "riskScore": 85,
       "drugTypes": "Liquid Meth (Sabu Cair), Ketamine cair, GHB, Ekstasi cair",
       "packagingTechnique": "Cairan Sabu dimasukkan ke dalam botol pembersih muka, botol sampo, tube krim kosmetik, atau wadah aerosol yang dimodifikasi segel pabriknya",
-      "mainIllustration": "assets/images/hotspots/hs_sardine_can_false.png",
-      "thumb": "assets/images/hotspots/hs_sardine_can_false.png",
+      "mainIllustration": "assets/images/hotspots/module_2/2_cosmetic_pouch.png",
+      "thumb": "assets/images/hotspots/module_2/2_cosmetic_pouch.png",
       "description": "Penyamaran Narkotika cair (Liquid Meth) di dalam botol/tube perlengkapan pribadi.",
       "modusDetail": "Sindikat melarutkan kristal Methamphetamine ke dalam pelarut kimia khusus membentuk cairan bening (Liquid Meth). Cairan ini diisikan ke dalam botol sampo, serum wajah, atau tube krim (100-500ml) lalu direkatkan kembali segel kemasannya agar tampak seperti produk kosmetik pabrikan baru.",
       "findings": [
         {
-          "thumb": "assets/images/hotspots/hs_sardine_can_false.png",
-          "full": "assets/images/hotspots/hs_sardine_can_false.png",
-          "caption": "Sitaan Botol Serum & Kosmetik Berisi Liquid Meth",
+          "thumb": "assets/images/hotspots/module_2/2_cosmetic_pouch.png",
+          "full": "assets/images/hotspots/module_2/2_cosmetic_pouch.png",
+          "caption": "Pemeriksaan Pouch Kosmetik & Botol Perlengkapan Pribadi Berisi Narkotika Cair",
           "tag": "Barang Bukti Sitaan"
         },
         {
           "thumb": "assets/images/central/m2_luggage_xray.png",
           "full": "assets/images/central/m2_luggage_xray.png",
-          "caption": "Citra Radiologi X-Ray Menunjukkan Densitas Cairan Tak Sesuai",
+          "caption": "Citra X-Ray Pemindaian Botol Kosmetik Berisi Cairan Sintetis Narkotika",
           "tag": "Pencitraan X-Ray"
         }
       ],
@@ -260,21 +260,21 @@
       "riskScore": 80,
       "drugTypes": "Sabu kristal, Heroin, Kertas Dewa (Paper Drug / LSD blotter), Cocaine",
       "packagingTechnique": "Lembaran kertas buku tebal dipotong persegi di bagian tengah membentuk rongga tersembunyi, dilapisi plastik klip presisi dan diikat sampul keras",
-      "mainIllustration": "assets/images/hotspots/hs_sardine_can_false.png",
-      "thumb": "assets/images/hotspots/hs_sardine_can_false.png",
+      "mainIllustration": "assets/images/hotspots/module_2/3_buku.png",
+      "thumb": "assets/images/hotspots/module_2/3_buku.png",
       "description": "Penyembunyian paket Narkotika di dalam rongga rahasia potongan halaman buku tebal.",
       "modusDetail": "Kurir membawa tumpukan buku tebal (kamus, kitab, atau buku naskah). Bagian dalam ratusan halaman dipotong rapi menggunakan cutter mesin presisi membentuk kotak berongga kedap udara. Di dalam rongga diselipkan paket Narkotika berbobot 200-800 gram.",
       "findings": [
         {
-          "thumb": "assets/images/hotspots/hs_sardine_can_false.png",
-          "full": "assets/images/hotspots/hs_sardine_can_false.png",
-          "caption": "Buku Tebal Dipotong Tengah Menampakkan Serbuk Sabu",
+          "thumb": "assets/images/hotspots/module_2/3_buku.png",
+          "full": "assets/images/hotspots/module_2/3_buku.png",
+          "caption": "Penyitaan Buku/Kitab Tebal yang Dibobok Tengahnya untuk Menyimpan Kristal Sabu",
           "tag": "Barang Bukti Sitaan"
         },
         {
           "thumb": "assets/images/central/m2_luggage_xray.png",
           "full": "assets/images/central/m2_luggage_xray.png",
-          "caption": "X-Ray Scanner Menampilkan Bayangan Persegi Berongga di Tengah Halaman",
+          "caption": "Hasil Citra Radiologi X-Ray Memperlihatkan Rongga Gelap di Dalam Sampul Buku",
           "tag": "Pencitraan X-Ray"
         }
       ],
@@ -382,21 +382,21 @@
       "riskScore": 88,
       "drugTypes": "Sabu kristal, Heroin lempengan, Pil Ekstasi, Ketamine",
       "packagingTechnique": "Sol karet bagian bawah sepatu dikikis/dibor membentuk kompartemen rahasia, diisi lempengan Sabu/Ekstasi (200-500g per sepatu), lalu ditutup insole palsu",
-      "mainIllustration": "assets/images/hotspots/hs_sardine_can_false.png",
-      "thumb": "assets/images/hotspots/hs_sardine_can_false.png",
+      "mainIllustration": "assets/images/hotspots/module_2/5_sepatu.png",
+      "thumb": "assets/images/hotspots/module_2/5_sepatu.png",
       "description": "Kompartemen rahasia sol sepatu berongga (False Sole) berisi paket Narkotika.",
       "modusDetail": "Sol luar sepatu olahraga atau sepatu kulit dikikis menggunakan mesin bubut hingga membentuk ruang berongga. Lempengan Sabu dipres tipis dimasukkan ke dalam sol kanan dan kiri (total muatan 400-1000 gram), kemudian dilapisi lem sintetis tebal dan dilapisi insole baru.",
       "findings": [
         {
-          "thumb": "assets/images/hotspots/hs_sardine_can_false.png",
-          "full": "assets/images/hotspots/hs_sardine_can_false.png",
-          "caption": "Pembongkaran Sol Karet Sepatu Menampakkan Balok Sabu Pres",
-          "tag": "Dokumentasi Penindakan"
+          "thumb": "assets/images/hotspots/module_2/5_sepatu.png",
+          "full": "assets/images/hotspots/module_2/5_sepatu.png",
+          "caption": "Pembongkaran Sol Bawah Sepatu Terisi Lempengan Narkotika Dipres Pipih",
+          "tag": "Barang Bukti Sitaan"
         },
         {
           "thumb": "assets/images/central/m2_luggage_xray.png",
           "full": "assets/images/central/m2_luggage_xray.png",
-          "caption": "Citra X-Ray Scanner Menunjukkan Rongga Massa Organik pada Sol Sepatu",
+          "caption": "Tampilan X-Ray Menampakkan Rongga Udara & Bahan Sintetis di Sol Sepatu",
           "tag": "Pencitraan X-Ray"
         }
       ],
@@ -444,20 +444,20 @@
       "riskScore": 92,
       "drugTypes": "Liquid Meth (Sabu Cair), Kokain Cair, Heroin murni, Ekstasi Serbuk",
       "packagingTechnique": "Narkotika cair diresapkan ke serat kain pakaian/handuk/jaket tebal, atau kristal dipres ke dalam rongga kancing pakaian (hollow buttons) yang dirancang khusus.",
-      "mainIllustration": "assets/images/hotspots/module_2/pakaian.png",
-      "thumb": "assets/images/hotspots/module_2/pakaian.png",
+      "mainIllustration": "assets/images/hotspots/module_2/6_pakaian.png",
+      "thumb": "assets/images/hotspots/module_2/6_pakaian.png",
       "description": "Penyembunyian Narkotika cair dengan metode diresapkan pada serat pakaian atau diselipkan di dalam rongga kancing pakaian bawaan.",
       "modusDetail": "Sindikat melarutkan kristal Methamphetamine/Cocaine ke dalam larutan khusus lalu merendam pakaian (seperti jaket tebal, jeans, atau handuk) hingga menyerap cairan narkotika. Pakaian lalu dikeringkan dan dilipat rapi di dalam koper. Selain itu, kristal murni juga kerap dimasukkan ke dalam rongga kancing kemeja/jas yang telah dibobok lalu dilapis ulang sintetis agar tidak tampak dari luar.",
       "findings": [
         {
-          "thumb": "assets/images/hotspots/module_2/pakaian.png",
-          "full": "assets/images/hotspots/module_2/pakaian.png",
+          "thumb": "assets/images/hotspots/module_2/6_pakaian.png",
+          "full": "assets/images/hotspots/module_2/6_pakaian.png",
           "caption": "Pemeriksaan Lipatan Pakaian Diresapkan Larutan Narkotika Cair",
           "tag": "Barang Bukti Sitaan"
         },
         {
-          "thumb": "assets/images/hotspots/module_2/kancing_pakaian.png",
-          "full": "assets/images/hotspots/module_2/kancing_pakaian.png",
+          "thumb": "assets/images/hotspots/module_2/6_kancing_pakaian.png",
+          "full": "assets/images/hotspots/module_2/6_kancing_pakaian.png",
           "caption": "Modus Penyembunyian Kristal Narkotika di Dalam Rongga Kancing Pakaian",
           "tag": "Modus Forensik"
         }
