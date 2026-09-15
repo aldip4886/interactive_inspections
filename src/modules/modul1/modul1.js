@@ -12,6 +12,8 @@ export class Modul1View extends BaseModuleView {
     this.currentActiveTab = 'tab-modus';
     this.currentAngle = 0; // 0, 90, 180, 270
     this.currentZoom = 1.35;
+    this.panX = 0;
+    this.panY = 0;
     this.isModalOpen = false;
     this.isAutoPlaying = false;
     this.autoPlayTimer = null;
@@ -550,43 +552,67 @@ export class Modul1View extends BaseModuleView {
       this.setBodyAngle(this.ANGLES[nextIdx]);
     });
 
-    // Drag / Swipe 360 interaction
+    // Drag / Swipe 360 & 2D Mouse Drag Panning
     let isDragging = false;
     let startX = 0;
+    let startY = 0;
+    let initPanX = 0;
+    let initPanY = 0;
+    let hasRotated = false;
 
-    canvasWrap?.addEventListener('pointerdown', (e) => {
-      if (e.target.closest('.body-hotspot-pin') || e.target.closest('button')) return;
-      this.stopAutoPlay();
-      isDragging = true;
-      startX = e.clientX;
-      canvasWrap.setPointerCapture(e.pointerId);
-    });
+    if (canvasWrap) {
+      canvasWrap.style.cursor = 'grab';
 
-    canvasWrap?.addEventListener('pointermove', (e) => {
-      if (!isDragging) return;
-      const deltaX = e.clientX - startX;
-      if (Math.abs(deltaX) > 40) {
-        const idx = this.ANGLES.indexOf(this.currentAngle);
-        if (deltaX < 0) {
-          const nextIdx = (idx + 1) % this.ANGLES.length;
-          this.setBodyAngle(this.ANGLES[nextIdx]);
-        } else {
-          const prevIdx = (idx - 1 + this.ANGLES.length) % this.ANGLES.length;
-          this.setBodyAngle(this.ANGLES[prevIdx]);
-        }
+      canvasWrap.addEventListener('pointerdown', (e) => {
+        if (e.target.closest('.body-hotspot-pin') || e.target.closest('button') || e.target.closest('.modal-card')) return;
+        this.stopAutoPlay();
+        isDragging = true;
+        hasRotated = false;
         startX = e.clientX;
-      }
-    });
+        startY = e.clientY;
+        initPanX = this.panX;
+        initPanY = this.panY;
+        canvasWrap.style.cursor = 'grabbing';
+        try { canvasWrap.setPointerCapture(e.pointerId); } catch (_) {}
+        e.preventDefault();
+      });
 
-    const endDrag = (e) => {
-      if (isDragging) {
-        isDragging = false;
-        try { canvasWrap.releasePointerCapture(e.pointerId); } catch (_) {}
-      }
-    };
+      canvasWrap.addEventListener('pointermove', (e) => {
+        if (!isDragging) return;
+        const dx = e.clientX - startX;
+        const dy = e.clientY - startY;
 
-    canvasWrap?.addEventListener('pointerup', endDrag);
-    canvasWrap?.addEventListener('pointercancel', endDrag);
+        // Panning 2D (Geser posisi gambar dengan mouse)
+        const maxPan = Math.max(300, (this.currentZoom - 0.5) * 400);
+        this.panX = Math.max(-maxPan, Math.min(maxPan, initPanX + dx));
+        this.panY = Math.max(-maxPan, Math.min(maxPan, initPanY + dy));
+        this.applyZoom(this.currentZoom);
+
+        // Swipe horizontal untuk rotasi sudut 360°
+        if (!hasRotated && Math.abs(dx) > 85 && Math.abs(dx) > Math.abs(dy) * 1.8) {
+          hasRotated = true;
+          const idx = this.ANGLES.indexOf(this.currentAngle);
+          if (dx < 0) {
+            const nextIdx = (idx + 1) % this.ANGLES.length;
+            this.setBodyAngle(this.ANGLES[nextIdx]);
+          } else {
+            const prevIdx = (idx - 1 + this.ANGLES.length) % this.ANGLES.length;
+            this.setBodyAngle(this.ANGLES[prevIdx]);
+          }
+        }
+      });
+
+      const endDrag = (e) => {
+        if (isDragging) {
+          isDragging = false;
+          canvasWrap.style.cursor = 'grab';
+          try { canvasWrap.releasePointerCapture(e.pointerId); } catch (_) {}
+        }
+      };
+
+      canvasWrap.addEventListener('pointerup', endDrag);
+      canvasWrap.addEventListener('pointercancel', endDrag);
+    }
   }
 
   toggleAutoPlay() {
@@ -632,7 +658,7 @@ export class Modul1View extends BaseModuleView {
 
     btnIn?.addEventListener('click', () => this.applyZoom(this.currentZoom + 0.15));
     btnOut?.addEventListener('click', () => this.applyZoom(this.currentZoom - 0.15));
-    btnReset?.addEventListener('click', () => this.applyZoom(1.35));
+    btnReset?.addEventListener('click', () => this.resetZoom());
 
     canvasWrap?.addEventListener('wheel', (e) => {
       e.preventDefault();
@@ -641,16 +667,25 @@ export class Modul1View extends BaseModuleView {
     }, { passive: false });
   }
 
+  resetZoom() {
+    this.panX = 0;
+    this.panY = 0;
+    this.applyZoom(1.35);
+  }
+
   applyZoom(val) {
-    this.currentZoom = Math.min(Math.max(val, 0.75), 2.2);
+    this.currentZoom = Math.min(Math.max(val, 0.75), 2.5);
     const container = this.container.querySelector('#body-image-container');
     const badge = this.container.querySelector('#zoom-level-text');
     const counterScale = (1 / this.currentZoom).toFixed(4);
 
     if (container) {
-      container.style.transform = `scale(${this.currentZoom})`;
       container.style.transformOrigin = 'center center';
-      container.style.transition = 'transform 0.15s ease';
+      if (this.panX === 0 && this.panY === 0) {
+        container.style.transform = `scale(${this.currentZoom})`;
+      } else {
+        container.style.transform = `translate(${this.panX}px, ${this.panY}px) scale(${this.currentZoom})`;
+      }
       container.style.setProperty('--body-zoom', this.currentZoom);
       container.style.setProperty('--tooltip-counter-scale', counterScale);
     }

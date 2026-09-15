@@ -41,7 +41,7 @@
         "icon": "🔄",
         "title": "Rotasi Navigasi Tubuh 360°",
         "badgeTag": "ROTASI 360°",
-        "desc": "Gunakan tombol kontrol ◂, ▶, dan ▸ di dock bawah atau usap/drag langsung pada model untuk memutar sudut peraga anatomi 360° (Depan 0°, Kanan 90°, Belakang 180°, Kiri 270°).",
+        "desc": "Gunakan tombol kontrol ◂, ▶, dan ▸ di dock bawah atau drag langsung pada model untuk memutar sudut peraga anatomi 360° (Depan 0°, Kanan 90°, Belakang 180°, Kiri 270°).",
         "targetSelector": "#pedestal-rotation-dock"
       },
       {
@@ -55,7 +55,7 @@
       {
         "step": 2,
         "icon": "🔍",
-        "title": "Kontrol Zoom Presisi (135%)",
+        "title": "Zoom %)",
         "badgeTag": "ZOOM 135%",
         "desc": "Gunakan tombol (-) dan (+) untuk memperbesar detail citra radiografi. Tekan tombol putar balik (↺) untuk mereset skala zoom ke default optimal 135%.",
         "targetSelector": ".canvas-zoom-toolbar"
@@ -144,7 +144,7 @@
       "coordsByAngle": {
         "0": {
           "x": 50.8,
-          "y": 14.0
+          "y": 19.0
         },
         "90": null,
         "180": null,
@@ -441,7 +441,7 @@
       "coordsByAngle": {
         "0": {
           "x": 50.7,
-          "y": 46.0
+          "y": 44.0
         },
         "90": null,
         "180": null,
