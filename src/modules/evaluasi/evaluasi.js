@@ -355,42 +355,62 @@ export class EvaluasiView {
     this.renderResultScreen(scorePercent, passed, correctCount, total);
   }
 
-  /* ─── 5. RESULT & ANSWER REVIEW SCREEN ─── */
+  /* ─── 5. FINISH SCREEN & ANSWER REVIEW ─── */
   renderResultScreen(scorePercent, passed, correctCount, total) {
     const questions = this.quizData.questions;
+    const overallPct = courseProgress.getOverallProgress();
 
     const html = `
       <div class="evaluasi-page-wrapper">
         <div class="evaluasi-result-card">
           
-          <!-- Result Status Banner -->
+          <!-- Finish Screen Header Banner -->
           <div class="result-banner">
             <div class="result-status-icon">
               ${passed ? '🏆' : '⚠️'}
             </div>
             <h2 class="result-status-title ${passed ? 'passed' : 'failed'}">
-              ${passed ? 'Selamat! Anda Lulus Ujian Evaluasi' : 'Belum Mencapai Batas Kelulusan'}
+              ${passed ? 'Selamat! Ujian Evaluasi Selesai' : 'Ujian Evaluasi Selesai'}
             </h2>
-            <div class="result-score-display ${passed ? 'passed' : 'failed'}">
-              ${scorePercent}%
-            </div>
-            <p style="font-size: var(--font-size-body-lg); color: #CBD5E1; max-width: 620px; margin: 0 auto; line-height: 1.6;">
-              Anda menjawab benar <strong>${correctCount}</strong> dari <strong>${total}</strong> soal skenario penindakan.<br>
-              Batas minimum kelulusan: ${this.quizData.passingScorePercent}%.
+            <p style="font-size: var(--font-size-body-lg); color: #CBD5E1; max-width: 620px; margin: 0 auto 12px; line-height: 1.6;">
+              ${passed 
+                ? 'Anda telah menyelesaikan seluruh rangkaian evaluasi dan memenuhi standar kelulusan sertifikasi DJBC.' 
+                : 'Anda telah menyelesaikan ujian evaluasi tetapi belum mencapai batas minimum kelulusan.'}
             </p>
             <div class="result-scorm-badge">
               <span>${passed ? '✅' : '⚠️'} Status SCORM LMS: <strong>${passed ? 'PASSED (LULUS)' : 'FAILED (BELUM LULUS)'}</strong></span>
             </div>
           </div>
 
-          <!-- Action Buttons -->
+          <!-- Dual Stats Summary Grid: Evaluasi Score & Course Progress -->
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin: 24px 0 32px;">
+            <!-- Stat 1: Skor Ujian Evaluasi -->
+            <div style="background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 14px; padding: 20px; text-align: center; backdrop-filter: blur(8px);">
+              <span style="font-size: 11px; font-weight: 800; color: #94A3B8; text-transform: uppercase; letter-spacing: 0.8px;">SKOR UJIAN EVALUASI</span>
+              <div style="font-size: 42px; font-weight: 800; color: ${passed ? '#10B981' : '#F59E0B'}; margin: 8px 0;">
+                ${scorePercent}%
+              </div>
+              <span style="font-size: 13px; color: #CBD5E1;">${correctCount} dari ${total} Soal Benar (Min. ${this.quizData.passingScorePercent}%)</span>
+            </div>
+
+            <!-- Stat 2: Total Progress Kursus -->
+            <div style="background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 14px; padding: 20px; text-align: center; backdrop-filter: blur(8px);">
+              <span style="font-size: 11px; font-weight: 800; color: #94A3B8; text-transform: uppercase; letter-spacing: 0.8px;">PROGRES KESELURUHAN KURSUS</span>
+              <div style="font-size: 42px; font-weight: 800; color: #D9B45B; margin: 8px 0;">
+                ${overallPct}%
+              </div>
+              <span style="font-size: 13px; color: #CBD5E1;">Item Interaktif & Skenario Terpenuhi</span>
+            </div>
+          </div>
+
+          <!-- Action Buttons: Finish & Reset/Ulangi -->
           <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-bottom: 36px;">
-            <button id="retake-quiz-btn" class="btn btn-ghost btn-lg">
-              🔄 Ulangi Ujian
+            <button id="finish-course-btn" class="btn btn-primary btn-lg" style="background: linear-gradient(135deg, #10B981, #059669); border: none; box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4); padding: 12px 28px; font-weight: 700; cursor: pointer;">
+              🏁 Selesai (Finish Course)
             </button>
-            <a href="#/beranda" class="btn btn-secondary btn-lg">
-              🏠 Kembali ke Beranda
-            </a>
+            <button id="reset-course-btn" class="btn btn-ghost btn-lg" style="padding: 12px 24px; border: 1px solid #FFFFFF; color: #FFFFFF; cursor: pointer;">
+              🔄 Ulangi (Reset Progress & Beranda)
+            </button>
           </div>
 
           <!-- Detailed Answer Review Section -->
@@ -451,9 +471,34 @@ export class EvaluasiView {
 
     this.container.innerHTML = html;
 
-    const retakeBtn = this.container.querySelector('#retake-quiz-btn');
-    if (retakeBtn) {
-      retakeBtn.addEventListener('click', () => this.render());
+    // Finish Course Handler
+    const finishBtn = this.container.querySelector('#finish-course-btn');
+    if (finishBtn) {
+      finishBtn.addEventListener('click', () => {
+        try {
+          scorm.setCompleted(scorePercent);
+          scorm.terminate();
+        } catch (e) {
+          console.warn('[Evaluasi] SCORM terminate error:', e);
+        }
+        window.location.hash = '#/beranda';
+        try {
+          window.close();
+        } catch (e) {
+          // ignore if window.close is blocked by browser security
+        }
+      });
+    }
+
+    // Reset Progress Handler
+    const resetBtn = this.container.querySelector('#reset-course-btn');
+    if (resetBtn) {
+      resetBtn.addEventListener('click', () => {
+        if (confirm('Apakah Anda yakin ingin mereset seluruh progres pembelajaran dan mengulang dari awal?')) {
+          courseProgress.resetProgress();
+          window.location.hash = '#/beranda';
+        }
+      });
     }
   }
 }

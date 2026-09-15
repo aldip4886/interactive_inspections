@@ -11,9 +11,9 @@ export class CourseProgressManager {
     this.STORAGE_KEY = 'elearning_narkotika_progress_v1';
     this.currentProgressPct = 0;
     
-    // Module hotspot totals & quiz question count (Total = 38 Items)
+    // Module hotspot totals & quiz question count (Total = 36 Items)
     this.moduleTotals = {
-      modul1: 8,
+      modul1: 6,
       modul2: 6,
       modul3: 7,
       modul4a: 6,
@@ -170,8 +170,32 @@ export class CourseProgressManager {
       completedItems += evalAns;
     }
 
-    const TOTAL_COURSE_ITEMS = 38; // 33 hotspots + 5 quiz questions
+    const TOTAL_COURSE_ITEMS = 36; // 31 hotspots + 5 quiz questions
     return Math.min(100, Math.round((completedItems / TOTAL_COURSE_ITEMS) * 100));
+  }
+
+  resetProgress() {
+    this.state = {
+      berandaVisited: false,
+      visitedHotspots: {
+        modul1: [],
+        modul2: [],
+        modul3: [],
+        modul4a: [],
+        modul4b: []
+      },
+      evaluasiCompleted: false,
+      evaluasiScore: 0,
+      evaluasiAnsweredCount: 0
+    };
+    try {
+      localStorage.removeItem(this.STORAGE_KEY);
+    } catch (e) {
+      console.warn('[ProgressManager] Could not reset progress:', e);
+    }
+    this.currentProgressPct = 0;
+    window.currentCourseProgressPct = 0;
+    this.updateDOM();
   }
 
   updateDOM() {
