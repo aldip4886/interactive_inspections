@@ -68,8 +68,8 @@ copyDirRecursive(publicImagesSrc, distImagesDest);
 console.log('[SCORM Package] Creating scorm_package.zip...');
 
 try {
-  // Compress contents of dist/scorm_package so imsmanifest.xml is at the root of the ZIP file
-  execSync('powershell -Command "Compress-Archive -Path dist\\scorm_package\\* -DestinationPath scorm_package.zip -Force"', { stdio: 'inherit' });
+  // Compress dist/scorm_package directory so there is 1 folder structure wrapping project files inside ZIP
+  execSync('powershell -Command "Compress-Archive -Path dist\\scorm_package -DestinationPath scorm_package.zip -Force"', { stdio: 'inherit' });
   console.log('[SCORM Package] scorm_package.zip generated successfully!');
 } catch (err) {
   console.error('[SCORM Package] Failed to zip package:', err.message);
