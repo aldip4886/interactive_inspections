@@ -298,6 +298,19 @@
   padding-top: 24px;
 }
 
+/* Explicit White Font & White Border for Ghost Buttons */
+.btn-ghost, .btn-ghost.btn-lg {
+  color: #FFFFFF !important;
+  border: 1px solid #FFFFFF !important;
+  background-color: transparent;
+}
+
+.btn-ghost:hover, .btn-ghost.btn-lg:hover {
+  background-color: rgba(255, 255, 255, 0.15) !important;
+  color: #FFFFFF !important;
+  border-color: #FFFFFF !important;
+}
+
 /* ─── RESULT & ANSWER REVIEW CARD ─── */
 .evaluasi-result-card {
   width: 100%;
