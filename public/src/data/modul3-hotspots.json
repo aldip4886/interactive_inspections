@@ -77,6 +77,26 @@
         "assets/images/hotspots/module_3/sarang_burung.png",
         "assets/images/hotspots/module_3/01.jpeg"
       ],
+      "findings": [
+        {
+          "thumb": "assets/images/hotspots/module_3/1_bungkus_makanan.png",
+          "full": "assets/images/hotspots/module_3/1_bungkus_makanan.png",
+          "caption": "Kemasan Pouch Makanan Ringan Sebagai Cover Cargo Penyelundupan",
+          "tag": "Barang Bukti #1"
+        },
+        {
+          "thumb": "assets/images/hotspots/module_3/sarang_burung.png",
+          "full": "assets/images/hotspots/module_3/sarang_burung.png",
+          "caption": "Penyamaran Zat Terlarang dalam Kemasan Makanan Sarang Burung Walet",
+          "tag": "Barang Bukti #2"
+        },
+        {
+          "thumb": "assets/images/hotspots/module_3/01.jpeg",
+          "full": "assets/images/hotspots/module_3/01.jpeg",
+          "caption": "Hasil Pemindaian Dual-Energy X-Ray Anomali Densitas Organik Pouch",
+          "tag": "Citra Radiologis"
+        }
+      ],
       "description": "Makanan dalam kemasan pouch fleksibel digunakan sebagai cover cargo yang tampak wajar dalam deklarasi, namun terdapat anomali densitas organik di dalamnya.",
       "modusDetail": "Penyelundup menyamarkan zat terlarang di dalam kemasan makanan ringan komersial (pouch bersegel) untuk mengelabui pemeriksaan visual awal. Pada pemindaian X-Ray Dual-Energy, terdeteksi ketidaksesuaian pola sebaran material dan densitas organik berlebih yang tidak konsisten dengan makanan ringan biasa.",
       "inspectionNote": "Fokus pemeriksa bukan mencari narkotika berdasarkan bentuk tertentu, melainkan menemukan ketidaksesuaian yang dapat diverifikasi antara deklarasi, kemasan, berat, dan citra X-ray.",
@@ -135,6 +155,20 @@
       "galleryImages": [
         "assets/images/hotspots/module_3/2_tabung_suspensi.png",
         "assets/images/hotspots/module_3/02.jpeg"
+      ],
+      "findings": [
+        {
+          "thumb": "assets/images/hotspots/module_3/2_tabung_suspensi.png",
+          "full": "assets/images/hotspots/module_3/2_tabung_suspensi.png",
+          "caption": "Hasil Pembongkaran Tabung Suspensi Kendaraan Berisi Sabu",
+          "tag": "Barang Bukti Sitaan"
+        },
+        {
+          "thumb": "assets/images/hotspots/module_3/02.jpeg",
+          "full": "assets/images/hotspots/module_3/02.jpeg",
+          "caption": "Hasil Radiografi Pemindai Dual-Energy X-Ray Menembus Silinder Logam",
+          "tag": "Citra Radiologis"
+        }
       ],
       "description": "Komponen shockbreaker kendaraan berbahan logam tebal dimanfaatkan sebagai cover cargo dengan menyelipkan material organik ke dalam tabung silinder.",
       "modusDetail": "Pelaku memanfaatkan rongga internal peredam kejut (shock absorber) otomotif yang berdinding logam tebal. Penyelundup berasumsi densitas logam (warna biru pada pemindai X-Ray) akan menutupi keberadaan zat organik. Namun pemindai Dual-Energy menembus silinder dan menampilkan saturasi oranye mencolok di dalam tabung.",
@@ -195,6 +229,20 @@
         "assets/images/hotspots/module_3/3_tabung_lampu.png",
         "assets/images/hotspots/module_3/03.jpeg"
       ],
+      "findings": [
+        {
+          "thumb": "assets/images/hotspots/module_3/3_tabung_lampu.png",
+          "full": "assets/images/hotspots/module_3/3_tabung_lampu.png",
+          "caption": "Bukti Fisik Bohlam Lampu Berisi Paket Narkotika Sintetis",
+          "tag": "Barang Bukti Sitaan"
+        },
+        {
+          "thumb": "assets/images/hotspots/module_3/03.jpeg",
+          "full": "assets/images/hotspots/module_3/03.jpeg",
+          "caption": "Anomali Radiologis X-Ray Massa Organik di Kubah Lampu LED",
+          "tag": "Citra Radiologis"
+        }
+      ],
       "description": "Bohlam lampu penerangan dimanfaatkan sebagai cover object dengan memasukkan paket padat ke dalam kubah bohlam di atas rangkaian sirkuit driver.",
       "modusDetail": "Kubah bohlam lampu yang normalnya berisi ruang hampa udara atau gas inert diisi paket padatan organik berbentuk balok/kubus. Pelaku menyatukan kembali kubah dengan ulir logam menggunakan perekat khusus. Citra X-Ray menampakkan massa oranye berdensitas tinggi tepat di atas sirkuit elektronik fitting bohlam.",
       "inspectionNote": "Gunakan unit pembanding jika tersedia (compare like with like) untuk memverifikasi apakah struktur kubah bohlam bersih dari materi asing.",
@@ -253,6 +301,20 @@
       "galleryImages": [
         "assets/images/hotspots/module_3/4_ups.png",
         "assets/images/hotspots/module_3/04.jpeg"
+      ],
+      "findings": [
+        {
+          "thumb": "assets/images/hotspots/module_3/4_ups.png",
+          "full": "assets/images/hotspots/module_3/4_ups.png",
+          "caption": "Penyitaan Unit UPS dengan Sisipan Balok Narkotika di Casing Baterai",
+          "tag": "Barang Bukti Sitaan"
+        },
+        {
+          "thumb": "assets/images/hotspots/module_3/04.jpeg",
+          "full": "assets/images/hotspots/module_3/04.jpeg",
+          "caption": "Citra Pemindaian Radiologi X-Ray Trafo & Sirkuit Elektrik UPS",
+          "tag": "Citra Radiologis"
+        }
       ],
       "description": "Perangkat elektronik UPS / adaptor daya berkapasitas besar dimodifikasi dengan menyisipkan balok bungkusan narkotika di antara komponen transformator dan sirkuit.",
       "modusDetail": "Pelaku memanfaatkan kerumitan internal perangkat elektronik dan casing logam tebal sebagai tameng visual. Sebagian baterai atau ruang kosong di dalam UPS dikeluarkan dan digantikan dengan balok narkotika yang dibungkus rapi. Pemindai Dual-Energy menampakkan blok oranye tebal di tengah kerangka sirkuit elektronik hijau dan trafo logam biru.",
@@ -313,6 +375,20 @@
         "assets/images/hotspots/module_3/05_mainan_anak.png",
         "assets/images/hotspots/module_3/05.jpeg"
       ],
+      "findings": [
+        {
+          "thumb": "assets/images/hotspots/module_3/05_mainan_anak.png",
+          "full": "assets/images/hotspots/module_3/05_mainan_anak.png",
+          "caption": "Pembukaan Bodi Plastik Mainan Anak Berisi Bungkusan Ekstasi",
+          "tag": "Barang Bukti Sitaan"
+        },
+        {
+          "thumb": "assets/images/hotspots/module_3/05.jpeg",
+          "full": "assets/images/hotspots/module_3/05.jpeg",
+          "caption": "Hasil Pemindaian X-Ray Rongga Internal Mainan Terisi Massa Organik",
+          "tag": "Citra Radiologis"
+        }
+      ],
       "description": "Mainan anak berbahan plastik dengan rongga internal yang biasanya kosong digunakan untuk menyimpan bungkusan materi organik terlarang.",
       "modusDetail": "Sebagian mainan anak secara normal memang memiliki rongga udara internal demi efisiensi material cetak atau fungsi gerak. Pelaku memanfaatkan rongga ini dengan menyelipkan paket narkotika, kemudian menyatukan kembali belahan plastik menggunakan lem/pemanas. Pada citra X-Ray, ruang yang seharusnya gelap/transparan terisi massa berwarna oranye kemerahan.",
       "inspectionNote": "Rongga bukan indikator otomatis penyelundupan. Yang krusial adalah apakah rongga tersebut bersih sesuai desain asli atau justru memuat massa asing yang tidak wajar.",
@@ -370,6 +446,14 @@
       "mainImage": "assets/images/hotspots/module_3/06.png",
       "galleryImages": [
         "assets/images/hotspots/module_3/06.png"
+      ],
+      "findings": [
+        {
+          "thumb": "assets/images/hotspots/module_3/06.png",
+          "full": "assets/images/hotspots/module_3/06.png",
+          "caption": "Botol Minuman Ritel Berisi Sachet Narkotika Terendam / Sabu Cair",
+          "tag": "Barang Bukti Sitaan"
+        }
       ],
       "description": "Botol minuman kemasan ritel dijadikan cover cargo dengan menyelamkan sachet bungkusan padat kedap air atau melarutkan narkotika cair ke dalam produk.",
       "modusDetail": "Pelaku menyusupkan kantong sachet kedap air berisi zat terlarang ke dalam cairan minuman, atau mengganti cairan minuman dengan larutan sabu cair (liquid meth). Citra pemindai Dual-Energy memperlihatkan anomali batas densitas: kontur sachet oranye pekat mengapung di tengah cairan dengan spektrum warna yang berbeda dari cairan minuman biasa.",
@@ -431,6 +515,32 @@
         "assets/images/hotspots/module_3/7_dinding_kardus_2.png",
         "assets/images/hotspots/module_3/7_dinding_kardus_3.png",
         "assets/images/hotspots/module_3/07.png"
+      ],
+      "findings": [
+        {
+          "thumb": "assets/images/hotspots/module_3/7_dinding_kardus.png",
+          "full": "assets/images/hotspots/module_3/7_dinding_kardus.png",
+          "caption": "Pengirisan Lapisan Dinding Kardus Bergelombang Berisi Serbuk Pres",
+          "tag": "Barang Bukti #1"
+        },
+        {
+          "thumb": "assets/images/hotspots/module_3/7_dinding_kardus_2.png",
+          "full": "assets/images/hotspots/module_3/7_dinding_kardus_2.png",
+          "caption": "Penampang Sisipan Narkotika di Sela Fluting Karton Box",
+          "tag": "Barang Bukti #2"
+        },
+        {
+          "thumb": "assets/images/hotspots/module_3/7_dinding_kardus_3.png",
+          "full": "assets/images/hotspots/module_3/7_dinding_kardus_3.png",
+          "caption": "Dokumentasi Pembukaan Lapisan Kertas Fluting Karton",
+          "tag": "Barang Bukti #3"
+        },
+        {
+          "thumb": "assets/images/hotspots/module_3/07.png",
+          "full": "assets/images/hotspots/module_3/07.png",
+          "caption": "Penebalan Densitas Organik pada Penampang Dinding Box Karton X-Ray",
+          "tag": "Citra Radiologis"
+        }
       ],
       "description": "Dinding kardus kemasan bergelombang (corrugated box) disisipi serbuk narkotika pres tipis di sela gelombang lapisan kertas karton ganda.",
       "modusDetail": "Penyelundup membelah lapisan dalam dinding karton bergelombang, memasukkan serbuk narkotika yang dipres sangat tipis dan dilaminasi plastik lentur di sela fluting kardus, lalu merekatkannya kembali. Citra X-Ray menampakkan penebalan materi organik abnormal pada penampang dinding kardus yang seharusnya berongga udara tipis.",

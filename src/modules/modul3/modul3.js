@@ -26,8 +26,9 @@ export class Modul3View extends BaseModuleView {
 
     this.cardPages = [
       { id: 'tab-modus', num: 1, title: 'Modus Operandi' },
-      { id: 'tab-detection', num: 2, title: 'Ciri Pelaku & SOP' },
-      { id: 'tab-risk', num: 3, title: 'Indikator Risiko' }
+      { id: 'tab-photos', num: 2, title: 'Foto Real' },
+      { id: 'tab-detection', num: 3, title: 'Ciri Pelaku & SOP' },
+      { id: 'tab-risk', num: 4, title: 'Indikator Risiko' }
     ];
     this.currentCardPageIndex = 0;
   }
@@ -218,7 +219,7 @@ export class Modul3View extends BaseModuleView {
                   <span class="floating-card-drag-indicator" title="Geser posisi kartu">⋮⋮</span>
                   <span id="detail-tag-badge" class="detail-tag-badge">MODUS #01</span>
                 </div>
-                <h3 id="detail-title" class="detail-title">1. Paket Narkotika Organik #1</h3>
+                <h3 id="detail-title" class="detail-title">1. Makanan dalam Kemasan (Pouch)</h3>
               </div>
               <div class="modal-header-right">
                 <div class="card-quick-nav">
@@ -230,57 +231,84 @@ export class Modul3View extends BaseModuleView {
               </div>
             </div>
 
-            <!-- Tab Navigation Header (3 Tabs) -->
+            <!-- Compact Segmented Tab Navigation (4 Tabs) -->
             <div class="card-tabs-nav" id="card-tabs-nav">
               <button class="tab-btn active" data-tab="tab-modus" title="Halaman 1: Modus Operandi">
-                <span class="tab-icon">📋</span>
                 <span class="tab-label">Modus Operandi</span>
               </button>
-              <button class="tab-btn" data-tab="tab-detection" title="Halaman 2: Ciri Pelaku & SOP">
-                <span class="tab-icon">🛡️</span>
+              <button class="tab-btn" data-tab="tab-photos" title="Halaman 2: Foto Gambar Real">
+                <span class="tab-label">Foto Real</span>
+              </button>
+              <button class="tab-btn" data-tab="tab-detection" title="Halaman 3: Ciri Pelaku & SOP">
                 <span class="tab-label">Ciri Pelaku & SOP</span>
               </button>
-              <button class="tab-btn" data-tab="tab-risk" title="Halaman 3: Indikator Risiko">
-                <span class="tab-icon">⚠️</span>
+              <button class="tab-btn" data-tab="tab-risk" title="Halaman 4: Indikator Risiko">
                 <span class="tab-label">Indikator Risiko</span>
               </button>
             </div>
 
-            <!-- Card Body Scrollable Viewport -->
-            <div class="tabbed-card-body" id="tabbed-card-body">
-              <!-- TAB 1: MODUS OPERANDI -->
+            <div class="tab-content-container" id="tab-content-container">
+              <!-- TAB 1: MODUS -->
               <div class="tab-pane active" id="tab-modus">
-                <div class="pane-media-lead">
-                  <div class="lead-img-wrapper" id="lead-img-container" style="cursor:zoom-in;">
-                    <img id="detail-real-img" src="" alt="Bukti Forensik X-Ray" class="lead-forensic-img" />
-                    <div class="img-magnify-hint">🔍 Klik untuk Pembesaran</div>
+                <div class="detail-media-row">
+                  <div class="detail-illustration-box">
+                    <img id="detail-main-img" src="assets/images/hotspots/module_3/1_bungkus_makanan.png" alt="Visualisasi Modus Kargo Pos" class="detail-main-img" />
                   </div>
-                  <div id="m3-gallery-thumbnails-grid" class="findings-thumbnails-grid" style="display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap;"></div>
-                  <p id="detail-desc" class="lead-caption-text"></p>
+                  <div class="detail-desc-box">
+                    <p id="detail-desc" class="detail-desc-text"></p>
+                  </div>
                 </div>
-                <div class="kv-details-grid">
-                  <div class="kv-item"><span class="kv-label">METODE:</span><span id="detail-method" class="kv-val"></span></div>
-                  <div class="kv-item"><span class="kv-label">LOKASI:</span><span id="detail-location" class="kv-val"></span></div>
-                  <div class="kv-item"><span class="kv-label">NARKOTIKA:</span><span id="detail-narcotics" class="kv-val highlight"></span></div>
-                  <div class="kv-item"><span class="kv-label">KEMASAN:</span><span id="detail-packaging" class="kv-val"></span></div>
+                <div class="modus-params-grid">
+                  <div class="param-box">
+                    <span class="param-label">Metode:</span>
+                    <p id="detail-concealment-method" class="param-val"></p>
+                  </div>
+                  <div class="param-box">
+                    <span class="param-label">Lokasi:</span>
+                    <p id="detail-body-location" class="param-val"></p>
+                  </div>
+                  <div class="param-box">
+                    <span class="param-label">Narkotika:</span>
+                    <p id="detail-drug-types" class="param-val"></p>
+                  </div>
+                  <div class="param-box">
+                    <span class="param-label">Kemasan:</span>
+                    <p id="detail-packaging" class="param-val"></p>
+                  </div>
                 </div>
-                <div class="modus-breakdown-box">
-                  <span class="box-title-label">Detail Teknis Modus:</span>
-                  <p id="detail-modus-detail" class="box-desc-text"></p>
+                <div class="deep-modus-note">
+                  <span class="note-label">Detail Teknis Modus:</span>
+                  <p id="detail-modus-narrative" class="note-text"></p>
+                </div>
+                <div class="inspection-guideline-box">
+                  <span class="guide-title">📋 Catatan Penindakan DJBC:</span>
+                  <p id="detail-inspection-note" class="guide-text"></p>
                 </div>
               </div>
 
-              <!-- TAB 2: CIRI PELAKU & SOP -->
+              <!-- TAB 2: FOTO REAL -->
+              <div class="tab-pane" id="tab-photos">
+                <div class="photos-tab-header">
+                  <span class="photos-tab-title">Barang Bukti Sitaan & Citra Forensik:</span>
+                  <span class="photos-tab-hint">Klik gambar untuk melihat resolusi penuh & zoom</span>
+                </div>
+                <div class="findings-thumbnails-grid" id="findings-thumbnails-grid"></div>
+                <div class="gallery-case-note">
+                  <strong>Penting:</strong> Dokumentasi penindakan riil dan citra radiologis forensik resmi DJBC.
+                </div>
+              </div>
+
+              <!-- TAB 3: CIRI PELAKU & SOP -->
               <div class="tab-pane" id="tab-detection">
-                <div class="dual-info-blocks">
-                  <div class="info-block traits-block">
+                <div class="detection-two-columns">
+                  <div class="info-block-col block-warning" id="block-indicators">
                     <div class="block-header">
-                      <span class="block-icon traits-icon"></span>
-                      <span class="block-title">Indikator Anomali & Profil</span>
+                      <span class="block-icon warning-icon">⚠️</span>
+                      <span class="block-title">Indikator Anomali & Red Flags X-Ray</span>
                     </div>
-                    <ul id="detail-traits-list" class="block-list"></ul>
+                    <ul id="detail-indicators-list" class="block-list"></ul>
                   </div>
-                  <div class="info-block procedure-block">
+                  <div class="info-block-col block-procedure" id="block-detection">
                     <div class="block-header">
                       <span class="block-icon procedure-icon"></span>
                       <span class="block-title">Standar Prosedur Pemeriksaan (SOP)</span>
@@ -290,11 +318,11 @@ export class Modul3View extends BaseModuleView {
                 </div>
               </div>
 
-              <!-- TAB 3: INDIKATOR RISIKO -->
+              <!-- TAB 4: INDIKATOR RISIKO -->
               <div class="tab-pane" id="tab-risk">
                 <div class="risk-meter-widget">
                   <div class="risk-meter-header">
-                    <span class="risk-meter-title">Tingkat Bahaya Kargo:</span>
+                    <span class="risk-meter-title">Tingkat Bahaya Penyelundupan:</span>
                     <span id="risk-score-val" class="risk-meter-score">KRITIS (100/100)</span>
                   </div>
                   <div class="risk-meter-bar-track">
@@ -310,7 +338,7 @@ export class Modul3View extends BaseModuleView {
                 <div class="hazard-alert-box hazard-medical">
                   <div class="hazard-icon">🚨</div>
                   <div class="hazard-content">
-                    <span class="hazard-title">Bahaya Kargo / Bahan Kimia:</span>
+                    <span class="hazard-title">Bahaya Medis Darurat / Bahan Kimia:</span>
                     <p id="detail-medical-risk" class="hazard-desc"></p>
                   </div>
                 </div>
@@ -319,21 +347,22 @@ export class Modul3View extends BaseModuleView {
                   <div class="hazard-content">
                     <span class="hazard-title">Protokol Keselamatan Petugas:</span>
                     <p class="hazard-desc">
-                      Gunakan sarung tangan nitril tebal & masker standar gas/partikel. Dilarang menghirup atau mencicipi serbuk secara langsung.
+                      Gunakan sarung tangan nitril & masker medis. Dilarang penguraian barang bukti tanpa APD resmi. Koordinasikan pengamanan BB.
                     </p>
                   </div>
                 </div>
               </div>
             </div>
 
-            <!-- Bottom Carousel Pagination Bar (<, dot, >) -->
+            <!-- Bottom Carousel Pagination Bar -->
             <div class="card-pagination-bar" id="card-pagination-bar">
               <button id="btn-page-prev" class="card-page-nav-btn" title="Halaman Tab Sebelumnya" disabled>&lt;</button>
 
               <div class="card-page-pills" id="card-page-pills">
                 <button class="page-pill active" data-page="0" title="1. Modus Operandi"></button>
-                <button class="page-pill" data-page="1" title="2. Ciri Pelaku & SOP"></button>
-                <button class="page-pill" data-page="2" title="3. Indikator Risiko"></button>
+                <button class="page-pill" data-page="1" title="2. Foto Gambar Real"></button>
+                <button class="page-pill" data-page="2" title="3. Ciri Pelaku & SOP"></button>
+                <button class="page-pill" data-page="3" title="4. Indikator Risiko"></button>
               </div>
 
               <button id="btn-page-next" class="card-page-nav-btn" title="Halaman Tab Selanjutnya">&gt;</button>
@@ -737,73 +766,82 @@ export class Modul3View extends BaseModuleView {
     if (title) title.textContent = hs.label;
 
     // TAB 1: Modus
-    const mainImg = this.container.querySelector('#detail-real-img') || this.container.querySelector('#detail-main-img');
+    const mainImg = this.container.querySelector('#detail-main-img');
     const desc = this.container.querySelector('#detail-desc');
-    const concealmentMethod = this.container.querySelector('#detail-method') || this.container.querySelector('#detail-concealment-method');
-    const bodyLocation = this.container.querySelector('#detail-location') || this.container.querySelector('#detail-body-location');
-    const drugTypes = this.container.querySelector('#detail-narcotics') || this.container.querySelector('#detail-drug-types');
+    const concealmentMethod = this.container.querySelector('#detail-concealment-method');
+    const bodyLocation = this.container.querySelector('#detail-body-location');
+    const drugTypes = this.container.querySelector('#detail-drug-types');
     const packaging = this.container.querySelector('#detail-packaging');
-    const narrative = this.container.querySelector('#detail-modus-detail') || this.container.querySelector('#detail-modus-narrative');
+    const narrative = this.container.querySelector('#detail-modus-narrative');
     const note = this.container.querySelector('#detail-inspection-note');
 
     if (mainImg) {
-      mainImg.src = hs.mainIllustration || hs.mainImage || 'assets/images/central/m3_parcel_xray.jpeg';
+      mainImg.onerror = () => {
+        mainImg.src = 'assets/mockup/image_placeholder.svg';
+      };
+      mainImg.src = hs.mainIllustration || hs.mainImage || hs.thumb || 'assets/mockup/image_placeholder.svg';
       mainImg.alt = hs.label;
     }
 
-    // Klik gambar utama pada Modus Operandi untuk memperbesar
-    const illustrationBox = this.container.querySelector('#lead-img-container') || this.container.querySelector('.detail-illustration-box');
+    const illustrationBox = this.container.querySelector('.detail-illustration-box');
     if (illustrationBox) {
       illustrationBox.style.cursor = 'pointer';
       illustrationBox.title = 'Klik untuk melihat gambar ukuran penuh';
       illustrationBox.onclick = () => {
-        const curImg = this.container.querySelector('#detail-real-img') || this.container.querySelector('#detail-main-img');
+        const curImg = this.container.querySelector('#detail-main-img');
         const curTitle = this.container.querySelector('#detail-title');
         this.openImagePopup(
-          curImg ? curImg.src : (hs.mainIllustration || hs.mainImage || 'assets/images/central/m3_parcel_xray.jpeg'),
+          curImg ? curImg.src : (hs.mainIllustration || hs.mainImage || hs.thumb),
           curTitle ? curTitle.textContent : hs.label
         );
       };
     }
 
-    // Gallery Thumbnails Grid
-    const galleryGrid = this.container.querySelector('#m3-gallery-thumbnails-grid');
-    if (galleryGrid) {
-      galleryGrid.innerHTML = '';
-      const galleryList = (hs.galleryImages && hs.galleryImages.length > 0)
-        ? hs.galleryImages
-        : (hs.mainIllustration ? [hs.mainIllustration] : []);
-
-      if (galleryList.length > 1) {
-        galleryList.forEach((imgUrl, idx) => {
-          const item = document.createElement('div');
-          item.className = `finding-thumb-item ${idx === 0 ? 'active' : ''}`;
-          item.style.cursor = 'pointer';
-          item.title = `Foto ${idx + 1} - Klik untuk memilih`;
-          item.innerHTML = `<img src="${imgUrl}" alt="Foto ${idx + 1}" style="width:52px; height:52px; object-fit:cover; border-radius:6px;" />`;
-          item.onclick = (e) => {
-            e.stopPropagation();
-            if (mainImg) mainImg.src = imgUrl;
-            galleryGrid.querySelectorAll('.finding-thumb-item').forEach(t => t.classList.remove('active'));
-            item.classList.add('active');
-          };
-          galleryGrid.appendChild(item);
-        });
-        galleryGrid.style.display = 'flex';
-      } else {
-        galleryGrid.style.display = 'none';
-      }
-    }
-
     if (desc) desc.textContent = hs.description;
-    if (concealmentMethod) concealmentMethod.textContent = hs.tag || hs.categoryLabel || 'False Compartment';
+    if (concealmentMethod) concealmentMethod.textContent = hs.tag || hs.categoryLabel || 'False Concealment';
     if (bodyLocation) bodyLocation.textContent = hs.bodyLocation || 'Kardus Kiriman';
     if (drugTypes) drugTypes.textContent = hs.drugTypes || 'Metamfetamin';
     if (packaging) packaging.textContent = hs.packagingTechnique || 'Plastik Vakum';
     if (narrative) narrative.textContent = hs.modusDetail || hs.description;
     if (note) note.textContent = hs.inspectionNote || 'SOP DJBC';
 
-    // TAB 2: Detection & SOP
+    // TAB 2: Foto Real dengan Fitur Popup Gambar
+    const findingsGrid = this.container.querySelector('#findings-thumbnails-grid');
+    if (findingsGrid) {
+      findingsGrid.innerHTML = '';
+      const findingsList = (hs.findings && hs.findings.length > 0)
+        ? hs.findings
+        : (hs.galleryImages && hs.galleryImages.length > 0)
+          ? hs.galleryImages.map(img => ({ full: img, thumb: img, caption: hs.label, tag: hs.badge || 'Barang Bukti' }))
+          : [{ full: hs.mainImage || hs.mainIllustration, thumb: hs.mainImage || hs.mainIllustration, caption: hs.label, tag: hs.badge || 'Barang Bukti' }];
+
+      findingsList.forEach(f => {
+        const item = document.createElement('div');
+        item.className = 'finding-thumb-item';
+        item.setAttribute('role', 'button');
+        item.setAttribute('tabindex', '0');
+        item.setAttribute('title', `Klik untuk memperbesar: ${f.caption}`);
+        item.style.cursor = 'pointer';
+        item.innerHTML = `
+          <img src="${f.thumb || f.full}" alt="${f.caption}" onerror="this.src='assets/mockup/image_placeholder.svg'" />
+          <span class="finding-thumb-label">${f.tag || 'Barang Bukti'}</span>
+        `;
+        item.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          this.openImagePopup(f.full || f.thumb, `${f.caption} — [${f.tag || 'Barang Bukti'}]`);
+        });
+        item.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            this.openImagePopup(f.full || f.thumb, `${f.caption} — [${f.tag || 'Barang Bukti'}]`);
+          }
+        });
+        findingsGrid.appendChild(item);
+      });
+    }
+
+    // TAB 3: Detection & SOP
     const indList = this.container.querySelector('#detail-indicators-list');
     if (indList) {
       indList.innerHTML = '';
@@ -835,7 +873,7 @@ export class Modul3View extends BaseModuleView {
     const level = (hs.riskLevel || 'KRITIS').toUpperCase();
     if (riskScoreVal) riskScoreVal.textContent = `${level} (${score}/100)`;
     if (riskBarFill) riskBarFill.style.width = `${score}%`;
-    if (medRisk) medRisk.textContent = hs.medicalRisk || 'BAHAYA ZAT KIMIA: Gunakan sarung tangan nitril dan masker medis saat membuka bungkusan barang bukti.';
+    if (medRisk) medRisk.textContent = hs.medicalRisk || 'PERINGATAN BAHAYA: Waspadai kemungkinan bahan kimia aktif, bubuk tak dikenal, atau zat sintetis berbahaya. Wajib gunakan sarung tangan nitril dan masker saat pembukaan fisik.';
   }
 
   initModals() {
