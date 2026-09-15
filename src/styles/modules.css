@@ -426,6 +426,23 @@
   pointer-events: auto;
 }
 
+/* Modul 3 Top Controls Dock 1-Row Layout */
+.m3-top-controls-dock {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  white-space: nowrap !important;
+}
+
+.m3-top-controls-dock .pedestal-carousel-controls {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  align-items: center !important;
+  gap: 8px !important;
+  white-space: nowrap !important;
+}
+
 @media (max-width: 960px) {
   .m1-top-rotate-dock,
   .m2-top-controls-dock,
