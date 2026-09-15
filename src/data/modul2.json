@@ -318,41 +318,48 @@
         }
       },
       "riskLevel": "warning",
-      "riskScore": 75,
-      "drugTypes": "Pil Ekstasi (MDMA), Sabu kristal/serbuk, Fentanyl, Liquid Meth, Happy Five (H5)",
-      "packagingTechnique": "Pil/kristal/serbuk diselipkan di dalam kantong plastik snack aluminium foil, kepingan biskuit, sachet kopi/minuman, atau kaleng makanan berlabel palsu",
-      "mainIllustration": "assets/images/hotspots/hs_sardine_can_false.png",
-      "thumb": "assets/images/hotspots/hs_sardine_can_false.png",
-      "description": "Penyamaran Narkotika (ekstasi, sabu kristal, atau serbuk) di dalam kantong makanan ringan, biskuit, atau sachet olahan.",
-      "modusDetail": "Kurir mencampur pil/kristal Narkotika ke dalam kemasan snack permen/kacang impor atau menyelipkan padatan Narkotika di dalam kepingan biskuit rekat ganda dan sachet minuman instan untuk mengelabui pemeriksaan visual awal petugas.",
+      "riskScore": 82,
+      "drugTypes": "Liquid Meth (Sabu Cair), Pil Ekstasi (MDMA), Sabu kristal, Fentanyl, Happy Five (H5)",
+      "packagingTechnique": "Narkotika cair atau kristal diisikan ke dalam kaleng makanan/sarden pabrikan yang disegel ulang rapi, atau diselipkan di dalam kantong plastik snack aluminium foil dan sachet olahan",
+      "mainIllustration": "assets/images/hotspots/module_2/4_makanan_kaleng.png",
+      "thumb": "assets/images/hotspots/module_2/4_makanan_kaleng.png",
+      "description": "Penyamaran Narkotika cair (Liquid Meth) atau padatan kristal di dalam kaleng makanan pabrikan (sardine can) dan kantong makanan ringan aluminium foil.",
+      "modusDetail": "Sindikat mengosongkan isi kaleng makanan pabrikan (seperti sarden atau korned) kemudian memasukkan kantong berisi Sabu cair (Liquid Meth) atau kristal murni. Tutup kaleng dipasang dan dipres kembali menggunakan mesin canning portable agar tampak seperti produk pabrikan baru yang belum pernah dibuka.",
       "findings": [
         {
-          "thumb": "assets/images/hotspots/hs_sardine_can_false.png",
-          "full": "assets/images/hotspots/hs_sardine_can_false.png",
-          "caption": "Sitaan Kemasan Makanan Ringan & Biskuit Berisi Narkotika",
-          "tag": "Barang Bukti Sitaan"
+          "thumb": "assets/images/hotspots/module_2/4_makanan_kaleng.png",
+          "full": "assets/images/hotspots/module_2/4_makanan_kaleng.png",
+          "caption": "Modus Penyembunyian Narkotika Cair / Kristal di Dalam Kaleng Makanan & Sarden Pabrikan",
+          "tag": "Barang Bukti Kaleng Makanan"
         },
         {
-          "thumb": "assets/images/central/m2_luggage_xray.png",
-          "full": "assets/images/central/m2_luggage_xray.png",
-          "caption": "Tampilan X-Ray Menunjukkan Anomali Densitas Tinggi pada Kemasan Makanan",
-          "tag": "Pencitraan X-Ray"
+          "thumb": "assets/images/hotspots/module_2/4_makanan_ringan.png",
+          "full": "assets/images/hotspots/module_2/4_makanan_ringan.png",
+          "caption": "Sitaan Narkotika di Dalam Kantong Makanan Ringan / Snack Aluminium Foil Hampa Udara",
+          "tag": "Barang Bukti Kemasan Snack"
+        },
+        {
+          "thumb": "assets/images/hotspots/module_2/4_makanan_ringan_2.png",
+          "full": "assets/images/hotspots/module_2/4_makanan_ringan_2.png",
+          "caption": "Hasil Pemindaian Radiografi X-Ray & Pengujian Sampel Kimia Produk Makanan Olahan",
+          "tag": "Analisis Radiografi & Uji Lab"
         }
       ],
       "indicators": [
-        "Tampilan X-Ray memperlihatkan butiran atau warna densitas tinggi yang tidak homogen di dalam kemasan snack/sachet",
-        "Ujung segel kemasan terdapat bekas kerutan pemanasan hand-sealer manual atau lem perekat buatan",
-        "Kantong snack terasa padat berlebih dan keping biskuit terasa kaku tidak renyah",
-        "Tercium aroma kimia atau wangi buatan yang menyengat keluar dari celah kemasan"
+        "Citra X-Ray Scanner memperlihatkan bayangan kontras bergelombang atau materi bermassa padat tidak homogen di dalam kaleng sarden/snack",
+        "Bobot kaleng makanan terasa berat atau lebih ringan tidak seimbang bila dibandingkan dengan spesifikasi berat bersih netto pada label",
+        "Terdapat kerutan bekas press kelim (crimping mark) tambahan pada lingkaran lipatan kaleng bagian bawah",
+        "Bunyi benturan di dalam kaleng saat diguncang terasa padat kaku dan tidak menimbulkan suara cairan makanan segar"
       ],
       "detection": [
-        "Pembukaan segel kemasan snack / pengirisan sachet minuman di meja pemeriksaan steril",
-        "Pengujian sampel dengan Reagen Marquis/Simon atau Narcotic Test Kit DJBC",
-        "Pengujian konfirmasi laboratorium di Balai Laboratorium Bea Cukai (BLBC)"
+        "Penimbangan berat kotor bruto kaleng makanan dan perbandingan dengan spesifikasi label pabrik",
+        "Pengujian pemindaian X-Ray dual-energy scanner untuk mendeteksi batas anomali cairan vs padatan",
+        "Pembukaan kelim tutup kaleng di bilik penggeledahan steril dengan alat pembuka kaleng medis",
+        "Pengujian Reagen Marquis & Uji Sampel Cairan dengan Ion Mobility Spectrometer (IMS)"
       ],
-      "medicalRisk": "BAHAYA RACUN TINGGI: Tertelan secara tidak sengaja dapat menyebabkan overdosis fatal & kontaminasi bahan kimia.",
-      "inspectionNote": "SOP Resmi DJBC: Makanan ringan & sachet olahan berbungkusan tidak standar atau dalam jumlah berlebih wajib dibuka sampel kemasannya untuk diuji dengan Narcotic Test Kit.",
-      "bodyLocation": "Kantong snack foil/plastik, dus biskuit, dan sachet minuman di dalam koper."
+      "medicalRisk": "BAHAYA RACUN & BAHAYA FISIK: Kebocoran bahan kimia Sabu cair berpotensi merusak organ pencernaan bila tertelan dan menimbulkan bahaya luka potong dari seng kaleng.",
+      "inspectionNote": "SOP Resmi DJBC: Setiap kaleng makanan pabrikan atau kemasan snack yang memiliki indikasi anomali X-Ray atau berat tidak seimbang wajib dibuka sampelnya di ruang penggeledahan khusus.",
+      "bodyLocation": "Kaleng makanan pabrikan, kantong snack foil, dan dus olahan makanan di dalam koper."
     },
     {
       "id": "hs-m2-sepatu",
