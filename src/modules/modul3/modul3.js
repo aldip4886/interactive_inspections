@@ -255,6 +255,7 @@ export class Modul3View extends BaseModuleView {
                     <img id="detail-real-img" src="" alt="Bukti Forensik X-Ray" class="lead-forensic-img" />
                     <div class="img-magnify-hint">🔍 Klik untuk Pembesaran</div>
                   </div>
+                  <div id="m3-gallery-thumbnails-grid" class="findings-thumbnails-grid" style="display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap;"></div>
                   <p id="detail-desc" class="lead-caption-text"></p>
                 </div>
                 <div class="kv-details-grid">
@@ -736,13 +737,13 @@ export class Modul3View extends BaseModuleView {
     if (title) title.textContent = hs.label;
 
     // TAB 1: Modus
-    const mainImg = this.container.querySelector('#detail-main-img');
+    const mainImg = this.container.querySelector('#detail-real-img') || this.container.querySelector('#detail-main-img');
     const desc = this.container.querySelector('#detail-desc');
-    const concealmentMethod = this.container.querySelector('#detail-concealment-method');
-    const bodyLocation = this.container.querySelector('#detail-body-location');
-    const drugTypes = this.container.querySelector('#detail-drug-types');
+    const concealmentMethod = this.container.querySelector('#detail-method') || this.container.querySelector('#detail-concealment-method');
+    const bodyLocation = this.container.querySelector('#detail-location') || this.container.querySelector('#detail-body-location');
+    const drugTypes = this.container.querySelector('#detail-narcotics') || this.container.querySelector('#detail-drug-types');
     const packaging = this.container.querySelector('#detail-packaging');
-    const narrative = this.container.querySelector('#detail-modus-narrative');
+    const narrative = this.container.querySelector('#detail-modus-detail') || this.container.querySelector('#detail-modus-narrative');
     const note = this.container.querySelector('#detail-inspection-note');
 
     if (mainImg) {
@@ -751,18 +752,47 @@ export class Modul3View extends BaseModuleView {
     }
 
     // Klik gambar utama pada Modus Operandi untuk memperbesar
-    const illustrationBox = this.container.querySelector('.detail-illustration-box');
+    const illustrationBox = this.container.querySelector('#lead-img-container') || this.container.querySelector('.detail-illustration-box');
     if (illustrationBox) {
       illustrationBox.style.cursor = 'pointer';
       illustrationBox.title = 'Klik untuk melihat gambar ukuran penuh';
       illustrationBox.onclick = () => {
-        const curImg = this.container.querySelector('#detail-main-img');
+        const curImg = this.container.querySelector('#detail-real-img') || this.container.querySelector('#detail-main-img');
         const curTitle = this.container.querySelector('#detail-title');
         this.openImagePopup(
           curImg ? curImg.src : (hs.mainIllustration || hs.mainImage || 'assets/images/central/m3_parcel_xray.jpeg'),
           curTitle ? curTitle.textContent : hs.label
         );
       };
+    }
+
+    // Gallery Thumbnails Grid
+    const galleryGrid = this.container.querySelector('#m3-gallery-thumbnails-grid');
+    if (galleryGrid) {
+      galleryGrid.innerHTML = '';
+      const galleryList = (hs.galleryImages && hs.galleryImages.length > 0)
+        ? hs.galleryImages
+        : (hs.mainIllustration ? [hs.mainIllustration] : []);
+
+      if (galleryList.length > 1) {
+        galleryList.forEach((imgUrl, idx) => {
+          const item = document.createElement('div');
+          item.className = `finding-thumb-item ${idx === 0 ? 'active' : ''}`;
+          item.style.cursor = 'pointer';
+          item.title = `Foto ${idx + 1} - Klik untuk memilih`;
+          item.innerHTML = `<img src="${imgUrl}" alt="Foto ${idx + 1}" style="width:52px; height:52px; object-fit:cover; border-radius:6px;" />`;
+          item.onclick = (e) => {
+            e.stopPropagation();
+            if (mainImg) mainImg.src = imgUrl;
+            galleryGrid.querySelectorAll('.finding-thumb-item').forEach(t => t.classList.remove('active'));
+            item.classList.add('active');
+          };
+          galleryGrid.appendChild(item);
+        });
+        galleryGrid.style.display = 'flex';
+      } else {
+        galleryGrid.style.display = 'none';
+      }
     }
 
     if (desc) desc.textContent = hs.description;

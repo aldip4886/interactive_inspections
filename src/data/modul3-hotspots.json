@@ -70,9 +70,11 @@
       "bodyLocation": "Kompartemen Kiri Paket Kiriman",
       "drugTypes": "Narkotika Sintetis / Bahan Berbahaya",
       "packagingTechnique": "Kemasan Pouch Foil / Flexible Packaging",
-      "mainIllustration": "assets/images/hotspots/module_3/01.jpeg",
-      "mainImage": "assets/images/hotspots/module_3/01.jpeg",
+      "mainIllustration": "assets/images/hotspots/module_3/1_bungkus_makanan.png",
+      "mainImage": "assets/images/hotspots/module_3/1_bungkus_makanan.png",
       "galleryImages": [
+        "assets/images/hotspots/module_3/1_bungkus_makanan.png",
+        "assets/images/hotspots/module_3/sarang_burung.png",
         "assets/images/hotspots/module_3/01.jpeg"
       ],
       "description": "Makanan dalam kemasan pouch fleksibel digunakan sebagai cover cargo yang tampak wajar dalam deklarasi, namun terdapat anomali densitas organik di dalamnya.",
@@ -128,9 +130,10 @@
       "bodyLocation": "Rongga Tabung Silinder Suspensi",
       "drugTypes": "Metamfetamin / Heroin / Zat Terlarang",
       "packagingTechnique": "Penyisipan Silinder dalam Tabung Logam",
-      "mainIllustration": "assets/images/hotspots/module_3/02.jpeg",
-      "mainImage": "assets/images/hotspots/module_3/02.jpeg",
+      "mainIllustration": "assets/images/hotspots/module_3/2_tabung_suspensi.png",
+      "mainImage": "assets/images/hotspots/module_3/2_tabung_suspensi.png",
       "galleryImages": [
+        "assets/images/hotspots/module_3/2_tabung_suspensi.png",
         "assets/images/hotspots/module_3/02.jpeg"
       ],
       "description": "Komponen shockbreaker kendaraan berbahan logam tebal dimanfaatkan sebagai cover cargo dengan menyelipkan material organik ke dalam tabung silinder.",
@@ -186,9 +189,10 @@
       "bodyLocation": "Rongga Kubah Bohlam Lampu",
       "drugTypes": "Narkotika Padat / Kristal Metamfetamin",
       "packagingTechnique": "Paket Padat dalam Kubah Kaca/Plastik",
-      "mainIllustration": "assets/images/hotspots/module_3/03.jpeg",
-      "mainImage": "assets/images/hotspots/module_3/03.jpeg",
+      "mainIllustration": "assets/images/hotspots/module_3/3_tabung_lampu.png",
+      "mainImage": "assets/images/hotspots/module_3/3_tabung_lampu.png",
       "galleryImages": [
+        "assets/images/hotspots/module_3/3_tabung_lampu.png",
         "assets/images/hotspots/module_3/03.jpeg"
       ],
       "description": "Bohlam lampu penerangan dimanfaatkan sebagai cover object dengan memasukkan paket padat ke dalam kubah bohlam di atas rangkaian sirkuit driver.",
@@ -244,9 +248,10 @@
       "bodyLocation": "Kompartemen Internal Casing UPS",
       "drugTypes": "Metamfetamin / Kokain / MDMA",
       "packagingTechnique": "Balok Vakum di Kompartemen Baterai/Trafo",
-      "mainIllustration": "assets/images/hotspots/module_3/04.jpeg",
-      "mainImage": "assets/images/hotspots/module_3/04.jpeg",
+      "mainIllustration": "assets/images/hotspots/module_3/4_ups.png",
+      "mainImage": "assets/images/hotspots/module_3/4_ups.png",
       "galleryImages": [
+        "assets/images/hotspots/module_3/4_ups.png",
         "assets/images/hotspots/module_3/04.jpeg"
       ],
       "description": "Perangkat elektronik UPS / adaptor daya berkapasitas besar dimodifikasi dengan menyisipkan balok bungkusan narkotika di antara komponen transformator dan sirkuit.",
@@ -302,9 +307,10 @@
       "bodyLocation": "Rongga Internal Bola / Mainan Plastik",
       "drugTypes": "Ekstasi / Sabu / Ketamin",
       "packagingTechnique": "Bungkusan Organik di Ruang Hampa Mainan",
-      "mainIllustration": "assets/images/hotspots/module_3/05.jpeg",
-      "mainImage": "assets/images/hotspots/module_3/05.jpeg",
+      "mainIllustration": "assets/images/hotspots/module_3/05_mainan_anak.png",
+      "mainImage": "assets/images/hotspots/module_3/05_mainan_anak.png",
       "galleryImages": [
+        "assets/images/hotspots/module_3/05_mainan_anak.png",
         "assets/images/hotspots/module_3/05.jpeg"
       ],
       "description": "Mainan anak berbahan plastik dengan rongga internal yang biasanya kosong digunakan untuk menyimpan bungkusan materi organik terlarang.",
@@ -418,9 +424,12 @@
       "bodyLocation": "Lapisan Dinding Bergelombang Kardus",
       "drugTypes": "Kokain / Metamfetamin / Heroin Pres",
       "packagingTechnique": "Lapisan Pres Tipis di Antara Lembar Karton",
-      "mainIllustration": "assets/images/hotspots/module_3/07.png",
-      "mainImage": "assets/images/hotspots/module_3/07.png",
+      "mainIllustration": "assets/images/hotspots/module_3/7_dinding_kardus.png",
+      "mainImage": "assets/images/hotspots/module_3/7_dinding_kardus.png",
       "galleryImages": [
+        "assets/images/hotspots/module_3/7_dinding_kardus.png",
+        "assets/images/hotspots/module_3/7_dinding_kardus_2.png",
+        "assets/images/hotspots/module_3/7_dinding_kardus_3.png",
         "assets/images/hotspots/module_3/07.png"
       ],
       "description": "Dinding kardus kemasan bergelombang (corrugated box) disisipi serbuk narkotika pres tipis di sela gelombang lapisan kertas karton ganda.",

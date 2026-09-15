@@ -15,7 +15,7 @@ export class CourseProgressManager {
     this.moduleTotals = {
       modul1: 8,
       modul2: 6,
-      modul3: 6,
+      modul3: 7,
       modul4a: 6,
       modul4b: 6
     };

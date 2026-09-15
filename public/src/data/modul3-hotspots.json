@@ -46,20 +46,20 @@
       "categoryLabel": "Makanan & Minuman",
       "position": {
         "x": 35.5,
-        "y": 48.0
+        "y": 48
       },
       "coordsByView": {
         "lens": {
           "x": 35.5,
-          "y": 48.0
+          "y": 48
         },
         "xray": {
           "x": 35.5,
-          "y": 48.0
+          "y": 48
         },
         "normal": {
           "x": 35.5,
-          "y": 48.0
+          "y": 48
         }
       },
       "label": "1. Makanan dalam Kemasan (Pouch)",
@@ -70,9 +70,11 @@
       "bodyLocation": "Kompartemen Kiri Paket Kiriman",
       "drugTypes": "Narkotika Sintetis / Bahan Berbahaya",
       "packagingTechnique": "Kemasan Pouch Foil / Flexible Packaging",
-      "mainIllustration": "assets/images/hotspots/module_3/01.jpeg",
-      "mainImage": "assets/images/hotspots/module_3/01.jpeg",
+      "mainIllustration": "assets/images/hotspots/module_3/1_bungkus_makanan.png",
+      "mainImage": "assets/images/hotspots/module_3/1_bungkus_makanan.png",
       "galleryImages": [
+        "assets/images/hotspots/module_3/1_bungkus_makanan.png",
+        "assets/images/hotspots/module_3/sarang_burung.png",
         "assets/images/hotspots/module_3/01.jpeg"
       ],
       "description": "Makanan dalam kemasan pouch fleksibel digunakan sebagai cover cargo yang tampak wajar dalam deklarasi, namun terdapat anomali densitas organik di dalamnya.",
@@ -103,21 +105,21 @@
       "categoryId": "mekanikal_mainan",
       "categoryLabel": "Suspensi & Mainan",
       "position": {
-        "x": 48.0,
-        "y": 53.0
+        "x": 48,
+        "y": 53
       },
       "coordsByView": {
         "lens": {
-          "x": 48.0,
-          "y": 53.0
+          "x": 48,
+          "y": 53
         },
         "xray": {
-          "x": 48.0,
-          "y": 53.0
+          "x": 48,
+          "y": 53
         },
         "normal": {
-          "x": 48.0,
-          "y": 53.0
+          "x": 48,
+          "y": 53
         }
       },
       "label": "2. Tabung Suspensi (Shockbreaker) Kendaraan",
@@ -128,9 +130,10 @@
       "bodyLocation": "Rongga Tabung Silinder Suspensi",
       "drugTypes": "Metamfetamin / Heroin / Zat Terlarang",
       "packagingTechnique": "Penyisipan Silinder dalam Tabung Logam",
-      "mainIllustration": "assets/images/hotspots/module_3/02.jpeg",
-      "mainImage": "assets/images/hotspots/module_3/02.jpeg",
+      "mainIllustration": "assets/images/hotspots/module_3/2_tabung_suspensi.png",
+      "mainImage": "assets/images/hotspots/module_3/2_tabung_suspensi.png",
       "galleryImages": [
+        "assets/images/hotspots/module_3/2_tabung_suspensi.png",
         "assets/images/hotspots/module_3/02.jpeg"
       ],
       "description": "Komponen shockbreaker kendaraan berbahan logam tebal dimanfaatkan sebagai cover cargo dengan menyelipkan material organik ke dalam tabung silinder.",
@@ -161,21 +164,21 @@
       "categoryId": "komponen_elektronik",
       "categoryLabel": "Elektronik & Bohlam",
       "position": {
-        "x": 44.0,
-        "y": 72.0
+        "x": 44,
+        "y": 72
       },
       "coordsByView": {
         "lens": {
-          "x": 44.0,
-          "y": 72.0
+          "x": 44,
+          "y": 72
         },
         "xray": {
-          "x": 44.0,
-          "y": 72.0
+          "x": 44,
+          "y": 72
         },
         "normal": {
-          "x": 44.0,
-          "y": 72.0
+          "x": 44,
+          "y": 72
         }
       },
       "label": "3. Bohlam Lampu",
@@ -186,9 +189,10 @@
       "bodyLocation": "Rongga Kubah Bohlam Lampu",
       "drugTypes": "Narkotika Padat / Kristal Metamfetamin",
       "packagingTechnique": "Paket Padat dalam Kubah Kaca/Plastik",
-      "mainIllustration": "assets/images/hotspots/module_3/03.jpeg",
-      "mainImage": "assets/images/hotspots/module_3/03.jpeg",
+      "mainIllustration": "assets/images/hotspots/module_3/3_tabung_lampu.png",
+      "mainImage": "assets/images/hotspots/module_3/3_tabung_lampu.png",
       "galleryImages": [
+        "assets/images/hotspots/module_3/3_tabung_lampu.png",
         "assets/images/hotspots/module_3/03.jpeg"
       ],
       "description": "Bohlam lampu penerangan dimanfaatkan sebagai cover object dengan memasukkan paket padat ke dalam kubah bohlam di atas rangkaian sirkuit driver.",
@@ -219,21 +223,21 @@
       "categoryId": "komponen_elektronik",
       "categoryLabel": "Elektronik & Bohlam",
       "position": {
-        "x": 54.0,
-        "y": 70.0
+        "x": 54,
+        "y": 70
       },
       "coordsByView": {
         "lens": {
-          "x": 54.0,
-          "y": 70.0
+          "x": 54,
+          "y": 70
         },
         "xray": {
-          "x": 54.0,
-          "y": 70.0
+          "x": 54,
+          "y": 70
         },
         "normal": {
-          "x": 54.0,
-          "y": 70.0
+          "x": 54,
+          "y": 70
         }
       },
       "label": "4. UPS atau Power Supply Unit",
@@ -244,9 +248,10 @@
       "bodyLocation": "Kompartemen Internal Casing UPS",
       "drugTypes": "Metamfetamin / Kokain / MDMA",
       "packagingTechnique": "Balok Vakum di Kompartemen Baterai/Trafo",
-      "mainIllustration": "assets/images/hotspots/module_3/04.jpeg",
-      "mainImage": "assets/images/hotspots/module_3/04.jpeg",
+      "mainIllustration": "assets/images/hotspots/module_3/4_ups.png",
+      "mainImage": "assets/images/hotspots/module_3/4_ups.png",
       "galleryImages": [
+        "assets/images/hotspots/module_3/4_ups.png",
         "assets/images/hotspots/module_3/04.jpeg"
       ],
       "description": "Perangkat elektronik UPS / adaptor daya berkapasitas besar dimodifikasi dengan menyisipkan balok bungkusan narkotika di antara komponen transformator dan sirkuit.",
@@ -277,20 +282,20 @@
       "categoryId": "mekanikal_mainan",
       "categoryLabel": "Suspensi & Mainan",
       "position": {
-        "x": 59.0,
+        "x": 59,
         "y": 60.5
       },
       "coordsByView": {
         "lens": {
-          "x": 59.0,
+          "x": 59,
           "y": 60.5
         },
         "xray": {
-          "x": 59.0,
+          "x": 59,
           "y": 60.5
         },
         "normal": {
-          "x": 59.0,
+          "x": 59,
           "y": 60.5
         }
       },
@@ -302,9 +307,10 @@
       "bodyLocation": "Rongga Internal Bola / Mainan Plastik",
       "drugTypes": "Ekstasi / Sabu / Ketamin",
       "packagingTechnique": "Bungkusan Organik di Ruang Hampa Mainan",
-      "mainIllustration": "assets/images/hotspots/module_3/05.jpeg",
-      "mainImage": "assets/images/hotspots/module_3/05.jpeg",
+      "mainIllustration": "assets/images/hotspots/module_3/05_mainan_anak.png",
+      "mainImage": "assets/images/hotspots/module_3/05_mainan_anak.png",
       "galleryImages": [
+        "assets/images/hotspots/module_3/05_mainan_anak.png",
         "assets/images/hotspots/module_3/05.jpeg"
       ],
       "description": "Mainan anak berbahan plastik dengan rongga internal yang biasanya kosong digunakan untuk menyimpan bungkusan materi organik terlarang.",
@@ -336,20 +342,20 @@
       "categoryLabel": "Makanan & Minuman",
       "position": {
         "x": 67.5,
-        "y": 52.0
+        "y": 52
       },
       "coordsByView": {
         "lens": {
           "x": 67.5,
-          "y": 52.0
+          "y": 52
         },
         "xray": {
           "x": 67.5,
-          "y": 52.0
+          "y": 52
         },
         "normal": {
           "x": 67.5,
-          "y": 52.0
+          "y": 52
         }
       },
       "label": "6. Minuman dalam Kemasan",
@@ -393,20 +399,20 @@
       "categoryId": "dinding_karton",
       "categoryLabel": "Dinding Box Karton",
       "position": {
-        "x": 48.0,
+        "x": 48,
         "y": 21.5
       },
       "coordsByView": {
         "lens": {
-          "x": 48.0,
+          "x": 48,
           "y": 21.5
         },
         "xray": {
-          "x": 48.0,
+          "x": 48,
           "y": 21.5
         },
         "normal": {
-          "x": 48.0,
+          "x": 48,
           "y": 21.5
         }
       },
@@ -418,9 +424,12 @@
       "bodyLocation": "Lapisan Dinding Bergelombang Kardus",
       "drugTypes": "Kokain / Metamfetamin / Heroin Pres",
       "packagingTechnique": "Lapisan Pres Tipis di Antara Lembar Karton",
-      "mainIllustration": "assets/images/hotspots/module_3/07.png",
-      "mainImage": "assets/images/hotspots/module_3/07.png",
+      "mainIllustration": "assets/images/hotspots/module_3/7_dinding_kardus.png",
+      "mainImage": "assets/images/hotspots/module_3/7_dinding_kardus.png",
       "galleryImages": [
+        "assets/images/hotspots/module_3/7_dinding_kardus.png",
+        "assets/images/hotspots/module_3/7_dinding_kardus_2.png",
+        "assets/images/hotspots/module_3/7_dinding_kardus_3.png",
         "assets/images/hotspots/module_3/07.png"
       ],
       "description": "Dinding kardus kemasan bergelombang (corrugated box) disisipi serbuk narkotika pres tipis di sela gelombang lapisan kertas karton ganda.",
@@ -443,5 +452,99 @@
       "riskLevel": "KRITIS",
       "medicalRisk": "BAHAYA PAPARAN SERBUK: Sayatan pada dinding karton dapat melepaskan partikel serbuk halus. Lakukan di ruangan berventilasi baik dengan masker pernapasan terstandar."
     }
-  ]
+  ],
+  "meta": {
+    "codeBadge": "MODUL 03",
+    "title": "Pemeriksaan Barang Kiriman (Postal & Courier Cargo)",
+    "legalRef": "PMK-188/2021 & S-39/BC/2023",
+    "instructionTag": "Arahkan lensa X-Ray dan klik hotspot bernomor untuk menganalisis anomali radiografi",
+    "description": "Inspeksi komprehensif paket kiriman kargo pos & PJT menggunakan simulator Dual-Energy X-Ray Scanner. Kenali anomali citra X-Ray pada pouch makanan ringan, shockbreaker kendaraan, bohlam lampu, unit UPS, mainan anak berongga, botol minuman kemasan, dan dinding karton bergelombang (corrugated)."
+  },
+  "telemetry": {
+    "subjectId": "SUBJEK ID: PARCEL-POS-4491 / PAKET KARGO UDARA",
+    "sensor": "SENSOR: CARGO DUAL-ENERGY X-RAY SCANNER",
+    "activeModeText": "MODE AKTIF: DUAL-ENERGY INTERACTIVE LENS"
+  },
+  "controlsConfig": {
+    "zoom": {
+      "default": 1.2,
+      "min": 1,
+      "max": 2.5,
+      "step": 0.15
+    },
+    "lensRadius": {
+      "default": 92,
+      "min": 80,
+      "max": 220
+    },
+    "modes": [
+      {
+        "id": "lens",
+        "label": "LENSA X-RAY",
+        "icon": "🔍"
+      },
+      {
+        "id": "xray",
+        "label": "FULL X-RAY",
+        "icon": "⚡"
+      },
+      {
+        "id": "normal",
+        "label": "TAMPAK LUAR",
+        "icon": "📦"
+      }
+    ]
+  },
+  "densityLegend": [
+    {
+      "id": "organic",
+      "colorClass": "organic-chip",
+      "name": "Organik / Narkotika",
+      "atomicNumber": "Z: 7-9",
+      "hex": "#D97706",
+      "desc": "Warna oranye/cokelat menandakan material organik seperti kokain, sabu, heroin, ganja, dan plastik."
+    },
+    {
+      "id": "inorganic",
+      "colorClass": "inorganic-chip",
+      "name": "Campuran / Aluminium",
+      "atomicNumber": "Z: 10-17",
+      "hex": "#10B981",
+      "desc": "Warna hijau menandakan material anorganik, kaca, keramik, atau logam ringan."
+    },
+    {
+      "id": "heavy",
+      "colorClass": "heavy-chip",
+      "name": "Logam Berat / Tak Tembus",
+      "atomicNumber": "Z: >18",
+      "hex": "#3B82F6",
+      "desc": "Warna biru/hitam pekat menandakan komponen baja, timah pembungkus, kabel tembaga, atau baterai."
+    }
+  ],
+  "guide": {
+    "type": "help_modal",
+    "title": "Panduan Penggunaan Modul Kargo Pos & PJT",
+    "items": [
+      {
+        "num": 1,
+        "title": "Lensa Kaca Pembesar X-Ray",
+        "text": "Arahkan kursor mouse (atau usap/drag jari pada tablet/ponsel) ke atas kardus kargo untuk memindai isi dalam paket secara interaktif."
+      },
+      {
+        "num": 2,
+        "title": "Titik Hotspot Anomali",
+        "text": "Klik titik hotspot bernomor untuk membuka kartu analisis modus operandi, bukti forensik, dan SOP penindakan Bea Cukai."
+      },
+      {
+        "num": 3,
+        "title": "Mode Tampilan & Kontrol Pembesar",
+        "text": "Gunakan tombol dok bawah untuk berpindah ke mode Full X-Ray atau sesuaikan radius lensa pembesar melalui slider vertikal."
+      },
+      {
+        "num": 4,
+        "title": "Format Tabbed Card",
+        "text": "Pelajari rincian lengkap melalui 3 tab: Modus Operandi, Ciri Pelaku & SOP, dan Indikator Risiko."
+      }
+    ]
+  }
 }
