@@ -16,10 +16,38 @@ export class EvaluasiView {
   async loadQuestions() {
     try {
       const resp = await fetch('src/data/evaluasi-questions.json');
-      this.quizData = await resp.json();
+      const data = await resp.json();
+      this.quizData = data;
+      this.allQuestions = data.questions || [];
     } catch (e) {
       console.error('[Evaluasi] Failed to load quiz JSON', e);
     }
+  }
+
+  selectSessionQuestions() {
+    if (!this.allQuestions || this.allQuestions.length === 0) return;
+    
+    const categories = ['Tubuh Kurir', 'Barang Bawaan', 'Barang Kiriman', 'Kendaraan Darat', 'Sarana Laut'];
+    const selected = [];
+
+    categories.forEach(cat => {
+      const catQuestions = this.allQuestions.filter(q => q.category === cat);
+      if (catQuestions.length > 0) {
+        const randomIndex = Math.floor(Math.random() * catQuestions.length);
+        selected.push(catQuestions[randomIndex]);
+      }
+    });
+
+    if (selected.length < 5) {
+      const selectedIds = new Set(selected.map(q => q.id));
+      const remaining = this.allQuestions.filter(q => !selectedIds.has(q.id));
+      while (selected.length < 5 && remaining.length > 0) {
+        const randIdx = Math.floor(Math.random() * remaining.length);
+        selected.push(remaining.splice(randIdx, 1)[0]);
+      }
+    }
+
+    this.quizData.questions = selected;
   }
 
   async render() {
@@ -28,6 +56,7 @@ export class EvaluasiView {
     }
     if (!this.quizData) return;
 
+    this.selectSessionQuestions();
     this.screenState = 'intro';
     this.currentIndex = 0;
     this.userAnswers = new Array(this.quizData.questions.length).fill(null);
@@ -114,6 +143,7 @@ export class EvaluasiView {
 
   /* ─── 2. START QUIZ & TIMER ─── */
   startQuiz() {
+    this.selectSessionQuestions();
     this.screenState = 'quiz';
     this.currentIndex = 0;
     this.userAnswers = new Array(this.quizData.questions.length).fill(null);
@@ -168,15 +198,6 @@ export class EvaluasiView {
     const total = this.quizData.questions.length;
     const selectedAnswer = this.userAnswers[this.currentIndex];
 
-    const categoryIcons = {
-      'Tubuh Kurir': '🧍',
-      'Barang Bawaan': '🧳',
-      'Barang Kiriman': '📦',
-      'Kendaraan Darat': '🚗',
-      'Sarana Laut': '🚢'
-    };
-    const catIcon = categoryIcons[q.category] || '🔍';
-
     const html = `
       <div class="evaluasi-page-wrapper">
         <div class="evaluasi-quiz-card">
@@ -184,7 +205,6 @@ export class EvaluasiView {
           <!-- Top Toolbar & Timer -->
           <div class="evaluasi-top-toolbar">
             <div class="evaluasi-meta-left">
-              <span class="evaluasi-cat-badge">${catIcon} ${q.category}</span>
               <span class="evaluasi-question-counter">Soal ${this.currentIndex + 1} dari ${total}</span>
             </div>
             <div id="evaluasi-timer" class="evaluasi-timer-pill ${this.timerSeconds < 120 ? 'urgent' : ''}">
