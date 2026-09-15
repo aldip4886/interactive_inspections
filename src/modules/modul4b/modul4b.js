@@ -645,6 +645,7 @@ export class Modul4bView extends BaseModuleView {
     this.currentHotspotId = hotspotId;
     this.isModalOpen = true;
     this.visitedHotspots.add(hotspotId);
+    courseProgress.recordHotspotVisit('modul4b', hotspotId);
 
     // Smooth camera animated zoom into zone
     this.zoomToZone(hs, 2.0);

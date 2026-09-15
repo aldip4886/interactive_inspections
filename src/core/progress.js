@@ -11,13 +11,14 @@ export class CourseProgressManager {
     this.STORAGE_KEY = 'elearning_narkotika_progress_v1';
     this.currentProgressPct = 0;
     
-    // Module hotspot totals
+    // Module hotspot totals & quiz question count (Total = 38 Items)
     this.moduleTotals = {
       modul1: 8,
       modul2: 6,
       modul3: 7,
       modul4a: 6,
-      modul4b: 6
+      modul4b: 6,
+      evaluasi: 5
     };
 
     this.state = {
@@ -30,7 +31,8 @@ export class CourseProgressManager {
         modul4b: []
       },
       evaluasiCompleted: false,
-      evaluasiScore: 0
+      evaluasiScore: 0,
+      evaluasiAnsweredCount: 0
     };
   }
 
@@ -109,10 +111,17 @@ export class CourseProgressManager {
     }
   }
 
-  recordEvaluasiComplete(score) {
-    this.state.evaluasiCompleted = true;
-    this.state.evaluasiScore = Math.max(this.state.evaluasiScore || 0, score);
+  recordEvaluasiProgress(answeredCount, totalQuestions = 5, scorePercent = null) {
+    this.state.evaluasiAnsweredCount = Math.max(this.state.evaluasiAnsweredCount || 0, answeredCount);
+    if (scorePercent !== null) {
+      this.state.evaluasiCompleted = true;
+      this.state.evaluasiScore = Math.max(this.state.evaluasiScore || 0, scorePercent);
+    }
     this.saveState();
+  }
+
+  recordEvaluasiComplete(score) {
+    this.recordEvaluasiProgress(5, 5, score);
   }
 
   setModuleProgress(moduleId, pct) {
@@ -127,6 +136,14 @@ export class CourseProgressManager {
   }
 
   getModuleProgress(moduleId) {
+    if (moduleId === 'evaluasi') {
+      if (this.state.evaluasiCompleted) {
+        return 100;
+      }
+      const evalAns = Math.min(5, this.state.evaluasiAnsweredCount || 0);
+      return Math.min(100, Math.round((evalAns / 5) * 100));
+    }
+
     if (this.state.moduleManualProgress && typeof this.state.moduleManualProgress[moduleId] === 'number') {
       return this.state.moduleManualProgress[moduleId];
     }
@@ -136,29 +153,25 @@ export class CourseProgressManager {
   }
 
   getOverallProgress() {
-    // Breakdown:
-    // Beranda: 10%
-    // Modul 1: 15%
-    // Modul 2: 15%
-    // Modul 3: 15%
-    // Modul 4a: 15%
-    // Modul 4b: 15%
-    // Evaluasi: 15%
-    let total = 0;
-    if (this.state.berandaVisited) total += 10;
-
+    let completedItems = 0;
     const modKeys = ['modul1', 'modul2', 'modul3', 'modul4a', 'modul4b'];
+
     modKeys.forEach(m => {
-      const pct = this.getModuleProgress(m);
-      total += (pct / 100) * 15;
+      const maxHotspots = this.moduleTotals[m] || 6;
+      const visitedCount = (this.state.visitedHotspots[m] || []).length;
+      completedItems += Math.min(maxHotspots, visitedCount);
     });
 
+    // Evaluasi items (max 5 questions)
     if (this.state.evaluasiCompleted) {
-      const evalPct = Math.min(100, this.state.evaluasiScore || 70);
-      total += (evalPct / 100) * 15;
+      completedItems += 5;
+    } else {
+      const evalAns = Math.min(5, this.state.evaluasiAnsweredCount || 0);
+      completedItems += evalAns;
     }
 
-    return Math.min(100, Math.round(total));
+    const TOTAL_COURSE_ITEMS = 38; // 33 hotspots + 5 quiz questions
+    return Math.min(100, Math.round((completedItems / TOTAL_COURSE_ITEMS) * 100));
   }
 
   updateDOM() {
@@ -176,7 +189,7 @@ export class CourseProgressManager {
     if (topProgressLine) topProgressLine.style.width = `${overallPct}%`;
 
     // 2. Update page-specific progress elements if present
-    const modKeys = ['modul1', 'modul2', 'modul3', 'modul4a', 'modul4b'];
+    const modKeys = ['modul1', 'modul2', 'modul3', 'modul4a', 'modul4b', 'evaluasi'];
     modKeys.forEach(m => {
       const modPct = this.getModuleProgress(m);
       const modText = document.getElementById(`${m}-progress-pct`);

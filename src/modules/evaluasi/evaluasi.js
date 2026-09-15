@@ -256,6 +256,9 @@ export class EvaluasiView {
       card.addEventListener('click', () => {
         const idx = parseInt(card.getAttribute('data-optindex'), 10);
         this.userAnswers[this.currentIndex] = idx;
+        const answeredCount = this.userAnswers.filter(a => a !== null).length;
+        const totalCount = this.quizData?.questions?.length || 5;
+        courseProgress.recordEvaluasiProgress(answeredCount, totalCount);
         this.renderQuestionScreen();
       });
     });
