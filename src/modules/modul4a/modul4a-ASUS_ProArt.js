@@ -822,6 +822,7 @@ export class Modul4aView extends BaseModuleView {
     this.isModalOpen = true;
 
     courseProgress.markHotspotVisited('modul4a', hs.id, hotspots.length);
+    xapi.trackHotspotClick('modul4a', hs.id, hs.label, hs.category || 'Pemeriksaan SUV');
     this.updateProgressUI();
 
     this.renderModalContent(hs, hotspots);
