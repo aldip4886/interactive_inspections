@@ -9,7 +9,7 @@ export class Modul2View extends BaseModuleView {
     this.currentHotspotId = 'hs-m2-koper-tas';
     this.visitedHotspots = new Set();
     this.currentActiveTab = 'tab-modus';
-    this.currentViewMode = 'xray'; // 'xray' or 'normal'
+    this.currentViewMode = 'normal'; // 'normal' or 'xray'
     this.activeFilter = 'all';
     this.isModalOpen = false;
     this.cardPages = [
@@ -74,9 +74,9 @@ export class Modul2View extends BaseModuleView {
             <!-- Angle / View Header Bar -->
             <div class="angle-header-bar">
               <div class="current-angle-badge" id="current-angle-badge">
-                <span class="angle-deg font-code-tech" id="view-mode-badge">X-RAY SCANNER</span>
+                <span class="angle-deg font-code-tech" id="view-mode-badge">TAMPAK NORMAL</span>
                 <span class="angle-sep">•</span>
-                <span class="angle-name" id="view-mode-title">Pemeriksaan Koper Bagasi (X-Ray)</span>
+                <span class="angle-name" id="view-mode-title">Pemeriksaan Koper Bagasi (Tampak Normal)</span>
                 <span class="angle-sub" id="view-mode-sub">(Koper Trolley & Barang Bawaan)</span>
               </div>
               <div class="angle-instruction-tag">
@@ -98,15 +98,15 @@ export class Modul2View extends BaseModuleView {
                   <div class="hud-line-sub">SUBJEK ID: SUSPECT-LUGGAGE-8812 / KOPER BAGASI</div>
                 </div>
                 <div class="forensic-hud-top-right font-code-tech">
-                  <div class="hud-line-azimuth" id="hud-azimuth-text">MODE AKTIF: SCANNER X-RAY HI-PENETRATION</div>
+                  <div class="hud-line-azimuth" id="hud-azimuth-text">MODE AKTIF: INSPEKSI FISIK TAMPAK NORMAL</div>
                   <div class="hud-line-status">SENSOR: DUAL-ENERGY TRANSMISSION X-RAY</div>
                 </div>
               </div>
 
               <!-- Central Active Luggage Image Container with Hotspots Layer -->
               <div class="body-image-container" id="luggage-image-container" style="max-width:850px; aspect-ratio: auto; margin:0 auto;">
-                <img id="m2-central-image" src="assets/images/central/m2_luggage_xray.png" 
-                     alt="X-Ray Scanner Koper Bagasi Bawaan" 
+                <img id="m2-central-image" src="assets/images/central/m2_luggage_normal.png" 
+                     alt="Tampak Normal Koper Bagasi Bawaan" 
                      class="main-body-img"
                      style="max-height: 68vh; filter: drop-shadow(0 12px 32px rgba(0, 37, 59, 0.16)); pointer-events:none;" />
                 <div class="body-pedestal-platform"></div>
@@ -117,11 +117,11 @@ export class Modul2View extends BaseModuleView {
               <div class="pedestal-rotation-dock" id="pedestal-rotation-dock">
                 <div class="pedestal-carousel-controls">
                   <!-- Mode Switcher Pill Buttons -->
-                  <button id="btn-view-xray" class="hud-pill-action-btn active" title="Tampilan X-Ray Scanner">
+                  <button id="btn-view-xray" class="hud-pill-action-btn mode-btn-secondary" title="Tampilan X-Ray Scanner">
                     <span class="hud-btn-icon">🔍</span>
                     <span class="hud-btn-text">X-RAY SCANNER</span>
                   </button>
-                  <button id="btn-view-normal" class="hud-pill-action-btn mode-btn-secondary" title="Tampilan Tampak Normal">
+                  <button id="btn-view-normal" class="hud-pill-action-btn active" title="Tampilan Tampak Normal">
                     <span class="hud-btn-icon">👜</span>
                     <span class="hud-btn-text">TAMPAK NORMAL</span>
                   </button>

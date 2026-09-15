@@ -156,12 +156,15 @@ export function Modul1View() {
   const currentHotspots = (moduleData?.hotspots || []).filter(hs => hs.visibleAngles?.includes(currentAngle));
   const progressPct = courseProgress.getModuleProgress('modul1');
 
-  const pages = [
+  const allPages = [
     { id: 'tab-modus', num: 1, title: 'Modus Operandi' },
     { id: 'tab-photos', num: 2, title: 'Foto Bukti' },
     { id: 'tab-detection', num: 3, title: 'SOP & Ciri' },
     { id: 'tab-risk', num: 4, title: 'Risiko' }
   ];
+
+  const hasPhotosTab = !(selectedHotspot?.id === 'rongga-mulut' || selectedHotspot?.badgeNum === 1 || selectedHotspot?.num === '01' || selectedHotspot?.hidePhotosTab);
+  const pages = hasPhotosTab ? allPages : allPages.filter(p => p.id !== 'tab-photos');
 
   return (
     <div id="modul1-app-root">
@@ -522,7 +525,7 @@ export function Modul1View() {
                       </div>
                     )}
 
-                    {activeTab === 'tab-photos' && (
+                    {activeTab === 'tab-photos' && hasPhotosTab && (
                       <div className="tab-pane active">
                         <div className="photos-tab-header">
                           <span className="photos-tab-title">Barang Bukti Sitaan & Citra Forensik:</span>

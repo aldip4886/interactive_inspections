@@ -10,7 +10,7 @@
   "telemetry": {
     "subjectId": "SUBJEK ID: SUSPECT-LUGGAGE-8812 / KOPER BAGASI",
     "sensor": "SENSOR: DUAL-ENERGY TRANSMISSION X-RAY",
-    "activeModeText": "MODE AKTIF: SCANNER X-RAY HI-PENETRATION"
+    "activeModeText": "MODE AKTIF: INSPEKSI FISIK TAMPAK NORMAL"
   },
   "controlsConfig": {
     "zoom": {

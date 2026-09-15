@@ -133,6 +133,7 @@
       "label": "1. Rongga Mulut & Orofaring",
       "shortName": "1. Rongga Mulut",
       "tag": "Metode Ingestion",
+      "hidePhotosTab": true,
       "categoryId": "ingestion",
       "categoryLabel": "Metode Ingestion",
       "color": "#F5A623",
@@ -159,8 +160,8 @@
       "modusDetail": "Metode ini lazim dilakukan oleh kurir jarak pendek atau kurir transit yang membawa muatan 10-50 gram. Bungkusan kerap diikatkan ke gigi geraham menggunakan benang nilon/dental floss agar mudah ditarik kembali atau ditelan kilat (orofaring) saat ada penindakan razia petugas.",
       "findings": [
         {
-          "thumb": "assets/images/hotspots/module_1/1_rongga_mulut.jpeg",
-          "full": "assets/images/hotspots/module_1/1_rongga_mulut.jpeg",
+          "thumb": "assets/images/hotspots/module_1/1_mulut.png",
+          "full": "assets/images/hotspots/module_1/1_mulut.png",
           "caption": "Pemeriksaan Visual Rongga Mulut & Temuan Paket Narkotika",
           "tag": "Barang Bukti Sitaan"
         }

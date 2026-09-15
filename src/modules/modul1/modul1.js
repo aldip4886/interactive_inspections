@@ -772,9 +772,10 @@ export class Modul1View extends BaseModuleView {
 
     // Tab buttons
     const tabBtns = Array.from(this.container.querySelectorAll('.card-tabs-nav .tab-btn'));
-    tabBtns.forEach((btn, idx) => {
+    tabBtns.forEach((btn) => {
       btn.addEventListener('click', () => {
-        this.switchCardPage(idx);
+        const tabId = btn.getAttribute('data-tab');
+        if (tabId) this.switchCardTab(tabId);
       });
     });
 
@@ -802,7 +803,9 @@ export class Modul1View extends BaseModuleView {
 
     pagePills.forEach((pill, idx) => {
       pill.addEventListener('click', () => {
-        this.switchCardPage(idx);
+        if (idx < this.cardPages.length) {
+          this.switchCardPage(idx);
+        }
       });
     });
 
@@ -866,8 +869,8 @@ export class Modul1View extends BaseModuleView {
     this.currentActiveTab = page.id;
 
     // Sync tab buttons
-    this.container.querySelectorAll('.card-tabs-nav .tab-btn').forEach((b, idx) => {
-      if (idx === pageIndex) b.classList.add('active');
+    this.container.querySelectorAll('.card-tabs-nav .tab-btn').forEach((b) => {
+      if (b.getAttribute('data-tab') === page.id) b.classList.add('active');
       else b.classList.remove('active');
     });
 
@@ -879,8 +882,14 @@ export class Modul1View extends BaseModuleView {
 
     // Sync pagination pills
     this.container.querySelectorAll('.card-page-pills .page-pill').forEach((pill, idx) => {
-      if (idx === pageIndex) pill.classList.add('active');
-      else pill.classList.remove('active');
+      if (idx < this.cardPages.length) {
+        pill.style.display = '';
+        pill.title = `${idx + 1}. ${this.cardPages[idx].title}`;
+        if (idx === pageIndex) pill.classList.add('active');
+        else pill.classList.remove('active');
+      } else {
+        pill.style.display = 'none';
+      }
     });
 
     // Update prev/next button states
@@ -1008,6 +1017,32 @@ export class Modul1View extends BaseModuleView {
     }
     if (title) title.textContent = hs.label;
     if (sub) sub.textContent = hs.tag;
+
+    // Configure available tabs (Hide "Foto Real" for Hotspot 1)
+    const hasPhotosTab = !(hs.id === 'rongga-mulut' || hs.badgeNum === 1 || hs.num === '01' || hs.hidePhotosTab);
+    if (hasPhotosTab) {
+      this.cardPages = [
+        { id: 'tab-modus', num: 1, title: 'Modus Operandi' },
+        { id: 'tab-photos', num: 2, title: 'Foto Gambar Real' },
+        { id: 'tab-detection', num: 3, title: 'Ciri Pelaku & SOP' },
+        { id: 'tab-risk', num: 4, title: 'Indikator Risiko' }
+      ];
+    } else {
+      this.cardPages = [
+        { id: 'tab-modus', num: 1, title: 'Modus Operandi' },
+        { id: 'tab-detection', num: 2, title: 'Ciri Pelaku & SOP' },
+        { id: 'tab-risk', num: 3, title: 'Indikator Risiko' }
+      ];
+    }
+
+    const photoTabBtn = this.container.querySelector('.card-tabs-nav .tab-btn[data-tab="tab-photos"]');
+    if (photoTabBtn) {
+      photoTabBtn.style.display = hasPhotosTab ? '' : 'none';
+    }
+    const photoTabPane = this.container.querySelector('#tab-photos');
+    if (photoTabPane && !hasPhotosTab) {
+      photoTabPane.classList.remove('active');
+    }
 
     // TAB 1: Modus
     const mainImg = this.container.querySelector('#detail-main-img');
