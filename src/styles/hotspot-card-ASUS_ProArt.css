@@ -685,6 +685,30 @@ model-viewer .body-hotspot-pin {
   border-color: var(--color-secondary-container, #FDBB24);
 }
 
+/* Slow Pulse Effect for X-Ray Scanner Button */
+#btn-view-xray,
+.xray-pulse-btn {
+  animation: xrayBtnPulseSlow 2.5s infinite ease-in-out;
+}
+
+@keyframes xrayBtnPulseSlow {
+  0% {
+    box-shadow: 0 0 0 0 rgba(245, 166, 35, 0.6);
+    border-color: rgba(245, 166, 35, 0.7);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 12px 3px rgba(245, 166, 35, 0.5);
+    border-color: #F5A623;
+    transform: scale(1.05);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(245, 166, 35, 0);
+    border-color: rgba(245, 166, 35, 0.7);
+    transform: scale(1);
+  }
+}
+
 .m2-dock-filter-btn {
   display: inline-flex;
   align-items: center;
