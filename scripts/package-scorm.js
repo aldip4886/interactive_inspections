@@ -65,19 +65,16 @@ const publicImagesSrc = path.join(process.cwd(), 'public', 'assets', 'images');
 const distImagesDest = path.join(scormStageDir, 'assets', 'images');
 copyDirRecursive(publicImagesSrc, distImagesDest);
 
-console.log('[SCORM Package] Creating scorm_package.zip...');
-
-try {
-  // Compress dist/scorm_package directory so there is 1 folder structure wrapping project files inside ZIP
-  execSync('powershell -Command "Compress-Archive -Path dist\\scorm_package -DestinationPath scorm_package.zip -Force"', { stdio: 'inherit' });
-  console.log('[SCORM Package] scorm_package.zip generated successfully!');
-} catch (err) {
-  console.error('[SCORM Package] Failed to zip package:', err.message);
-}
-
 console.log('[SCORM Package] Syncing to workspace scorm_package folder...');
 const rootScormPkgDir = path.join(process.cwd(), 'scorm_package');
+if (fs.existsSync(rootScormPkgDir)) {
+  fs.rmSync(rootScormPkgDir, { recursive: true, force: true });
+}
 copyDirRecursive(scormStageDir, rootScormPkgDir);
 
-console.log('[SCORM Package] Build output ready in scorm_package.zip!');
+console.log('[SCORM Package] Executing Python SCORM Packager (Reference: Interactive Organization Explorer v3.0)...');
+const pyScript = path.join(process.cwd(), 'scripts', 'package_scorm.py');
+execSync(`python "${pyScript}"`, { stdio: 'inherit' });
+
+console.log('[SCORM Package] SCORM output ready in scorm_package.zip!');
 console.log('[SCORM Package] Upload scorm_package.zip directly to KLC2 LMS.');
