@@ -80,7 +80,6 @@ export class EvaluasiView {
           <div class="evaluasi-intro-header">
             <div class="evaluasi-intro-icon">🛡️</div>
             <div>
-              <span class="badge badge-gold" style="margin-bottom: 6px; display: inline-block;">Sertifikasi Penindakan DJBC</span>
               <h2 class="evaluasi-intro-title">${this.quizData?.quizTitle || 'Ujian Evaluasi Modus Penyelundupan Narkotika'}</h2>
               <p class="evaluasi-intro-subtitle">Pusat Asesmen Kompetensi Teknis Inspeksi & Identifikasi Narkotika Bea Cukai</p>
             </div>

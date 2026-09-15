@@ -1,8 +1,9 @@
-﻿import React from 'react';
+import React from 'react';
 import { useApp } from '../context/AppContext';
+import { userProfile } from '../../core/user-profile.js';
 
 export function Header() {
-  const { profile, overallProgress, currentRoute, sidebarCollapsed, setSidebarCollapsed, isLrsConfigured } = useApp();
+  const { profile, overallProgress, currentRoute, sidebarCollapsed, setSidebarCollapsed } = useApp();
 
   const titles = {
     beranda: 'Beranda & Panduan',
@@ -16,10 +17,20 @@ export function Header() {
 
   const getInitials = (name) => {
     if (!name) return 'BC';
-    const parts = name.trim().split(' ');
-    if (parts.length >= 2) return (parts[0][0] + parts[1][0]).toUpperCase();
+    const parts = name.trim().split(' ').filter(Boolean);
+    if (parts.length >= 2) return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
     return name.slice(0, 2).toUpperCase();
   };
+
+  const handleProfileClick = () => {
+    userProfile.showProfileDetailModal(profile);
+  };
+
+  const avatarSrc = profile?.avatarUrl || profile?.picture;
+  const nameDisplay = profile?.name || 'Pegawai';
+  const roleDisplay = (profile?.nip && profile.nip !== '-')
+    ? `NIP. ${profile.nip}`
+    : (profile?.userType || profile?.role || 'Pegawai Kementerian Keuangan');
 
   return (
     <header id="main-header">
@@ -51,44 +62,44 @@ export function Header() {
           </div>
         </div>
 
-        {/* LRS Connection Config Button */}
-        {/* <button
-          id="lrs-config-btn"
-          className="btn-icon"
-          title="Pengaturan LRS / xAPI Analytics"
-          style={{ position: 'relative' }}
-          onClick={() => alert('LRS / xAPI Analytics sudah terhubung secara default.')}
-        >
-          ⚙️
-          <span
-            id="lrs-status-dot"
-            style={{
-              position: 'absolute',
-              top: '6px',
-              right: '6px',
-              width: '8px',
-              height: '8px',
-              borderRadius: '50%',
-              background: isLrsConfigured ? '#34C759' : '#64748B'
-            }}
-          ></span>
-        </button> */}
-
         {/* KLC User Profile Widget */}
-        <div id="user-profile-widget">
+        <div
+          id="user-profile-widget"
+          className="user-profile-widget"
+          onClick={handleProfileClick}
+          style={{ cursor: 'pointer' }}
+          title="Klik untuk melihat detail profil KLC2"
+        >
           <div className="user-avatar-container">
-            {profile?.avatarUrl ? (
-              <img id="user-avatar-img" src={profile.avatarUrl} alt="Avatar" />
-            ) : (
-              <span id="user-avatar-initials">{getInitials(profile?.name)}</span>
-            )}
+            {avatarSrc ? (
+              <img
+                id="user-avatar-img"
+                className="user-avatar-img"
+                src={avatarSrc}
+                alt="Avatar"
+                style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '50%', display: 'block' }}
+                onError={(e) => {
+                  e.target.style.display = 'none';
+                  const initialsEl = e.target.nextElementSibling;
+                  if (initialsEl) initialsEl.style.display = 'flex';
+                }}
+              />
+            ) : null}
+            <span
+              id="user-avatar-initials"
+              className="user-avatar-initials"
+              style={{ display: avatarSrc ? 'none' : 'flex' }}
+            >
+              {getInitials(nameDisplay)}
+            </span>
           </div>
           <div className="user-info-text">
-            <span id="user-display-name">{profile?.name || 'Pegawai DJBC'}</span>
-            <span id="user-display-role">{profile?.unit || 'Direktorat Jenderal Bea dan Cukai'}</span>
+            <span id="user-display-name" className="user-display-name">{nameDisplay}</span>
+            <span id="user-display-role" className="user-display-role">{roleDisplay}</span>
           </div>
         </div>
       </div>
     </header>
   );
 }
+

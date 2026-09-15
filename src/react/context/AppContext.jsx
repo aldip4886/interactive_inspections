@@ -19,7 +19,10 @@ export function AppProvider({ children }) {
   useEffect(() => {
     scorm.init();
     userProfile.init().then(p => {
-      if (p) setProfile(p);
+      if (p) setProfile({ ...p });
+    });
+    const unsubscribeProfile = userProfile.onProfileChange(p => {
+      if (p) setProfile({ ...p });
     });
     courseProgress.init();
     setOverallProgress(courseProgress.getOverallProgress());
@@ -42,6 +45,7 @@ export function AppProvider({ children }) {
     }
 
     return () => {
+      unsubscribeProfile();
       window.removeEventListener('hashchange', onHashChange);
       window.removeEventListener('beforeunload', onBeforeUnload);
     };
